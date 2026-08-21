@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #14a84e;
-  --color-secondary: #f59f00;
-  --color-accent: #f59f00;
-  --color-dark: #4a4a4a;
+  --color-primary: #273A90;
+  --color-secondary: #1E293B;
+  --color-accent: #0891B2;
+  --color-dark: #020617;
   --color-light: #F8FAFC;
 
   --animate-fade-in-up: fade-in-up 0.2s ease-out;
@@ -15,6 +15,24 @@
   --animate-gradient-x: gradient-x 15s ease infinite;
 
   --animate-gradient-slow: gradient-slow 15s ease infinite;
+  --animate-fade-in: fade-in 0.3s ease-out;
+  --animate-bounce-slow: bounce-slow 4s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s infinite;
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
 
   @keyframes gradient-slow {
     0% { background-position: 0% 50%; }

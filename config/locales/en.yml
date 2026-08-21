@@ -30,18 +30,26 @@
 en:
   navbar:
     search_placeholder: "Search Products..."
-    all_products: "Catalogs"
+    all_products: "Products"
     home: "Home"
-    apple: "iPhone Series"
-    oppo: "oppo"
     custom: "OEM/ODM"
-    huawei: "Huawei"
-    xiaomi: "Xiaomi"
-    samsung: "Samsung"
-    transsion: "Transsion"
-    vivo: "vivo"
-    factory: "About us"
+    factory: "Factory"
     customize: "OEM Service"
+    factory_experience: "Factory Experience"
+    hero:
+      badge: "Direct Manufacturer"
+      title: "Reliable Manufacturing Partner"
+      italic_title: "for Global Foodservice Industry"
+      description: "With a 700,000㎡ production base and global export experience, Sinower provides professional refrigeration, cooking and stainless-steel kitchen solutions for restaurants and hotels worldwide."
+      factory_area: "Factory Area"
+      employees: "Employees"
+      countries: "Countries"
+      capacity_yr: "Capacity/Yr"
+      request_quote: "Request A Quote"
+      explore_products: "Explore Products"
+      factory_live_tour: "Factory Live Tour"
+      verified: "Verified"
+      experience_years: "10+ Years of Manufacturing Excellence"
     about_us: "About us"
     contact_us: "Contact us"
     login: "Log In"
@@ -55,23 +63,25 @@ en:
     all_news: "All News"
   footer:
     quick_links: "Know More"
-    address: "Building 6, Kusai Science and Technology Park, South Fumin Road, Dalang Town, Dongguan City, Guangdong Province"
-    company_desc: "Professional Mobile Phone Battery Manufacturer"
-    company_name: "GUANGDONG YAPAI ELECTRONIC TECHNOLOGY CO.,LTD."
-    rights_reserved: ""
+    address: "Shandong Binzhou Boxing Pangjia Town Industrial Park"
+    company_desc: "Professional Commercial Kitchen Equipment Manufacturer. Spanning 700,000㎡ manufacturing base, serving 108+ countries."
+    company_name: "Shandong Sinower Electrical Appliance Co., Ltd"
+    phone: "+86 0543 8171612"
+    email: "info@skyrainbow.com.cn"
+    rights_reserved: "All rights reserved."
   posts:
     hero:
-      title: "Yapai Blog"
+      title: "Sinower News"
       subtitle: "LATEST ARTICLES"
-      description: "Battery manufacturing insights, industry trends, and professional guides from our team in Guangdong."
+      description: "Professional Commercial Kitchen Equipment Manufacturer - Shandong Sinower Electrical Appliance Co., Ltd"
     enterprise_updates:
       title: "Company Updates"
       subtitle: "NEWS"
-      description: "Stay updated with Yapai's latest corporate developments, factory expansions, and milestones."
+      description: "Stay updated with Shandong Sinower Electrical Appliance Co., Ltd's latest corporate developments and milestones."
     industry_news:
       title: "Industry Information"
       subtitle: "NEWS"
-      description: "Professional analysis and insights into the global mobile phone battery industry and technology trends."
+      description: "Professional analysis and insights into the global commercial kitchen equipment industry from Shandong Sinower."
     all: "All News"
     back_to_blog: "Back to News"
     statistics:
@@ -82,10 +92,9 @@ en:
   categories:
     all_products: "All Products"
     all_products_catalog: "All Products Catalog"
-    all_products_desc: "Explore Yapai's complete mobile phone battery collection. We provide professional replacement batteries for over 1,000 mainstream brands."
-    total_products_count: "Total Products"
-    end_of_line: "End of Line"
-    explore_all: "Yapai Battery Catalog"
+    all_products_desc: "Sinower integrates diversified commercial refrigeration and cooking kitchen equipment to deliver a complete product portfolio for global foodservice clients."
+    banner_eyebrow: "SINOWER FOODSERVICE EQUIPMENT"
+    explore_all: "Sinower Kitchen Equipment"
     view_details: "View Details"
     no_skus_title: "No Available Models"
     no_skus_desc: "This category is currently being updated. Please check back later for our latest releases."
@@ -94,17 +103,24 @@ en:
     product_name: "Product Name"
     material: "Material"
     specification: "Specification"
-    head_circumference: "Voltage"
-    brim_length: "Capacity"
-    closure_type: "Battery Cell"
-    embroidery_print: "Compatible Brands"
-    color: "Color/Appearance"
+    voltage_power: "Voltage/Power"
+    capacity_dimensions: "Capacity/Dimensions"
+    burners_controls: "Burners/Controls"
+    series_applications: "Series/Usage"
+    color_appearance: "Color/Appearance"
     moq: "MOQ"
     sample_time: "Sample Time"
     production_lead_time: "Production Lead Time"
     packing: "Packing"
     carton_size: "Carton Size"
     gross_weight: "Gross Weight"
+    price: "Price"
+    params:
+      voltage_power: "Voltage/Power"
+      capacity_dimensions: "Capacity/Dimensions"
+      burners_controls: "Burners/Controls"
+      series_applications: "Series/Usage"
+      color_appearance: "Color/Appearance"
     features: "Detailed Description"
     add_to_order: "ADD TO ORDER"
     add_short: "Add"
@@ -128,224 +144,22 @@ en:
     low_energy: "Eco-Friendly/Low Energy"
     durability: "Built for Durability"
   home:
-    customize:
-      hero:
-        title: "Customized Service"
-        subtitle: "From Design to Production, We Realize Your Personalized Needs."
-        description: "Supporting product customization, appearance design, material selection, and mass production. High-efficiency delivery with professional design & R&D support."
-        cta: "Inquire Now"
-        tag: "Supporting Customization"
-      capabilities:
-        title: "Customization Capabilities"
-        subtitle: "Tell us what you need, and we can make it happen."
-        items:
-          appearance:
-            title: "Appearance Design"
-            desc: "Customized shell design and aesthetic styling."
-          material:
-            title: "Material Selection"
-            desc: "Multiple cell types and material options available."
-          dimensions:
-            title: "Dimension Customization"
-            desc: "Precise size matching for your device requirements."
-          packaging:
-            title: "Brand Packaging"
-            desc: "Complete branding and retail packaging solutions."
-      process:
-        title: "Customization Process"
-        subtitle: "Simple and clear steps for a worry-free cooperation."
-        step1: "Requirement"
-        step1_desc: "Communication"
-        step2: "Solution"
-        step2_desc: "Confirmation"
-        step3: "Sample"
-        step3_desc: "Production"
-        step4: "Customer"
-        step4_desc: "Confirmation"
-        step5: "Batch"
-        step5_desc: "Production"
-        step6: "Final"
-        step6_desc: "Delivery"
-      design_rd:
-        title: "Logo Design"
-        subtitle: "Just send me your logo name or picture."
-        items:
-          free_design: "Free Design"
-          sample_confirmation: "Sample Confirmation"
-          screen_printing: "Screen Printing (Black or White)"
-          uv_printing: "UV Printing (Multi-Color)"
-      packaging_design:
-        title: "Packaging Design"
-        subtitle: "We offer packaging in paper boxes, plastic bags, tin boxes and so on."
-        items:
-          free_design: "Free Design"
-          sample_confirmation: "Sample Confirmation"
-          low_moq: "Low-MOQ Customization"
-          more_languages: "Supports More Languages"
-      production:
-        title: "Production Capacity"
-        subtitle: "Stable delivery with industrial-grade quality control."
-        items:
-          scale: "Factory Scale"
-          equipment: "Advanced Equipment"
-          team: "Professional Team"
-          qc: "Quality Control"
-      cases:
-        title: "Custom Cases"
-        subtitle: "Proven experience in delivering high-quality customized solutions."
-        case1:
-          requirement: "Special materials + Brand LOGO"
-          solution: "Design development + Batch production"
-          result: "Completed delivery"
-      faqs:
-        title: "FAQ"
-        q1: "What is the minimum order quantity (MOQ)?"
-        a1: "The MOQ varies depending on the customization level. Please contact our sales team for details."
-        q2: "How long is the customization cycle?"
-        a2: "Usually 2-4 weeks from design confirmation to batch production, depending on the complexity."
-        q3: "Do you provide samples?"
-        a3: "Yes, we provide sample making services for customer confirmation before batch production."
-        q4: "What modifications are supported?"
-        a4: "We support modifications in design, material, capacity, and packaging."
-      conversion:
-        title: "Ready To Start Your OEM Order?"
-        subtitle: "Our expert team is ready to help you with everything from design to mass production."
-        cta: "Inquire Now"
     faqs:
-      title: "FAQ's"
-      subtitle: "Find answers to common questions about our products and services"
+      hero_badge: "FAQs"
+      title: "Frequently Asked Questions"
+      subtitle: "Find answers about our products, manufacturing process, customization, quality control and cooperation."
+      search_placeholder: "Search your question..."
+      categories_title: "FAQ Categories"
       no_questions: "No FAQs available"
-      more_questions_title: "Still Have Questions?"
+      more_questions_title: "Still have questions?"
       more_questions_desc: "If you cannot find the answer you are looking for, please feel free to contact our customer service team."
+      inquiry_cta: "Send Inquiry"
     contact_us: "Contact Us"
-    index:
-      hero_slides:
-        slide1:
-          title1: "Professional Battery Factory"
-          title2: "YAPAI BATTERY"
-          desc: "Professional mobile phone battery manufacturer headquartered in Guangdong, China."
-        slide2:
-          title1: "Wide Compatibility"
-          title2: "1,000+ MODELS"
-          desc: "Replacement batteries for iPhone, Huawei, Xiaomi, OPPO, vivo, and more."
-        slide3:
-          title1: "Global Export"
-          title2: "YOUR TRUSTED PARTNER"
-          desc: "Supporting OEM/ODM orders with free brand logo customization for global wholesalers."
-      global_expertise: "PROFESSIONAL BATTERY MANUFACTURER · GLOBAL REACH"
-      hero_title_1: "Yapai Battery Factory"
-      hero_title_2: "Mobile Phone Battery Expert"
-      hero_desc: "Focusing on R&D, production, and global export of replacement batteries for smartphones."
-      explore_products: "EXPLORE PRODUCTS"
-      contact_us: "CONTACT US"
-      stats:
-        customers: "1,000+ Models"
-        patents: "5,000+ Daily Capacity"
-        support: "72h Delivery"
-        efficiency: "Global Reach"
-      trust_bar_title: "Wide Model Compatibility"
-      who_we_are_title: "Who We Are"
-      who_we_are_desc: "Yapai Battery Factory is a professional mobile phone battery manufacturer headquartered in Guangdong, China, with its production plant located in Dongguan. The company focuses on the R&D, production, and global export of replacement batteries for smartphones. We provide replacement batteries for over 1,000 mainstream mobile phone brands, comprehensively covering popular overseas brands such as iPhone, Huawei, Xiaomi, OPPO, and vivo."
-      years_history: "Years of Experience"
-      oem_odm_capability: "OEM + ODM Capability"
-      partner_brands:
-        brand_1: "iPhone"
-        brand_2: "Huawei"
-        brand_3: "Xiaomi"
-        brand_4: "OPPO"
-        brand_5: "vivo"
-        brand_6: "Samsung"
-        brand_7: "Realme"
-        brand_8: "Motorola"
-        brand_9: "OnePlus"
-        brand_10: "Infinix"
-      core_products_title: "Our Core Battery Series"
-      strength_title: "Our Strengths"
-      strengths:
-        no_moq:
-          title: "Low MOQ"
-          desc: "We support small batch orders, usually starting from 50 pieces."
-        flexible:
-          title: "Production Capacity"
-          desc: "Daily production capacity exceeds 5,000 battery packs."
-        easy_process:
-          title: "Fast Delivery"
-          desc: "Standard order guarantee of fast delivery within 72 hours."
-        direct_factory:
-          title: "Direct Factory"
-          desc: "Headquartered in Guangdong with production plant in Dongguan."
-      final_cta_title: "Ready To Start Your First Order?"
-      final_cta_desc: ""
-      get_free_quote: "Get A Order Quote"
-      features:
-        factory_direct:
-          title: "Direct Factory"
-          desc: "Professional manufacturer with daily capacity exceeding 5,000 units."
-        inventory:
-          title: "Wide Compatibility"
-          desc: "Replacement batteries for over 1,000 mainstream mobile phone brands."
-        support:
-          title: "Customization Support"
-          desc: "Supporting OEM/ODM orders with free brand logo customization."
-    about:
-      title: "About Us"
-      subtitle: "Professional Battery Manufacturer"
-      hero_title: "Our Factory & Manufacturing"
-      hero_desc: "Professional mobile phone battery manufacturing with advanced technology. We focus on R&D and production to deliver high-quality replacement batteries worldwide."
-      heritage_title: "Production and Customization Capabilities"
-      heritage_desc_1: "Daily production capacity exceeds 5,000 battery packs, supporting OEM/ODM orders, and offering free brand logo customization for global wholesalers and retailers."
-      heritage_desc_2: "We provide replacement batteries for over 1,000 mainstream mobile phone brands, comprehensively covering popular overseas brands such as iPhone, Huawei, Xiaomi, OPPO, and vivo."
-      stats:
-        years: "1,000+ MODELS"
-        subsidiaries: "5,000+ DAILY"
-      product_lines_title: "Our Core Product Lines"
-      product_lines:
-        performance_title: "iPhone Series"
-        performance_desc: "High-capacity replacement batteries for all iPhone models."
-        fashion_title: "oppo"
-        fashion_desc: "Wide compatibility for Huawei, Xiaomi, OPPO, vivo, etc."
-        custom_title: "OEM/ODM Service"
-        custom_desc: "Customized battery solutions and brand logo services."
-      value_title: "Wholesale and Delivery"
-      value_desc_1: "We support small batch orders (usually 50 pieces), with a standard order guarantee of fast delivery within 72 hours."
-      value_desc_2: "Our factory-backed technical teams provide professional support, helping your business development with confidence."
-      expansion_title: "Global Export"
-      expansion_desc: "Yapai is committed to building a strong global presence. We provide reliable supply chains and fast delivery to global wholesalers."
-      expansion_stats:
-        offices: "5,000+ Daily Capacity"
-        plan: "1,000+ Model Support"
-        efficiency: "72h Fast Delivery"
-      expansion_footer: "We welcome all partners to visit our factory and discuss business. Let's fulfill your battery orders together."
-      commitment_title: "Our Commitment"
-      commitment_desc: "As a professional battery factory, Yapai is committed to building long-term partnerships with wholesalers and retailers. We believe sustainable growth is built on transparency, reliability, and mutual success."
-      become_dealer_title: "Partner with Yapai Battery Factory."
-      become_dealer_desc: "Yapai provides partners with factory-direct pricing, reliable product supply, and free customization services. Together, we build sustainable partnerships designed for long-term success."
-      apply_now: "Contact Us"
-      why_title: "Why Partner With Yapai?"
-      partners:
-        title: "Our Partners & Clients"
-        subtitle: "Global Collaboration"
-      reasons:
-        pricing:
-          title: "Factory-Direct Pricing"
-          desc: "Get competitive pricing directly from our Dongguan production plant for maximum profit margins."
-        support:
-          title: "Free Customization"
-          desc: "We offer free brand logo customization for wholesalers and retailers to build your own brand."
-        standards:
-          title: "Wide Compatibility"
-          desc: "Access replacement batteries for over 1,000 mainstream mobile phone brands from a single source."
-        opportunity:
-          title: "Low MOQ"
-          desc: "Support for small batch orders (50 pieces) allows you to test markets with minimal risk."
-        inventory:
-          title: "Fast Delivery"
-          desc: "Standard order guarantee of fast delivery within 72 hours to keep your inventory flowing."
     contact:
-      title: "Contact Yapai"
-      subtitle: "Contact Yapai"
-      hero_title: "Professional Partner"
-      hero_desc: "Contact our team for product inquiries, customized samples, or business partnerships. We are ready to help your brand grow."
+      title: "Contact Us"
+      subtitle: "Contact Us"
+      hero_title: "Professional Manufacturer"
+      hero_desc: "Professional Commercial Kitchen Equipment Manufacturer - Shandong Sinower Electrical Appliance Co., Ltd. Contact our team for product inquiries or business partnerships."
       send_message: "Send Message"
       success_notice: "Message sent successfully. We will contact you as soon as possible."
       form:
@@ -370,10 +184,12 @@ en:
       view_warranty: "View Details"
     submission_limit: "You are submitting too frequently. Please try again in 1 minute."
   contact_info:
-    address: "Room 602, Building 6, No. 71 Fumin South Road, Dalang Town, Dongguan City, Guangdong Province"
-    phone: "+86 18124935425"
-    email: "Caroline@yapaibattery.com"
-    support_email: "Caroline@yapaibattery.com"
+    address: "Shandong Binzhou Boxing Pangjia Town Industrial Park"
+    phone: "+86 0543 8171612"
+    email: "info@skyrainbow.com.cn"
+    support_email: "info@skyrainbow.com.cn"
+    company_profile_title: "Company Profile"
+    company_profile_content: "Shandong Sinower Electrical Appliance Co., Ltd. is strategically located in the Pangjia Town Industrial Park (37°N, 118°E). Spanning an expansive area of 700,000 square meters, we specialize in manufacturing commercial refrigeration units, cooking equipment, and premium stainless-steel kitchen apparatus."
 
   privacy_policy:
     ip_banner:
@@ -398,7 +214,7 @@ en:
       content: "You have the right to request the deletion of your personal data."
     contact_us:
       title: "Contact Us to Delete"
-      content: "To request data deletion or if you have questions about our privacy practices, please contact us at Caroline@yapaibattery.com."
+      content: "To request data deletion or if you have questions about our privacy practices, please contact us at info@skyrainbow.com.cn."
     close: "Close"
 
   cookie_banner:

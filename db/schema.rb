@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_15_112000) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_20_162500) do
   create_table "a_sku_details", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "net_capacity"
@@ -102,7 +102,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_15_112000) do
 
   create_table "categories", force: :cascade do |t|
     t.string "category_kind"
-    t.integer "channel_id"
     t.datetime "created_at", null: false
     t.boolean "featured", default: false
     t.integer "featured_position", default: 0
@@ -117,18 +116,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_15_112000) do
     t.integer "position"
     t.string "slug"
     t.datetime "updated_at", null: false
-    t.index ["channel_id"], name: "index_categories_on_channel_id"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["slug"], name: "index_categories_on_slug"
-  end
-
-  create_table "channels", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "key"
-    t.string "name"
-    t.integer "position", default: 0
-    t.datetime "updated_at", null: false
-    t.index ["key"], name: "index_channels_on_key", unique: true
   end
 
   create_table "contact_messages", force: :cascade do |t|
@@ -259,19 +248,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_15_112000) do
   end
 
   create_table "skus", force: :cascade do |t|
-    t.string "brim_length"
     t.string "carton_size"
     t.integer "category_id", null: false
-    t.string "closure"
-    t.string "closure_type"
     t.string "color"
     t.datetime "created_at", null: false
-    t.string "embroidery_print"
-    t.string "fabric"
     t.string "gross_weight"
-    t.string "head_circumference"
-    t.string "item"
-    t.string "item_no"
     t.string "material"
     t.text "meta_description"
     t.string "meta_keywords"
@@ -283,14 +264,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_15_112000) do
     t.decimal "price", precision: 10, scale: 2
     t.string "product_name"
     t.string "production_lead_time"
-    t.string "profile"
     t.string "sample_time"
     t.string "specification"
+    t.json "specifications", default: {}
     t.text "standard_features"
     t.string "status", default: "draft"
-    t.string "unit_dimensions"
     t.datetime "updated_at", null: false
-    t.string "visor"
     t.index ["category_id"], name: "index_skus_on_category_id"
     t.index ["status"], name: "index_skus_on_status"
   end

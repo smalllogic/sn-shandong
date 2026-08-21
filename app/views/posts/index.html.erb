@@ -7,9 +7,9 @@
     t('navbar.blog')
   end
 
-  content_for :title, "#{hero_title} - Yapai Battery"
+  content_for :title, "#{hero_title} - #{t('footer.company_name')}"
 %>
-<% content_for :meta_description, "Explore mobile phone battery manufacturing insights, trends, and guides from Yapai Battery Factory." %>
+<% content_for :meta_description, "Explore commercial kitchen equipment manufacturing insights, trends, and guides from Sinower Kitchen Factory." %>
 
 <% 
   hero_subtitle = if params[:category] == 'enterprise_updates'
@@ -25,7 +25,7 @@
   elsif params[:category] == 'industry_news'
     t('posts.industry_news.description')
   else
-    "Explore mobile phone battery manufacturing insights, trends, and guides from Yapai Battery Factory."
+    "Explore commercial kitchen equipment manufacturing insights, trends, and guides from Sinower Kitchen Factory."
   end
 %>
 
@@ -41,7 +41,7 @@
       </div>
       <h1 class="hero-title">
         <%= hero_title %>
-        <span>Yapai Insights</span>
+        <span><%= t('footer.company_name') %></span>
       </h1>
       <div class="hero-divider"></div>
       <p class="hero-subtitle">
@@ -85,7 +85,7 @@
   .hero-section {
     position: relative;
     padding: 4rem 2rem;
-    background: #14a84e; /* Logo Green */
+    background: #1B2B69; /* Logo Blue */
     overflow: hidden;
     text-align: center;
   }

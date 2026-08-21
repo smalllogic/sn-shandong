@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   def add_item
     sku = Sku.find(params[:sku_id])
     session[:cart] ||= {}
-    session[:cart][sku.id.to_s] = (session[:cart][sku.id.to_s] || 0) + 30
+    session[:cart][sku.id.to_s] = (session[:cart][sku.id.to_s] || 0) + 1
     render json: { count: session[:cart].values.sum }
   end
 
@@ -51,6 +51,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:name, :country, :phone, :email)
+    params.permit(:name, :country, :phone, :email, :message)
   end
 end

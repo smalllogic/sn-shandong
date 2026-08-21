@@ -18,6 +18,9 @@ class Sku < ApplicationRecord
   validate :category_must_be_leaf
   validate :images_must_be_bmp_or_png_jpg_images
 
+  # 定义不同产品的差异化参数映射
+  store_accessor :specifications, :voltage_power, :capacity_dimensions, :burners_controls, :series_applications, :color_appearance
+
   private
 
   def images_must_be_bmp_or_png_jpg_images

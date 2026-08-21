@@ -2,7 +2,7 @@
 
 后台
 * ...
-yapai网站
+sinower网站
 
 全栈技术: ruby on rails
 

@@ -1,4 +1,4 @@
-class AddYapaiFieldsToSkus < ActiveRecord::Migration[8.1]
+class AddExtraFieldsToSkus < ActiveRecord::Migration[8.1]
   def change
     add_column :skus, :item_no, :string
     add_column :skus, :material, :string

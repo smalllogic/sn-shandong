@@ -1,170 +1,187 @@
-<% content_for :title, "FAQ's - Yapai Battery" %>
-<div class="bg-slate-50 min-h-screen pb-20">
-  <!-- Header Section -->
-  <section class="hero-section mb-20">
-    <div class="hero-bg-pattern"></div>
+<% content_for :title, "#{t('home.faqs.title')} - #{t('footer.company_name')}" %>
+
+<div class="bg-slate-50 min-h-screen pb-20" x-data="{ 
+  activeCategory: <%= @faq_categories.first&.id || 'null' %>,
+  searchQuery: '',
+  scrollToCategory(id) {
+    this.activeCategory = id;
+    const element = document.getElementById('category-' + id);
+    if (element) {
+      const offset = 150;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  }
+}">
+  <!-- Hero Section -->
+  <section class="relative py-24 bg-primary overflow-hidden pt-32 lg:pt-24">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-30"></div>
+    </div>
     
-    <div class="max-w-screen-xl mx-auto px-6 relative z-10">
-      <div class="text-center">
-        <div class="hero-badge">
-          <div class="hero-badge-dot"></div>
-          <span class="hero-badge-text">FAQs</span>
+    <div class="max-w-screen-xl mx-auto px-6 relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full mb-6 backdrop-blur-md">
+        <div class="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+        <span class="text-white text-[10px] font-black uppercase tracking-widest"><%= t('home.faqs.hero_badge') %></span>
+      </div>
+      
+      <h1 class="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
+        <%= t('home.faqs.title') %>
+      </h1>
+      
+      <p class="text-white/70 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+        <%= t('home.faqs.subtitle') %>
+      </p>
+      
+      <!-- Search Bar -->
+      <div class="max-w-xl mx-auto relative group">
+        <input type="text" 
+               x-model="searchQuery"
+               placeholder="<%= t('home.faqs.search_placeholder') %>" 
+               class="w-full pl-14 pr-6 py-5 bg-white border-none rounded-2xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-accent/30 transition-all shadow-2xl">
+        <div class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-accent transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </div>
-        <h1 class="hero-title">
-          <%= t('home.faqs.title', default: "FAQ's") %>
-          <span>Your Answers Await</span>
-        </h1>
-        <div class="hero-divider"></div>
-        <p class="hero-subtitle">
-          <%= t('home.faqs.subtitle', default: 'Find answers to common questions about our products and services.') %>
-          <br>
-          <%= t('home.faqs.subtitle2', default: 'Get expert insights from our team.') %>
-        </p>
       </div>
     </div>
   </section>
 
-  <div class="max-w-screen-md mx-auto px-6">
-    <div class="space-y-12">
-      <% @faq_categories.each do |category| %>
-        <% next if category.faqs.empty? %>
-        
-        <div>
-          <h2 class="text-2xl font-black text-dark mb-6 flex items-center gap-3">
-            <span class="w-2 h-8 bg-primary rounded-full"></span>
-            <%= category.name %>
-          </h2>
+  <div class="max-w-screen-xl mx-auto px-6 mt-12">
+    <div class="flex flex-col lg:flex-row gap-12">
+      <!-- Sidebar Navigation -->
+      <aside class="lg:w-1/4">
+        <div class="sticky top-32 space-y-6">
+          <div>
+            <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 pl-4">
+              <%= t('home.faqs.categories_title') %>
+            </h3>
+            <nav class="space-y-1">
+              <% @faq_categories.each do |category| %>
+                <button @click="scrollToCategory(<%= category.id %>)"
+                        :class="activeCategory == <%= category.id %> ? 'bg-primary text-white shadow-lg shadow-primary/20 scale-[1.02]' : 'text-slate-600 hover:bg-slate-100 border-l-4 border-transparent'"
+                        class="w-full text-left px-5 py-4 rounded-2xl font-bold transition-all duration-300 flex items-center justify-between group">
+                  <span><%= category.name %></span>
+                  <svg :class="activeCategory == <%= category.id %> ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'"
+                       class="w-4 h-4 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </button>
+              <% end %>
+            </nav>
+          </div>
           
-          <div class="space-y-4">
-            <% category.faqs.each do |faq| %>
-              <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden transition-all duration-300 hover:border-primary/30">
-                <details class="group">
-                  <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
-                    <h3 class="text-lg font-bold text-slate-800 pr-8 group-open:text-primary transition-colors">
-                      <%= faq.question %>
-                    </h3>
-                    <div class="flex-shrink-0 text-slate-400 group-open:rotate-180 group-open:text-primary transition-all duration-300">
-                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
-                    </div>
-                  </summary>
-                  <div class="px-6 pb-6 text-slate-600 leading-relaxed whitespace-pre-wrap border-t border-slate-50 pt-4">
-                    <%= faq.answer %>
-                  </div>
-                </details>
-              </div>
-            <% f=faq %>
-            <% end %>
+          <!-- Quick Inquiry Card -->
+          <div class="bg-primary rounded-[2rem] p-8 text-white relative overflow-hidden group shadow-xl shadow-primary/10">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150 duration-700"></div>
+            <h4 class="text-xl font-black mb-4 relative z-10"><%= t('home.faqs.more_questions_title') %></h4>
+            <p class="text-white/70 text-sm mb-6 relative z-10"><%= t('home.faqs.more_questions_desc') %></p>
+            <%= link_to t('home.faqs.inquiry_cta'), contact_path, class: "block w-full py-4 bg-white text-primary text-center font-black rounded-xl hover:bg-slate-50 transition-all transform hover:scale-105 relative z-10 shadow-lg" %>
           </div>
         </div>
-      <% end %>
+      </aside>
 
-      <% if @faq_categories.empty? || @faq_categories.all? { |c| c.faqs.empty? } %>
-        <div class="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-200">
-          <p class="text-slate-400 font-medium"><%= t('home.faqs.no_questions', default: 'No FAQs available') %></p>
+      <!-- FAQ Content -->
+      <div class="lg:w-3/4">
+        <div class="space-y-16">
+          <% @faq_categories.each do |category| %>
+            <div id="category-<%= category.id %>" 
+                 x-show="searchQuery === '' || $el.innerText.toLowerCase().includes(searchQuery.toLowerCase())"
+                 class="scroll-mt-32">
+              <div class="flex items-center gap-4 mb-8">
+                <div class="h-10 w-2 bg-accent rounded-full"></div>
+                <h2 class="text-3xl font-black text-slate-900 tracking-tight"><%= category.name %></h2>
+              </div>
+              
+              <div class="space-y-4">
+                <% category.faqs.each do |faq| %>
+                  <div x-show="searchQuery === '' || '<%= j faq.question.downcase %>'.includes(searchQuery.toLowerCase()) || '<%= j faq.answer.downcase %>'.includes(searchQuery.toLowerCase())"
+                       class="bg-white rounded-2xl border border-slate-200 hover:border-primary/30 transition-all duration-300 shadow-sm overflow-hidden group">
+                    <details class="group/details">
+                      <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                        <h3 class="text-lg font-bold text-slate-800 pr-8 group-hover/details:text-primary transition-colors">
+                          <%= faq.question %>
+                        </h3>
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-open:rotate-180 group-open:bg-primary group-open:text-white transition-all duration-300">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                      </summary>
+                      <div class="px-6 pb-8 text-slate-600 leading-relaxed border-t border-slate-50 pt-6 prose prose-slate max-w-none">
+                        <%= faq.answer.gsub("\n", "<br>").html_safe %>
+                        
+                        <!-- Internal Links (Example) -->
+                        <div class="mt-8 pt-6 border-t border-slate-50 flex flex-wrap gap-4">
+                          <% if faq.question.downcase.include?('quality') %>
+                            <%= link_to factory_path, class: "text-xs font-black text-accent hover:text-primary uppercase tracking-tighter flex items-center transition-colors" do %>
+                              <span>Learn about Quality Control</span>
+                              <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            <% end %>
+                          <% end %>
+                          <% if faq.question.downcase.include?('product') || faq.question.downcase.include?('manufacture') %>
+                            <%= link_to categories_path, class: "text-xs font-black text-accent hover:text-primary uppercase tracking-tighter flex items-center transition-colors" do %>
+                              <span>Explore Products</span>
+                              <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </details>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
+          <!-- No Search Results -->
+          <div x-show="searchQuery !== '' && !document.querySelector('.lg\\:w-3\\/4').innerText.toLowerCase().includes(searchQuery.toLowerCase())"
+               class="text-center py-20 bg-white rounded-[2.5rem] border border-dashed border-slate-200">
+            <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+            <p class="text-slate-400 font-bold"><%= t('home.faqs.no_questions') %></p>
+          </div>
         </div>
-      <% end %>
-    </div>
-
-    <!-- Contact CTA -->
-    <div class="mt-20 p-10 bg-primary/5 rounded-[2.5rem] border border-primary/10 text-center">
-      <h3 class="text-xl font-black text-dark mb-4"><%= t('home.faqs.more_questions_title', default: 'Still have questions?') %></h3>
-      <p class="text-slate-600 mb-8"><%= t('home.faqs.more_questions_desc', default: 'If you cannot find the answer you are looking for, please feel free to contact our customer service team.') %></p>
-      <%= link_to t('home.contact_us', default: 'Contact Us'), contact_path, class: "inline-flex items-center px-8 py-3 bg-primary text-white font-black rounded-xl hover:bg-primary-dark transition-all transform hover:scale-105" %>
+      </div>
     </div>
   </div>
+
+  <!-- Bottom CTA -->
+  <section class="max-w-screen-xl mx-auto px-6 mt-20">
+    <div class="bg-primary rounded-[3rem] p-12 text-center relative overflow-hidden shadow-2xl shadow-primary/30">
+      <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+      <div class="relative z-10">
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-6 tracking-tight">
+          Ready to Start Your Project?
+        </h2>
+        <p class="text-white/80 text-lg mb-10 max-w-2xl mx-auto">
+          Contact our professional team to get detailed solutions and competitive quotations for your commercial kitchen.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <%= link_to contact_path, class: "px-10 py-5 bg-white text-primary font-black rounded-2xl hover:bg-slate-50 transition-all transform hover:scale-105 shadow-xl" do %>
+            <%= t('home.faqs.inquiry_cta') %>
+          <% end %>
+          <a href="tel:<%= t('contact_info.phone') %>" class="px-10 py-5 bg-primary/20 text-white font-black rounded-2xl border border-white/20 hover:bg-white/10 transition-all">
+            Call Us Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <style>
-.hero-section {
-    position: relative;
-    padding: 4rem 2rem;
-    background: #14a84e; /* Logo Green */
-    overflow: hidden;
-    text-align: center;
-  }
-
-  .hero-bg-pattern {
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
-    background-size: 30px 30px;
-  }
-
-
-  @keyframes fadeUp {
-    from { opacity:0; transform:translateY(20px); }
-    to { opacity:1; transform:translateY(0); }
-  }
-  @keyframes pulse-soft {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 0.7; }
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 16px;
-    background: rgba(255,255,255,0.2);
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 999px;
-    margin-bottom: 1.5rem;
-    animation: fadeUp 0.8s ease out;
-  }
-
-  .hero-badge-dot {
-    width: 6px;
-    height: 6px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #fff;
-    animation: pulse-soft 2s infinite;
-  }
-
-  .hero-badge-text {
-    color: #fff;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  .hero-title {
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: #fff;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 1rem;
-    animation: fadeUp 0.8s 0.1s ease out both;
-  }
-
-  .hero-title span {
-    display: block;
-    color: rgba(255,255,255,0.9);
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.85);
-    line-height: 1.6;
-    max-width: 500px;
-    margin: 0 auto;
-    animation: fadeUp 0.8s 0.2s ease out both;
-  }
-
-  .hero-divider {
-    width: 40px;
-    height: 2px;
-    background: rgba(255,255,255,0.4);
-    margin: 1.5rem auto;
-    border-radius: 1px;
-    animation: fadeUp 0.8s 0.3s ease out both;
-  }
-
   summary::-webkit-details-marker {
     display: none;
+  }
+  
+  .prose br {
+    display: block;
+    content: "";
+    margin-top: 0.5em;
   }
 </style>

@@ -6,16 +6,13 @@ module ApplicationHelper
   end
 
   def channel_path(kind, options = {})
-    case kind.to_s
-    when 'apple' then apple_channel_path(options)
-    when 'huawei' then huawei_channel_path(options)
-    when 'oppo' then oppo_channel_path(options)
-    when 'vivo' then vivo_channel_path(options)
-    when 'xiaomi' then xiaomi_channel_path(options)
-    when 'samsung' then samsung_channel_path(options)
-    when 'transsion' then transsion_channel_path(options)
-    when 'custom' then custom_channel_path(options)
-    else categories_path(options)
+    # 尝试查找对应的硬编码路由
+    helper_method = "#{kind}_channel_path"
+    if respond_to?(helper_method)
+      send(helper_method, options)
+    else
+      # 如果没有硬编码路由，则使用通用分类路由，并带上 kind 参数
+      categories_path(options.merge(kind: kind))
     end
   end
 end

@@ -1,4 +1,4 @@
-<% content_for :title, "Contact Yapai Factory" %>
+<% content_for :title, "#{t('home.contact.title')} - #{t('footer.company_name')}" %>
 
 
 
@@ -15,7 +15,7 @@
     .hero-section {
         position: relative;
         padding: 4rem 2rem;
-        background: #14a84e; /* Logo Green */
+        background: #273A90; /* Logo Blue Updated */
         overflow: hidden;
         text-align: center;
     }
@@ -111,14 +111,18 @@
 
     <h1 class="hero-title">
       <%= t('home.contact.hero_title') %>
-      <span>Yapai Battery Factory</span>
+      <span><%= t('footer.company_name') %></span>
     </h1>
+
+    <div class="mb-6 flex justify-center gap-4">
+      <span class="px-4 py-2 bg-white/10 backdrop-blur-md rounded-xl text-white text-xs font-bold border border-white/20">37°N, 118°E</span>
+      <span class="px-4 py-2 bg-white/10 backdrop-blur-md rounded-xl text-white text-xs font-bold border border-white/20">700,000 m²</span>
+    </div>
 
     <div class="hero-divider"></div>
 
     <p class="hero-subtitle">
-      Empowering your business with premium mobile battery solutions and 
-      expert technical support from Yapai's manufacturing excellence.
+      <%= t('home.contact.hero_desc') %>
     </p>
   </div>
 </div>
@@ -208,6 +212,13 @@
           <p class="text-slate-500 font-medium text-lg leading-relaxed max-w-md mb-8">
             <%= (@site_config.address.presence || t('contact_info.address')).gsub(', ', '<br/>').html_safe %>
           </p>
+
+          <div class="mb-12">
+            <h3 class="text-xl font-black text-slate-900 mb-4 tracking-tight"><%= t('contact_info.company_profile_title') %></h3>
+            <p class="text-slate-500 font-medium text-base leading-relaxed">
+              <%= t('contact_info.company_profile_content') %>
+            </p>
+          </div>
           
           <!-- Google Map Container -->
           <div class="rounded-3xl overflow-hidden shadow-2xl border border-slate-200 aspect-video w-full bg-slate-100">
@@ -218,8 +229,19 @@
               allowfullscreen="" 
               loading="lazy" 
               referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.397587784013!2d113.96619947605963!3d22.923835819779316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3402517671d1c37b%3A0x633d779836338e55!2z5Lic6I6e5biC5aSn5pyX6ZWH5a-M5rCR5Y2X6LevNzHlj7c!5e0!3m2!1szh-CN!2shk!4v1741162800000!5m2!1szh-CN!2shk">
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d161100.8647582531!2d117.846875!3d37.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35ef000000000000%3A0x0!2zQm94aW5nLCBCaW56aG91LCBTaGFuZG9uZywgQ2hpbmE!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus">
             </iframe>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+            <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 shadow-sm">
+              <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2"><%= t('home.contact.email_title') %></h4>
+              <p class="text-lg font-bold text-slate-900"><%= t('contact_info.email') %></p>
+            </div>
+            <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 shadow-sm">
+              <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2"><%= t('home.contact.phone_title') %></h4>
+              <p class="text-lg font-bold text-slate-900"><%= t('contact_info.phone') %></p>
+            </div>
           </div>
         </div>
 

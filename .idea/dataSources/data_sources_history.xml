@@ -1,25 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+<DataSourcesHistory>
+  <DataSourceFromHistory isRemovedFromProject="false">
     <data-source source="LOCAL" name="sinower: test" uuid="ca3194bd-e810-4361-acff-3badc62d8297">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="SQLITE" />
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <configured-by-url>true</configured-by-url>
-      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <remarks>/Users/shibin/sinower-shandong/config/database.yml</remarks>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:postgresql://127.0.0.1:5432/sinower_test</jdbc-url>
+      <schema-mapping />
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+  </DataSourceFromHistory>
+  <DataSourceFromHistory isRemovedFromProject="false">
     <data-source source="LOCAL" name="sinower: development" uuid="b3c7b24a-3bcf-4704-9192-0dd323f00c31">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="SQLITE" />
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <configured-by-url>true</configured-by-url>
-      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <remarks>/Users/shibin/sinower-shandong/config/database.yml</remarks>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:postgresql://127.0.0.1:5432/sinower_development</jdbc-url>
+      <schema-mapping />
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-  </component>
-</project>
+  </DataSourceFromHistory>
+</DataSourcesHistory>

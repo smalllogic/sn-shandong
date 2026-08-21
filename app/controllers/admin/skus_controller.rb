@@ -155,13 +155,13 @@ class Admin::SkusController < Admin::BaseController
     CSV.generate(headers: true) do |csv|
       # 定义表头
       base_headers = ["ID", "Position", "Name", "Channel", "Category Path", "Price", "Status", "Image URLs"]
-      battery_headers = [
+      sku_spec_headers = [
         "Product Name", "Material", "Specification", 
-        "Voltage", "Capacity", "Battery Cell", "Compatible Brands", 
+        "Voltage/Power", "Capacity/Dimensions", "Burners/Controls", "Series/Applications",
         "Color/Appearance", "MOQ", "Sample Time", "Production Lead Time", "Packing", 
         "Carton Size", "Gross Weight"
       ]
-      csv << base_headers + battery_headers + ["Standard Features HTML"]
+      csv << base_headers + sku_spec_headers + ["Standard Features HTML"]
 
       categories_cache = Category.all.includes(:parent).index_by(&:id)
 
@@ -181,14 +181,14 @@ class Admin::SkusController < Admin::BaseController
           image_urls
         ]
         
-        battery_row = [
+        spec_row = [
           sku.product_name, sku.material, sku.specification,
-          sku.head_circumference, sku.brim_length, sku.closure_type, sku.embroidery_print,
-          sku.color, sku.moq, sku.sample_time, sku.production_lead_time, sku.packing,
+          sku.voltage_power, sku.capacity_dimensions, sku.burners_controls, sku.series_applications,
+          sku.color_appearance, sku.moq, sku.sample_time, sku.production_lead_time, sku.packing,
           sku.carton_size, sku.gross_weight
         ]
         
-        csv << row + battery_row + [sku.standard_features.to_s]
+        csv << row + spec_row + [sku.standard_features.to_s]
       end
     end
   end
@@ -217,8 +217,8 @@ class Admin::SkusController < Admin::BaseController
   def sku_params
     params.require(:sku).permit(
       :name, :category_id, :price, :status, :position,
-      :product_name, :material, :specification, :head_circumference,
-      :brim_length, :closure_type, :embroidery_print, :color, :moq, :sample_time,
+      :product_name, :material, :specification, :voltage_power,
+      :capacity_dimensions, :burners_controls, :series_applications, :color_appearance, :moq, :sample_time,
       :production_lead_time, :packing, :carton_size, :gross_weight,
       :standard_features,
       :meta_title, :meta_description, :meta_keywords,

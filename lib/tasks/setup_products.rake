@@ -1,5 +1,5 @@
 namespace :setup_products do
-  desc "Clear categories/SKUs and seed 3 categories with 9 yapai products"
+  desc "Clear categories/SKUs and seed 3 categories with 9 Sinower products"
   task run: :environment do
     puts "Purging existing SKU images..."
     Sku.find_each do |sku|
@@ -13,7 +13,7 @@ namespace :setup_products do
     puts "Creating categories..."
 
     cat_a = Category.create!(
-      name: "Baseball Yapais",
+      name: "Baseball Sinowers",
       name_zh: "棒球帽",
       category_kind: "a",
       parent_id: nil,
@@ -21,7 +21,7 @@ namespace :setup_products do
     )
 
     cat_b = Category.create!(
-      name: "Fashion Yapais",
+      name: "Fashion Sinowers",
       name_zh: "时尚帽",
       category_kind: "b",
       parent_id: nil,
@@ -29,7 +29,7 @@ namespace :setup_products do
     )
 
     cat_c = Category.create!(
-      name: "Winter Yapais",
+      name: "Winter Sinowers",
       name_zh: "冬季帽",
       category_kind: "c",
       parent_id: nil,
@@ -39,15 +39,15 @@ namespace :setup_products do
     puts "Creating SKUs..."
 
     products = [
-      { name: "Baseball Yapai",           name_zh: "棒球帽",     category: cat_a, img: "product_baseball_yapai.png",    position: 10 },
-      { name: "Flat Bill Yapai",          name_zh: "平沿帽",     category: cat_a, img: "product_flat_bill_yapai.png",   position: 9 },
-      { name: "Quick Dry Baseball Yapai", name_zh: "速干棒球帽", category: cat_a, img: "product_quick_dry_yapai.png",   position: 8 },
-      { name: "Trucker Yapai",            name_zh: "卡车帽",     category: cat_a, img: "product_trucker_yapai.png",     position: 7 },
-      { name: "Bucket Yapai",             name_zh: "渔夫帽",     category: cat_b, img: "product_bucket_yapai.png",      position: 10 },
-      { name: "Visor Yapai",              name_zh: "遮阳帽",     category: cat_b, img: "product_visor_yapai.png",       position: 9 },
-      { name: "Kids Yapai",               name_zh: "儿童帽",     category: cat_b, img: "product_kids_yapai.png",        position: 8 },
-      { name: "Knit Beanie Yapai",        name_zh: "针织毛线帽", category: cat_c, img: "product_knit_beanie_yapai.png", position: 10 },
-      { name: "Winter Yapais",            name_zh: "冬季帽",     category: cat_c, img: "product_winter_yapais.png",     position: 9 }
+      { name: "Baseball Sinower",           name_zh: "棒球帽",     category: cat_a, img: "product_baseball.png",    position: 10 },
+      { name: "Flat Bill Sinower",          name_zh: "平沿帽",     category: cat_a, img: "product_flat_bill.png",   position: 9 },
+      { name: "Quick Dry Baseball Sinower", name_zh: "速干棒球帽", category: cat_a, img: "product_quick_dry.png",   position: 8 },
+      { name: "Trucker Sinower",            name_zh: "卡车帽",     category: cat_a, img: "product_trucker.png",     position: 7 },
+      { name: "Bucket Sinower",             name_zh: "渔夫帽",     category: cat_b, img: "product_bucket.png",      position: 10 },
+      { name: "Visor Sinower",              name_zh: "遮阳帽",     category: cat_b, img: "product_visor.png",       position: 9 },
+      { name: "Kids Sinower",               name_zh: "儿童帽",     category: cat_b, img: "product_kids.png",        position: 8 },
+      { name: "Knit Beanie Sinower",        name_zh: "针织毛线帽", category: cat_c, img: "product_knit_beanie.png", position: 10 },
+      { name: "Winter Sinowers",            name_zh: "冬季帽",     category: cat_c, img: "product_winter.png",     position: 9 }
     ]
 
     products.each do |p|

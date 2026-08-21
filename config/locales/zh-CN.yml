@@ -2,24 +2,40 @@ zh-CN:
   navbar:
     search_placeholder: "搜索产品..."
     all_products: "产品中心"
+    factory: "工厂实力"
+    factory_experience: "工厂体验"
     customize: "定制服务"
     blog: "LATEST INFORMATION"
     enterprise_updates: "企业动态"
     industry_news: "行业新闻"
     all_news: "全部资讯"
+    hero:
+      badge: "源头制造商"
+      title: "可靠的制造合作伙伴"
+      italic_title: "服务于全球餐饮服务行业"
+      description: "拥有 700,000㎡ 生产基地及丰富的全球出口经验，Sinower 为全球餐厅和酒店提供专业的制冷、烹饪及不锈钢厨房解决方案。"
+      factory_area: "工厂面积"
+      employees: "员工人数"
+      countries: "服务国家"
+      capacity_yr: "年产能"
+      request_quote: "获取报价"
+      explore_products: "探索产品"
+      factory_live_tour: "工厂实况"
+      verified: "权威验证"
+      experience_years: "10+ 年制造业卓越经验"
   posts:
     hero:
-      title: "雅派博客"
+      title: "Sinower 资讯"
       subtitle: "最新动态"
-      description: "来自广东专业团队的电池制造见解、行业趋势和专业指南。"
+      description: "专业商用厨房设备制造商 - 山东Sinower电器有限公司"
     enterprise_updates:
       title: "企业动态"
       subtitle: "公司新闻"
-      description: "了解雅派最新的企业发展、工厂扩张和重要里程碑。"
+      description: "了解山东Sinower电器有限公司最新的企业发展和重要里程碑。"
     industry_news:
       title: "行业新闻"
       subtitle: "市场趋势"
-      description: "针对全球手机电池行业和技术趋势的专业分析与见解。"
+      description: "针对全球商用厨房设备行业的专业分析与见解。"
     all: "全部资讯"
     back_to_blog: "返回资讯列表"
     statistics:
@@ -29,10 +45,10 @@ zh-CN:
       read_count: "累计阅读"
   home:
     contact:
-      title: "联系雅派"
-      subtitle: "联系雅派"
-      hero_title: "专业的合作伙伴"
-      hero_desc: "联系我们的团队进行产品咨询、定制样品或业务合作。我们已准备好助您的品牌成长。"
+      title: "联系我们"
+      subtitle: "联系我们"
+      hero_title: "专业制造商"
+      hero_desc: "专业商用厨房设备制造商 - 山东Sinower电器有限公司。联系我们的团队进行产品咨询或业务合作。"
       send_message: "发送消息"
       success_notice: "消息发送成功。我们将尽快与您联系。"
       form:
@@ -55,145 +71,67 @@ zh-CN:
       support_card_title: "需要专业支持？"
       support_card_desc: "为您的品牌发展提供专业支持和咨询服务。"
       view_warranty: "查看详情"
-    customize:
-      hero:
-        title: "定制服务"
-        subtitle: "从设计到生产，满足您的个性化需求"
-        description: "支持产品定制、外观设计、材料选择和批量生产。展示企业从需求沟通、设计开发到生产交付的完整能力。"
-        cta: "立即咨询"
-        tag: "支持定制"
-      capabilities:
-        title: "定制能力展示"
-        subtitle: "告诉我们您的需求，我们为您实现"
-        items:
-          appearance:
-            title: "外观设计"
-            desc: "支持个性化外壳设计与美学造型定制。"
-          material:
-            title: "材料选择"
-            desc: "提供多种电芯类型与材质方案供您选择。"
-          dimensions:
-            title: "尺寸定制"
-            desc: "根据您的设备要求，精准匹配电池尺寸。"
-          packaging:
-            title: "品牌包装"
-            desc: "提供完整的品牌形象与零售包装解决方案。"
-      process:
-        title: "定制流程"
-        subtitle: "简单清晰的合作流程，让您全程无忧"
-        step1: "需求"
-        step1_desc: "沟通"
-        step2: "方案"
-        step2_desc: "确认"
-        step3: "样品"
-        step3_desc: "制作"
-        step4: "客户"
-        step4_desc: "确认"
-        step5: "批量"
-        step5_desc: "生产"
-        step6: "最终"
-        step6_desc: "交付"
-      design_rd:
-        title: "Logo定制"
-        subtitle: "只需发送您的Logo名称或图片。"
-        items:
-          free_design: "免费设计"
-          sample_confirmation: "样品确认"
-          screen_printing: "丝印（黑或白）"
-          uv_printing: "UV印刷（彩色）"
-      packaging_design:
-        title: "包装设计"
-        subtitle: "我们提供纸盒、塑料袋、铁盒等包装。"
-        items:
-          free_design: "免费设计"
-          sample_confirmation: "样品确认"
-          low_moq: "小批量定制"
-          more_languages: "支持多国语言"
-      production:
-        title: "生产能力展示"
-        subtitle: "工业级品质控制，确保稳定交付"
-        items:
-          scale: "工厂规模"
-          equipment: "生产设备"
-          team: "生产团队"
-          qc: "质量控制"
-      cases:
-        title: "定制案例"
-        subtitle: "证明我们在各行业的实际定制经验与成功结果"
-        case1:
-          requirement: "特殊材料 + 品牌LOGO"
-          solution: "设计开发 + 批量生产"
-          result: "完成交付"
-      faqs:
-        title: "常见问题解答"
-        q1: "最低订单量（MOQ）是多少？"
-        a1: "MOQ 根据定制程度而定，请联系我们的销售团队了解详情。"
-        q2: "定制周期需要多久？"
-        a2: "从设计确认到批量生产通常需要 2-4 周，具体视复杂度而定。"
-        q3: "你们提供样品吗？"
-        a3: "是的，我们在批量生产前提供样品制作服务供客户确认。"
-        q4: "支持哪些修改？"
-        a4: "我们支持对设计、材料、容量以及包装方案的修改。"
-      conversion:
-        title: "准备好开启您的定制项目了吗？"
-        subtitle: "我们的专家团队已准备就绪，为您提供从设计到批量生产的全方位支持。"
-        cta: "立即咨询"
     faqs:
+      hero_badge: "常见问题"
       title: "常见问题解答"
-      subtitle: "在这里您可以找到有关我们产品和服务的常见问题解答"
+      subtitle: "寻找关于我们产品、制造工艺、定制服务、质量控制及合作方式的答案。"
+      search_placeholder: "搜索您的问题..."
+      categories_title: "问题分类"
       no_questions: "暂无问题"
       more_questions_title: "还有其他问题吗？"
       more_questions_desc: "如果您没能找到想要的答案，请随时联系我们的客户服务团队。"
+      inquiry_cta: "发送询价"
     contact_us: "联系我们"
-
-    about:
-      title: "关于我们"
-      subtitle: "公司简介"
-      hero_title: "专注于高品质手机电池制造"
-      hero_desc: "作为一家拥有20年经验的工厂，我们为全球批发商提供 OEM/ODM 电池解决方案。"
-      heritage_title: "我们的背景与实力"
-      heritage_desc_1: "雅派电子科技有限公司总部位于中国广东省，是一家专业从事锂离子电池研发、制造和销售的企业。"
-      heritage_desc_2: "我们拥有先进的生产设备和完善的质量控制体系，确保每一块出厂的电池都符合国际标准。"
-      stats:
-        years: "年行业经验"
-        subsidiaries: "家下属工厂"
-      value_title: "我们的价值"
-      value_desc_1: "我们不仅提供产品，更提供可靠的供应链保障和专业的技术支持。"
-      value_desc_2: "质量是企业的生命线，创新是发展的驱动力。"
-      why_title: "为什么选择雅派？"
-      partners:
-        title: "我们的合作伙伴与客户"
-        subtitle: "全球协作"
-      reasons:
-        pricing:
-          title: "工厂直供价"
-          desc: "从我们在东莞的生产工厂直接获取极具竞争力的价格，确保您的利润最大化。"
-        support:
-          title: "免费定制"
-          desc: "我们为批发商和零售商提供免费的品牌 Logo 定制服务，助您打造自有品牌。"
-        standards:
-          title: "严格标准"
-          desc: "我们的产品通过了 CE, RoHS, FCC 等多项国际认证，品质无忧。"
-        opportunity:
-          title: "市场机遇"
-          desc: "我们紧跟行业趋势，快速推出最新款手机的适配电池，助您抢占先机。"
-        inventory:
-          title: "稳定库存"
-          desc: "常用型号保持稳定现货，发货速度快，降低您的库存压力。"
+  categories:
+    all_products: "产品中心"
+    all_products_catalog: "全部产品目录"
+    all_products_desc: "Sinower 整合多样化的商用制冷和烹饪厨房设备，为全球餐饮服务客户提供完整的产品组合。"
+    banner_eyebrow: "SINOWER 商用厨具"
+    explore_all: "Sinower 厨房设备"
+    view_details: "查看详情"
+    no_skus_title: "暂无可用型号"
+    no_skus_desc: "此分类正在更新中。请稍后再来查看我们的最新发布。"
+    contact_us: "联系我们"
   skus:
+    product_name: "产品名称"
+    material: "材质"
+    specification: "规格"
+    voltage_power: "电压/功率"
+    capacity_dimensions: "容量/尺寸"
+    burners_controls: "燃烧器/控制方式"
+    series_applications: "系列/用途"
+    color_appearance: "颜色/外观"
+    moq: "最小起订量"
+    sample_time: "样品时间"
+    production_lead_time: "生产周期"
+    packing: "包装"
+    carton_size: "外箱尺寸"
+    gross_weight: "毛重"
+    price: "价格"
+    params:
+      voltage_power: "电压/功率"
+      capacity_dimensions: "容量/尺寸"
+      burners_controls: "燃烧器/控制方式"
+      series_applications: "系列/用途"
+      color_appearance: "颜色/外观"
     add_to_order: "添加到订单"
     add_short: "添加"
   footer:
-    address: "广东省东莞市大朗镇富民南路库赛科技园6栋"
-    company_name: "广东雅派电子科技有限公司"
-    company_desc: "专业手机电池制造商"
+    quick_links: "了解更多"
+    address: "滨州市博兴县庞家工业园"
+    company_desc: "专业商用厨房设备制造商"
+    company_name: "山东Sinower电器有限公司"
+    phone: "+86 0543 8171612"
+    email: "info@skyrainbow.com.cn"
     rights_reserved: "保留所有权利。"
     
   contact_info:
-    address: "广东省东莞市大朗镇富民南路71号6栋602室"
-    phone: "+86 18124935425"
-    email: "Caroline@yapaibattery.com"
-    support_email: "Caroline@yapaibattery.com"
+    address: "山东省滨州市博兴县庞家镇工业园"
+    phone: "+86 0543 8171612"
+    email: "info@skyrainbow.com.cn"
+    support_email: "info@skyrainbow.com.cn"
+    company_profile_title: "公司简介"
+    company_profile_content: "山东Sinower电器有限公司战略性地坐落于庞家镇工业园 (北纬37°，东经118°)。公司占地70万平方米，专业生产商用制冷设备、烹饪设备及优质不锈钢厨具。"
 
   privacy_policy:
     ip_banner:
@@ -218,7 +156,7 @@ zh-CN:
       content: "您有权要求删除您的个人数据。"
     contact_us:
       title: "联系我们删除"
-      content: "如需请求删除数据或对我们的隐私惯例有任何疑问，请通过 Caroline@yapaibattery.com 与我们联系。"
+      content: "如需请求删除数据或对我们的隐私惯例有任何疑问，请通过 info@skyrainbow.com.cn 与我们联系。"
     close: "关闭"
 
   cookie_banner:

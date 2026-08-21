@@ -1,4 +1,16 @@
 class Category < ApplicationRecord
+  ROOT_CATEGORIES = {
+    'refrigeration' => 'Refrigeration',
+    'stainless-steel-product' => 'Stainless steel product',
+    'stainless-steel-sink' => 'Stainless steel Sink',
+    'cooking-equipment' => 'Cooking Equipment',
+    'food-equipment' => 'Food Equipment',
+    'retail-refrigeration' => 'Retail Refrigeration'
+  }.freeze
+
+  def self.root_slugs
+    ROOT_CATEGORIES.keys
+  end
   has_many :children, -> { unscoped.order(:position, :id) }, class_name: "Category", foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: "Category", optional: true
   has_many :skus, dependent: :destroy
@@ -7,23 +19,35 @@ class Category < ApplicationRecord
     attachable.variant :featured, resize_to_limit: [600, 800], format: :webp, saver: { quality: 85 }
   end
 
+  has_one_attached :banner do |attachable|
+    attachable.variant :large, resize_to_limit: [1920, 600], format: :webp, saver: { quality: 85 }
+  end
+
   default_scope { order(:position, :id) }
 
   validates :name, presence: true
   validates :keywords, length: { maximum: 255 }
   before_validation :generate_slug, if: -> { slug.blank? }
-  validates :category_kind, presence: true, inclusion: { in: %w[apple huawei oppo vivo xiaomi samsung transsion custom] }
+  before_validation :sync_category_kind
   validates :slug, presence: true, uniqueness: true, format: { with: /\A[a-z0-9-]+\z/, message: "只能包含小写字母、数字和连字符" }
   
   scope :visible, -> { where(hidden: false) }
+  scope :roots, -> { where(parent_id: nil) }
 
   after_commit :clear_cache
 
   def to_param
     slug.presence || id.to_s
   end
-  validate :leaf_category_constraint_for_parent
-  validate :consistent_category_kind
+  validate :root_category_slug_and_kind_consistency, if: -> { parent_id.nil? }
+  validate :prevent_root_slug_change_if_has_children, if: -> { parent_id.nil? && !new_record? }
+  validate :validate_root_category_slug, if: -> { parent_id.nil? }
+
+  def validate_root_category_slug
+    if !ROOT_CATEGORIES.key?(slug)
+      errors.add(:slug, "顶级分类必须是预定义的 6 类之一: #{ROOT_CATEGORIES.keys.join(', ')}")
+    end
+  end
 
   def leaf?
     children.empty?
@@ -82,13 +106,33 @@ class Category < ApplicationRecord
 
   def generate_slug
     return if name.blank?
-    self.slug = name.parameterize
+    self.slug = name.parameterize if slug.blank?
+  end
+
+  def sync_category_kind
+    if parent_id.nil?
+      # 顶级分类，强制 category_kind 等于 slug
+      self.category_kind = slug if slug.present?
+    else
+      # 子分类，继承父分类的 category_kind
+      self.category_kind = parent.category_kind if parent
+    end
+  end
+
+  def root_category_slug_and_kind_consistency
+    if slug.present? && category_kind.present? && slug != category_kind
+      errors.add(:category_kind, "顶级分类的频道标识必须与其路径(slug)一致")
+    end
+  end
+
+  def prevent_root_slug_change_if_has_children
+    if slug_changed? && children.exists?
+      errors.add(:slug, "该分类下已有子项，不可更改路径标识，以免影响子项频道属性")
+    end
   end
 
   def clear_cache
-    %w[apple huawei oppo vivo xiaomi samsung transsion custom].each do |kind|
-      Rails.cache.delete("categories_for_kind_#{kind}")
-    end
+    Rails.cache.delete("categories_for_kind_#{category_kind}") if category_kind.present?
   end
 
   def leaf_category_constraint_for_parent

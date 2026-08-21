@@ -12,6 +12,6 @@ class SiteConfig < ApplicationRecord
   has_many_attached :factory_images
 
   def self.get
-    first_or_create!(name: "Yapai")
+    first_or_create!(name: "Sinower")
   end
 end

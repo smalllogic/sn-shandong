@@ -1,470 +1,437 @@
-<% content_for :title, "Our Factory - Yapai Battery Manufacturing in Dongguan, China" %>
-<% content_for :meta_description, "Visit the Yapai Battery Factory in Dongguan, China. Daily production capacity exceeds 5,000 battery packs, supporting OEM/ODM orders with free brand logo customization." %>
-<% content_for :meta_keywords, "battery factory China, mobile phone battery manufacturer, battery manufacturing facility, OEM battery factory, Yapai factory" %>
-
-<div class="bg-slate-50 min-h-screen overflow-x-hidden">
-
-  <div class="relative bg-slate-900 py-36 sm:py-48 overflow-hidden">
-    <div class="absolute inset-0">
-      <%= image_tag "factory1.jpg", class: "w-full h-full object-cover opacity-60" %>
-      <div class="absolute inset-0 bg-slate-950/70 mix-blend-multiply"></div>
-      <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-slate-900/40"></div>
-    </div>
-    <!-- Advanced decorative elements -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full overflow-hidden pointer-events-none">
-      <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-white/5 rounded-full blur-[120px] animate-pulse"></div>
-      <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-slate-400/10 rounded-full blur-[120px]"></div>
-    </div>
-
-    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
-      <div class="reveal-hero flex flex-col items-center">
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-xl rounded-full border border-white/20 mb-8 shadow-sm">
-          <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-          </span>
-          <p class="text-white/90 font-bold tracking-[0.2em] uppercase text-[10px]">
-            PROFESSIONAL BATTERY MANUFACTURER
-          </p>
-        </div>
-        <h1 class="text-6xl font-black tracking-tighter text-white sm:text-8xl mb-8 leading-[1.1]">
-          About <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-white to-slate-400 animate-gradient-x">Yapai</span>
-        </h1>
-        <p class="text-xl leading-relaxed text-slate-300 max-w-2xl font-medium mb-12">
-          Yapai Battery Factory is a professional mobile phone battery manufacturer headquartered in Guangdong, China, with its production plant located in Dongguan. The company focuses on the R&D, production, and global export of replacement batteries for smartphones.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== MARQUEE PHOTO STRIP ===== -->
-  <div class="bg-slate-50 py-8 overflow-hidden relative z-10 -mt-10 rounded-t-[3rem] shadow-[0_-20px_50px_rgba(0,0,0,0.05)] border-t border-slate-100">
-    <div class="flex gap-6" style="animation: marquee-strip 28s linear infinite; width: max-content;">
-      <% if @site_config.factory_images.attached? %>
-        <% 2.times do %>
-          <% @site_config.factory_images.each do |image| %>
-            <%= image_tag image, class: "h-56 w-80 object-cover rounded-2xl flex-shrink-0 shadow-lg border border-white" %>
-          <% end %>
-        <% end %>
+<div class="relative bg-white">
+  <!-- 1. Factory Hero Section -->
+  <section class="relative h-[80vh] flex items-center overflow-hidden bg-slate-900">
+    <div class="absolute inset-0 z-0">
+      <% if File.exist?(Rails.root.join("app/assets/images/sinower-factory1.png")) %>
+        <%= image_tag "sinower-factory1.png", class: "w-full h-full object-cover opacity-40" %>
       <% else %>
-        <% 2.times do %>
-          <%= image_tag "factory1.jpg", class: "h-56 w-80 object-cover rounded-2xl flex-shrink-0 shadow-lg border border-white" %>
-          <%= image_tag "factory2.jpg", class: "h-56 w-80 object-cover rounded-2xl flex-shrink-0 shadow-lg border border-white" %>
-          <%= image_tag "factory3.jpg", class: "h-56 w-80 object-cover rounded-2xl flex-shrink-0 shadow-lg border border-white" %>
-          <%= image_tag "factory4.jpg", class: "h-56 w-80 object-cover rounded-2xl flex-shrink-0 shadow-lg border border-white" %>
-          <%= image_tag "factory5.jpg", class: "h-56 w-80 object-cover rounded-2xl flex-shrink-0 shadow-lg border border-white" %>
-        <% end %>
+        <div class="w-full h-full bg-slate-800 opacity-50"></div>
       <% end %>
-    </div>
-  </div>
-
-  <!-- ===== ANIMATED STATS ===== -->
-  <div id="stats" class="bg-white py-24 relative overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent"></div>
-    <div class="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
-        <div class="reveal-stat group">
-          <div class="text-6xl font-black text-slate-900 mb-3 tracking-tighter group-hover:text-primary transition-colors"><span class="counter" data-target="20">0</span>+</div>
-          <div class="text-slate-400 text-xs font-bold uppercase tracking-[0.2em]">Years Experience</div>
-        </div>
-        <div class="reveal-stat group">
-          <div class="text-6xl font-black text-slate-900 mb-3 tracking-tighter group-hover:text-primary transition-colors"><span class="counter" data-target="200">0</span>+</div>
-          <div class="text-slate-400 text-xs font-bold uppercase tracking-[0.2em]">Skilled Workers</div>
-        </div>
-        <div class="reveal-stat group">
-          <div class="text-6xl font-black text-slate-900 mb-3 tracking-tighter group-hover:text-primary transition-colors"><span class="counter" data-target="30">0</span>+</div>
-          <div class="text-slate-400 text-xs font-bold uppercase tracking-[0.2em]">Countries Served</div>
-        </div>
-        <div class="reveal-stat group">
-          <div class="text-6xl font-black text-slate-900 mb-3 tracking-tighter group-hover:text-primary transition-colors"><span class="counter" data-target="5000000">0</span>+</div>
-          <div class="text-slate-400 text-xs font-bold uppercase tracking-[0.2em]">Packs Per Year</div>
-        </div>
+      <div class="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-transparent to-slate-900"></div>
+      
+      <!-- Video Indicator -->
+      <div class="absolute bottom-10 right-10 flex items-center gap-3 text-white/50">
+        <div class="w-2 h-2 bg-accent rounded-full animate-ping"></div>
+        <span class="text-[10px] font-black tracking-widest uppercase">Live Factory Feed</span>
       </div>
     </div>
-  </div>
 
-  <!-- ===== MANUFACTURING EXCELLENCE ===== -->
-  <div class="relative bg-slate-50 py-24 sm:py-32 overflow-hidden -mt-1 border-y border-slate-100">
-    <div class="absolute inset-0 opacity-5">
-      <%= image_tag "factory4.jpg", class: "w-full h-full object-cover" %>
+    <div class="relative z-10 max-w-screen-xl mx-auto px-6 text-center text-white pt-20 lg:pt-0">
+      <div class="inline-block px-4 py-1.5 bg-accent/20 backdrop-blur-md border border-accent/30 rounded-full text-accent text-xs font-bold tracking-[0.2em] uppercase mb-8">
+        Manufacturing Capability Proof
+      </div>
+      <h1 class="text-5xl md:text-7xl font-black leading-tight mb-8">
+        Advanced Manufacturing <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-400">for Global Excellence</span>
+      </h1>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-16 pt-16 border-t border-white/10">
+        <div>
+          <div class="text-3xl md:text-4xl font-black text-white"><span data-target-value="700000" class="counter">0</span><span class="text-accent text-xl ml-1">㎡</span></div>
+          <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Production Area</div>
+        </div>
+        <div>
+          <div class="text-3xl md:text-4xl font-black text-white"><span data-target-value="550" class="counter">0</span><span class="text-accent text-xl ml-1">+</span></div>
+          <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Production Machines</div>
+        </div>
+        <div>
+          <div class="text-3xl md:text-4xl font-black text-white"><span data-target-value="280000" class="counter">0</span></div>
+          <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Annual Capacity</div>
+        </div>
+        <div>
+          <div class="text-3xl md:text-4xl font-black text-white"><span data-target-value="500" class="counter">0</span><span class="text-accent text-xl ml-1">+</span></div>
+          <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Expert Employees</div>
+        </div>
+      </div>
+
+      <div class="mt-16 flex justify-center gap-6">
+        <a href="#overview" class="px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-accent hover:text-white transition-all transform hover:-translate-y-1">
+          Explore Facility
+        </a>
+        <%= link_to contact_path, class: "px-8 py-4 border-2 border-white/30 text-white font-bold rounded-xl hover:bg-white/10 transition-all" do %>
+          Request A Quote
+        <% end %>
+      </div>
     </div>
-    <div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-slate-50 to-transparent"></div>
-    <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+  </section>
+
+  <!-- 2. Factory Overview -->
+  <section id="overview" class="py-24 bg-white overflow-hidden">
+    <div class="max-w-screen-xl mx-auto px-6">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-        <div class="reveal-left">
-          <div class="inline-block px-3 py-1 bg-primary/10 border border-primary/20 rounded-lg mb-6">
-            <p class="text-primary font-bold tracking-widest uppercase text-[10px]">Established 2003</p>
-          </div>
-          <h2 class="text-4xl font-black tracking-tighter text-slate-900 sm:text-5xl mb-8 leading-tight">Precision Engineering,<br/>Global Standards.</h2>
-          <div class="space-y-6 text-lg leading-relaxed text-slate-500">
-            <p>
-              Yapai Battery Factory stands at the forefront of mobile energy solutions. Headquartered in Guangdong with high-tech facilities in Dongguan, we bridge the gap between innovation and mass production.
-            </p>
-            <p>
-              Equipped with fully automated production lines and rigorous aging-test chambers, our daily output exceeds <span class="text-slate-900 font-bold">5,000 packs</span>, ensuring every battery meets international safety benchmarks.
-            </p>
-          </div>
-          <div class="grid grid-cols-2 gap-6 mt-12">
-            <div class="bg-white p-8 rounded-3xl border border-slate-200 hover:border-primary/30 transition-all group shadow-sm hover:shadow-md">
-              <div class="text-primary font-black text-4xl mb-2 group-hover:scale-110 transition-transform origin-left">20+</div>
-              <div class="text-[10px] text-slate-400 uppercase tracking-widest font-black">Years Industry Lead</div>
-            </div>
-            <div class="bg-white p-8 rounded-3xl border border-slate-200 hover:border-primary/30 transition-all group shadow-sm hover:shadow-md">
-              <div class="text-primary font-black text-4xl mb-2 group-hover:scale-110 transition-transform origin-left">100%</div>
-              <div class="text-[10px] text-slate-400 uppercase tracking-widest font-black">Quality Assurance</div>
-            </div>
-          </div>
-        </div>
-        <div class="relative reveal-right">
-          <div class="relative z-10 grid grid-cols-2 gap-4">
-            <div class="aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white rotate-[-2deg] hover:rotate-0 transition-all duration-700">
-              <%= image_tag "worker3.jpg", class: "w-full h-full object-cover" %>
-            </div>
-            <div class="space-y-4 pt-12">
-              <div class="aspect-square rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white rotate-[2deg] hover:rotate-0 transition-all duration-700">
-                <%= image_tag "worker1.jpg", class: "w-full h-full object-cover" %>
-              </div>
-              <div class="bg-primary p-8 rounded-[2rem] shadow-2xl shadow-primary/20">
-                <p class="text-slate-900 font-black text-2xl leading-none">5K+</p>
-                <p class="text-slate-900/70 text-[10px] font-black uppercase tracking-widest mt-2">Daily Output</p>
-              </div>
-            </div>
-          </div>
-          <!-- Abstract shapes -->
-          <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-primary/20 rounded-full blur-[80px] -z-10 animate-pulse"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== PRODUCTION AND CUSTOMIZATION CAPABILITIES (from about us) ===== -->
-  <div class="py-24 bg-white overflow-hidden relative z-10 -mt-12 rounded-t-[4rem] shadow-[0_-30px_60px_rgba(0,0,0,0.02)]">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-        <div class="lg:col-span-5 space-y-8">
-          <div>
-            <h2 class="text-4xl font-black text-slate-900 mb-8 tracking-tight"><%= t('home.about.heritage_title') %></h2>
-            <div class="space-y-6">
-              <p class="text-slate-600 text-lg leading-relaxed font-medium">
-                <%= t('home.about.heritage_desc_1') %>
-              </p>
-              <p class="text-slate-600 text-lg leading-relaxed font-medium border-l-4 border-primary pl-6 py-2 bg-slate-50 rounded-r-2xl">
-                <%= t('home.about.heritage_desc_2') %>
-              </p>
-            </div>
-          </div>
-          
-          <div class="grid grid-cols-2 gap-6 pt-4">
-            <div class="p-8 bg-slate-50 rounded-[2rem] border border-slate-100 group hover:bg-white hover:shadow-2xl hover:border-primary/20 transition-all duration-500">
-              <div class="text-primary font-black text-4xl mb-3">1,000+</div>
-              <p class="text-sm font-bold text-slate-500 uppercase tracking-widest"><%= t('home.about.stats.years') %></p>
-            </div>
-            <div class="p-8 bg-slate-50 rounded-[2rem] border border-slate-100 group hover:bg-white hover:shadow-2xl hover:border-secondary/20 transition-all duration-500">
-              <div class="text-secondary font-black text-4xl mb-3">5,000+</div>
-              <p class="text-sm font-bold text-slate-500 uppercase tracking-widest"><%= t('home.about.stats.subsidiaries') %></p>
-            </div>
+        <div class="relative group">
+          <div class="absolute -inset-4 bg-accent/5 rounded-[2rem] transform rotate-3 group-hover:rotate-0 transition-transform duration-700"></div>
+          <%= image_tag "sinower-factory2.png", class: "relative w-full aspect-[4/3] object-cover rounded-[2rem] shadow-2xl z-10" %>
+          <div class="absolute -bottom-10 -right-10 bg-primary text-white p-8 rounded-2xl shadow-xl z-20 hidden md:block border border-white/10">
+            <div class="text-4xl font-black mb-1">10+</div>
+            <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-300">Years Industry Experience</div>
           </div>
         </div>
         
-        <div class="lg:col-span-7 relative group">
-          <div class="aspect-[16/10] lg:aspect-[16/9] rounded-[4rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] transition-transform duration-700 group-hover:scale-[1.02]">
-            <%= image_tag "global.jpg", class: "w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110", alt: "Yapai Factory" %>
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="space-y-10">
+          <div>
+            <h2 class="text-4xl font-black text-slate-900 mb-6">World-Class Manufacturing <br>Infrastructure</h2>
+            <p class="text-lg text-slate-600 leading-relaxed">
+              Located in the heart of China's commercial kitchen manufacturing hub, Sinower operates one of the most technologically advanced facilities in the industry. Our massive 700,000㎡ production base provides the scale and stability required by global distributors and chain partners.
+            </p>
           </div>
-          <!-- Decorative elements -->
-          <div class="absolute -bottom-12 -left-12 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
-          <div class="absolute -top-12 -right-12 w-64 h-64 bg-slate-200/50 rounded-full blur-3xl -z-10"></div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-accent transition-colors">
+              <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2">Location</div>
+              <div class="text-slate-900 font-bold">Binzhou, Shandong, China</div>
+            </div>
+            <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-accent transition-colors">
+              <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2">Total Area</div>
+              <div class="text-slate-900 font-bold">700,000 Square Meters</div>
+            </div>
+            <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-accent transition-colors">
+              <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2">Staffing</div>
+              <div class="text-slate-900 font-bold">500+ Skilled Technicians</div>
+            </div>
+            <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-accent transition-colors">
+              <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2">Specialization</div>
+              <div class="text-slate-900 font-bold">Full Chain Manufacturing</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- ===== SECOND MARQUEE (reverse) ===== -->
-  <div class="bg-slate-50 py-12 overflow-hidden border-y border-slate-100">
-    <div class="flex gap-6" style="animation: marquee-strip-reverse 35s linear infinite; width: max-content;">
-      <% 2.times do %>
-        <%= image_tag "factory5.jpg", class: "h-44 w-72 object-cover rounded-2xl flex-shrink-0 shadow-md transition-all duration-500" %>
-        <%= image_tag "factory4.jpg", class: "h-44 w-72 object-cover rounded-2xl flex-shrink-0 shadow-md transition-all duration-500" %>
-        <%= image_tag "factory3.jpg", class: "h-44 w-72 object-cover rounded-2xl flex-shrink-0 shadow-md transition-all duration-500" %>
-        <%= image_tag "factory2.jpg", class: "h-44 w-72 object-cover rounded-2xl flex-shrink-0 shadow-md transition-all duration-500" %>
-        <%= image_tag "factory1.jpg", class: "h-44 w-72 object-cover rounded-2xl flex-shrink-0 shadow-md transition-all duration-500" %>
-      <% end %>
-    </div>
-  </div>
-
-
-  <!-- ===== YAPAI-ABILITIES ===== -->
-  <div class="relative bg-white py-24 sm:py-32 overflow-hidden -mt-16 z-10 rounded-t-[4rem] border-t border-slate-100">
-    <div class="absolute inset-0 opacity-5">
-      <%= image_tag "factory5.jpg", class: "w-full h-full object-cover" %>
-    </div>
-    <div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-slate-50 to-transparent"></div>
-    <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="text-center mb-16 reveal-up">
-        <p class="text-primary font-semibold tracking-widest uppercase text-sm mb-3">What We Offer</p>
-        <h2 class="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">Full-Service Manufacturing</h2>
+  <!-- 3. Production Capacity -->
+  <section class="py-24 bg-primary text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+    <div class="max-w-screen-xl mx-auto px-6 relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <h2 class="text-4xl font-black mb-6">Massive Annual Output</h2>
+        <p class="text-slate-300 text-lg">We maintain high-capacity production lines to ensure steady supply for large-scale global procurement.</p>
+        <div class="mt-10 inline-flex items-center gap-4 bg-white/5 backdrop-blur-md px-8 py-4 rounded-2xl border border-white/10">
+          <span class="text-5xl font-black text-accent">280,000</span>
+          <span class="text-left text-xs font-bold uppercase tracking-widest text-slate-200">Units Total <br>Annual Capacity</span>
+        </div>
       </div>
+
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <% [
-          { title: "Diverse Battery Portfolio", color: "primary", desc: "Replacement batteries for iPhone, Samsung, Huawei, Xiaomi, Vivo, Oppo, and more.", items: ["iPhone Batteries", "Samsung Batteries", "Huawei Batteries", "Xiaomi Batteries", "Vivo & Oppo", "Redmi & Honor"] },
-          { title: "Global Reach", color: "secondary", desc: "Products exported to Europe, America, Southeast Asia, Middle East, and Latin America.", items: ["United States", "Germany", "United Kingdom", "Russia", "Brazil", "India"] },
-          { title: "Custom Services", color: "accent", desc: "End-to-end customization from cell choice to private labeling and packaging design.", items: ["Custom Capacity", "Private Labeling", "Packaging Design", "BMS Customization", "OEM / ODM", "Small Batch Orders"] }
-        ].each do |yapai| %>
-          <div class="reveal-card bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
-            <div class="h-2 bg-<%= yapai[:color] %>"></div>
-            <div class="p-8">
-              <h3 class="text-xl font-bold text-slate-900 mb-3"><%= yapai[:title] %></h3>
-              <p class="text-slate-500 text-sm leading-relaxed mb-6"><%= yapai[:desc] %></p>
-              <ul class="space-y-2">
-                <% yapai[:items].each do |item| %>
-                  <li class="flex items-center gap-2 text-sm text-slate-600">
-                    <svg class="w-4 h-4 text-<%= yapai[:color] %> flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                    </svg>
-                    <%= item %>
-                  </li>
-                <% end %>
-              </ul>
+          { name: "Refrigeration", icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4", cap: "85,000 Units/yr" },
+          { name: "Cooking Equipment", icon: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z", cap: "120,000 Units/yr" },
+          { name: "Stainless Steel Fab", icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4", cap: "75,000 Units/yr" }
+        ].each do |item| %>
+          <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:border-accent hover:bg-white/10 transition-all group">
+            <svg class="w-12 h-12 text-accent mb-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="<%= item[:icon] %>"></path></svg>
+            <h4 class="text-xl font-bold mb-2"><%= item[:name] %></h4>
+            <div class="text-2xl font-black text-white"><%= item[:cap] %></div>
+            <div class="mt-4 h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+               <div class="h-full bg-accent w-3/4"></div>
             </div>
           </div>
         <% end %>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Partners Section (from about us) -->
-  <% if @partners.present? %>
-    <div class="py-24 bg-white overflow-hidden border-t border-slate-100 relative z-20 -mt-12 rounded-t-[4rem]">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16 reveal-up">
-          <p class="text-primary font-semibold tracking-widest uppercase text-sm mb-3"><%= t('home.about.partners.subtitle') %></p>
-          <h2 class="text-3xl font-black text-slate-900 tracking-tight"><%= t('home.about.partners.title') %></h2>
+  <!-- 4. Manufacturing Facilities -->
+  <section class="py-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+        <div class="max-w-2xl">
+          <h2 class="text-4xl font-black text-slate-900 mb-4">Advanced Machinery & Automation</h2>
+          <p class="text-slate-600">Precision manufacturing powered by world-leading equipment.</p>
         </div>
+        <div class="hidden md:flex gap-4">
+           <div class="px-6 py-2 bg-slate-100 rounded-full text-xs font-bold text-slate-500 uppercase tracking-widest">550+ Machines</div>
+           <div class="px-6 py-2 bg-slate-100 rounded-full text-xs font-bold text-slate-500 uppercase tracking-widest">Digital Control</div>
+        </div>
+      </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center justify-items-center">
-          <% @partners.each do |partner| %>
-            <div class="w-full aspect-square flex items-center justify-center p-3 transition-all duration-500 hover:scale-110 reveal-up">
-              <% if partner.logo.attached? %>
-                <%= image_tag partner.logo, class: "w-full h-full object-contain", alt: partner.name %>
-              <% else %>
-                <span class="text-slate-300 font-bold"><%= partner.name %></span>
-              <% end %>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <% [
+          { name: "Laser Cutting", img: "sinower-factory3.png", desc: "High-precision stainless steel processing for complex components." },
+          { name: "CNC Bending", img: "sinower-factory2.png", desc: "Computerized bending for perfect angles and structural integrity." },
+          { name: "Robot Welding", img: "sinower-factory1.png", desc: "Automated welding ensuring consistent quality and high durability." },
+          { name: "Digital Assembly", img: "sinower-office.png", desc: "Streamlined production lines for efficient large-scale assembly." }
+        ].each do |facility| %>
+          <div class="group">
+            <div class="aspect-square rounded-3xl overflow-hidden mb-6 relative">
+              <%= image_tag facility[:img], class: "w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" %>
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                 <p class="text-white text-xs leading-relaxed"><%= facility[:desc] %></p>
+              </div>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900 group-hover:text-accent transition-colors"><%= facility[:name] %></h4>
+            <div class="w-8 h-1 bg-accent mt-2 group-hover:w-full transition-all duration-500"></div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Production Process -->
+  <section class="py-24 bg-slate-50 overflow-hidden">
+    <div class="max-w-screen-xl mx-auto px-6">
+      <h2 class="text-4xl font-black text-slate-900 text-center mb-20">Streamlined Production Workflow</h2>
+      
+      <div class="relative">
+        <!-- Path Line -->
+        <div class="hidden lg:block absolute top-24 left-0 w-full h-1 bg-slate-200"></div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-12 relative z-10">
+          <% [
+            { step: "01", name: "Material QC", desc: "Raw stainless steel & component testing." },
+            { step: "02", name: "Cutting", desc: "Precision laser & CNC blanking." },
+            { step: "03", name: "Forming", desc: "CNC bending & hydraulic pressing." },
+            { step: "04", name: "Welding", desc: "Professional TIG/MIG & Robot welding." },
+            { step: "05", name: "Assembly", desc: "Module integration & system installation." },
+            { step: "06", name: "Testing", desc: "72h performance & safety burnout." }
+          ].each do |proc| %>
+            <div class="flex flex-col items-center text-center group">
+              <div class="w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center text-xl font-black text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-all transform group-hover:-translate-y-2 border border-slate-100">
+                <%= proc[:step] %>
+              </div>
+              <h4 class="font-bold text-slate-900 mb-2"><%= proc[:name] %></h4>
+              <p class="text-slate-500 text-xs leading-relaxed"><%= proc[:desc] %></p>
             </div>
           <% end %>
         </div>
       </div>
     </div>
-  <% end %>
+  </section>
 
-
-  <!-- ===== VISIT US / CTA ===== -->
-  <div id="visit" class="py-24 sm:py-32 bg-slate-50 relative z-20 -mt-16 rounded-t-[4rem]">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="bg-white rounded-[3rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.1)] flex flex-col lg:flex-row reveal-up border border-slate-100">
-        <div class="p-12 lg:p-20 lg:w-3/5">
-          <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full mb-6">
-            <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
-            <span class="text-primary font-bold uppercase tracking-widest text-[10px]">Open Door Policy</span>
-          </div>
-          <h2 class="text-4xl font-black tracking-tighter text-slate-900 mb-8 sm:text-5xl">Experience Quality In Person.</h2>
-          <p class="text-slate-500 text-lg leading-relaxed mb-12">
-            We welcome all partners to visit our facility in Dongguan. Transparency is our core value—witness our production lines, meet our engineering team, and discuss your bespoke requirements directly.
-          </p>
-
-
-          <div class="flex flex-col gap-8 mb-12">
-            <div class="flex items-center gap-5 group">
-              <div class="w-12 h-12 bg-slate-700 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors duration-500">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+  <!-- 6. Quality Control -->
+  <section class="py-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <h2 class="text-4xl font-black text-slate-900 mb-8">Four-Stage Quality Control System</h2>
+          <div class="space-y-6">
+            <% [
+              { t: "IQC: Incoming Inspection", d: "100% inspection of critical raw materials and electronic components." },
+              { t: "IPQC: In-Process Inspection", d: "Real-time monitoring at every manufacturing workstation." },
+              { t: "FQC: Final Quality Check", d: "Comprehensive performance and safety testing before storage." },
+              { t: "OQC: Outgoing Inspection", d: "Double-check packaging and loading specifications before shipping." }
+            ].each do |qc| %>
+              <div class="flex gap-6 p-6 rounded-2xl border border-slate-100 hover:bg-slate-50 transition-colors group">
+                 <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 text-accent group-hover:bg-accent group-hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                 </div>
+                 <div>
+                    <h4 class="font-bold text-slate-900 mb-1"><%= qc[:t] %></h4>
+                    <p class="text-sm text-slate-500"><%= qc[:d] %></p>
+                 </div>
               </div>
-              <div class="flex items-center gap-3">
-                <span class="text-slate-500 font-bold">Dongguan City, Guangdong Province, China</span>
-              </div>
-            </div>
-          </div>
-          <div class="flex flex-col sm:flex-row items-center gap-4" x-data="{ open: false }">
-            <button @click="open = true" class="w-full sm:w-auto group relative px-6 py-4 rounded-2xl bg-emerald-50 text-emerald-600 font-black hover:bg-emerald-100 transition-all border border-emerald-100 flex items-center justify-center gap-3 overflow-hidden animate-pulse-gentle">
-              <span class="relative z-10 flex items-center gap-3">
-                <span class="relative flex">
-                  <span class="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-30"></span>
-                  <svg class="relative w-5 h-5 fill-current" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </span>
-                <span class="text-base font-bold whitespace-nowrap">Watch Yapai Factory Video</span>
-              </span>
-              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-shimmer-fast"></div>
-            </button>
-            <a href="https://wa.me/+8618124935425" class="w-full sm:w-auto px-6 py-4 rounded-2xl bg-primary text-white font-black hover:bg-primary/90 transition-all shadow-lg hover:-translate-y-1 active:translate-y-0 flex items-center justify-center gap-3">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-              <span class="text-base whitespace-nowrap">Contact Yapai Now</span>
-            </a>
-
-            <!-- Video Modal -->
-            <template x-teleport="body">
-              <div x-show="open" 
-                   x-transition:enter="transition ease-out duration-300"
-                   x-transition:enter-start="opacity-0"
-                   x-transition:enter-end="opacity-100"
-                   x-transition:leave="transition ease-in duration-200"
-                   x-transition:leave-start="opacity-100"
-                   x-transition:leave-end="opacity-0"
-                   class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/90 backdrop-blur-sm"
-                   @keydown.escape.window="open = false"
-                   style="display: none;">
-                
-                <div class="relative w-full max-w-5xl aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl"
-                     @click.away="open = false">
-                  <button @click="open = false" class="absolute top-4 right-4 z-20 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                  </button>
-                  
-                  <template x-if="open">
-                    <iframe class="w-full h-full" 
-                            src="https://www.youtube.com/embed/LMBzklV6Ves?autoplay=1" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
-                    </iframe>
-                  </template>
-                </div>
-              </div>
-            </template>
+            <% end %>
           </div>
         </div>
-
-        <!-- Animation styles -->
-        <style>
-          @keyframes shimmer-fast {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-          }
-          .animate-shimmer-fast {
-            animation: shimmer-fast 1.5s infinite;
-          }
-          @keyframes pulse-gentle {
-            0%, 100% { transform: scale(1); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }
-            50% { transform: scale(1.02); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -6px rgba(0, 0, 0, 0.1); }
-          }
-          .animate-pulse-gentle {
-            animation: pulse-gentle 2s infinite ease-in-out;
-          }
-          @keyframes ping-slow {
-            75%, 100% {
-              transform: scale(2);
-              opacity: 0;
-            }
-          }
-          .animate-ping-slow {
-            animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-          }
-        </style>
-        <div class="lg:w-2/5 min-h-[400px] relative overflow-hidden group">
-          <%= image_tag "factory222.jpg", class: "absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]" %>
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent"></div>
+        <div class="relative">
+           <div class="aspect-square bg-slate-900 rounded-[3rem] overflow-hidden relative group">
+              <%= image_tag "sinower-door.png", class: "w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" %>
+              <div class="absolute inset-0 flex items-center justify-center p-12">
+                 <div class="text-center space-y-4">
+                    <div class="text-6xl font-black text-white">ISO 9001</div>
+                    <div class="text-accent font-bold tracking-widest uppercase text-sm">Quality Standard Certified</div>
+                    <div class="flex justify-center gap-4 pt-8 opacity-80">
+                       <span class="px-4 py-1 border border-white/30 rounded text-xs text-white">CE</span>
+                       <span class="px-4 py-1 border border-white/30 rounded text-xs text-white">ETL</span>
+                       <span class="px-4 py-1 border border-white/30 rounded text-xs text-white">NSF</span>
+                    </div>
+                 </div>
+              </div>
+           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
+  <!-- 7. R&D and Technology -->
+  <section class="py-24 bg-primary text-white">
+    <div class="max-w-screen-xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-1">
+           <h2 class="text-4xl font-black mb-6">Engineering & R&D Excellence</h2>
+           <p class="text-slate-300 mb-8 leading-relaxed">
+             Our dedicated engineering team provides end-to-end support for customization, OEM, and ODM projects. We turn concepts into high-performance products.
+           </p>
+           <ul class="space-y-4">
+             <li class="flex items-center gap-3">
+               <span class="w-1.5 h-1.5 bg-accent rounded-full"></span>
+               <span class="font-bold">CAD/3D Design Studio</span>
+             </li>
+             <li class="flex items-center gap-3">
+               <span class="w-1.5 h-1.5 bg-accent rounded-full"></span>
+               <span class="font-bold">Prototype Lab</span>
+             </li>
+             <li class="flex items-center gap-3">
+               <span class="w-1.5 h-1.5 bg-accent rounded-full"></span>
+               <span class="font-bold">Thermodynamic Testing Room</span>
+             </li>
+           </ul>
+        </div>
+        <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
+           <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:bg-accent/20 transition-colors">
+              <h4 class="text-xl font-bold text-accent mb-4">Customization</h4>
+              <p class="text-slate-300 text-sm">Tailored dimensions, power specifications, and features to meet specific regional market requirements.</p>
+           </div>
+           <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:bg-accent/20 transition-colors">
+              <h4 class="text-xl font-bold text-accent mb-4">OEM Service</h4>
+              <p class="text-slate-300 text-sm">High-capacity production for global brands with strict adherence to brand standards and quality.</p>
+           </div>
+           <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:bg-accent/20 transition-colors">
+              <h4 class="text-xl font-bold text-accent mb-4">Energy Efficiency</h4>
+              <p class="text-slate-300 text-sm">Pioneering energy-saving technology that reduces operating costs and environmental impact.</p>
+           </div>
+           <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:bg-accent/20 transition-colors">
+              <h4 class="text-xl font-bold text-accent mb-4">IoT Integration</h4>
+              <p class="text-slate-300 text-sm">Smart monitoring systems for remote performance tracking and preventive maintenance.</p>
+           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Warehouse & Logistics -->
+  <section class="py-24 bg-white overflow-hidden">
+    <div class="max-w-screen-xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="order-2 lg:order-1 space-y-8">
+          <div class="relative group">
+            <h2 class="text-4xl font-black text-slate-900 mb-6">Global Footprint & Branches</h2>
+            <p class="text-slate-600 mb-8 leading-relaxed">
+              With headquarters in China and strategically located branches in France, Germany, UAE, and USA, Sinower provides localized support and efficient supply chain services to clients worldwide.
+            </p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <% [
+                { name: "China HQ", addr: "Industrial Park, Pangjia Town, Boxing County, Binzhou, Shandong", icon: "🇨🇳" },
+                { name: "France Branch", addr: "31 Quai de L'industrie, 91200 Athis Mons, France", icon: "🇫🇷" },
+                { name: "Germany Branch", addr: "Frühlingstr. 15, 80415, Germany", icon: "🇩🇪" },
+                { name: "UAE Branch", addr: "Bu Shaghara, Liberty Signal, Al Wahda St, Sharjah", icon: "🇦🇪" },
+                { name: "USA Branch", addr: "6155 A Jimmy Carter Blvd Suite A, Norcross, GA 30071", icon: "🇺🇸" }
+              ].each do |branch| %>
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 group hover:bg-white hover:shadow-lg transition-all">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="text-xl"><%= branch[:icon] %></span>
+                    <h4 class="font-bold text-slate-900 text-sm group-hover:text-accent transition-colors"><%= branch[:name] %></h4>
+                  </div>
+                  <p class="text-[10px] text-slate-500 leading-tight"><%= branch[:addr] %></p>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2 space-y-8">
+           <h2 class="text-4xl font-black text-slate-900">Secure Storage & Global Logistics</h2>
+           <p class="text-slate-600 leading-relaxed">
+             Our modern warehouse management system ensures accurate inventory control and efficient loading. With professional export packaging and strategic location, we guarantee on-time delivery to over 108 countries.
+           </p>
+           <div class="grid grid-cols-2 gap-8">
+              <div>
+                 <div class="text-3xl font-black text-slate-900">50,000㎡</div>
+                 <div class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">Warehouse Capacity</div>
+              </div>
+              <div>
+                 <div class="text-3xl font-black text-slate-900">108+</div>
+                 <div class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">Countries Served</div>
+              </div>
+           </div>
+           <div class="pt-4 space-y-4">
+              <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 flex items-start gap-4">
+                <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-accent shrink-0">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900">Global Sales Support</h4>
+                  <p class="text-xs text-slate-500 mt-1">Direct communication with our overseas branches for localized technical support and fast delivery.</p>
+                </div>
+              </div>
+
+              <%= link_to contact_path, class: "inline-flex items-center gap-3 text-accent font-bold hover:gap-5 transition-all" do %>
+                Learn about shipping options <span>→</span>
+              <% end %>
+           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Factory Gallery -->
+  <section class="py-24 bg-slate-50">
+    <div class="max-w-screen-xl mx-auto px-6">
+      <h2 class="text-4xl font-black text-slate-900 text-center mb-16">Authentic Factory Sight</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <% [
+          "sinower-factory1.png", "sinower-factory2.png", "sinower-factory3.png", "sinower-office.png",
+          "sinower-door.png", "sinower-factory1.png", "sinower-factory2.png", "sinower-factory3.png"
+        ].each do |img| %>
+          <div class="aspect-square rounded-2xl overflow-hidden cursor-pointer group">
+             <%= image_tag img, class: "w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Final CTA -->
+  <section class="py-24 bg-accent relative overflow-hidden">
+     <div class="absolute inset-0 opacity-10 flex items-center justify-center">
+        <svg class="w-[150%] h-[150%] animate-spin-slow" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" stroke="white" stroke-width="0.5" fill="none" stroke-dasharray="10 20"/></svg>
+     </div>
+     <div class="relative z-10 max-w-screen-xl mx-auto px-6 text-center text-white">
+        <h2 class="text-4xl md:text-5xl font-black mb-8 italic uppercase tracking-tighter">Ready to Partner with a <br>Global Manufacturing Leader?</h2>
+        <p class="text-xl mb-12 max-w-2xl mx-auto font-medium">
+          Experience the Sinower advantage in quality, scale, and professional service.
+        </p>
+        <div class="flex flex-wrap justify-center gap-6">
+           <%= link_to contact_path, class: "px-12 py-5 bg-primary hover:bg-primary/90 text-white font-black rounded-2xl text-lg transition-all transform hover:-translate-y-1 shadow-2xl" do %>
+             Request Factory Tour & Quote
+           <% end %>
+        </div>
+     </div>
+  </section>
 </div>
 
-<style>
-  @keyframes marquee-strip {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  @keyframes marquee-strip-reverse {
-    from { transform: translateX(-50%); }
-    to { transform: translateX(0); }
-  }
-
-  .reveal-left, .reveal-right, .reveal-up, .reveal-stat,
-  .reveal-hero, .reveal-process, .reveal-card, .reveal-from-right-large {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal-hero { transition-delay: 0.1s; }
-  .reveal-left { transform: translateX(-32px); }
-  .reveal-right { transform: translateX(32px); }
-  .reveal-from-right-large { 
-    transform: translateX(100vw); 
-    transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1), transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .reveal-card:nth-child(1) { transition-delay: 0.1s; }
-  .reveal-card:nth-child(2) { transition-delay: 0.2s; }
-  .reveal-card:nth-child(3) { transition-delay: 0.3s; }
-
-  .revealed {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  @keyframes gradient-x {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-  .animate-gradient-x {
-    background-size: 200% 200%;
-    animation: gradient-x 5s ease infinite;
-  }
-</style>
-
 <script>
-  function initFactoryAnimations() {
-    // Scroll reveal
-    const revealEls = document.querySelectorAll(
-      ".reveal-left, .reveal-right, .reveal-up, .reveal-stat, .reveal-hero, .reveal-process, .reveal-card, .reveal-from-right-large"
-    );
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("revealed");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.05 });
+  // Simple Counter Animation (Reuse from index or keep scoped)
+  const animateCounters = () => {
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
 
-    revealEls.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        el.classList.add("revealed");
-      } else {
-        observer.observe(el);
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-target-value');
+      const updateCount = () => {
+        const countValue = +counter.innerText.replace(/,/g, '');
+        const inc = target / speed;
+
+        if (countValue < target) {
+          counter.innerText = Math.ceil(countValue + inc).toLocaleString();
+          setTimeout(updateCount, 1);
+        } else {
+          counter.innerText = target.toLocaleString();
+        }
+      };
+      updateCount();
+    });
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounters();
+        observer.unobserve(entry.target);
       }
     });
+  }, { threshold: 0.1 });
 
-    // Animated counters
-    function animateCounter(el) {
-      if (el.dataset.animated) return;
-      el.dataset.animated = "1";
-      const target = parseInt(el.dataset.target, 10);
-      const step = target / (1800 / 16);
-      let current = 0;
-      const timer = setInterval(() => {
-        current += step;
-        if (current >= target) { current = target; clearInterval(timer); }
-        el.textContent = target >= 1000000
-          ? (current / 1000000).toFixed(1) + "M"
-          : Math.floor(current).toLocaleString();
-      }, 16);
-    }
-
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.querySelectorAll(".counter").forEach(animateCounter);
-          counterObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-    document.querySelectorAll(".reveal-stat").forEach(el => counterObserver.observe(el));
-  }
-
-  document.addEventListener("DOMContentLoaded", initFactoryAnimations);
-  document.addEventListener("turbo:load", initFactoryAnimations);
+  document.querySelectorAll('.counter').forEach(el => observer.observe(el));
 </script>
+
+<style>
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin-slow {
+    animation: spin-slow 30s linear infinite;
+  }
+</style>

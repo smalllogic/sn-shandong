@@ -57,9 +57,10 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show, :destroy, :update]
   end
 
-  %w[apple huawei oppo vivo xiaomi samsung transsion custom].each do |kind|
-    get kind, to: "channels#index", defaults: { kind: kind }, as: "#{kind}_channel"
-  end
+  # 动态频道路由：根据顶级分类的 category_kind (即 slug) 自动生成频道页面
+  get ':kind', to: 'categories#index', constraints: ->(req) { 
+    Category.unscoped.roots.exists?(slug: req.params[:kind]) 
+  }, as: :dynamic_channel
 
   resources :categories, only: [:index, :show]
   resources :skus, only: [:show]

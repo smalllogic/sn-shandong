@@ -95,15 +95,15 @@
               <td class="px-6 py-4 text-sm font-medium text-slate-800"><%= sku.name %></td>
               <td class="px-6 py-4 text-sm text-slate-600"><%= sku.category.localized_name %></td>
               <td class="px-6 py-4 text-sm text-slate-600">
-                <% if sku.fabric.present? %>
-                  <span class="block text-xs text-slate-500 uppercase font-bold tracking-wider">Fabric</span>
-                  <span class="block mb-1"><%= sku.fabric %></span>
+                <% if sku.voltage_power.present? %>
+                  <span class="block text-xs text-slate-500 uppercase font-bold tracking-wider"><%= t('skus.voltage_power') %></span>
+                  <span class="block mb-1"><%= sku.voltage_power %></span>
                 <% end %>
-                <% if sku.closure.present? %>
-                  <span class="block text-xs text-slate-500 uppercase font-bold tracking-wider">Closure</span>
-                  <span class="block"><%= sku.closure %></span>
+                <% if sku.capacity_dimensions.present? %>
+                  <span class="block text-xs text-slate-500 uppercase font-bold tracking-wider"><%= t('skus.capacity_dimensions') %></span>
+                  <span class="block"><%= sku.capacity_dimensions %></span>
                 <% end %>
-                <% if sku.fabric.blank? && sku.closure.blank? %>
+                <% if sku.voltage_power.blank? && sku.capacity_dimensions.blank? %>
                   <span class="text-slate-400 italic">No specs</span>
                 <% end %>
               </td>

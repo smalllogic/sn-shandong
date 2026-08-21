@@ -11,7 +11,7 @@ class Admin::CategoriesController < Admin::BaseController
   def new
     if params[:parent_id].present?
       parent = Category.find(params[:parent_id])
-      @category = Category.new(parent_id: parent.id, category_kind: parent.category_kind)
+      @category = Category.new(parent_id: parent.id)
     else
       @category = Category.new
     end
@@ -38,8 +38,12 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def destroy
-    @category.destroy
-    redirect_to admin_categories_path, notice: '分类已删除。'
+    if @category.parent_id.nil? && Category::ROOT_CATEGORIES.key?(@category.slug)
+      redirect_to admin_categories_path, alert: '顶级分类不可删除。'
+    else
+      @category.destroy
+      redirect_to admin_categories_path, notice: '分类已删除。'
+    end
   end
 
   private
@@ -51,6 +55,6 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def category_params
-    params.require(:category).permit(:name, :slug, :parent_id, :category_kind, :hidden, :position, :featured, :featured_position, :image, :meta_title, :meta_description, :meta_keywords, :keywords)
+    params.require(:category).permit(:name, :slug, :parent_id, :category_kind, :hidden, :position, :featured, :featured_position, :image, :banner, :meta_title, :meta_description, :meta_keywords, :keywords)
   end
 end

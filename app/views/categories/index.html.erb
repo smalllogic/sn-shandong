@@ -5,30 +5,18 @@
   title = if @current_category && @current_category.meta_title.present?
             @current_category.meta_title
           elsif @current_category 
-            "#{@current_category.localized_name} - #{t('home.index.hero_title_2')}"
+            "#{@current_category.localized_name} - #{t('footer.company_name')}"
           elsif kind_val
-            case kind_val.to_s
-            when 'apple' then "#{t('navbar.apple')} - #{t('home.index.hero_title_2')}"
-            when 'huawei' then "#{t('navbar.huawei')} - #{t('home.index.hero_title_2')}"
-            when 'oppo' then "#{t('navbar.oppo')} - #{t('home.index.hero_title_2')}"
-            when 'vivo' then "#{t('navbar.vivo')} - #{t('home.index.hero_title_2')}"
-            when 'xiaomi' then "#{t('navbar.xiaomi')} - #{t('home.index.hero_title_2')}"
-            when 'custom' then "#{t('navbar.custom')} - #{t('home.index.hero_title_2')}"
-            end
+            # 动态获取频道名称，优先从翻译文件获取，否则使用名称或 kind
+            kind_name = t("navbar.#{kind_val}", default: Category.find_by(category_kind: kind_val, parent_id: nil)&.localized_name || kind_val.to_s.titleize)
+            "#{kind_name} - #{t('footer.company_name')}"
           else
-            "#{t('categories.explore_all')} - #{t('home.index.hero_title_2')}"
+            "#{t('categories.explore_all')} - #{t('footer.company_name')}"
           end
   content_for :title, title
   
   description = if @current_category && @current_category.meta_description.present?
                   @current_category.meta_description
-                elsif kind_val
-                  case kind_val.to_s
-                  when 'apple' then t('home.about.product_lines.performance_desc')
-                  when 'oppo' then t('home.about.product_lines.fashion_desc')
-                  when 'custom' then t('home.about.product_lines.custom_desc')
-                  when 'huawei', 'xiaomi', 'vivo' then t('categories.all_products_desc')
-                  end
                 else
                   t('categories.all_products_desc')
                 end
@@ -44,27 +32,24 @@
             elsif @current_category
               @current_category.localized_name
             elsif kind_val
-              case kind_val.to_s
-              when 'apple' then t('navbar.apple')
-              when 'huawei' then t('navbar.huawei')
-              when 'oppo' then t('navbar.oppo')
-              when 'vivo' then t('navbar.vivo')
-              when 'xiaomi' then t('navbar.xiaomi')
-              when 'custom' then t('navbar.custom')
-              end
+              t("navbar.#{kind_val}", default: Category.find_by(category_kind: kind_val, parent_id: nil)&.localized_name || kind_val.to_s.titleize)
             else
               t('categories.explore_all')
             end
 
-  banner_image = case kind_val.to_s
-                 when 'apple' then "category1.webp"
-                 when 'huawei' then "category2.webp"
-                 when 'oppo' then "category3.webp"
-                 when 'vivo' then "category4.webp"
-                 when 'xiaomi' then "category5.webp"
-                 when 'custom' then "category6.webp"
-                 else "categories_banner.jpg"
-                 end
+  # Banner 图片逻辑
+  banner_url = nil
+  if kind_val
+    # 查找该频道根分类或当前分类及其祖先的 banner
+    target_category = @current_category || Category.find_by(category_kind: kind_val, parent_id: nil)
+    if target_category
+      category_with_banner = target_category.ancestors_and_self.reverse.find { |c| c.banner.attached? }
+      banner_url = url_for(category_with_banner.banner.variant(:large)) if category_with_banner
+    end
+  end
+
+  # 如果没有上传的 banner，使用默认图片
+  banner_image = "categories_banner.jpg" unless banner_url
 %>
 <style>
   @keyframes cbZoom   { from { transform: scale(1.12); } to { transform: scale(1); } }
@@ -85,14 +70,18 @@
     <!-- 顶部 Banner:各类帽子展示 + 动态标题 -->
     <section class="relative mb-10 h-52 sm:h-64 md:h-80 rounded-[2rem] overflow-hidden shadow-xl shadow-slate-900/20">
       <div class="absolute inset-0 overflow-hidden">
-        <%= image_tag banner_image, alt: heading, loading: "eager", class: "cb-img w-full h-full object-cover" %>
+        <% if banner_url %>
+          <%= image_tag banner_url, alt: heading, loading: "eager", class: "cb-img w-full h-full object-cover" %>
+        <% else %>
+          <%= image_tag banner_image, alt: heading, loading: "eager", class: "cb-img w-full h-full object-cover" %>
+        <% end %>
       </div>
       <div class="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-900/55 to-slate-900/20"></div>
       <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
       <div class="relative z-10 h-full flex flex-col justify-center px-7 sm:px-10 md:px-16 max-w-3xl">
         <span class="cb-eyebrow inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-[10px] font-black tracking-[0.2em] uppercase mb-3">
           <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-          Yapai Battery Collection
+          <%= t('categories.banner_eyebrow', default: 'Sinower Kitchen Collection') %>
         </span>
         <h1 class="cb-title text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-none drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">
           <% heading.to_s.chars.each_with_index do |ch, i| %><span class="cb-char" style="animation-delay: <%= (0.15 + i * 0.04).round(3) %>s"><%= ch == ' ' ? raw('&nbsp;') : ch %></span><% end %>
@@ -200,7 +189,7 @@
                     
                     <!-- 遮罩与操作 -->
                     <div class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center backdrop-blur-[2px] p-6 text-center">
-                      <span class="text-[10px] text-white/80 font-bold tracking-widest uppercase mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">YAPAI PREMIUM</span>
+                      <span class="text-[10px] text-white/80 font-bold tracking-widest uppercase mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">SINOWER PREMIUM</span>
                       <%= link_to sku_path(sku), data: { turbo: false }, class: "bg-white text-dark px-6 py-2 rounded-full font-black text-[10px] tracking-widest uppercase shadow-xl hover:scale-105 transition-all transform translate-y-4 group-hover:translate-y-0 duration-500" do %>
                         <%= t('categories.view_details', default: '查看详情') %>
                       <% end %>
@@ -229,22 +218,22 @@
                     
                     <!-- 核心规格预览 -->
                     <div class="grid grid-cols-2 gap-2 mb-4">
-                      <% if sku.fabric.present? %>
+                      <% if sku.voltage_power.present? %>
                         <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 text-center">
-                          <p class="text-[8px] font-black text-slate-400 uppercase mb-0.5"><%= t('skus.fabric', default: '面料') %></p>
-                          <p class="text-[10px] font-black text-slate-700 truncate"><%= sku.fabric %></p>
+                          <p class="text-[8px] font-black text-slate-400 uppercase mb-0.5"><%= t('skus.voltage_power', default: '电压/功率') %></p>
+                          <p class="text-[10px] font-black text-slate-700 truncate"><%= sku.voltage_power %></p>
                         </div>
                       <% end %>
-                      <% if sku.closure.present? %>
+                      <% if sku.capacity_dimensions.present? %>
                         <div class="p-2 rounded-xl bg-primary/10 border border-primary/20 text-center">
-                          <p class="text-[8px] font-black text-primary uppercase mb-0.5"><%= t('skus.closure', default: '尾带') %></p>
-                          <p class="text-[10px] font-black text-primary truncate"><%= sku.closure %></p>
+                          <p class="text-[8px] font-black text-primary uppercase mb-0.5"><%= t('skus.capacity_dimensions', default: '容量/尺寸') %></p>
+                          <p class="text-[10px] font-black text-primary truncate"><%= sku.capacity_dimensions %></p>
                         </div>
                       <% end %>
-                      <% if sku.fabric.blank? && sku.closure.blank? %>
+                      <% if sku.voltage_power.blank? && sku.capacity_dimensions.blank? %>
                         <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 text-center col-span-2">
-                          <p class="text-[8px] font-black text-slate-400 uppercase mb-0.5"><%= t('skus.name', default: '名称') %></p>
-                          <p class="text-[10px] font-black text-slate-700 truncate"><%= sku.name %></p>
+                          <p class="text-[8px] font-black text-slate-400 uppercase mb-0.5"><%= t('skus.product_name', default: '产品名称') %></p>
+                          <p class="text-[10px] font-black text-slate-700 truncate"><%= sku.product_name || sku.name %></p>
                         </div>
                       <% end %>
                     </div>

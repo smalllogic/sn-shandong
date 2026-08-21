@@ -27,19 +27,19 @@
       
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-16 pt-16 border-t border-white/10">
         <div>
-          <div class="text-3xl md:text-4xl font-black text-white"><span data-target-value="700000" class="counter">0</span><span class="text-accent text-xl ml-1">㎡</span></div>
+          <div class="text-3xl md:text-4xl font-black text-white"><span data-controller="counter" data-target-value="700000" class="counter">0</span><span class="text-accent text-xl ml-1">㎡</span></div>
           <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Production Area</div>
         </div>
         <div>
-          <div class="text-3xl md:text-4xl font-black text-white"><span data-target-value="550" class="counter">0</span><span class="text-accent text-xl ml-1">+</span></div>
+          <div class="text-3xl md:text-4xl font-black text-white"><span data-controller="counter" data-target-value="550" class="counter">0</span><span class="text-accent text-xl ml-1">+</span></div>
           <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Production Machines</div>
         </div>
         <div>
-          <div class="text-3xl md:text-4xl font-black text-white"><span data-target-value="280000" class="counter">0</span></div>
+          <div class="text-3xl md:text-4xl font-black text-white"><span data-controller="counter" data-target-value="280000" class="counter">0</span></div>
           <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Annual Capacity</div>
         </div>
         <div>
-          <div class="text-3xl md:text-4xl font-black text-white"><span data-target-value="500" class="counter">0</span><span class="text-accent text-xl ml-1">+</span></div>
+          <div class="text-3xl md:text-4xl font-black text-white"><span data-controller="counter" data-target-value="500" class="counter">0</span><span class="text-accent text-xl ml-1">+</span></div>
           <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Expert Employees</div>
         </div>
       </div>
@@ -390,41 +390,6 @@
      </div>
   </section>
 </div>
-
-<script>
-  // Simple Counter Animation (Reuse from index or keep scoped)
-  const animateCounters = () => {
-    const counters = document.querySelectorAll('.counter');
-    const speed = 200;
-
-    counters.forEach(counter => {
-      const target = +counter.getAttribute('data-target-value');
-      const updateCount = () => {
-        const countValue = +counter.innerText.replace(/,/g, '');
-        const inc = target / speed;
-
-        if (countValue < target) {
-          counter.innerText = Math.ceil(countValue + inc).toLocaleString();
-          setTimeout(updateCount, 1);
-        } else {
-          counter.innerText = target.toLocaleString();
-        }
-      };
-      updateCount();
-    });
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounters();
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.counter').forEach(el => observer.observe(el));
-</script>
 
 <style>
   @keyframes spin-slow {

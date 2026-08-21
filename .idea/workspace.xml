@@ -5,105 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69105836-b536-45f9-8b97-f315a7f5c2b5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/assets/images/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/assets/images/sinower-door.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/assets/images/sinower-factory1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/assets/images/sinower-factory2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/assets/images/sinower-factory3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/assets/images/sinower-office.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/db-forest-config.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/yapai.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/categories_banner.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/categories_banner.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/category1.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/category2.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/category3.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/category4.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/category5.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/category6.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/factory.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/factory1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/factory2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/factory22.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/factory222.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/factory3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/factory4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/factory5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/factory6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/factory7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/global.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/huawei.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/indexbanner1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/indexbanner2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/indexbanner3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/indexbanner3.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/iphone.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/oem-logodesign.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/oem-packagingdesign.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/oppo.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/other.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/vivo.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/worker1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/worker2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/worker3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/worker4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/wx.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/xiaomi.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/yapai.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/images/yapai.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/tailwind/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/tailwind/application.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/admin/categories_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/admin/categories_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/admin/skus_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/admin/skus_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/channels_controller.rb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/orders_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/orders_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/helpers/application_helper.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers/application_helper.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/mailers/notification_mailer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/mailers/notification_mailer.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/category.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/category.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/site_config.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/site_config.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/sku.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/sku.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/categories/_category_row.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/categories/_category_row.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/categories/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/categories/_form.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/contact_messages/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/contact_messages/show.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/home_products/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/home_products/_form.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/shared/_sidebar.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/shared/_sidebar.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/skus/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/skus/_form.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/skus/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/skus/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/categories/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/categories/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/home/contact.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/home/contact.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/home/customize.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/home/customize.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/home/factory.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/home/factory.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/home/faqs.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/home/faqs.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/home/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/home/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/home/privacy.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/home/privacy.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/_footer.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/_footer.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/_navbar.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/_navbar.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/_navbar_mobile_category.html.erb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/admin.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/admin.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/posts/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/posts/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/posts/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/posts/show.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/pwa/manifest.json.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/pwa/manifest.json.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/shared/_cart_modal.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/shared/_cart_modal.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/skus/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/skus/show.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/application.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/application.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/deploy.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/environments/production.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/environments/production.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/locales/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/en.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/locales/zh-CN.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/zh-CN.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/sitemap.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/sitemap.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/development.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db/development.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/migrate/20260624101901_add_yapai_fields_to_skus.rb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/tasks/mail_test.rake" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tasks/mail_test.rake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/tasks/setup_products.rake" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tasks/setup_products.rake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/fixtures/skus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/skus.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/importmap.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/importmap.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,23 +28,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.003099822028052" />
-      <entry key="MS500" value="1.7474852113285446" />
-      <entry key="S2" value="5.213014715392996" />
-      <entry key="S5" value="7.90046769590252" />
-      <entry key="S10" value="9.270065314153797" />
-      <entry key="S30" value="10.377059542736525" />
-      <entry key="S60" value="10.682297145857692" />
-      <entry key="M2" value="10.839554695594819" />
-      <entry key="M5" value="10.935434673425274" />
-      <entry key="M10" value="10.96765240872357" />
-      <entry key="M15" value="10.978420481376672" />
-      <entry key="M30" value="10.989203004454483" />
-      <entry key="H1" value="10.994599691789677" />
-      <entry key="H2" value="10.997299393112936" />
-      <entry key="H4" value="10.998649583339416" />
-      <entry key="D1" value="10.999774914830152" />
-      <entry key="W1" value="10.999967844590577" />
+      <entry key="MS100" value="1.5251785039261558" />
+      <entry key="MS500" value="4.079433265212879" />
+      <entry key="S2" value="9.168606765558904" />
+      <entry key="S5" value="16.404612385487248" />
+      <entry key="S10" value="22.830115628363046" />
+      <entry key="S30" value="30.01091272974129" />
+      <entry key="S60" value="32.363041726385845" />
+      <entry key="M2" value="33.64359941682722" />
+      <entry key="M5" value="34.44802337176144" />
+      <entry key="M10" value="34.72241519968066" />
+      <entry key="M15" value="34.814586655396766" />
+      <entry key="M30" value="34.90711441017007" />
+      <entry key="H1" value="34.95351237942843" />
+      <entry key="H2" value="34.976744971241665" />
+      <entry key="H4" value="34.98836967949386" />
+      <entry key="D1" value="34.99806122338101" />
+      <entry key="W1" value="34.99972302236212" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -161,23 +66,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9425129950126763" />
-      <entry key="MS500" value="1.7285491872730476" />
-      <entry key="S2" value="5.195228505585263" />
-      <entry key="S5" value="7.887447901006402" />
-      <entry key="S10" value="9.261844116689788" />
-      <entry key="S30" value="10.373831361646968" />
-      <entry key="S60" value="10.680613929193093" />
-      <entry key="M2" value="10.838695131307345" />
-      <entry key="M5" value="10.935086449099535" />
-      <entry key="M10" value="10.96747755590496" />
-      <entry key="M15" value="10.978303747676803" />
-      <entry key="M30" value="10.989144554886064" />
-      <entry key="H1" value="10.99457044629929" />
-      <entry key="H2" value="10.997284765187874" />
-      <entry key="H4" value="10.998642268081502" />
-      <entry key="D1" value="10.99977369544055" />
-      <entry key="W1" value="10.999967670387655" />
+      <entry key="MS100" value="1.4477574422207928" />
+      <entry key="MS500" value="4.034096612636891" />
+      <entry key="S2" value="9.136513248919448" />
+      <entry key="S5" value="16.376474795017444" />
+      <entry key="S10" value="22.80865868845016" />
+      <entry key="S30" value="30.00090379448853" />
+      <entry key="S60" value="32.35756095128346" />
+      <entry key="M2" value="33.640728639982015" />
+      <entry key="M5" value="34.4468421984578" />
+      <entry key="M10" value="34.721818999772076" />
+      <entry key="M15" value="34.81418793111535" />
+      <entry key="M30" value="34.9069144166007" />
+      <entry key="H1" value="34.95341222429896" />
+      <entry key="H2" value="34.97669485402962" />
+      <entry key="H4" value="34.98834461096837" />
+      <entry key="D1" value="34.99805704391506" />
+      <entry key="W1" value="34.99972242526179" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -305,7 +210,7 @@
       <workItem from="1787234030967" duration="398000" />
       <workItem from="1787273599459" duration="491000" />
       <workItem from="1787274097421" duration="10000" />
-      <workItem from="1787274123701" duration="334000" />
+      <workItem from="1787274123701" duration="1142000" />
     </task>
     <servers />
   </component>

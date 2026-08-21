@@ -60,23 +60,23 @@
       <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-16">Global Manufacturing Powerhouse</h2>
       <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
         <div class="space-y-2 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all group">
-          <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-target-value="700000" class="counter">0</span>㎡</div>
+          <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="700000" class="counter">0</span>㎡</div>
           <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Production Area</div>
         </div>
         <div class="space-y-2 p-6 rounded-2xl bg-primary/5 border border-primary/10 hover:shadow-lg transition-all text-primary group">
-          <div class="text-3xl md:text-4xl font-extrabold group-hover:scale-110 transition-transform"><span data-target-value="500" class="counter">0</span>+</div>
+          <div class="text-3xl md:text-4xl font-extrabold group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="500" class="counter">0</span>+</div>
           <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Employees</div>
         </div>
         <div class="space-y-2 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all group">
-          <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-target-value="550" class="counter">0</span></div>
+          <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="550" class="counter">0</span></div>
           <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Advanced Machines</div>
         </div>
         <div class="space-y-2 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all group">
-          <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-target-value="108" class="counter">0</span></div>
+          <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="108" class="counter">0</span></div>
           <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Countries Served</div>
         </div>
         <div class="space-y-2 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all group">
-          <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-target-value="280000" class="counter">0</span></div>
+          <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="280000" class="counter">0</span></div>
           <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Annual Capacity</div>
         </div>
       </div>
@@ -317,39 +317,3 @@
      </div>
   </section>
 </div>
-
-<script>
-  // Simple Counter Animation
-  const animateCounters = () => {
-    const counters = document.querySelectorAll('.counter');
-    const speed = 200;
-
-    counters.forEach(counter => {
-      const target = +counter.getAttribute('data-target-value');
-      const updateCount = () => {
-        const count = +counter.innerText.replace(/,/g, '');
-        const inc = target / speed;
-
-        if (count < target) {
-          counter.innerText = Math.ceil(count + inc).toLocaleString();
-          setTimeout(updateCount, 1);
-        } else {
-          counter.innerText = target.toLocaleString();
-        }
-      };
-      updateCount();
-    });
-  };
-
-  // Intersection Observer for animation
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounters();
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.counter').forEach(el => observer.observe(el));
-</script>

@@ -1,31 +1,18 @@
 <div class="relative min-h-screen">
   <!-- 1. New Globalization Hero Section (Fast Loading) -->
-  <section class="relative bg-slate-900 py-24 lg:py-40 overflow-hidden border-b border-white/5">
-    <!-- Industrial Aesthetic Background -->
-    <div class="absolute inset-0 z-0">
-      <!-- Deep Gradient Background -->
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(15,23,42,1)_0%,rgba(2,6,23,1)_100%)]"></div>
-      
-      <!-- Technical Grid with Perspective -->
-      <div class="absolute inset-0 opacity-[0.15]" 
-           style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 40px 40px;"></div>
-      
-      <!-- Animated Line -->
-      <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent animate-pulse"></div>
-      
-      <!-- Corner Decorative Elements -->
-      <div class="absolute top-10 left-10 w-20 h-20 border-t border-l border-white/10"></div>
-      <div class="absolute bottom-10 right-10 w-20 h-20 border-b border-r border-white/10"></div>
-      
-      <!-- Side Coordinate Marks -->
-      <div class="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col space-y-8 opacity-20">
-        <% 5.times do |i| %><div class="w-8 h-px bg-white"></div><% end %>
+  <section class="relative bg-slate-900 py-24 lg:py-40 overflow-hidden border-b border-white/5 min-h-[850px] flex items-center">
+    <!-- Globe Background -->
+    <div class="absolute inset-0 z-0 flex items-center justify-center overflow-hidden pointer-events-none">
+      <div class="relative w-full h-full max-w-[1000px] max-h-[1000px] aspect-square">
+        <canvas id="globe-canvas" style="width: 100%; height: 100%; opacity: 0.8;"></canvas>
       </div>
+      <!-- Radial Overlay for depth -->
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(15,23,42,0)_0%,rgba(15,23,42,0.6)_70%,rgba(15,23,42,1)_100%)] pointer-events-none"></div>
     </div>
 
-    <div class="relative z-10 max-w-screen-xl mx-auto px-6">
-      <div class="text-center mb-24">
-        <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-accent/10 border border-accent/20 rounded-full text-accent text-[11px] font-black tracking-[0.2em] uppercase mb-8 backdrop-blur-md">
+    <div class="relative z-10 max-w-screen-xl mx-auto px-6 w-full text-center flex flex-col items-center">
+      <div class="mb-12">
+        <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-accent/20 border border-accent/30 rounded-full text-accent text-[11px] font-black tracking-[0.2em] uppercase mb-8 backdrop-blur-xl">
           <span class="relative flex h-2 w-2">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
@@ -33,17 +20,19 @@
           Global Supply Chain Leader
         </div>
         
-        <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[1.1] mb-10 tracking-tighter">
-          ENGINEERING THE <br>
-          <span class="text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/40">FUTURE OF KITCHENS</span>
+        <h1 class="text-6xl md:text-8xl lg:text-9xl font-black text-white leading-[1.05] mb-8 tracking-tighter drop-shadow-2xl">
+          CONNECTING THE <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/30">GLOBAL KITCHEN</span>
         </h1>
         
         <p class="text-xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed font-medium">
           Premium commercial equipment manufactured with industrial precision. 
-          <span class="text-white/60">5 Strategic Global Hubs. 1 Integrated Standard.</span>
+          <span class="text-white/60">5 Strategic Global Hubs. Serving 100+ Countries.</span>
         </p>
-        
-        <div class="flex flex-wrap justify-center gap-6">
+      </div>
+      
+      <div class="w-full flex flex-col items-center">
+        <div class="flex flex-wrap justify-center gap-6 mb-24">
           <%= link_to contact_path, class: "group relative px-10 py-5 bg-accent text-white font-black rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-accent/20 overflow-hidden" do %>
             <span class="relative z-10">REQUEST GLOBAL QUOTE</span>
             <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
@@ -52,30 +41,117 @@
             EXPLORE FACTORY
           <% end %>
         </div>
-      </div>
 
-      <!-- 5 Branches Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        <% [
-          { name: "China HQ", addr: "Industrial Park, Boxing", icon: "CN", tag: "GLOBAL HUB" },
-          { name: "France", addr: "31 Quai de L'industrie, Paris", icon: "FR", tag: "EUROPE" },
-          { name: "Germany", addr: "Frühlingstr. 15, Munich", icon: "DE", tag: "EUROPE" },
-          { name: "UAE", addr: "Al Wahda St, Sharjah", icon: "AE", tag: "MIDDLE EAST" },
-          { name: "USA", addr: "Norcross, GA 30071", icon: "US", tag: "NORTH AMERICA" }
-        ].each do |branch| %>
-          <div class="bg-white/[0.03] p-6 rounded-2xl border border-white/5 hover:border-accent/30 transition-all group backdrop-blur-sm relative overflow-hidden">
-            <div class="absolute top-0 right-0 p-2 opacity-5 font-black text-4xl text-white pointer-events-none"><%= branch[:icon] %></div>
-            <div class="flex justify-between items-start mb-8">
-              <div class="text-[10px] font-black text-accent tracking-tighter"><%= branch[:tag] %></div>
-              <div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
+        <!-- 5 Branches Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto w-full">
+          <% [
+            { name: "China HQ", addr: "Boxing, CN", flag: "🇨🇳", tag: "GLOBAL HUB" },
+            { name: "France", addr: "Paris, FR", flag: "🇫🇷", tag: "EUROPE" },
+            { name: "Germany", addr: "Munich, DE", flag: "🇩🇪", tag: "EUROPE" },
+            { name: "UAE", addr: "Sharjah, UAE", flag: "🇦🇪", tag: "MIDDLE EAST" },
+            { name: "USA", addr: "Georgia, US", flag: "🇺🇸", tag: "NORTH AMERICA" }
+          ].each do |branch| %>
+            <div class="bg-white/[0.03] p-4 rounded-xl border border-white/5 hover:border-accent/30 transition-all group backdrop-blur-sm relative overflow-hidden">
+              <div class="flex justify-between items-center mb-4">
+                <div class="text-[9px] font-black text-accent tracking-tighter uppercase"><%= branch[:tag] %></div>
+                <div class="flex items-center gap-2">
+                  <span class="text-xl drop-shadow-sm"><%= branch[:flag] %></span>
+                  <div class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
+                </div>
+              </div>
+              <h3 class="text-white font-black text-sm group-hover:text-accent transition-colors"><%= branch[:name] %></h3>
+              <p class="text-[10px] text-slate-500 font-medium uppercase tracking-tight"><%= branch[:addr] %></p>
             </div>
-            <h3 class="text-white font-black text-lg mb-2 group-hover:text-accent transition-colors"><%= branch[:name] %></h3>
-            <p class="text-[11px] text-slate-500 leading-tight font-medium uppercase tracking-tight"><%= branch[:addr] %></p>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   </section>
+
+  <script type="module">
+    import createGlobe from 'https://cdn.jsdelivr.net/npm/cobe@0.6.3/+esm'
+
+    const canvas = document.getElementById('globe-canvas')
+    if (canvas) {
+      let phi = 0
+      let isVisible = true
+      let pulse = 0
+
+      const locations = {
+        china:   [37.155, 118.111],
+        usa:     [33.941, -84.214],
+        france:  [48.707, 2.389],
+        germany: [48.266, 10.985],
+        uae:     [25.340, 55.400]
+      }
+
+      const globe = createGlobe(canvas, {
+        devicePixelRatio: 1,
+        width: 1000,
+        height: 1000,
+        phi: 0,
+        theta: 0.25,
+        dark: 1,
+        diffuse: 1.0,
+        mapSamples: 800,
+        mapBrightness: 6,
+        baseColor: [0.1, 0.15, 0.3],
+        markerColor: [0.1, 0.8, 1],
+        glowColor: [0.1, 0.3, 0.6],
+        markers: [
+          { location: locations.china, size: 0.1 },
+          { location: locations.usa, size: 0.08 },
+          { location: locations.france, size: 0.08 },
+          { location: locations.germany, size: 0.08 },
+          { location: locations.uae, size: 0.08 }
+        ],
+        arcs: [],
+        onRender: (state) => {
+          if (!isVisible) return
+
+          state.phi = phi
+          phi += 0.003
+
+          // Simple pulse effect for markers to make them noticeable without high CPU cost
+          pulse += 0.05
+          const scale = 1 + Math.sin(pulse) * 0.3
+          state.markers = [
+            { location: locations.china, size: 0.15 * scale, color: [0.2, 1, 0.4] },
+            { location: locations.usa, size: 0.1 * scale, color: [0.2, 1, 0.4] },
+            { location: locations.france, size: 0.1 * scale, color: [0.2, 1, 0.4] },
+            { location: locations.germany, size: 0.1 * scale, color: [0.2, 1, 0.4] },
+            { location: locations.uae, size: 0.1 * scale, color: [0.2, 1, 0.4] }
+          ]
+        }
+      })
+
+      function resize() {
+        const size = canvas.parentElement.offsetWidth
+        globe.update({
+          width: Math.min(size, 1000),
+          height: Math.min(size, 1000)
+        })
+      }
+
+      const handleVisibilityChange = () => {
+        isVisible = document.visibilityState === 'visible'
+      }
+
+      const cleanup = () => {
+        globe.destroy()
+        window.removeEventListener('resize', resize)
+        document.removeEventListener('visibilitychange', handleVisibilityChange)
+      }
+
+      window.addEventListener('resize', resize)
+      document.addEventListener('visibilitychange', handleVisibilityChange)
+      resize()
+      
+      // Handle Turbo navigation to ensure resources are freed
+      document.addEventListener("turbo:visit", cleanup, { once: true })
+      document.addEventListener("turbo:before-cache", cleanup, { once: true })
+    }
+  </script>
 
   <!-- 2. Core Data (Digital Trust) -->
   <section class="py-20 bg-white">

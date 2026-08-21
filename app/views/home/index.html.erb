@@ -1,53 +1,76 @@
 <div class="relative min-h-screen">
   <!-- 1. New Globalization Hero Section (Fast Loading) -->
-  <section class="relative bg-slate-900 py-20 lg:py-32 overflow-hidden border-b border-white/5">
-    <!-- Clean Dark Background with subtle SVG Grid -->
-    <div class="absolute inset-0 opacity-10">
-      <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-        <path d="M 10 0 L 10 100 M 20 0 L 20 100 M 30 0 L 30 100 M 40 0 L 40 100 M 50 0 L 50 100 M 60 0 L 60 100 M 70 0 L 70 100 M 80 0 L 80 100 M 90 0 L 90 100" fill="none" stroke="white" stroke-width="0.1" />
-        <path d="M 0 10 L 100 10 M 0 20 L 100 20 M 0 30 L 100 30 M 0 40 L 100 40 M 0 50 L 100 50 M 0 60 L 100 60 M 0 70 L 100 70 M 0 80 L 100 80 M 0 90 L 100 90" fill="none" stroke="white" stroke-width="0.1" />
-      </svg>
+  <section class="relative bg-slate-900 py-24 lg:py-40 overflow-hidden border-b border-white/5">
+    <!-- Industrial Aesthetic Background -->
+    <div class="absolute inset-0 z-0">
+      <!-- Deep Gradient Background -->
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(15,23,42,1)_0%,rgba(2,6,23,1)_100%)]"></div>
+      
+      <!-- Technical Grid with Perspective -->
+      <div class="absolute inset-0 opacity-[0.15]" 
+           style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 40px 40px;"></div>
+      
+      <!-- Animated Line -->
+      <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent animate-pulse"></div>
+      
+      <!-- Corner Decorative Elements -->
+      <div class="absolute top-10 left-10 w-20 h-20 border-t border-l border-white/10"></div>
+      <div class="absolute bottom-10 right-10 w-20 h-20 border-b border-r border-white/10"></div>
+      
+      <!-- Side Coordinate Marks -->
+      <div class="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col space-y-8 opacity-20">
+        <% 5.times do |i| %><div class="w-8 h-px bg-white"></div><% end %>
+      </div>
     </div>
 
     <div class="relative z-10 max-w-screen-xl mx-auto px-6">
-      <div class="text-center mb-20">
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-accent/20 border border-accent/30 rounded-full text-accent text-[10px] font-black tracking-widest uppercase mb-6">
-          <span class="w-2 h-2 bg-accent rounded-full animate-ping"></span>
+      <div class="text-center mb-24">
+        <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-accent/10 border border-accent/20 rounded-full text-accent text-[11px] font-black tracking-[0.2em] uppercase mb-8 backdrop-blur-md">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+          </span>
           Global Supply Chain Leader
         </div>
-        <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-8">
-          Serving the World <br>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-400">from 5 Strategic Hubs</span>
+        
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[1.1] mb-10 tracking-tighter">
+          ENGINEERING THE <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/40">FUTURE OF KITCHENS</span>
         </h1>
-        <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10">
-          Professional commercial kitchen equipment manufacturer with a localized global network for faster delivery and superior service.
+        
+        <p class="text-xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed font-medium">
+          Premium commercial equipment manufactured with industrial precision. 
+          <span class="text-white/60">5 Strategic Global Hubs. 1 Integrated Standard.</span>
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <%= link_to contact_path, class: "px-8 py-4 bg-accent hover:bg-accent/90 text-white font-bold rounded-xl transition-all shadow-lg shadow-accent/20" do %>
-            Request Global Quote
+        
+        <div class="flex flex-wrap justify-center gap-6">
+          <%= link_to contact_path, class: "group relative px-10 py-5 bg-accent text-white font-black rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-accent/20 overflow-hidden" do %>
+            <span class="relative z-10">REQUEST GLOBAL QUOTE</span>
+            <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
           <% end %>
-          <%= link_to factory_path, class: "px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 transition-all backdrop-blur-sm" do %>
-            View Our Factory
+          <%= link_to factory_path, class: "px-10 py-5 bg-white/5 border border-white/10 text-white font-black rounded-2xl hover:bg-white/10 transition-all backdrop-blur-md border-dashed" do %>
+            EXPLORE FACTORY
           <% end %>
         </div>
       </div>
 
       <!-- 5 Branches Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
         <% [
-          { name: "China HQ", addr: "Industrial Park, Boxing, Shandong", icon: "🇨🇳", tag: "Global Hub" },
-          { name: "France Branch", addr: "31 Quai de L'industrie, Paris", icon: "🇫🇷", tag: "Europe" },
-          { name: "Germany Branch", addr: "Frühlingstr. 15, 80415", icon: "🇩🇪", tag: "Europe" },
-          { name: "UAE Branch", addr: "Al Wahda St, Sharjah", icon: "🇦🇪", tag: "Middle East" },
-          { name: "USA Branch", addr: "Norcross, GA 30071", icon: "🇺🇸", tag: "North America" }
+          { name: "China HQ", addr: "Industrial Park, Boxing", icon: "CN", tag: "GLOBAL HUB" },
+          { name: "France", addr: "31 Quai de L'industrie, Paris", icon: "FR", tag: "EUROPE" },
+          { name: "Germany", addr: "Frühlingstr. 15, Munich", icon: "DE", tag: "EUROPE" },
+          { name: "UAE", addr: "Al Wahda St, Sharjah", icon: "AE", tag: "MIDDLE EAST" },
+          { name: "USA", addr: "Norcross, GA 30071", icon: "US", tag: "NORTH AMERICA" }
         ].each do |branch| %>
-          <div class="bg-white/5 p-6 rounded-3xl border border-white/10 hover:border-accent/50 transition-all group backdrop-blur-sm">
-            <div class="flex justify-between items-start mb-6">
-              <div class="text-3xl"><%= branch[:icon] %></div>
-              <div class="text-[8px] font-black text-slate-500 uppercase tracking-widest bg-white/5 px-2 py-1 rounded-md"><%= branch[:tag] %></div>
+          <div class="bg-white/[0.03] p-6 rounded-2xl border border-white/5 hover:border-accent/30 transition-all group backdrop-blur-sm relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-2 opacity-5 font-black text-4xl text-white pointer-events-none"><%= branch[:icon] %></div>
+            <div class="flex justify-between items-start mb-8">
+              <div class="text-[10px] font-black text-accent tracking-tighter"><%= branch[:tag] %></div>
+              <div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
             </div>
-            <h3 class="text-white font-black mb-2 group-hover:text-accent transition-colors"><%= branch[:name] %></h3>
-            <p class="text-[10px] text-slate-500 leading-relaxed"><%= branch[:addr] %></p>
+            <h3 class="text-white font-black text-lg mb-2 group-hover:text-accent transition-colors"><%= branch[:name] %></h3>
+            <p class="text-[11px] text-slate-500 leading-tight font-medium uppercase tracking-tight"><%= branch[:addr] %></p>
           </div>
         <% end %>
       </div>

@@ -14,17 +14,29 @@
 
     .hero-section {
         position: relative;
-        padding: 4rem 2rem;
-        background: #273A90; /* Logo Blue Updated */
+        padding: 6rem 2rem;
+        background: radial-gradient(circle at 50% 50%, #273A90 0%, #1a2a6c 100%);
         overflow: hidden;
         text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .hero-bg-pattern {
         position: absolute;
         inset: 0;
-        background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
-        background-size: 30px 30px;
+        background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+        background-size: 40px 40px;
+        opacity: 0.6;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     }
 
 
@@ -39,12 +51,13 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 6px 16px;
-        background: rgba(255,255,255,0.2);
-        border: 1px solid rgba(255,255,255,0.3);
+        padding: 8px 20px;
+        background: rgba(255,255,255,0.05);
+        border: 1px dashed rgba(255,255,255,0.2);
+        backdrop-filter: blur(8px);
         border-radius: 999px;
-        margin-bottom: 1.5rem;
-        animation: fadeUp 0.8s ease out;
+        margin-bottom: 2rem;
+        animation: fadeUp 0.8s ease-out;
     }
 
     .hero-badge-dot {

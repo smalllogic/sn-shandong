@@ -70,24 +70,59 @@
       </div>
 
       <!-- Bottom Level: Product Categories -->
-      <div class="hidden md:block bg-slate-50/50">
-        <div class="max-w-screen-2xl mx-auto px-8">
-          <div class="flex items-center justify-center space-x-1 py-1">
-            <% Category.roots.visible.each do |category| %>
-              <div class="relative group/mega">
-                <%= link_to category_path(category), class: "flex items-center px-4 py-3 text-[12px] font-bold uppercase tracking-widest #{current_page?(category_path(category)) ? 'text-accent' : 'text-slate-600 hover:text-slate-900'} transition-colors cursor-pointer" do %>
-                  <span><%= category.localized_name %></span>
+      <div class="hidden md:block bg-slate-900 border-b border-white/5 relative overflow-hidden">
+        <!-- Industrial background element -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none" 
+             style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+        <div class="max-w-screen-2xl mx-auto px-8 relative z-10">
+          <div class="flex items-center justify-center py-0">
+            <% Category.roots.visible.each_with_index do |category, index| %>
+              <% if index > 0 %>
+                <div class="h-4 w-px bg-white/10 self-center mx-1 rotate-12"></div>
+              <% end %>
+              
+              <div class="relative group/mega flex items-center">
+                <%= link_to category_path(category), class: "flex items-center px-3 xl:px-5 py-4 text-[10px] xl:text-[11px] font-black uppercase tracking-[0.2em] #{current_page?(category_path(category)) ? 'text-accent' : 'text-slate-300 hover:text-white'} transition-all cursor-pointer relative" do %>
+                  <!-- Animated background hover -->
+                  <div class="absolute inset-0 bg-white/5 opacity-0 group-hover/mega:opacity-100 transition-opacity duration-300"></div>
+                  
+                  <!-- Bottom highlight bar -->
+                  <div class="absolute bottom-0 left-0 w-full h-0.5 bg-accent scale-x-0 group-hover/mega:scale-x-100 transition-transform duration-300 origin-left"></div>
+
+                  <span class="w-5 h-5 flex items-center justify-center mr-2 opacity-50 group-hover/mega:opacity-100 group-hover/mega:scale-110 transition-all duration-300 flex-shrink-0">
+                    <% case category.slug %>
+                    <% when 'refrigeration' %>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7m14-8l-7 7-7-7"></path></svg>
+                    <% when 'cooking-equipment' %>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.99 7.99 0 0120 13a7.98 7.98 0 01-2.343 5.657z"></path></svg>
+                    <% when 'stainless-steel-product' %>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    <% when 'stainless-steel-sink' %>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4M9 19h6"></path></svg>
+                    <% when 'food-equipment' %>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m12 12a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                    <% when 'retail-refrigeration' %>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <% else %>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <% end %>
+                  </span>
+                  <span class="relative z-10"><%= category.localized_name %></span>
                   <% if category.children.visible.any? %>
-                    <svg class="w-3 h-3 ml-1.5 transition-transform group-hover/mega:rotate-180 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg class="w-3 h-3 ml-2 transition-transform group-hover/mega:rotate-180 text-white/30 group-hover/mega:text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                   <% end %>
                 <% end %>
                 
                 <% if category.children.visible.any? %>
                   <div class="invisible group-hover/mega:visible absolute left-1/2 -translate-x-1/2 top-full pt-0 z-50 w-64 opacity-0 group-hover/mega:opacity-100 transition-all duration-300 transform translate-y-2 group-hover/mega:translate-y-0">
-                    <div class="bg-white border border-slate-100 rounded-b-2xl shadow-xl overflow-hidden p-5">
-                      <div class="flex flex-col space-y-2.5">
+                    <div class="bg-slate-900 border border-white/10 rounded-b-2xl shadow-2xl overflow-hidden p-5 border-t-2 border-accent backdrop-blur-xl">
+                      <div class="flex flex-col space-y-2">
                         <% category.children.visible.each do |sub| %>
-                          <%= link_to sub.localized_name, category_path(sub), class: "text-[12px] font-medium text-slate-500 hover:text-accent transition-colors py-1 block border-b border-slate-50 last:border-0" %>
+                          <%= link_to category_path(sub), class: "text-[11px] font-bold text-slate-400 hover:text-white hover:pl-2 transition-all py-1.5 block border-b border-white/5 last:border-0 flex items-center group/sub" do %>
+                            <span class="w-1.5 h-1.5 bg-accent rounded-full mr-2 opacity-0 group-hover/sub:opacity-100 transition-opacity"></span>
+                            <%= sub.localized_name %>
+                          <% end %>
                         <% end %>
                       </div>
                     </div>
@@ -117,9 +152,29 @@
             <div class="grid grid-cols-1 gap-2">
               <% Category.roots.visible.each do |category| %>
                 <div x-data="{ open: false }">
-                  <div class="flex items-center justify-between py-4 px-5 text-sm font-bold text-slate-900 bg-slate-50 rounded-2xl hover:bg-accent hover:text-white transition-all cursor-pointer"
+                  <div class="flex items-center justify-between py-4 px-5 text-sm font-bold text-white bg-slate-900 rounded-2xl border border-white/10 hover:border-accent transition-all cursor-pointer"
                        @click="open = !open">
-                    <span><%= category.localized_name %></span>
+                    <div class="flex items-center">
+                      <span class="w-8 h-8 flex items-center justify-center mr-3 bg-white/10 rounded-lg text-accent flex-shrink-0 transition-all shadow-sm">
+                        <% case category.slug %>
+                        <% when 'refrigeration' %>
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7m14-8l-7 7-7-7"></path></svg>
+                        <% when 'cooking-equipment' %>
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.99 7.99 0 0120 13a7.98 7.98 0 01-2.343 5.657z"></path></svg>
+                        <% when 'stainless-steel-product' %>
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                        <% when 'stainless-steel-sink' %>
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4M9 19h6"></path></svg>
+                        <% when 'food-equipment' %>
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m12 12a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                        <% when 'retail-refrigeration' %>
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <% else %>
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        <% end %>
+                      </span>
+                      <span><%= category.localized_name %></span>
+                    </div>
                     <% if category.children.visible.any? %>
                       <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     <% end %>
@@ -127,7 +182,9 @@
                   <% if category.children.visible.any? %>
                     <div x-show="open" x-collapse class="pl-4 space-y-1 mt-2">
                       <% category.children.visible.each do |sub| %>
-                        <%= link_to sub.localized_name, category_path(sub), class: "block py-2 px-4 text-sm text-slate-600 hover:text-accent" %>
+                        <%= link_to category_path(sub), class: "block py-3 px-5 text-[13px] font-bold text-slate-400 hover:text-accent bg-slate-50/5 rounded-xl border border-white/5 mt-1 transition-all" do %>
+                          <%= sub.localized_name %>
+                        <% end %>
                       <% end %>
                     </div>
                   <% end %>
@@ -160,5 +217,5 @@
     </div>
   </nav>
   <!-- Spacer to prevent content jump -->
-  <div class="h-[72px] md:h-[112px]"></div>
+  <div class="h-[64px] md:h-[114px]"></div>
 </div>

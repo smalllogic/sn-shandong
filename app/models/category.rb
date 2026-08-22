@@ -5,7 +5,8 @@ class Category < ApplicationRecord
     'stainless-steel-sink' => 'Stainless steel Sink',
     'cooking-equipment' => 'Cooking Equipment',
     'food-equipment' => 'Food Equipment',
-    'retail-refrigeration' => 'Retail Refrigeration'
+    'retail-refrigeration' => 'Retail Refrigeration',
+    'ventilation' => 'Ventilation'
   }.freeze
 
   def self.root_slugs
@@ -45,7 +46,7 @@ class Category < ApplicationRecord
 
   def validate_root_category_slug
     if !ROOT_CATEGORIES.key?(slug)
-      errors.add(:slug, "顶级分类必须是预定义的 6 类之一: #{ROOT_CATEGORIES.keys.join(', ')}")
+      errors.add(:slug, "顶级分类必须是预定义的 7 类之一: #{ROOT_CATEGORIES.keys.join(', ')}")
     end
   end
 

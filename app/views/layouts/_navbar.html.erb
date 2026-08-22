@@ -4,9 +4,9 @@
        x-data="{ mobileMenuOpen: false }">
     
     <!-- Main Navigation Bar -->
-    <div class="bg-white shadow-sm transition-all duration-300">
+    <div class="bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
       <!-- Top Level: Basic Pages & Branding -->
-      <div class="border-b border-slate-50">
+      <div class="border-b border-slate-100/50">
         <div class="max-w-screen-2xl mx-auto px-4 md:px-8 h-16 flex justify-between items-center">
           <!-- Logo -->
           <div class="flex items-center">
@@ -15,22 +15,66 @@
             <% end %>
           </div>
 
-          <!-- Basic Pages Links -->
           <div class="hidden lg:flex items-center space-x-4 xl:space-x-8">
-            <%= link_to t('navbar.home'), root_path, class: "text-[12px] xl:text-[13px] font-bold uppercase tracking-wider #{current_page?(root_path) ? 'text-accent' : 'text-slate-600 hover:text-slate-900'} transition-colors" %>
-            <%= link_to t('navbar.factory'), factory_path, class: "text-[12px] xl:text-[13px] font-bold uppercase tracking-wider #{current_page?(factory_path) ? 'text-accent' : 'text-slate-600 hover:text-slate-900'} transition-colors" %>
-            <%= link_to t('navbar.blog'), posts_path, class: "text-[12px] xl:text-[13px] font-bold uppercase tracking-wider #{current_page?(posts_path) ? 'text-accent' : 'text-slate-600 hover:text-slate-900'} transition-colors" %>
-            <%= link_to t('navbar.faqs'), faqs_path, class: "text-[12px] xl:text-[13px] font-bold uppercase tracking-wider #{current_page?(faqs_path) ? 'text-accent' : 'text-slate-600 hover:text-slate-900'} transition-colors" %>
-            <%= link_to t('navbar.contact_us'), contact_path, class: "text-[12px] xl:text-[13px] font-bold uppercase tracking-wider #{current_page?(contact_path) ? 'text-accent' : 'text-slate-600 hover:text-slate-900'} transition-colors" %>
+            <%= link_to root_path, class: "text-[12px] xl:text-[13px] font-bold uppercase tracking-wider #{current_page?(root_path) ? 'text-accent' : 'text-slate-600 hover:text-slate-900'} transition-colors relative group/link" do %>
+              <%= t('navbar.home') %>
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover/link:w-full"></span>
+            <% end %>
+            <%= link_to factory_path, class: "text-[12px] xl:text-[13px] font-bold uppercase tracking-wider #{current_page?(factory_path) ? 'text-accent' : 'text-slate-600 hover:text-slate-900'} transition-colors relative group/link" do %>
+              <%= t('navbar.factory') %>
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover/link:w-full"></span>
+            <% end %>
+            <%= link_to posts_path, class: "text-[12px] xl:text-[13px] font-bold uppercase tracking-wider #{current_page?(posts_path) ? 'text-accent' : 'text-slate-600 hover:text-slate-900'} transition-colors relative group/link" do %>
+              <%= t('navbar.blog') %>
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover/link:w-full"></span>
+            <% end %>
+            <%= link_to faqs_path, class: "text-[12px] xl:text-[13px] font-bold uppercase tracking-wider #{current_page?(faqs_path) ? 'text-accent' : 'text-slate-600 hover:text-slate-900'} transition-colors relative group/link" do %>
+              <%= t('navbar.faqs') %>
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover/link:w-full"></span>
+            <% end %>
+            <%= link_to contact_path, class: "text-[12px] xl:text-[13px] font-bold uppercase tracking-wider #{current_page?(contact_path) ? 'text-accent' : 'text-slate-600 hover:text-slate-900'} transition-colors relative group/link" do %>
+              <%= t('navbar.contact_us') %>
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover/link:w-full"></span>
+            <% end %>
           </div>
 
           <!-- Right Side Actions -->
           <div class="flex items-center space-x-4">
             <!-- Language selector -->
-            <div class="hidden md:flex items-center space-x-2 text-[11px] font-bold border-r border-slate-100 pr-4 mr-2">
-              <span class="text-slate-900">EN</span>
-              <span class="text-slate-300">|</span>
-              <span class="text-slate-500 hover:text-accent cursor-pointer transition-colors">CN</span>
+            <div class="hidden md:flex items-center space-x-4 text-[13px] font-bold border-r border-slate-100 pr-4 mr-2">
+              <a href="#" class="flex items-center space-x-1.5 group/lang">
+                <span class="w-6 h-4.5 bg-slate-200 rounded-sm overflow-hidden flex-shrink-0 relative">
+                  <span class="absolute inset-0 bg-blue-600"></span>
+                  <span class="absolute inset-y-0 left-1/3 right-1/3 bg-white"></span>
+                  <span class="absolute inset-y-0 right-0 left-2/3 bg-red-600"></span>
+                </span>
+                <span class="text-slate-400 group-hover:text-accent transition-colors">FR</span>
+              </a>
+              <a href="#" class="flex items-center space-x-1.5 group/lang">
+                <span class="w-6 h-4.5 bg-slate-200 rounded-sm overflow-hidden flex-shrink-0 relative">
+                  <span class="absolute inset-0 bg-green-600"></span>
+                  <span class="absolute inset-y-0 left-1/3 right-1/3 bg-white"></span>
+                  <span class="absolute inset-y-0 right-0 left-2/3 bg-red-600"></span>
+                </span>
+                <span class="text-slate-400 group-hover:text-accent transition-colors">IT</span>
+              </a>
+              <a href="#" class="flex items-center space-x-1.5 group/lang">
+                <span class="w-6 h-4.5 bg-slate-200 rounded-sm overflow-hidden flex-shrink-0 relative border border-slate-100">
+                  <span class="absolute inset-0 bg-white"></span>
+                  <span class="absolute inset-x-0 top-1/3 bottom-1/3 bg-red-600"></span>
+                  <span class="absolute inset-y-0 left-1/3 right-1/3 bg-red-600"></span>
+                </span>
+                <span class="text-slate-900">EN</span>
+              </a>
+              <a href="#" class="flex items-center space-x-1.5 group/lang">
+                <span class="w-6 h-4.5 bg-slate-200 rounded-sm overflow-hidden flex-shrink-0 relative">
+                  <span class="absolute inset-0 bg-red-600"></span>
+                  <span class="absolute top-0 left-0 w-2 h-2 flex items-center justify-center">
+                    <span class="text-[5px] text-yellow-400">★</span>
+                  </span>
+                </span>
+                <span class="text-slate-400 group-hover:text-accent transition-colors">CN</span>
+              </a>
             </div>
 
             <!-- Search Toggle -->
@@ -70,58 +114,56 @@
       </div>
 
       <!-- Bottom Level: Product Categories -->
-      <div class="hidden md:block bg-slate-900 border-b border-white/5 relative overflow-hidden">
-        <!-- Industrial background element -->
-        <div class="absolute inset-0 opacity-10 pointer-events-none" 
-             style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
-
+      <div class="hidden md:block bg-white/80 backdrop-blur-md border-b border-slate-100 relative overflow-hidden">
+        <!-- Modern accent line -->
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent opacity-50"></div>
+        
         <div class="max-w-screen-2xl mx-auto px-8 relative z-10">
           <div class="flex items-center justify-center py-0">
             <% Category.roots.visible.each_with_index do |category, index| %>
               <% if index > 0 %>
-                <div class="h-4 w-px bg-white/10 self-center mx-1 rotate-12"></div>
+                <div class="h-3 w-px bg-slate-200 self-center mx-1 opacity-50"></div>
               <% end %>
               
               <div class="relative group/mega flex items-center">
-                <%= link_to category_path(category), class: "flex items-center px-3 xl:px-5 py-4 text-[10px] xl:text-[11px] font-black uppercase tracking-[0.2em] #{current_page?(category_path(category)) ? 'text-accent' : 'text-slate-300 hover:text-white'} transition-all cursor-pointer relative" do %>
-                  <!-- Animated background hover -->
-                  <div class="absolute inset-0 bg-white/5 opacity-0 group-hover/mega:opacity-100 transition-opacity duration-300"></div>
+                <%= link_to category_path(category), class: "flex items-center px-4 xl:px-6 py-4 text-[10px] xl:text-[11px] font-bold uppercase tracking-[0.15em] #{current_page?(category_path(category)) ? 'text-accent' : 'text-slate-500 hover:text-slate-900'} transition-all cursor-pointer relative" do %>
+                  <!-- Subtle Hover Background -->
+                  <div class="absolute inset-y-2 inset-x-1 bg-slate-50 rounded-xl opacity-0 group-hover/mega:opacity-100 transition-all duration-300 -z-10"></div>
                   
-                  <!-- Bottom highlight bar -->
-                  <div class="absolute bottom-0 left-0 w-full h-0.5 bg-accent scale-x-0 group-hover/mega:scale-x-100 transition-transform duration-300 origin-left"></div>
-
-                  <span class="w-5 h-5 flex items-center justify-center mr-2 opacity-50 group-hover/mega:opacity-100 group-hover/mega:scale-110 transition-all duration-300 flex-shrink-0">
+                  <span class="w-7 h-7 flex items-center justify-center mr-2.5 text-slate-400 group-hover/mega:text-accent transition-all duration-300 flex-shrink-0">
                     <% case category.slug %>
                     <% when 'refrigeration' %>
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7m14-8l-7 7-7-7"></path></svg>
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7m14-8l-7 7-7-7"></path></svg>
                     <% when 'cooking-equipment' %>
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.99 7.99 0 0120 13a7.98 7.98 0 01-2.343 5.657z"></path></svg>
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.99 7.99 0 0120 13a7.98 7.98 0 01-2.343 5.657z"></path></svg>
                     <% when 'stainless-steel-product' %>
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
                     <% when 'stainless-steel-sink' %>
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4M9 19h6"></path></svg>
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4M9 19h6"></path></svg>
                     <% when 'food-equipment' %>
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m12 12a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m12 12a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
                     <% when 'retail-refrigeration' %>
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <% when 'ventilation' %>
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path></svg>
                     <% else %>
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     <% end %>
                   </span>
                   <span class="relative z-10"><%= category.localized_name %></span>
                   <% if category.children.visible.any? %>
-                    <svg class="w-3 h-3 ml-2 transition-transform group-hover/mega:rotate-180 text-white/30 group-hover/mega:text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg class="w-3 h-3 ml-1.5 transition-transform group-hover/mega:rotate-180 text-slate-300 group-hover/mega:text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                   <% end %>
                 <% end %>
                 
                 <% if category.children.visible.any? %>
-                  <div class="invisible group-hover/mega:visible absolute left-1/2 -translate-x-1/2 top-full pt-0 z-50 w-64 opacity-0 group-hover/mega:opacity-100 transition-all duration-300 transform translate-y-2 group-hover/mega:translate-y-0">
-                    <div class="bg-slate-900 border border-white/10 rounded-b-2xl shadow-2xl overflow-hidden p-5 border-t-2 border-accent backdrop-blur-xl">
-                      <div class="flex flex-col space-y-2">
+                  <div class="invisible group-hover/mega:visible absolute left-1/2 -translate-x-1/2 top-full pt-1 z-50 w-72 opacity-0 group-hover/mega:opacity-100 transition-all duration-300 transform translate-y-2 group-hover/mega:translate-y-0">
+                    <div class="bg-white rounded-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] overflow-hidden p-3 border border-slate-100 ring-1 ring-slate-900/5">
+                      <div class="grid grid-cols-1 gap-1">
                         <% category.children.visible.each do |sub| %>
-                          <%= link_to category_path(sub), class: "text-[11px] font-bold text-slate-400 hover:text-white hover:pl-2 transition-all py-1.5 block border-b border-white/5 last:border-0 flex items-center group/sub" do %>
-                            <span class="w-1.5 h-1.5 bg-accent rounded-full mr-2 opacity-0 group-hover/sub:opacity-100 transition-opacity"></span>
-                            <%= sub.localized_name %>
+                          <%= link_to category_path(sub), class: "flex items-center justify-between px-4 py-2.5 rounded-xl text-[11px] font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all group/sub" do %>
+                            <span><%= sub.localized_name %></span>
+                            <svg class="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                           <% end %>
                         <% end %>
                       </div>
@@ -147,30 +189,63 @@
          x-cloak>
       <div class="bg-white min-h-screen flex flex-col p-6 overflow-y-auto">
         <div class="space-y-8">
+          <!-- Mobile Language Selector -->
+          <div class="grid grid-cols-2 gap-3 pb-6 border-b border-slate-100">
+            <a href="#" class="flex items-center space-x-3 p-3 bg-slate-50 rounded-xl border border-slate-100 font-bold text-[12px] text-slate-600">
+              <span class="w-6 h-4.5 bg-blue-600 rounded-sm overflow-hidden relative flex-shrink-0">
+                <span class="absolute inset-y-0 left-1/3 right-1/3 bg-white"></span>
+                <span class="absolute inset-y-0 right-0 left-2/3 bg-red-600"></span>
+              </span>
+              <span>FRANÇAIS</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 p-3 bg-slate-50 rounded-xl border border-slate-100 font-bold text-[12px] text-slate-600">
+              <span class="w-6 h-4.5 bg-green-600 rounded-sm overflow-hidden relative flex-shrink-0">
+                <span class="absolute inset-y-0 left-1/3 right-1/3 bg-white"></span>
+                <span class="absolute inset-y-0 right-0 left-2/3 bg-red-600"></span>
+              </span>
+              <span>ITALIANO</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 p-3 bg-slate-50 rounded-xl border border-slate-200 ring-1 ring-accent/30 font-bold text-[12px] text-slate-900">
+              <span class="w-6 h-4.5 bg-white rounded-sm overflow-hidden relative border border-slate-100 flex-shrink-0">
+                <span class="absolute inset-x-0 top-1/3 bottom-1/3 bg-red-600"></span>
+                <span class="absolute inset-y-0 left-1/3 right-1/3 bg-red-600"></span>
+              </span>
+              <span>ENGLISH</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 p-3 bg-slate-50 rounded-xl border border-slate-100 font-bold text-[12px] text-slate-600">
+              <span class="w-6 h-4.5 bg-red-600 rounded-sm overflow-hidden relative flex-shrink-0">
+                <span class="absolute top-0 left-0 w-2 h-2 flex items-center justify-center">
+                  <span class="text-[5px] text-yellow-400">★</span>
+                </span>
+              </span>
+              <span>中文</span>
+            </a>
+          </div>
+
           <div>
             <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] block mb-6">Product Range</span>
             <div class="grid grid-cols-1 gap-2">
               <% Category.roots.visible.each do |category| %>
                 <div x-data="{ open: false }">
-                  <div class="flex items-center justify-between py-4 px-5 text-sm font-bold text-white bg-slate-900 rounded-2xl border border-white/10 hover:border-accent transition-all cursor-pointer"
+                  <div class="flex items-center justify-between py-4 px-5 text-sm font-bold text-slate-900 bg-slate-50 rounded-2xl border border-slate-100 hover:border-accent transition-all cursor-pointer"
                        @click="open = !open">
                     <div class="flex items-center">
-                      <span class="w-8 h-8 flex items-center justify-center mr-3 bg-white/10 rounded-lg text-accent flex-shrink-0 transition-all shadow-sm">
+                      <span class="w-10 h-10 flex items-center justify-center mr-3 bg-white rounded-lg text-accent flex-shrink-0 transition-all shadow-sm">
                         <% case category.slug %>
                         <% when 'refrigeration' %>
-                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7m14-8l-7 7-7-7"></path></svg>
+                          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7m14-8l-7 7-7-7"></path></svg>
                         <% when 'cooking-equipment' %>
-                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.99 7.99 0 0120 13a7.98 7.98 0 01-2.343 5.657z"></path></svg>
+                          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.99 7.99 0 0120 13a7.98 7.98 0 01-2.343 5.657z"></path></svg>
                         <% when 'stainless-steel-product' %>
-                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
                         <% when 'stainless-steel-sink' %>
-                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4M9 19h6"></path></svg>
+                          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4M9 19h6"></path></svg>
                         <% when 'food-equipment' %>
-                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m12 12a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m12 12a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
                         <% when 'retail-refrigeration' %>
-                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                         <% else %>
-                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         <% end %>
                       </span>
                       <span><%= category.localized_name %></span>
@@ -182,7 +257,7 @@
                   <% if category.children.visible.any? %>
                     <div x-show="open" x-collapse class="pl-4 space-y-1 mt-2">
                       <% category.children.visible.each do |sub| %>
-                        <%= link_to category_path(sub), class: "block py-3 px-5 text-[13px] font-bold text-slate-400 hover:text-accent bg-slate-50/5 rounded-xl border border-white/5 mt-1 transition-all" do %>
+                        <%= link_to category_path(sub), class: "block py-3 px-5 text-[13px] font-bold text-slate-600 hover:text-accent bg-slate-50 rounded-xl border border-slate-100 mt-1 transition-all" do %>
                           <%= sub.localized_name %>
                         <% end %>
                       <% end %>
@@ -217,5 +292,5 @@
     </div>
   </nav>
   <!-- Spacer to prevent content jump -->
-  <div class="h-[64px] md:h-[114px]"></div>
+  <div class="h-[64px] md:h-[116px]"></div>
 </div>

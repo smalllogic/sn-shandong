@@ -13,7 +13,7 @@ zh-CN:
       badge: "源头制造商"
       title: "可靠的制造合作伙伴"
       italic_title: "服务于全球餐饮服务行业"
-      description: "拥有 700,000㎡ 生产基地及丰富的全球出口经验，Sinower 为全球餐厅和酒店提供专业的制冷、烹饪及不锈钢厨房解决方案。"
+      description: "公司成立于2002年，集生产、研发、设计、销售、售后于一体的现代化商用厨具制造企业，先后在法国、德国、意大利、捷克、迪拜、美国、等地开设多家海外分公司，产品远销180+国家。拥有 140,000㎡ 生产基地。"
       factory_area: "工厂面积"
       employees: "员工人数"
       countries: "服务国家"
@@ -108,12 +108,7 @@ zh-CN:
     carton_size: "外箱尺寸"
     gross_weight: "毛重"
     price: "价格"
-    params:
-      voltage_power: "电压/功率"
-      capacity_dimensions: "容量/尺寸"
-      burners_controls: "燃烧器/控制方式"
-      series_applications: "系列/用途"
-      color_appearance: "颜色/外观"
+    standard_features: "Standard Features"
     add_to_order: "添加到订单"
     add_short: "添加"
   footer:
@@ -131,7 +126,7 @@ zh-CN:
     email: "info@skyrainbow.com.cn"
     support_email: "info@skyrainbow.com.cn"
     company_profile_title: "公司简介"
-    company_profile_content: "山东Sinower电器有限公司战略性地坐落于庞家镇工业园 (北纬37°，东经118°)。公司占地70万平方米，专业生产商用制冷设备、烹饪设备及优质不锈钢厨具。"
+    company_profile_content: "公司成立于2002年，集生产、研发、设计、销售、售后于一体的现代化商用厨具制造企业，先后在法国、德国、意大利、捷克、迪拜、美国、等地开设多家海外分公司，产品远销180+国家。公司占地140,000平方米，专业生产商用制冷设备、烹饪设备及优质不锈钢厨具。"
 
   privacy_policy:
     ip_banner:

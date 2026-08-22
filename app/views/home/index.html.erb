@@ -43,11 +43,13 @@
         </div>
 
         <!-- 5 Branches Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto w-full">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 max-w-6xl mx-auto w-full">
           <% [
             { name: "China HQ", addr: "Boxing, CN", flag: "🇨🇳", tag: "GLOBAL HUB" },
             { name: "France", addr: "Paris, FR", flag: "🇫🇷", tag: "EUROPE" },
             { name: "Germany", addr: "Munich, DE", flag: "🇩🇪", tag: "EUROPE" },
+            { name: "Italy", addr: "IT", flag: "🇮🇹", tag: "EUROPE" },
+            { name: "Czech", addr: "CZ", flag: "🇨🇿", tag: "EUROPE" },
             { name: "UAE", addr: "Sharjah, UAE", flag: "🇦🇪", tag: "MIDDLE EAST" },
             { name: "USA", addr: "Georgia, US", flag: "🇺🇸", tag: "NORTH AMERICA" }
           ].each do |branch| %>
@@ -82,6 +84,8 @@
         usa:     [33.941, -84.214],
         france:  [48.707, 2.389],
         germany: [48.266, 10.985],
+        italy:   [41.8719, 12.5674],
+        czech:   [49.8175, 15.4730],
         uae:     [25.340, 55.400]
       }
 
@@ -103,6 +107,8 @@
           { location: locations.usa, size: 0.08 },
           { location: locations.france, size: 0.08 },
           { location: locations.germany, size: 0.08 },
+          { location: locations.italy, size: 0.08 },
+          { location: locations.czech, size: 0.08 },
           { location: locations.uae, size: 0.08 }
         ],
         arcs: [],
@@ -167,16 +173,16 @@
           <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Employees</div>
         </div>
         <div class="space-y-2 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all group">
-          <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="550" class="counter">0</span></div>
-          <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Advanced Machines</div>
+          <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="8" class="counter">0</span></div>
+          <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Automated Lines</div>
         </div>
         <div class="space-y-2 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all group">
-          <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="108" class="counter">0</span></div>
+          <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="180" class="counter">0</span></div>
           <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Countries Served</div>
         </div>
         <div class="space-y-2 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all group">
-          <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="280000" class="counter">0</span></div>
-          <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Annual Capacity</div>
+          <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="300000" class="counter">0</span></div>
+          <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Annual Output</div>
         </div>
       </div>
     </div>
@@ -233,22 +239,22 @@
             <div class="flex gap-4">
               <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0 text-accent font-bold">01</div>
               <div>
-                <h4 class="font-bold text-slate-900">700,000㎡ Modern Factory</h4>
+                <h4 class="font-bold text-slate-900">140,000㎡ Modern Factory</h4>
                 <p class="text-slate-600 text-sm">Large-scale production base ensuring stable supply and scale advantage.</p>
               </div>
             </div>
             <div class="flex gap-4">
               <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0 text-accent font-bold">02</div>
               <div>
-                <h4 class="font-bold text-slate-900">550+ Advanced Machines</h4>
-                <p class="text-slate-600 text-sm">Equipped with CNC, laser cutting, and automatic welding for precision.</p>
+                <h4 class="font-bold text-slate-900">8 Professional Automated Lines</h4>
+                <p class="text-slate-600 text-sm">Precision manufacturing powered by world-leading equipment and 5 workshops.</p>
               </div>
             </div>
             <div class="flex gap-4">
               <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0 text-accent font-bold">03</div>
               <div>
-                <h4 class="font-bold text-slate-900">OEM / ODM Experts</h4>
-                <p class="text-slate-600 text-sm">Professional engineering team for customized kitchen solutions.</p>
+                <h4 class="font-bold text-slate-900">50+ R&D Engineers</h4>
+                <p class="text-slate-600 text-sm">Professional engineering team for customized kitchen solutions and 2 labs.</p>
               </div>
             </div>
           </div>
@@ -339,11 +345,11 @@
           <tbody class="divide-y divide-slate-200">
             <tr>
               <td class="p-6 text-slate-900 font-bold">Stable Supply</td>
-              <td class="p-6 text-slate-600">280,000 units/year annual capacity</td>
+              <td class="p-6 text-slate-600">300,000+ units/year total output</td>
             </tr>
             <tr>
               <td class="p-6 text-slate-900 font-bold">Cost Leadership</td>
-              <td class="p-6 text-slate-600">Large-scale 700,000㎡ manufacturing base</td>
+              <td class="p-6 text-slate-600">Modern 140,000㎡ manufacturing base</td>
             </tr>
             <tr>
               <td class="p-6 text-slate-900 font-bold">Quick Delivery</td>

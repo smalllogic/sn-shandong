@@ -40,7 +40,7 @@ en:
       badge: "Direct Manufacturer"
       title: "Reliable Manufacturing Partner"
       italic_title: "for Global Foodservice Industry"
-      description: "With a 700,000㎡ production base and global export experience, Sinower provides professional refrigeration, cooking and stainless-steel kitchen solutions for restaurants and hotels worldwide."
+      description: "Founded in 2002, we are a modern commercial kitchenware manufacturer integrating production, R&D, design, sales, and after-sales. We have opened multiple overseas branches in France, Germany, Italy, Czech Republic, Dubai, USA, etc. Products are exported to 180+ countries. Spanning a 140,000㎡ production base."
       factory_area: "Factory Area"
       employees: "Employees"
       countries: "Countries"
@@ -64,7 +64,7 @@ en:
   footer:
     quick_links: "Know More"
     address: "Shandong Binzhou Boxing Pangjia Town Industrial Park"
-    company_desc: "Professional Commercial Kitchen Equipment Manufacturer. Spanning 700,000㎡ manufacturing base, serving 108+ countries."
+    company_desc: "Professional Commercial Kitchen Equipment Manufacturer. Spanning 140,000㎡ manufacturing base, serving 180+ countries."
     company_name: "Shandong Sinower Electrical Appliance Co., Ltd"
     phone: "+86 0543 8171612"
     email: "info@skyrainbow.com.cn"
@@ -115,13 +115,13 @@ en:
     carton_size: "Carton Size"
     gross_weight: "Gross Weight"
     price: "Price"
+    standard_features: "Standard Features"
     params:
       voltage_power: "Voltage/Power"
       capacity_dimensions: "Capacity/Dimensions"
       burners_controls: "Burners/Controls"
       series_applications: "Series/Usage"
       color_appearance: "Color/Appearance"
-    features: "Detailed Description"
     add_to_order: "ADD TO ORDER"
     add_short: "Add"
     get_quote: "Get Professional Quote"
@@ -189,7 +189,7 @@ en:
     email: "info@skyrainbow.com.cn"
     support_email: "info@skyrainbow.com.cn"
     company_profile_title: "Company Profile"
-    company_profile_content: "Shandong Sinower Electrical Appliance Co., Ltd. is strategically located in the Pangjia Town Industrial Park (37°N, 118°E). Spanning an expansive area of 700,000 square meters, we specialize in manufacturing commercial refrigeration units, cooking equipment, and premium stainless-steel kitchen apparatus."
+    company_profile_content: "Founded in 2002, Shandong Sinower Electrical Appliance Co., Ltd. is a modern commercial kitchenware manufacturer integrating production, R&D, design, sales, and after-sales. We have opened multiple overseas branches in France, Germany, Italy, Czech Republic, Dubai, USA, etc. Our products are exported to 180+ countries. Spanning an expansive area of 140,000 square meters, we specialize in manufacturing commercial refrigeration units, cooking equipment, and premium stainless-steel kitchen apparatus."
 
   privacy_policy:
     ip_banner:

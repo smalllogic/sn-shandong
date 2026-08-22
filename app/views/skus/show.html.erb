@@ -1,29 +1,22 @@
 <% 
   content_for :title, @sku.meta_title.presence || "#{@sku.name} - #{t('home.index.hero_title_2')}"
-  content_for :meta_description, @sku.meta_description.presence || "#{@sku.name} - Professional #{@sku.category.localized_name} for commercial kitchen and foodservice. OEM & ODM available. MOQ: #{@sku.moq.presence || '100 pcs'}. Factory-direct pricing from Sinower."
+  content_for :meta_description, @sku.meta_description.presence || "#{@sku.name} - Professional #{@sku.category.localized_name} for commercial kitchen and foodservice. OEM & ODM available. Factory-direct pricing from Sinower."
   content_for :meta_keywords, @sku.meta_keywords.presence || "#{@sku.name}, #{@sku.category.localized_name}, commercial kitchen equipment, foodservice equipment, restaurant equipment, Sinower Kitchen"
 %>
 <div class="max-w-screen-xl mx-auto px-4 py-12">
   <!-- 顶部面包屑导航 -->
-  <nav class="flex mb-10 items-center space-x-2 text-sm font-bold bg-white/50 backdrop-blur-sm p-3 rounded-xl border border-slate-200/50 w-fit sticky top-20 z-10">
-    <%= link_to categories_path, class: "text-slate-400 hover:text-primary transition-colors" do %>
-      <%= t('categories.all_products', default: '全部产品') %>
-    <% end %>
-    <svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  <nav class="flex mb-10 items-center space-x-0 text-[10px] font-black uppercase tracking-[0.2em] bg-white text-slate-900 p-0 rounded-lg overflow-hidden w-fit sticky top-20 z-10 shadow-sm border border-slate-200">
     <% @sku.category.ancestors_and_self.each do |cat| %>
-      <%= link_to cat.localized_name, categories_path(category_id: cat), class: "text-slate-400 hover:text-primary transition-colors" %>
-      <svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      <%= link_to cat.localized_name, categories_path(category_id: cat), class: "px-4 py-2.5 hover:bg-slate-50 hover:text-primary transition-colors border-r border-slate-100" %>
     <% end %>
-    <span class="text-dark truncate max-w-[200px]"><%= @sku.name %></span>
+    <span class="px-4 py-2.5 bg-slate-50 text-slate-400 truncate max-w-[200px]"><%= @sku.name %></span>
   </nav>
 
-  <!-- 产品主展示区：左右布局 -->
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 bg-white p-6 lg:p-12 rounded-[2.5rem] border border-slate-100 shadow-2xl shadow-primary/5 overflow-hidden relative">
-    <!-- 装饰背景 -->
-    <div class="absolute -top-24 -right-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-50 -z-0"></div>
+  <!-- 产品主展示区：工业风布局 -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden relative">
     
     <!-- 左侧：媒体展示 (占 5/12) -->
-    <div class="lg:col-span-5 relative z-10 space-y-8" 
+    <div class="lg:col-span-5 relative border-r border-slate-100 bg-slate-50/30" 
          x-data="{ 
            activeImage: 0, 
            isZoomed: false, 
@@ -35,238 +28,207 @@
              this.zoomY = ((e.clientY - rect.top) / rect.height) * 100;
            }
          }">
-      <div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-2xl overflow-hidden group relative">
-        <div class="aspect-square relative overflow-hidden bg-slate-50"
-             :class="isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'"
-             @mouseenter="isZoomed = true"
-             @mouseleave="isZoomed = false"
-             @mousemove="handleMouseMove($event)">
-          <% if @sku.images.attached? %>
-            <% @sku.sorted_images.each_with_index do |image, index| %>
-              <% 
-                begin
-                  medium_url = url_for(image.variant(:medium))
-                  original_url = url_for(image)
-                rescue ArgumentError, ActiveStorage::InvariableError
-                  medium_url = url_for(image)
-                  original_url = url_for(image)
-                end
-              %>
-              <div x-show="activeImage === <%= index %>" 
-                   x-cloak
-                   x-transition:enter="transition ease-out duration-500"
-                   x-transition:enter-start="opacity-0 transform scale-95"
-                   x-transition:enter-end="opacity-100 transform scale-100"
-                   class="w-full h-full absolute inset-0">
-                <!-- 基础图 -->
-                <%= image_tag medium_url, 
-                              class: "w-full h-full object-contain p-4", 
-                              style: "background-color: transparent;",
-                              loading: index == 0 ? "eager" : "lazy",
-                              alt: "#{@sku.name} - #{index + 1}" %>
-                
-                <!-- 放大镜层 (仅在 isZoomed 时显示) -->
-                <div x-show="isZoomed"
-                     class="absolute inset-0 z-20 pointer-events-none"
-                     :style="`background-image: url('${activeImage === <%= index %> ? '<%= original_url.html_safe %>' : ''}'); 
-                              background-size: 250%; 
-                              background-position: ${zoomX}% ${zoomY}%; 
-                              background-repeat: no-repeat;`"
-                     x-transition:enter="transition opacity duration-200"
-                     x-transition:enter-start="opacity-0"
-                     x-transition:enter-end="opacity-100"
-                     x-transition:leave="transition opacity duration-200"
-                     x-transition:leave-start="opacity-100"
-                     x-transition:leave-end="opacity-0">
+      <div class="p-8">
+        <div class="bg-white rounded-lg border border-slate-100 shadow-sm overflow-hidden group relative">
+          <div class="aspect-square relative overflow-hidden bg-white"
+               :class="isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'"
+               @mouseenter="isZoomed = true"
+               @mouseleave="isZoomed = false"
+               @mousemove="handleMouseMove($event)">
+            <% if @sku.images.attached? %>
+              <% @sku.sorted_images.each_with_index do |image, index| %>
+                <div x-show="activeImage === <%= index %>" 
+                     x-cloak
+                     x-transition:enter="transition opacity duration-300"
+                     class="w-full h-full absolute inset-0">
+                  <%= image_tag image, 
+                                class: "w-full h-full object-contain p-6", 
+                                style: "background-color: transparent;",
+                                loading: index == 0 ? "eager" : "lazy" %>
+                  
+                  <!-- 放大镜层 -->
+                  <div x-show="isZoomed"
+                       class="absolute inset-0 z-20 pointer-events-none"
+                       :style="`background-image: url('${activeImage === <%= index %> ? url_for(image).html_safe : ''}'); 
+                                background-size: 250%; 
+                                background-position: ${zoomX}% ${zoomY}%; 
+                                background-repeat: no-repeat;`"
+                       x-transition:enter="transition opacity duration-200"
+                       x-transition:enter-start="opacity-0"
+                       x-transition:enter-end="opacity-100">
+                  </div>
                 </div>
+              <% end %>
+            <% else %>
+              <div class="w-full h-full flex flex-col items-center justify-center">
+                <svg class="w-24 h-24 text-slate-100 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <span class="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Digital Asset Pending</span>
               </div>
             <% end %>
-          <% else %>
-            <div class="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
-              <svg class="w-32 h-32 text-slate-200 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-              <span class="text-xs font-black text-slate-300 uppercase tracking-widest">Digital Asset Pending</span>
-            </div>
-          <% end %>
-          
-          <div class="absolute top-6 left-6 flex flex-col space-y-2">
-            <span class="bg-amber-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest uppercase shadow-lg shadow-amber-500/30">
-              <%= t('skus.pro_series') %>
-            </span>
           </div>
         </div>
-      </div>
 
-      <!-- 缩略图列表 -->
-      <% if @sku.images.attached? && @sku.images.count > 1 %>
-        <div class="flex flex-wrap gap-4 px-2">
-          <% @sku.sorted_images.each_with_index do |image, index| %>
-            <button @click="activeImage = <%= index %>" 
-                    :class="activeImage === <%= index %> ? 'ring-2 ring-primary border-transparent shadow-lg' : 'border-slate-100 hover:border-primary/50'"
-                    class="w-20 h-20 rounded-2xl border-2 bg-white overflow-hidden transition-all duration-300 group">
-              <% begin %>
-                <%= image_tag image.variant(resize_to_limit: [200, 200], saver: { quality: 80 }), class: "w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" %>
-              <% rescue ArgumentError, ActiveStorage::InvariableError %>
-                <div class="w-full h-full bg-red-50 flex items-center justify-center text-red-400 text-xs">无法预览</div>
-              <% end %>
-            </button>
-          <% end %>
-        </div>
-      <% end %>
-      
-    </div>
-
-    <!-- 右侧：产品详情信息 (占 7/12) -->
-    <div class="lg:col-span-7 flex flex-col relative z-10 py-4">
-      <div class="mb-10">
-        <div class="flex items-center space-x-3 mb-6">
-          <span class="h-1 w-12 bg-primary rounded-full"></span>
-          <span class="text-[10px] font-black text-primary uppercase tracking-[0.3em]">Technical Excellence</span>
-        </div>
-        
-        <h1 class="text-5xl font-black text-dark mb-6 tracking-tight leading-none"><%= @sku.name %></h1>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-12">
-        <% [
-          { label: t('skus.material', default: 'Material'), value: @sku.material },
-          { label: t('skus.specification', default: 'Specification'), value: @sku.specification },
-          { label: t('skus.voltage_power', default: 'Voltage/Power'), value: @sku.voltage_power },
-          { label: t('skus.capacity_dimensions', default: 'Capacity/Dimensions'), value: @sku.capacity_dimensions },
-          { label: t('skus.burners_controls', default: 'Burners/Controls'), value: @sku.burners_controls },
-          { label: t('skus.series_applications', default: 'Series/Applications'), value: @sku.series_applications },
-          { label: t('skus.color_appearance', default: 'Color/Appearance'), value: @sku.color_appearance },
-          { label: t('skus.moq', default: 'MOQ'), value: @sku.moq },
-          { label: t('skus.sample_time', default: 'Sample Time'), value: @sku.sample_time },
-          { label: t('skus.production_lead_time', default: 'Production Lead Time'), value: @sku.production_lead_time },
-          { label: t('skus.packing', default: 'Packing'), value: @sku.packing },
-          { label: t('skus.carton_size', default: 'Carton Size'), value: @sku.carton_size },
-          { label: t('skus.gross_weight', default: 'Gross Weight'), value: @sku.gross_weight }
-        ].select { |s| s[:value].present? }.each do |spec| %>
-          <div class="group">
-            <div class="flex flex-col border-l-2 border-slate-100 pl-4 group-hover:border-primary transition-all duration-300">
-              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5"><%= spec[:label] %></span>
-              <span class="text-sm font-black text-dark tracking-tight"><%= spec[:value] %></span>
-            </div>
+        <!-- 缩略图列表 -->
+        <% if @sku.images.attached? && @sku.images.count > 1 %>
+          <div class="flex flex-wrap gap-3 mt-6">
+            <% @sku.sorted_images.each_with_index do |image, index| %>
+              <button @click="activeImage = <%= index %>" 
+                      :class="activeImage === <%= index %> ? 'border-primary' : 'border-slate-200'"
+                      class="w-16 h-16 rounded border bg-white overflow-hidden transition-all group">
+                <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "w-full h-full object-contain p-1 group-hover:scale-110 transition-transform" %>
+              </button>
+            <% end %>
           </div>
         <% end %>
       </div>
+    </div>
+
+    <!-- 右侧：产品详情信息 (工业风) -->
+    <div class="lg:col-span-7 flex flex-col bg-white p-10 lg:p-14">
+      <div class="mb-auto">
+        <div class="flex items-center space-x-4 mb-8">
+          <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] border-l-4 border-primary pl-4">Engineering Excellence</span>
+        </div>
+        
+        <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-8 tracking-tight leading-none uppercase"><%= @sku.name %></h1>
+        
+        <div class="grid grid-cols-2 gap-8 mb-12">
+          <div class="border-l border-slate-100 pl-4">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Product Status</p>
+            <p class="text-sm font-black text-slate-900 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+              Active Production
+            </p>
+          </div>
+          <div class="border-l border-slate-100 pl-4">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Global Standard</p>
+            <p class="text-sm font-black text-slate-900 uppercase">CE / RoHS / ISO</p>
+          </div>
+        </div>
+      </div>
 
       <!-- 操作区域 -->
-      <div class="mt-auto space-y-4">
-        <div class="grid grid-cols-1 gap-4">
-          <button onclick="addToOrder(<%= @sku.id %>)" class="w-full inline-flex justify-center items-center px-10 py-5 bg-primary hover:bg-primary/90 text-white rounded-[1.5rem] font-black text-sm tracking-widest uppercase transition-all duration-300 shadow-2xl shadow-primary/30 group">
-            <span><%= t('skus.add_to_order') %></span>
-            <svg class="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
+      <div class="space-y-6 pt-10 border-t border-slate-100">
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button onclick="addToOrder(<%= @sku.id %>)" class="flex-1 inline-flex justify-center items-center px-8 py-4 bg-slate-900 hover:bg-primary text-white font-black text-xs tracking-widest uppercase transition-all duration-300 group">
+            <span>Add to Quote Request</span>
+            <svg class="w-4 h-4 ml-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
           </button>
         </div>
-        <p class="text-[9px] text-slate-400 text-center sm:text-left font-bold uppercase tracking-tighter">
-          <%= t('skus.spec_notice') %>
-        </p>
+        <div class="flex items-center justify-between text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+          <span>Model: SNW-<%= @sku.id.to_s.rjust(6, '0') %></span>
+          <span>Lead Time: 15-30 Days</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- 下方：详细特性 -->
-  <div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
+  <!-- 下方：详细特性 (工业风) -->
+  <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
     <div class="lg:col-span-2">
-      <div class="bg-white rounded-[2rem] p-10 border border-slate-100 shadow-xl h-full">
-        <div class="flex items-center space-x-4 mb-8">
-          <h3 class="text-xl font-black text-slate-900 tracking-tight"><%= t('skus.core_features') %></h3>
+      <div class="bg-white rounded-xl p-10 border border-slate-200 shadow-sm h-full">
+        <div class="flex items-center justify-between mb-10 border-b border-slate-100 pb-6">
+          <h3 class="text-lg font-black text-slate-900 tracking-[0.1em] uppercase"><%= t('skus.standard_features') %></h3>
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">Technical Specifications</span>
         </div>
-        <div class="bg-slate-50 rounded-2xl p-8 text-slate-600 text-base leading-relaxed font-medium border border-slate-100 prose prose-slate max-w-none">
+        <div class="prose prose-slate max-w-none text-slate-600 font-medium">
           <% if @sku.standard_features.present? %>
             <%= @sku.standard_features %>
           <% else %>
-            <%= t('skus.default_feature_desc') %>
+            <p class="italic text-slate-400"><%= t('skus.default_feature_desc') %></p>
           <% end %>
         </div>
       </div>
     </div>
     
     <div class="lg:col-span-1">
-      <div class="rounded-[2rem] overflow-hidden border border-slate-100 shadow-xl h-full flex flex-col">
-        <!-- Avatar header -->
-        <div class="bg-gradient-to-br from-primary to-secondary p-8 flex flex-col items-center text-center relative">
-          <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 30% 70%, white 1px, transparent 1px); background-size: 18px 18px;"></div>
-          <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-xl mb-4 relative z-10 bg-white flex items-center justify-center">
-            <%= image_tag "logo.png", class: "w-full h-full object-contain p-2", alt: "Logo" %>
-          </div>
-          <h3 class="text-white font-black text-lg relative z-10">Marketing Manager</h3>
-          <p class="text-white/70 text-xs font-semibold uppercase tracking-widest relative z-10">Sinower · Guangdong</p>
-          <div class="inline-flex items-center gap-1.5 mt-3 px-3 py-1 bg-white/20 rounded-full text-white text-xs font-semibold relative z-10">
-            <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
-            Available Now
-          </div>
+      <div class="rounded-xl overflow-hidden border border-slate-200 shadow-sm h-full flex flex-col bg-white">
+        <!-- Technical Contact Header -->
+        <div class="bg-slate-900 p-8 text-center relative overflow-hidden">
+          <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: linear-gradient(30deg, #444 12%, transparent 12.5%, transparent 87%, #444 87.5%, #444), linear-gradient(150deg, #444 12%, transparent 12.5%, transparent 87%, #444 87.5%, #444), linear-gradient(30deg, #444 12%, transparent 12.5%, transparent 87%, #444 87.5%, #444), linear-gradient(150deg, #444 12%, transparent 12.5%, transparent 87%, #444 87.5%, #444), linear-gradient(60deg, #999 25%, transparent 25.5%, transparent 75%, #999 75%, #999), linear-gradient(60deg, #999 25%, transparent 25.5%, transparent 75%, #999 75%, #999); background-size: 40px 70px;"></div>
+          <h3 class="text-white font-black text-lg relative z-10 tracking-widest uppercase mb-1">Global Support</h3>
+          <p class="text-primary text-[10px] font-black uppercase tracking-[0.3em] relative z-10">Sales & Engineering</p>
         </div>
         <!-- Contact body -->
-        <div class="bg-white flex-1 p-6 flex flex-col gap-4">
-          <p class="text-slate-500 text-sm leading-relaxed">Get fast answers on pricing, samples, MOQ, and lead times for this product.</p>
-          <a href="https://wa.me/+8605438171612" target="_blank"
-             class="flex items-center gap-3 p-3 bg-green-50 hover:bg-green-100 rounded-xl transition-colors group">
-            <div class="w-9 h-9 bg-green-500 rounded-xl flex items-center justify-center flex-shrink-0">
-              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">WhatsApp</p>
-              <p class="text-sm font-semibold text-slate-700">+86 0543 8171612</p>
-            </div>
-          </a>
-          <a href="mailto:info@skyrainbow.com.cn"
-             class="flex items-center gap-3 p-3 bg-slate-50 hover:bg-slate-100 rounded-xl transition-colors group">
-            <div class="w-9 h-9 bg-primary rounded-xl flex items-center justify-center flex-shrink-0">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Email</p>
-              <p class="text-sm font-semibold text-slate-700">info@skyrainbow.com.cn</p>
-            </div>
-          </a>
-          <%= link_to contact_path, class: "mt-2 block w-full text-center py-3.5 bg-primary hover:bg-primary/90 text-white rounded-xl font-black text-xs tracking-widest uppercase transition-colors shadow-lg shadow-primary/20" do %>
-            Send Enquiry
+        <div class="p-8 flex flex-col gap-6">
+          <p class="text-slate-500 text-xs font-bold leading-relaxed uppercase tracking-wide">Direct channel for wholesale, OEM projects and technical verification.</p>
+          
+          <div class="space-y-4">
+            <a href="https://wa.me/+8605438171612" target="_blank" class="flex items-center gap-4 p-4 border border-slate-100 hover:border-primary/30 transition-all group">
+              <div class="w-10 h-10 bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-primary transition-colors">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+              <div>
+                <p class="text-[8px] font-black text-slate-400 uppercase tracking-widest">WhatsApp Business</p>
+                <p class="text-xs font-black text-slate-900">+86 186 6303 1612</p>
+              </div>
+            </a>
+            
+            <a href="mailto:info@skyrainbow.com.cn" class="flex items-center gap-4 p-4 border border-slate-100 hover:border-primary/30 transition-all group">
+              <div class="w-10 h-10 bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-primary transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              </div>
+              <div>
+                <p class="text-[8px] font-black text-slate-400 uppercase tracking-widest">Global Inquiry</p>
+                <p class="text-xs font-black text-slate-900">info@skyrainbow.com.cn</p>
+              </div>
+            </a>
+          </div>
+
+          <%= link_to contact_path, class: "mt-4 block w-full text-center py-4 bg-primary text-white font-black text-[10px] tracking-[0.2em] uppercase transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]" do %>
+            Request Factory Quote
           <% end %>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 推荐产品 -->
+  <!-- 推荐产品 (工业风) -->
   <%
     all_in_cat = @sku.category.skus.where(status: 'active').order(position: :asc, created_at: :desc).to_a
     cur_idx    = all_in_cat.index { |s| s.id == @sku.id }
     related    = []
     if cur_idx
+      # 获取前后各几个
       related << all_in_cat[cur_idx - 1] if cur_idx > 0
       related << all_in_cat[cur_idx + 1] if cur_idx + 1 < all_in_cat.length
       related << all_in_cat[cur_idx + 2] if cur_idx + 2 < all_in_cat.length
+      # 如果不够 3 个，尝试从头部补
+      if related.length < 3
+        all_in_cat.each do |s|
+          next if s.id == @sku.id || related.include?(s)
+          related << s
+          break if related.length >= 4
+        end
+      end
     end
     related.compact!
   %>
   <% if related.any? %>
-    <div class="mt-16">
-      <div class="flex items-center gap-4 mb-8">
-        <h2 class="text-2xl font-black text-slate-900 tracking-tight">You May Also Like</h2>
-        <div class="h-0.5 flex-1 bg-slate-100 rounded-full"></div>
+    <div class="mt-20">
+      <div class="flex items-center justify-between mb-10 border-b border-slate-100 pb-6">
+        <h2 class="text-xl font-black text-slate-900 tracking-widest uppercase">Related Equipment</h2>
+        <div class="flex space-x-1">
+          <div class="w-12 h-1 bg-primary"></div>
+          <div class="w-4 h-1 bg-slate-200"></div>
+        </div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <% related.each do |s| %>
-          <%= link_to sku_path(s), class: "group bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden" do %>
-            <div class="aspect-square overflow-hidden bg-slate-50">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <% related.take(4).each do |s| %>
+          <%= link_to sku_path(s), class: "group bg-white border border-slate-200 hover:border-primary transition-all duration-300 flex flex-col h-full" do %>
+            <div class="aspect-square overflow-hidden bg-slate-50 border-b border-slate-100">
               <% if s.images.attached? %>
                 <% begin %>
-                  <%= image_tag s.sorted_images.first.variant(resize_to_limit: [600, 600], saver: { quality: 80 }),
-                                class: "w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500" %>
-                <% rescue ArgumentError, ActiveStorage::InvariableError %>
-                  <div class="w-full h-full flex items-center justify-center text-slate-300 text-xs">No Image</div>
+                  <%= image_tag s.sorted_images.first.variant(resize_to_limit: [600, 600]),
+                                class: "w-full h-full object-contain p-6 group-hover:scale-110 transition-transform duration-500" %>
+                <% rescue %>
+                  <div class="w-full h-full flex items-center justify-center text-slate-200">No Image</div>
                 <% end %>
-              <% else %>
-                <div class="w-full h-full flex items-center justify-center bg-slate-100">
-                  <svg class="w-16 h-16 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                </div>
               <% end %>
             </div>
-            <div class="p-5">
-              <p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1"><%= s.category.localized_name %></p>
-              <h3 class="font-black text-slate-900 text-sm leading-tight group-hover:text-primary transition-colors"><%= s.name %></h3>
+            <div class="p-6 bg-white">
+              <p class="text-[8px] font-black text-primary uppercase tracking-[0.2em] mb-2"><%= s.category.localized_name %></p>
+              <h3 class="font-black text-slate-900 text-xs leading-tight uppercase group-hover:text-primary transition-colors line-clamp-2"><%= s.name %></h3>
             </div>
           <% end %>
         <% end %>

@@ -58,7 +58,7 @@
             <th class="px-6 py-4 text-sm font-semibold text-slate-700">排序</th>
             <th class="px-6 py-4 text-sm font-semibold text-slate-700">名称</th>
             <th class="px-6 py-4 text-sm font-semibold text-slate-700">分类</th>
-            <th class="px-6 py-4 text-sm font-semibold text-slate-700">核心规格</th>
+            <th class="px-6 py-4 text-sm font-semibold text-slate-700">描述摘要</th>
             <th class="px-6 py-4 text-sm font-semibold text-slate-700 text-center">状态</th>
             <th class="px-6 py-4 text-sm font-semibold text-slate-700 text-right">操作</th>
           </tr>
@@ -95,16 +95,12 @@
               <td class="px-6 py-4 text-sm font-medium text-slate-800"><%= sku.name %></td>
               <td class="px-6 py-4 text-sm text-slate-600"><%= sku.category.localized_name %></td>
               <td class="px-6 py-4 text-sm text-slate-600">
-                <% if sku.voltage_power.present? %>
-                  <span class="block text-xs text-slate-500 uppercase font-bold tracking-wider"><%= t('skus.voltage_power') %></span>
-                  <span class="block mb-1"><%= sku.voltage_power %></span>
-                <% end %>
-                <% if sku.capacity_dimensions.present? %>
-                  <span class="block text-xs text-slate-500 uppercase font-bold tracking-wider"><%= t('skus.capacity_dimensions') %></span>
-                  <span class="block"><%= sku.capacity_dimensions %></span>
-                <% end %>
-                <% if sku.voltage_power.blank? && sku.capacity_dimensions.blank? %>
-                  <span class="text-slate-400 italic">No specs</span>
+                <% if sku.standard_features.present? %>
+                  <div class="text-xs text-slate-500 line-clamp-2">
+                    <%= strip_tags(sku.standard_features.to_s).truncate(100) %>
+                  </div>
+                <% else %>
+                  <span class="text-slate-400 italic text-xs">No description</span>
                 <% end %>
               </td>
               <td class="px-6 py-4 text-sm text-center">

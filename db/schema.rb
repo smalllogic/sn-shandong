@@ -10,19 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_20_162500) do
-  create_table "a_sku_details", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "net_capacity"
-    t.string "packaging_dimensions"
-    t.text "standard_features"
-    t.text "standard_features_zh"
-    t.string "temp_range"
-    t.string "unit_dimensions"
-    t.datetime "updated_at", null: false
-    t.string "voltage_frequency"
-  end
-
+ActiveRecord::Schema[8.1].define(version: 2026_08_21_162600) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -61,43 +49,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_20_162500) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
-  create_table "b_sku_details", force: :cascade do |t|
-    t.string "burners_and_control_method"
-    t.datetime "created_at", null: false
-    t.string "exterior_dimensions"
-    t.string "gas_type"
-    t.string "intake_tube_pressure"
-    t.string "per_btu"
-    t.string "regulator"
-    t.text "standard_features"
-    t.text "standard_features_zh"
-    t.string "total_btu"
-    t.string "unit_dimensions"
-    t.datetime "updated_at", null: false
-    t.string "work_area"
-  end
-
-  create_table "c_sku_details", force: :cascade do |t|
-    t.string "burners_and_control_method"
-    t.datetime "created_at", null: false
-    t.string "exterior_dimensions"
-    t.string "faucet_and_drain"
-    t.string "gas_type"
-    t.string "intake_tube_pressure"
-    t.string "leg_bracing"
-    t.string "per_btu"
-    t.string "product_dimensions"
-    t.string "regulator"
-    t.string "sink_bowl_dimensions"
-    t.string "sink_depth"
-    t.text "standard_features"
-    t.text "standard_features_zh"
-    t.string "total_btu"
-    t.string "unit_dimensions"
-    t.datetime "updated_at", null: false
-    t.string "work_area"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -196,6 +147,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_20_162500) do
     t.string "country"
     t.datetime "created_at", null: false
     t.string "email"
+    t.text "message"
     t.string "name"
     t.string "phone"
     t.string "status"
@@ -248,26 +200,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_20_162500) do
   end
 
   create_table "skus", force: :cascade do |t|
-    t.string "carton_size"
     t.integer "category_id", null: false
-    t.string "color"
     t.datetime "created_at", null: false
-    t.string "gross_weight"
-    t.string "material"
     t.text "meta_description"
     t.string "meta_keywords"
     t.string "meta_title"
-    t.string "moq"
     t.string "name"
-    t.string "packing"
     t.integer "position", default: 0, null: false
     t.decimal "price", precision: 10, scale: 2
-    t.string "product_name"
-    t.string "production_lead_time"
-    t.string "sample_time"
-    t.string "specification"
     t.json "specifications", default: {}
-    t.text "standard_features"
     t.string "status", default: "draft"
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_skus_on_category_id"

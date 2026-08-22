@@ -80,7 +80,13 @@
         <%= f.file_field :image, class: "w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" %>
         <% if @category.image.attached? && @category.image.persisted? %>
           <div class="mt-2">
-            <%= image_tag @category.image.variant(:thumb), class: "w-32 h-32 object-cover rounded-lg border" %>
+            <% if @category.image.variable? %>
+              <%= image_tag @category.image.variant(:thumb), class: "w-32 h-32 object-cover rounded-lg border" %>
+            <% else %>
+              <div class="w-32 h-32 bg-slate-100 rounded border flex items-center justify-center text-[10px] text-slate-500 text-center p-2">
+                非图片格式 (<%= @category.image.content_type %>)
+              </div>
+            <% end %>
           </div>
         <% end %>
       </div>
@@ -90,7 +96,13 @@
         <%= f.file_field :banner, class: "w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" %>
         <% if @category.banner.attached? && @category.banner.persisted? %>
           <div class="mt-2">
-            <%= image_tag @category.banner.variant(:large), class: "w-full h-32 object-cover rounded-lg border" %>
+            <% if @category.banner.variable? %>
+              <%= image_tag @category.banner.variant(:large), class: "w-full h-32 object-cover rounded-lg border" %>
+            <% else %>
+              <div class="p-4 bg-slate-100 rounded text-xs text-slate-500">
+                文件格式不可预览 (<%= @category.banner.content_type %>)
+              </div>
+            <% end %>
           </div>
         <% end %>
       </div>

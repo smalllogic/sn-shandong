@@ -2,7 +2,7 @@ zh-CN:
   navbar:
     search_placeholder: "搜索产品..."
     all_products: "产品中心"
-    factory: "工厂实力"
+    factory: "关于我们"
     factory_experience: "工厂体验"
     customize: "定制服务"
     blog: "LATEST INFORMATION"
@@ -81,6 +81,18 @@ zh-CN:
       more_questions_title: "还有其他问题吗？"
       more_questions_desc: "如果您没能找到想要的答案，请随时联系我们的客户服务团队。"
       inquiry_cta: "发送询价"
+    branches:
+      china: "中国总部"
+      france: "法国分公司"
+      germany: "德国分公司"
+      italy: "意大利分公司"
+      czech: "捷克分公司"
+      uae: "迪拜分公司"
+      usa: "美国分公司"
+      global_hub: "全球总部"
+      europe: "欧洲"
+      middle_east: "中东"
+      north_america: "北美"
     contact_us: "联系我们"
   categories:
     all_products: "产品中心"

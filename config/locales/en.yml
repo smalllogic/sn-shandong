@@ -33,7 +33,7 @@ en:
     all_products: "Products"
     home: "Home"
     custom: "OEM/ODM"
-    factory: "Factory"
+    factory: "About us"
     customize: "OEM Service"
     factory_experience: "Factory Experience"
     hero:
@@ -154,6 +154,17 @@ en:
       more_questions_title: "Still have questions?"
       more_questions_desc: "If you cannot find the answer you are looking for, please feel free to contact our customer service team."
       inquiry_cta: "Send Inquiry"
+    branches:
+      china: "China HQ"
+      france: "France"
+      germany: "Germany"
+      czech: "Czech"
+      uae: "UAE"
+      usa: "USA"
+      global_hub: "GLOBAL HUB"
+      europe: "EUROPE"
+      middle_east: "MIDDLE EAST"
+      north_america: "NORTH AMERICA"
     contact_us: "Contact Us"
     contact:
       title: "Contact Us"

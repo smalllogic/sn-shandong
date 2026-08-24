@@ -301,13 +301,12 @@
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <% [
-                { name: "China HQ", addr: "Industrial Park, Pangjia Town, Boxing County, Binzhou, Shandong", icon: "🇨🇳" },
-                { name: "France Branch", addr: "Athis Mons, France", icon: "🇫🇷" },
-                { name: "Germany Branch", addr: "Germany", icon: "🇩🇪" },
-                { name: "Italy Branch", addr: "Italy", icon: "🇮🇹" },
-                { name: "Czech Branch", addr: "Czech Republic", icon: "🇨🇿" },
-                { name: "UAE Branch", addr: "Sharjah, UAE", icon: "🇦🇪" },
-                { name: "USA Branch", addr: "Norcross, GA, USA", icon: "🇺🇸" }
+                { name: t('home.branches.china'), addr: "Industrial Park, Pangjia Town, Boxing County, Binzhou, Shandong", icon: "🇨🇳" },
+                { name: t('home.branches.france'), addr: "Athis Mons, France", icon: "🇫🇷" },
+                { name: t('home.branches.germany'), addr: "Germany", icon: "🇩🇪" },
+                { name: t('home.branches.czech'), addr: "Czech Republic", icon: "🇨🇿" },
+                { name: t('home.branches.uae'), addr: "Sharjah, UAE", icon: "🇦🇪" },
+                { name: t('home.branches.usa'), addr: "Norcross, GA, USA", icon: "🇺🇸" }
               ].each do |branch| %>
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 group hover:bg-white hover:shadow-lg transition-all">
                   <div class="flex items-center gap-2 mb-2">

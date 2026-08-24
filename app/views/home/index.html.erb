@@ -27,7 +27,7 @@
         
         <p class="text-xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed font-medium">
           Premium commercial equipment manufactured with industrial precision. 
-          <span class="text-white/60">5 Strategic Global Hubs. Serving 100+ Countries.</span>
+          <span class="text-white/60">6 Strategic Global Hubs. Serving 100+ Countries.</span>
         </p>
       </div>
       
@@ -43,17 +43,16 @@
         </div>
 
         <!-- 5 Branches Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 max-w-6xl mx-auto w-full">
+        <div class="flex flex-wrap justify-center gap-4 max-w-6xl mx-auto w-full">
           <% [
-            { name: "China HQ", addr: "Boxing, CN", flag: "🇨🇳", tag: "GLOBAL HUB" },
-            { name: "France", addr: "Paris, FR", flag: "🇫🇷", tag: "EUROPE" },
-            { name: "Germany", addr: "Munich, DE", flag: "🇩🇪", tag: "EUROPE" },
-            { name: "Italy", addr: "IT", flag: "🇮🇹", tag: "EUROPE" },
-            { name: "Czech", addr: "CZ", flag: "🇨🇿", tag: "EUROPE" },
-            { name: "UAE", addr: "Sharjah, UAE", flag: "🇦🇪", tag: "MIDDLE EAST" },
-            { name: "USA", addr: "Georgia, US", flag: "🇺🇸", tag: "NORTH AMERICA" }
+            { name: t('home.branches.china'), addr: "Boxing, CN", flag: "🇨🇳", tag: t('home.branches.global_hub') },
+            { name: t('home.branches.france'), addr: "Paris, FR", flag: "🇫🇷", tag: t('home.branches.europe') },
+            { name: t('home.branches.germany'), addr: "Munich, DE", flag: "🇩🇪", tag: t('home.branches.europe') },
+            { name: t('home.branches.czech'), addr: "CZ", flag: "🇨🇿", tag: t('home.branches.europe') },
+            { name: t('home.branches.uae'), addr: "Sharjah, UAE", flag: "🇦🇪", tag: t('home.branches.middle_east') },
+            { name: t('home.branches.usa'), addr: "Georgia, US", flag: "🇺🇸", tag: t('home.branches.north_america') }
           ].each do |branch| %>
-            <div class="bg-white/[0.03] p-4 rounded-xl border border-white/5 hover:border-accent/30 transition-all group backdrop-blur-sm relative overflow-hidden">
+            <div class="bg-white/[0.03] p-4 rounded-xl border border-white/5 hover:border-accent/30 transition-all group backdrop-blur-sm relative overflow-hidden w-full sm:w-[calc(50%-1rem)] md:w-[calc(33.33%-1rem)] lg:w-[calc(16.66%-1rem)] min-w-[160px]">
               <div class="flex justify-between items-center mb-4">
                 <div class="text-[9px] font-black text-accent tracking-tighter uppercase"><%= branch[:tag] %></div>
                 <div class="flex items-center gap-2">
@@ -84,7 +83,6 @@
         usa:     [33.941, -84.214],
         france:  [48.707, 2.389],
         germany: [48.266, 10.985],
-        italy:   [41.8719, 12.5674],
         czech:   [49.8175, 15.4730],
         uae:     [25.340, 55.400]
       }
@@ -107,7 +105,6 @@
           { location: locations.usa, size: 0.08 },
           { location: locations.france, size: 0.08 },
           { location: locations.germany, size: 0.08 },
-          { location: locations.italy, size: 0.08 },
           { location: locations.czech, size: 0.08 },
           { location: locations.uae, size: 0.08 }
         ],
@@ -126,6 +123,7 @@
             { location: locations.usa, size: 0.1 * scale, color: [0.2, 1, 0.4] },
             { location: locations.france, size: 0.1 * scale, color: [0.2, 1, 0.4] },
             { location: locations.germany, size: 0.1 * scale, color: [0.2, 1, 0.4] },
+            { location: locations.czech, size: 0.1 * scale, color: [0.2, 1, 0.4] },
             { location: locations.uae, size: 0.1 * scale, color: [0.2, 1, 0.4] }
           ]
         }

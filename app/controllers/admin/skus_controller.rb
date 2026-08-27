@@ -72,6 +72,7 @@ class Admin::SkusController < Admin::BaseController
   def create
     begin
       filtered_params = sku_params
+      process_specifications(filtered_params)
       # 提取图片位置信息，并从 filtered_params 中删除，防止 UnknownAttributeError
       image_positions = filtered_params.delete(:image_positions)
       
@@ -103,6 +104,7 @@ class Admin::SkusController < Admin::BaseController
   def update
     begin
       filtered_params = sku_params
+      process_specifications(filtered_params)
       # 提取图片位置信息，并从 filtered_params 中删除，防止 UnknownAttributeError
       image_positions = filtered_params.delete(:image_positions)
 
@@ -206,7 +208,21 @@ class Admin::SkusController < Admin::BaseController
       :name, :category_id, :price, :status, :position,
       :standard_features,
       :meta_title, :meta_description, :meta_keywords,
-      images: [], image_positions: {}
+      images: [], image_positions: {},
+      specifications: [:key, :value]
     )
+  end
+
+  def process_specifications(filtered_params)
+    specs = filtered_params.delete(:specifications)
+    if specs.is_a?(Array)
+      processed_specs = {}
+      specs.each do |s|
+        key = s[:key].to_s.strip
+        value = s[:value].to_s.strip
+        processed_specs[key] = value if key.present?
+      end
+      filtered_params[:specifications] = processed_specs
+    end
   end
 end

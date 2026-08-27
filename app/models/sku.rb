@@ -19,6 +19,8 @@ class Sku < ApplicationRecord
   validate :images_must_be_bmp_or_png_jpg_images
 
   # specifications 字段保留但目前没有映射的 accessors
+  # 使用 store_accessor 映射 specifications 中的字段，或者使用 jsonb 的灵活特性
+  store_accessor :specifications
 
   private
 

@@ -27,7 +27,7 @@
         
         <p class="text-xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed font-medium">
           Premium commercial equipment manufactured with industrial precision. 
-          <span class="text-white/60">6 Strategic Global Hubs. Serving 100+ Countries.</span>
+          <span class="text-white/60">9 Strategic Global Hubs. Serving 100+ Countries.</span>
         </p>
       </div>
       
@@ -48,11 +48,14 @@
             { name: t('home.branches.china'), addr: "Boxing, CN", flag: "🇨🇳", tag: t('home.branches.global_hub') },
             { name: t('home.branches.france'), addr: "Paris, FR", flag: "🇫🇷", tag: t('home.branches.europe') },
             { name: t('home.branches.germany'), addr: "Munich, DE", flag: "🇩🇪", tag: t('home.branches.europe') },
-            { name: t('home.branches.czech'), addr: "CZ", flag: "🇨🇿", tag: t('home.branches.europe') },
+            { name: t('home.branches.czech'), addr: "Czech Republic", flag: "🇨🇿", tag: t('home.branches.europe') },
+            { name: t('home.branches.spain'), addr: "Madrid, ES", flag: "🇪🇸", tag: t('home.branches.europe') },
+            { name: t('home.branches.uk'), addr: "London, UK", flag: "🇬🇧", tag: t('home.branches.europe') },
+            { name: t('home.branches.australia'), addr: "Sydney, AU", flag: "🇦🇺", tag: t('home.branches.global_hub') },
             { name: t('home.branches.uae'), addr: "Sharjah, UAE", flag: "🇦🇪", tag: t('home.branches.middle_east') },
             { name: t('home.branches.usa'), addr: "Georgia, US", flag: "🇺🇸", tag: t('home.branches.north_america') }
           ].each do |branch| %>
-            <div class="bg-white/[0.03] p-4 rounded-xl border border-white/5 hover:border-accent/30 transition-all group backdrop-blur-sm relative overflow-hidden w-full sm:w-[calc(50%-1rem)] md:w-[calc(33.33%-1rem)] lg:w-[calc(16.66%-1rem)] min-w-[160px]">
+            <div class="bg-white/[0.03] p-4 rounded-xl border border-white/5 hover:border-accent/30 transition-all group backdrop-blur-sm relative overflow-hidden w-full sm:w-[calc(50%-1rem)] md:w-[calc(33.33%-1rem)] lg:w-[calc(20%-1rem)] min-w-[160px]">
               <div class="flex justify-between items-center mb-4">
                 <div class="text-[9px] font-black text-accent tracking-tighter uppercase"><%= branch[:tag] %></div>
                 <div class="flex items-center gap-2">

@@ -176,13 +176,14 @@
         <!-- Path Line -->
         <div class="hidden lg:block absolute top-24 left-0 w-full h-1 bg-slate-200"></div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-12 relative z-10">
           <% [
-            { step: "01", name: "Sheet Metal", desc: "Precision fabrication workshop." },
-            { step: "02", name: "SS & Sink", desc: "Stainless steel products workshop." },
-            { step: "03", name: "Western Kitchen", desc: "Specialized western cooking equipment." },
-            { step: "04", name: "Food Machinery", desc: "Advanced food processing machinery." },
-            { step: "05", name: "Assembly", desc: "Modern assembly & testing center." }
+            { step: "01", name: "SS Coils", desc: "Raw material stainless steel coils." },
+            { step: "02", name: "Sheet Metal", desc: "Precision fabrication workshop." },
+            { step: "03", name: "Laser Cutting", desc: "High-precision laser cutting center." },
+            { step: "04", name: "Bending", desc: "Advanced CNC bending process." },
+            { step: "05", name: "Assembly", desc: "Modern assembly & testing center." },
+            { step: "06", name: "Packaging", desc: "Secure export-standard packaging." }
           ].each do |proc| %>
             <div class="flex flex-col items-center text-center group">
               <div class="w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center text-xl font-black text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-all transform group-hover:-translate-y-2 border border-slate-100">

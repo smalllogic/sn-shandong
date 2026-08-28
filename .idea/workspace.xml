@@ -6,11 +6,33 @@
   <component name="ChangeListManager">
     <list default="true" id="69105836-b536-45f9-8b97-f315a7f5c2b5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/admin/skus_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/admin/skus_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/sku.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/sku.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/skus/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/skus/_form.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/skus/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/skus/show.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/admin/home_products_controller.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/admin/home_settings_controller.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/admin/partners_controller.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/home_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/home_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/home_product.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/partner.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/home_products/_form.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/home_products/edit.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/home_products/index.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/home_products/new.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/home_settings/edit.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/partners/_form.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/partners/create.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/partners/destroy.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/partners/edit.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/partners/index.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/partners/new.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/partners/update.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/shared/_sidebar.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/shared/_sidebar.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/development.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db/development.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20260716064457_create_home_products.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20260730181201_create_partners.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/controllers/admin/partners_controller_test.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/partners.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/models/partner_test.rb" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +40,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="367" />
+    <option name="cachedIndexableFilesCount" value="348" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -30,23 +52,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0237449545281507" />
-      <entry key="MS500" value="2.506924767637419" />
-      <entry key="S2" value="4.677991631951542" />
-      <entry key="S5" value="5.419509420649397" />
-      <entry key="S10" value="5.7003480719662" />
-      <entry key="S30" value="5.897946194239929" />
-      <entry key="S60" value="5.948696740808142" />
-      <entry key="M2" value="5.974278890551564" />
-      <entry key="M5" value="5.989694830774362" />
-      <entry key="M10" value="5.994850110659128" />
-      <entry key="M15" value="5.9975747725800925" />
-      <entry key="M30" value="6.243551080564507" />
-      <entry key="H1" value="11.90882192532518" />
-      <entry key="H2" value="42.01401663904719" />
-      <entry key="H4" value="100.27585576921125" />
-      <entry key="D1" value="222.2131459201821" />
-      <entry key="W1" value="255.88219014185015" />
+      <entry key="MS100" value="1.0099390999224915" />
+      <entry key="MS500" value="2.100714396528625" />
+      <entry key="S2" value="4.539535445511694" />
+      <entry key="S5" value="5.795022882909001" />
+      <entry key="S10" value="6.351143752609707" />
+      <entry key="S30" value="6.772300191408275" />
+      <entry key="S60" value="6.884647200573498" />
+      <entry key="M2" value="6.941941897577019" />
+      <entry key="M5" value="6.976690446894391" />
+      <entry key="M10" value="6.993272519601198" />
+      <entry key="M15" value="7.039384074759431" />
+      <entry key="M30" value="7.513058021082003" />
+      <entry key="H1" value="9.722520038801612" />
+      <entry key="H2" value="23.768947290878298" />
+      <entry key="H4" value="68.8960557163102" />
+      <entry key="D1" value="214.15691161357802" />
+      <entry key="W1" value="263.6314578554999" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -68,23 +90,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.8868379626574793" />
-      <entry key="MS500" value="2.4384170430900736" />
-      <entry key="S2" value="4.642675629394531" />
-      <entry key="S5" value="5.4027510504222604" />
-      <entry key="S10" value="5.691463794743918" />
-      <entry key="S30" value="5.894865650524733" />
-      <entry key="S60" value="5.9471411300926595" />
-      <entry key="M2" value="5.973497216042397" />
-      <entry key="M5" value="5.989381227934289" />
-      <entry key="M10" value="5.994693152821145" />
-      <entry key="M15" value="5.997470015872649" />
-      <entry key="M30" value="6.243484563952317" />
-      <entry key="H1" value="11.908619213338902" />
-      <entry key="H2" value="42.013512745257465" />
-      <entry key="H4" value="100.27525442479403" />
-      <entry key="D1" value="222.21293469714297" />
-      <entry key="W1" value="255.88215580002074" />
+      <entry key="MS100" value="0.8561619866079121" />
+      <entry key="MS500" value="2.0574729209279683" />
+      <entry key="S2" value="4.520437162322742" />
+      <entry key="S5" value="5.785162744536659" />
+      <entry key="S10" value="6.345684436347632" />
+      <entry key="S30" value="6.77034272333888" />
+      <entry key="S60" value="6.883649830796591" />
+      <entry key="M2" value="6.941438439983352" />
+      <entry key="M5" value="6.976487903133666" />
+      <entry key="M10" value="6.993170889178852" />
+      <entry key="M15" value="7.0393153485245366" />
+      <entry key="M30" value="7.513018469573339" />
+      <entry key="H1" value="9.722471768996098" />
+      <entry key="H2" value="23.768758807304057" />
+      <entry key="H4" value="68.8956942513489" />
+      <entry key="D1" value="214.15671674476766" />
+      <entry key="W1" value="263.63142371461186" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -96,31 +118,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.ruby.rubocop.migration.global.runOnSaveToExternalFormatter": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP": "1787798926654",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "junie.plugin.stays.banner.dismissed": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ruby.structure.view.model.defaults.configured": "true",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ruby.rubocop.migration.global.runOnSaveToExternalFormatter&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP&quot;: &quot;1787798926654&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ruby.structure.view.model.defaults.configured&quot;: &quot;true&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/assets/images" />
@@ -231,7 +253,8 @@
       <workItem from="1787639450499" duration="4000" />
       <workItem from="1787639473523" duration="4430000" />
       <workItem from="1787646846179" duration="90000" />
-      <workItem from="1787798860608" duration="9110000" />
+      <workItem from="1787798860608" duration="15550000" />
+      <workItem from="1787872804999" duration="2347000" />
     </task>
     <servers />
   </component>

@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   post "contact", to: "home#create_contact"
 
   namespace :admin do
-    resources :partners
     root to: "dashboard#index"
     get "dashboard", to: "dashboard#index"
     resources :categories
@@ -46,8 +45,6 @@ Rails.application.routes.draw do
       end
     end
     resource :site_config, only: [:edit, :update]
-    resource :home_settings, only: [:edit, :update]
-    resources :home_products
     resources :users, only: [:index, :edit, :update, :destroy] do
       member do
         patch :promote

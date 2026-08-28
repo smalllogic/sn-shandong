@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_21_162600) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_27_181500) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -98,16 +98,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_21_162600) do
     t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "home_products", force: :cascade do |t|
-    t.boolean "active"
-    t.datetime "created_at", null: false
-    t.string "link"
-    t.integer "position"
-    t.integer "row"
-    t.string "title"
-    t.datetime "updated_at", null: false
-  end
-
   create_table "login_logs", force: :cascade do |t|
     t.string "city"
     t.string "country"
@@ -151,12 +141,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_21_162600) do
     t.string "name"
     t.string "phone"
     t.string "status"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "partners", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "name"
     t.datetime "updated_at", null: false
   end
 

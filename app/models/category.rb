@@ -95,11 +95,75 @@ class Category < ApplicationRecord
   def localized_name
     case I18n.locale.to_sym
     when :en
-      name
+      name_en.presence || name
+    when :it
+      name_it.presence || name
+    when :fr
+      name_fr.presence || name
     when :"zh-CN", :zh
       name_zh.presence || name
     else
       name
+    end
+  end
+
+  def localized_meta_title
+    case I18n.locale.to_sym
+    when :en
+      meta_title_en.presence || meta_title
+    when :it
+      meta_title_it.presence || meta_title
+    when :fr
+      meta_title_fr.presence || meta_title
+    when :"zh-CN", :zh
+      meta_title_zh.presence || meta_title
+    else
+      meta_title
+    end
+  end
+
+  def localized_meta_description
+    case I18n.locale.to_sym
+    when :en
+      meta_description_en.presence || meta_description
+    when :it
+      meta_description_it.presence || meta_description
+    when :fr
+      meta_description_fr.presence || meta_description
+    when :"zh-CN", :zh
+      meta_description_zh.presence || meta_description
+    else
+      meta_description
+    end
+  end
+
+  def localized_meta_keywords
+    case I18n.locale.to_sym
+    when :en
+      meta_keywords_en.presence || meta_keywords
+    when :it
+      meta_keywords_it.presence || meta_keywords
+    when :fr
+      meta_keywords_fr.presence || meta_keywords
+    when :"zh-CN", :zh
+      meta_keywords_zh.presence || meta_keywords
+    else
+      meta_keywords
+    end
+  end
+
+  def localized_keywords
+    case I18n.locale.to_sym
+    when :en
+      keywords_en.presence || keywords
+    when :it
+      keywords_it.presence || keywords
+    when :fr
+      keywords_fr.presence || keywords
+    when :"zh-CN", :zh
+      keywords_zh.presence || keywords
+    else
+      keywords
     end
   end
 

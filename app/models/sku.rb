@@ -12,15 +12,109 @@ class Sku < ApplicationRecord
     images_attachments.includes(:blob).order(:position, :created_at)
   end
   has_rich_text :standard_features
+  has_rich_text :standard_features_zh
+  has_rich_text :standard_features_it
+  has_rich_text :standard_features_fr
 
-  validates :name, presence: true
+  def localized_name
+    case I18n.locale.to_sym
+    when :en
+      name_en.presence || name
+    when :it
+      name_it.presence || name
+    when :fr
+      name_fr.presence || name
+    when :"zh-CN", :zh
+      name_zh.presence || name
+    else
+      name
+    end
+  end
+
+  def localized_meta_title
+    case I18n.locale.to_sym
+    when :en
+      meta_title_en.presence || meta_title
+    when :it
+      meta_title_it.presence || meta_title
+    when :fr
+      meta_title_fr.presence || meta_title
+    when :"zh-CN", :zh
+      meta_title_zh.presence || meta_title
+    else
+      meta_title
+    end
+  end
+
+  def localized_meta_description
+    case I18n.locale.to_sym
+    when :en
+      meta_description_en.presence || meta_description
+    when :it
+      meta_description_it.presence || meta_description
+    when :fr
+      meta_description_fr.presence || meta_description
+    when :"zh-CN", :zh
+      meta_description_zh.presence || meta_description
+    else
+      meta_description
+    end
+  end
+
+  def localized_meta_keywords
+    case I18n.locale.to_sym
+    when :en
+      meta_keywords_en.presence || meta_keywords
+    when :it
+      meta_keywords_it.presence || meta_keywords
+    when :fr
+      meta_keywords_fr.presence || meta_keywords
+    when :"zh-CN", :zh
+      meta_keywords_zh.presence || meta_keywords
+    else
+      meta_keywords
+    end
+  end
+
+  def localized_standard_features
+    case I18n.locale.to_sym
+    when :en
+      standard_features
+    when :it
+      standard_features_it.presence || standard_features
+    when :fr
+      standard_features_fr.presence || standard_features
+    when :"zh-CN", :zh
+      standard_features_zh.presence || standard_features
+    else
+      standard_features
+    end
+  end
+
+  def localized_specifications
+    return [] unless specifications.is_a?(Array)
+    
+    specifications.map do |spec|
+      case I18n.locale.to_sym
+      when :en
+        { key: spec['key'], value: spec['value'] }
+      when :it
+        { key: spec['key_it'].presence || spec['key'], value: spec['value_it'].presence || spec['value'] }
+      when :fr
+        { key: spec['key_fr'].presence || spec['key'], value: spec['value_fr'].presence || spec['value'] }
+      when :"zh-CN", :zh
+        { key: spec['key_zh'].presence || spec['key'], value: spec['value_zh'].presence || spec['value'] }
+      else
+        { key: spec['key'], value: spec['value'] }
+      end
+    end.reject { |s| s[:key].blank? }
+  end
   validates :position, numericality: { only_integer: true }
   validate :category_must_be_leaf
   validate :images_must_be_bmp_or_png_jpg_images
 
-  # specifications 字段保留但目前没有映射的 accessors
-  # 使用 store_accessor 映射 specifications 中的字段，或者使用 jsonb 的灵活特性
-  store_accessor :specifications
+  # specifications 字段保留，作为 JSON 数组存储
+  # 不再使用 store_accessor，因为内容是动态且多语言的数组
 
   private
 

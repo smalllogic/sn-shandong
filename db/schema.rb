@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_27_181500) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_29_120000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -58,10 +58,29 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_27_181500) do
     t.integer "featured_position", default: 0
     t.boolean "hidden", default: false, null: false
     t.string "keywords"
+    t.string "keywords_en"
+    t.string "keywords_fr"
+    t.string "keywords_it"
+    t.string "keywords_zh"
     t.text "meta_description"
+    t.text "meta_description_en"
+    t.text "meta_description_fr"
+    t.text "meta_description_it"
+    t.text "meta_description_zh"
     t.string "meta_keywords"
+    t.string "meta_keywords_en"
+    t.string "meta_keywords_fr"
+    t.string "meta_keywords_it"
+    t.string "meta_keywords_zh"
     t.string "meta_title"
+    t.string "meta_title_en"
+    t.string "meta_title_fr"
+    t.string "meta_title_it"
+    t.string "meta_title_zh"
     t.string "name"
+    t.string "name_en"
+    t.string "name_fr"
+    t.string "name_it"
     t.string "name_zh"
     t.integer "parent_id"
     t.integer "position"
@@ -187,9 +206,25 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_27_181500) do
     t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.text "meta_description"
+    t.text "meta_description_en"
+    t.text "meta_description_fr"
+    t.text "meta_description_it"
+    t.text "meta_description_zh"
     t.string "meta_keywords"
+    t.string "meta_keywords_en"
+    t.string "meta_keywords_fr"
+    t.string "meta_keywords_it"
+    t.string "meta_keywords_zh"
     t.string "meta_title"
+    t.string "meta_title_en"
+    t.string "meta_title_fr"
+    t.string "meta_title_it"
+    t.string "meta_title_zh"
     t.string "name"
+    t.string "name_en"
+    t.string "name_fr"
+    t.string "name_it"
+    t.string "name_zh"
     t.integer "position", default: 0, null: false
     t.decimal "price", precision: 10, scale: 2
     t.json "specifications", default: {}

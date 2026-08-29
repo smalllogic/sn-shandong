@@ -225,6 +225,7 @@ zh-CN:
     faqs: { title: "常见问题｜Sinower", description: "关于 Sinower 产品、制造、定制、质量控制与合作的解答。" }
     privacy: { title: "隐私政策｜Sinower", description: "了解 Sinower 如何收集、使用和保护个人信息。" }
   navbar:
+    search_placeholder: "搜索产品..."
     home: "首页"
     factory: "关于我们"
     blog: "资讯"

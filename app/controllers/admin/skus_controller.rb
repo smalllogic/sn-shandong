@@ -67,6 +67,7 @@ class Admin::SkusController < Admin::BaseController
   end
 
   def edit
+    normalize_specifications
   end
 
   def create
@@ -103,6 +104,7 @@ class Admin::SkusController < Admin::BaseController
 
   def update
     begin
+      normalize_specifications
       filtered_params = sku_params
       process_specifications(filtered_params)
       # 提取图片位置信息，并从 filtered_params 中删除，防止 UnknownAttributeError
@@ -203,24 +205,53 @@ class Admin::SkusController < Admin::BaseController
     @sku = Sku.find(params[:id])
   end
 
+  def normalize_specifications
+    return unless @sku && @sku.specifications.is_a?(Hash)
+    
+    # 将旧的 Hash 格式 {"key" => "value"} 转换为新格式 [{"key" => "key", "value" => "value", ...}]
+    new_specs = @sku.specifications.map do |k, v|
+      {
+        'key' => k,
+        'value' => v,
+        'key_zh' => '', 'value_zh' => '',
+        'key_it' => '', 'value_it' => '',
+        'key_fr' => '', 'value_fr' => ''
+      }
+    end
+    @sku.specifications = new_specs
+  end
+
   def sku_params
     params.require(:sku).permit(
-      :name, :category_id, :price, :status, :position,
-      :standard_features,
-      :meta_title, :meta_description, :meta_keywords,
+      :name, :name_zh, :name_en, :name_it, :name_fr,
+      :category_id, :price, :status, :position,
+      :standard_features, :standard_features_zh, :standard_features_it, :standard_features_fr,
+      :meta_title, :meta_title_zh, :meta_title_en, :meta_title_it, :meta_title_fr,
+      :meta_description, :meta_description_zh, :meta_description_en, :meta_description_it, :meta_description_fr,
+      :meta_keywords, :meta_keywords_zh, :meta_keywords_en, :meta_keywords_it, :meta_keywords_fr,
       images: [], image_positions: {},
-      specifications: [:key, :value]
+      specifications: [:key, :value, :key_zh, :value_zh, :key_it, :value_it, :key_fr, :value_fr]
     )
   end
 
   def process_specifications(filtered_params)
     specs = filtered_params.delete(:specifications)
     if specs.is_a?(Array)
-      processed_specs = {}
+      processed_specs = []
       specs.each do |s|
-        key = s[:key].to_s.strip
-        value = s[:value].to_s.strip
-        processed_specs[key] = value if key.present?
+        # 只要有一个语言的 key 有值，就保留这一行
+        if s[:key].present? || s[:key_zh].present? || s[:key_it].present? || s[:key_fr].present?
+          processed_specs << {
+            key: s[:key].to_s.strip,
+            value: s[:value].to_s.strip,
+            key_zh: s[:key_zh].to_s.strip,
+            value_zh: s[:value_zh].to_s.strip,
+            key_it: s[:key_it].to_s.strip,
+            value_it: s[:value_it].to_s.strip,
+            key_fr: s[:key_fr].to_s.strip,
+            value_fr: s[:value_fr].to_s.strip
+          }
+        end
       end
       filtered_params[:specifications] = processed_specs
     end

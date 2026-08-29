@@ -304,6 +304,7 @@ en:
       title: "Privacy Policy | Sinower"
       description: "Learn how Sinower collects, uses and protects personal information."
   navbar:
+    search_placeholder: "Search Products..."
     home: "Home"
     factory: "About us"
     blog: "News"

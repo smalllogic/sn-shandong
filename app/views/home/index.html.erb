@@ -206,28 +206,52 @@
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <% [
-          { name: t('home.index.categories.refrigeration.name'), image: "sinower-factory2.png", desc: t('home.index.categories.refrigeration.description') },
-          { name: t('home.index.categories.cooking.name'), image: "sinower-factory3.png", desc: t('home.index.categories.cooking.description') },
-          { name: t('home.index.categories.kitchenware.name'), image: "sinower-door.png", desc: t('home.index.categories.kitchenware.description') }
-        ].each do |cat| %>
-          <div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100">
-            <div class="h-64 overflow-hidden relative">
-              <% if File.exist?(Rails.root.join("app/assets/images/#{cat[:image]}")) %>
-                <%= image_tag cat[:image], class: "w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" %>
-              <% else %>
-                <div class="w-full h-full bg-slate-200"></div>
+        <% if @featured_categories.any? %>
+          <% @featured_categories.each do |cat| %>
+            <div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100">
+              <%= link_to channel_path(cat.category_kind, category_id: cat) do %>
+                <div class="h-64 overflow-hidden relative">
+                  <% if cat.image.attached? %>
+                    <%= image_tag cat.image.variant(:featured), class: "w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" %>
+                  <% else %>
+                    <div class="w-full h-full bg-slate-200"></div>
+                  <% end %>
+                  <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all"></div>
+                </div>
+                <div class="p-8 text-center">
+                  <h3 class="text-xl font-bold text-slate-900 group-hover:text-accent transition-colors"><%= cat.localized_name %></h3>
+                  <p class="text-slate-500 mt-2 text-xs font-black tracking-[0.2em] uppercase"><%= cat.localized_keywords.presence || "CUSTOM · OEM · ODM" %></p>
+                  <div class="mt-6 flex items-center justify-center text-slate-900 font-bold text-sm">
+                    <%= t('home.index.categories.view_products') %> <span class="ml-2 group-hover:translate-x-2 transition-transform text-accent">→</span>
+                  </div>
+                </div>
               <% end %>
-              <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all"></div>
             </div>
-            <div class="p-8">
-              <h3 class="text-xl font-bold text-slate-900 group-hover:text-accent transition-colors"><%= cat[:name] %></h3>
-              <p class="text-slate-500 mt-2 text-sm"><%= cat[:desc] %></p>
-              <div class="mt-6 flex items-center text-slate-900 font-bold text-sm">
-                <%= t('home.index.categories.view_products') %> <span class="ml-2 group-hover:translate-x-2 transition-transform text-accent">→</span>
+          <% end %>
+        <% else %>
+          <% [
+            { name: t('home.index.categories.refrigeration.name'), image: "sinower-factory2.png", desc: t('home.index.categories.refrigeration.description') },
+            { name: t('home.index.categories.cooking.name'), image: "sinower-factory3.png", desc: t('home.index.categories.cooking.description') },
+            { name: t('home.index.categories.kitchenware.name'), image: "sinower-door.png", desc: t('home.index.categories.kitchenware.description') }
+          ].each do |cat| %>
+            <div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100">
+              <div class="h-64 overflow-hidden relative">
+                <% if File.exist?(Rails.root.join("app/assets/images/#{cat[:image]}")) %>
+                  <%= image_tag cat[:image], class: "w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" %>
+                <% else %>
+                  <div class="w-full h-full bg-slate-200"></div>
+                <% end %>
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all"></div>
+              </div>
+              <div class="p-8">
+                <h3 class="text-xl font-bold text-slate-900 group-hover:text-accent transition-colors"><%= cat[:name] %></h3>
+                <p class="text-slate-500 mt-2 text-sm"><%= cat[:desc] %></p>
+                <div class="mt-6 flex items-center text-slate-900 font-bold text-sm">
+                  <%= t('home.index.categories.view_products') %> <span class="ml-2 group-hover:translate-x-2 transition-transform text-accent">→</span>
+                </div>
               </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
       </div>
     </div>

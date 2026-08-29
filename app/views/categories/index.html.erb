@@ -2,8 +2,8 @@
   # 优先从当前分类获取频道，如果没有则从 params 获取
   kind_val = @current_category ? @current_category.category_kind : @kind
 
-  title = if @current_category && @current_category.meta_title.present?
-            @current_category.meta_title
+  title = if @current_category && @current_category.localized_meta_title.present?
+            @current_category.localized_meta_title
           elsif @current_category 
             "#{@current_category.localized_name} - #{t('footer.company_name')}"
           elsif kind_val
@@ -15,15 +15,15 @@
           end
   content_for :title, title
   
-  description = if @current_category && @current_category.meta_description.present?
-                  @current_category.meta_description
+  description = if @current_category && @current_category.localized_meta_description.present?
+                  @current_category.localized_meta_description
                 else
                   t('categories.all_products_desc')
                 end
   content_for :meta_description, description
 
-  if @current_category && @current_category.meta_keywords.present?
-    content_for :meta_keywords, @current_category.meta_keywords
+  if @current_category && @current_category.localized_meta_keywords.present?
+    content_for :meta_keywords, @current_category.localized_meta_keywords
   end
 
   # 当前分类/频道的显示名称 —— 用于 Banner 上的动态文字
@@ -223,7 +223,7 @@
                   <div class="p-4 flex flex-col flex-grow bg-white border-t border-slate-50">
                     <div class="flex items-start justify-between mb-2">
                       <h3 class="text-xs font-black text-slate-900 group-hover:text-primary transition-colors duration-300 line-clamp-2 uppercase tracking-tight leading-tight flex-1">
-                        <%= sku.name %>
+                        <%= sku.localized_name %>
                       </h3>
                     </div>
                     
@@ -232,9 +232,9 @@
                     
                     <!-- 描述摘要 -->
                     <div class="mb-4">
-                      <% if sku.standard_features.present? %>
+                      <% if sku.localized_standard_features.present? %>
                         <div class="text-[10px] text-slate-500 line-clamp-2 font-medium leading-relaxed font-sans">
-                          <%= strip_tags(sku.standard_features.to_s).truncate(85) %>
+                          <%= strip_tags(sku.localized_standard_features.to_s).truncate(85) %>
                         </div>
                       <% end %>
                     </div>

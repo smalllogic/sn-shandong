@@ -6,6 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="69105836-b536-45f9-8b97-f315a7f5c2b5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/admin/categories_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/admin/categories_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/admin/skus_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/admin/skus_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/category.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/category.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/sku.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/sku.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/categories/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/categories/_form.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/shared/_seo_fields.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/shared/_seo_fields.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/skus/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/skus/_form.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/categories/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/categories/index.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/home/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/home/index.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/skus/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/skus/show.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/locales/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/en.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/locales/zh-CN.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/zh-CN.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/development.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db/development.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,7 +27,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="348" />
+    <option name="cachedIndexableFilesCount" value="353" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -25,23 +39,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.000244142871273" />
-      <entry key="MS500" value="1.2465506423347887" />
-      <entry key="S2" value="4.550784314007794" />
-      <entry key="S5" value="11.966533035260216" />
-      <entry key="S10" value="20.1456910753334" />
-      <entry key="S30" value="31.17479225567914" />
-      <entry key="S60" value="35.21818165366373" />
-      <entry key="M2" value="37.50765475088264" />
-      <entry key="M5" value="38.978959359457974" />
-      <entry key="M10" value="39.61389128462942" />
-      <entry key="M15" value="40.226939053747934" />
-      <entry key="M30" value="42.447121310206924" />
-      <entry key="H1" value="46.459588865890495" />
-      <entry key="H2" value="59.13594305548863" />
-      <entry key="H4" value="100.55970197522598" />
-      <entry key="D1" value="251.5277368061913" />
-      <entry key="W1" value="306.45437478299726" />
+      <entry key="MS100" value="1.009282682038627" />
+      <entry key="MS500" value="1.693265840604548" />
+      <entry key="S2" value="3.5887372738229675" />
+      <entry key="S5" value="4.7359526500897795" />
+      <entry key="S10" value="5.297273516194084" />
+      <entry key="S30" value="5.747271629905485" />
+      <entry key="S60" value="5.8711707935111646" />
+      <entry key="M2" value="5.942905020455284" />
+      <entry key="M5" value="6.8543901072804525" />
+      <entry key="M10" value="13.405360409101188" />
+      <entry key="M15" value="21.62115757564357" />
+      <entry key="M30" value="39.98363476189117" />
+      <entry key="H1" value="58.24700885666153" />
+      <entry key="H2" value="79.53064333322457" />
+      <entry key="H4" value="124.36390879690904" />
+      <entry key="D1" value="282.8673547182344" />
+      <entry key="W1" value="341.65066755906065" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -63,23 +77,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.05183290952566839" />
-      <entry key="MS500" value="0.6631882670867248" />
-      <entry key="S2" value="4.224372220173983" />
-      <entry key="S5" value="11.774565570278385" />
-      <entry key="S10" value="20.015794230230394" />
-      <entry key="S30" value="31.11533680943245" />
-      <entry key="S60" value="35.18542391478431" />
-      <entry key="M2" value="37.49041326450424" />
-      <entry key="M5" value="38.97184054520611" />
-      <entry key="M10" value="39.61028799009105" />
-      <entry key="M15" value="40.2245154908534" />
-      <entry key="M30" value="42.445876037709525" />
-      <entry key="H1" value="46.45893105193136" />
-      <entry key="H2" value="59.13548854567809" />
-      <entry key="H4" value="100.55923715195699" />
-      <entry key="D1" value="251.52752008226753" />
-      <entry key="W1" value="306.45433681469353" />
+      <entry key="MS100" value="0.9162379733299788" />
+      <entry key="MS500" value="1.6626640650776776" />
+      <entry key="S2" value="3.5691267361733607" />
+      <entry key="S5" value="4.724415048576603" />
+      <entry key="S10" value="5.290520987942145" />
+      <entry key="S30" value="5.744748004839885" />
+      <entry key="S60" value="5.869870721873953" />
+      <entry key="M2" value="5.942241610296662" />
+      <entry key="M5" value="6.853970433476037" />
+      <entry key="M10" value="13.404579938977658" />
+      <entry key="M15" value="21.620161240330223" />
+      <entry key="M30" value="39.9826160578688" />
+      <entry key="H1" value="58.24625241441215" />
+      <entry key="H2" value="79.5300858307305" />
+      <entry key="H4" value="124.36338783808324" />
+      <entry key="D1" value="282.867123613641" />
+      <entry key="W1" value="341.65062707703913" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -230,6 +244,9 @@
       <workItem from="1787872804999" duration="4529000" />
       <workItem from="1787912397596" duration="1082000" />
       <workItem from="1787960460558" duration="2089000" />
+      <workItem from="1787969543023" duration="4599000" />
+      <workItem from="1787977018063" duration="1076000" />
+      <workItem from="1787985535451" duration="428000" />
     </task>
     <servers />
   </component>

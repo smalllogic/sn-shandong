@@ -1,7 +1,8 @@
 <li class="border-l-2 border-slate-100 pl-4 py-2">
   <div class="flex items-center justify-between group">
     <div class="flex items-center space-x-2">
-      <span class="inline-flex items-center justify-center w-6 h-6 rounded bg-slate-100 text-[10px] font-mono text-slate-500 mr-1" title="排序位置"><%= category.position || 0 %></span>
+      <span class="inline-flex items-center justify-center px-1.5 h-6 rounded bg-slate-100 text-[10px] font-mono text-slate-500 mr-1" title="排序位置">P:<%= category.position || 0 %></span>
+      <span class="inline-flex items-center justify-center px-1.5 h-6 rounded bg-blue-50 text-[10px] font-mono text-blue-600 mr-1" title="分类ID">ID:<%= category.id %></span>
       <span class="font-medium text-slate-800"><%= category.name %></span>
       <% if category.featured? %>
         <span class="bg-amber-50 text-amber-600 text-[10px] px-1.5 py-0.5 rounded-full border border-amber-100 font-bold" title="首页推荐，排序: <%= category.featured_position %>">已推荐</span>

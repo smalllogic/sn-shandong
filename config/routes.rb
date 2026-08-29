@@ -20,6 +20,9 @@ Rails.application.routes.draw do
       collection do
         get :export
         patch :update_positions
+        get :import
+        post :import, to: 'skus#do_import', as: :do_import
+        get :download_template
       end
       member do
         delete :delete_image

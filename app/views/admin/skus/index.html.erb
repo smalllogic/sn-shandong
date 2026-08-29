@@ -3,6 +3,7 @@
 <div class="mb-6 flex justify-between items-center">
   <p class="text-slate-600">管理所有的产品型号 (SKU)。注意：只能在叶子分类下创建 SKU。</p>
   <div class="flex items-center space-x-3">
+    <%= link_to "批量导入", import_admin_skus_path, class: "text-slate-600 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors" %>
     <%= link_to "添加 SKU", new_admin_sku_path, class: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors" %>
   </div>
 </div>
@@ -25,7 +26,7 @@
         <option value="">所有叶子分类</option>
         <% @categories.each do |cat| %>
           <option value="<%= cat.id %>" <%= 'selected' if @category_id.to_s == cat.id.to_s %>>
-            <%= cat.localized_name %>
+            [ID:<%= cat.id %>] <%= cat.localized_name %>
           </option>
         <% end %>
       </select>
@@ -55,6 +56,7 @@
         <thead>
           <tr class="bg-slate-50 border-b border-slate-200">
             <th class="px-6 py-4 text-sm font-semibold text-slate-700">预览</th>
+            <th class="px-6 py-4 text-sm font-semibold text-slate-700">ID</th>
             <th class="px-6 py-4 text-sm font-semibold text-slate-700">排序</th>
             <th class="px-6 py-4 text-sm font-semibold text-slate-700">名称</th>
             <th class="px-6 py-4 text-sm font-semibold text-slate-700">分类</th>
@@ -66,7 +68,7 @@
         <tbody class="divide-y divide-slate-100">
           <% if @skus.empty? %>
             <tr>
-              <td colspan="7" class="px-6 py-12 text-center text-slate-500 text-sm">
+              <td colspan="8" class="px-6 py-12 text-center text-slate-500 text-sm">
                 <% if @q.present? || @category_id.present? %>
                   未找到匹配的 SKU，请尝试其他关键词或分类。
                 <% else %>
@@ -88,6 +90,7 @@
                   <div class="w-10 h-10 bg-slate-100 rounded-md flex items-center justify-center text-slate-400 text-[10px]">无图</div>
                 <% end %>
               </td>
+              <td class="px-6 py-4 text-sm font-mono text-slate-400"><%= sku.id %></td>
               <td class="px-6 py-4 text-sm text-slate-500 font-mono">
                 <input type="number" name="positions[<%= sku.id %>]" value="<%= sku.position %>" 
                        class="w-20 px-2 py-1 border border-slate-300 rounded focus:ring-blue-500 focus:border-blue-500 text-sm">

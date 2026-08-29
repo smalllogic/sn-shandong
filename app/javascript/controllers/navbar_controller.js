@@ -20,10 +20,7 @@ export default class extends Controller {
 
   closeAllDropdowns() {
     this.element.querySelectorAll('.dropdown-container').forEach(dropdown => {
-      // 在电脑端宽度下，不手动操作 hidden 类，以免干扰 Tailwind 的 hover 逻辑
-      if (window.innerWidth < 768) {
-        dropdown.classList.add("hidden")
-      }
+      dropdown.classList.add("hidden")
     })
     this.element.querySelectorAll('svg.rotate-180, svg.rotate-90').forEach(svg => {
       svg.classList.remove("rotate-180", "rotate-90")

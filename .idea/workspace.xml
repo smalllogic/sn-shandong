@@ -25,23 +25,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0012798045732276" />
-      <entry key="MS500" value="1.394973235577361" />
-      <entry key="S2" value="4.496795502095862" />
-      <entry key="S5" value="7.918482313653551" />
-      <entry key="S10" value="10.008136521358281" />
-      <entry key="S30" value="11.876395585902449" />
-      <entry key="S60" value="12.42038311026024" />
-      <entry key="M2" value="12.705567930667991" />
-      <entry key="M5" value="12.882672747924627" />
-      <entry key="M10" value="13.07215901159552" />
-      <entry key="M15" value="13.538479952552" />
-      <entry key="M30" value="15.61511855948207" />
-      <entry key="H1" value="19.554953673694882" />
-      <entry key="H2" value="32.201748596760225" />
-      <entry key="H4" value="73.62225626458326" />
-      <entry key="D1" value="224.556172488794" />
-      <entry key="W1" value="279.4593730139473" />
+      <entry key="MS100" value="1.000244142871273" />
+      <entry key="MS500" value="1.2465506423347887" />
+      <entry key="S2" value="4.550784314007794" />
+      <entry key="S5" value="11.966533035260216" />
+      <entry key="S10" value="20.1456910753334" />
+      <entry key="S30" value="31.17479225567914" />
+      <entry key="S60" value="35.21818165366373" />
+      <entry key="M2" value="37.50765475088264" />
+      <entry key="M5" value="38.978959359457974" />
+      <entry key="M10" value="39.61389128462942" />
+      <entry key="M15" value="40.226939053747934" />
+      <entry key="M30" value="42.447121310206924" />
+      <entry key="H1" value="46.459588865890495" />
+      <entry key="H2" value="59.13594305548863" />
+      <entry key="H4" value="100.55970197522598" />
+      <entry key="D1" value="251.5277368061913" />
+      <entry key="W1" value="306.45437478299726" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -63,23 +63,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.08304758038891656" />
-      <entry key="MS500" value="0.8226766345090392" />
-      <entry key="S2" value="4.1907989345897905" />
-      <entry key="S5" value="7.762884768895903" />
-      <entry key="S10" value="9.922391484782635" />
-      <entry key="S30" value="11.845676678101272" />
-      <entry key="S60" value="12.404727299428327" />
-      <entry key="M2" value="12.697663466604643" />
-      <entry key="M5" value="12.879492122243558" />
-      <entry key="M10" value="13.070559914055696" />
-      <entry key="M15" value="13.537400316629709" />
-      <entry key="M30" value="15.614549116025012" />
-      <entry key="H1" value="19.554634731341498" />
-      <entry key="H2" value="32.201463631912844" />
-      <entry key="H4" value="73.62187616087051" />
-      <entry key="D1" value="224.55596990807805" />
-      <entry key="W1" value="279.4593370689933" />
+      <entry key="MS100" value="0.05183290952566839" />
+      <entry key="MS500" value="0.6631882670867248" />
+      <entry key="S2" value="4.224372220173983" />
+      <entry key="S5" value="11.774565570278385" />
+      <entry key="S10" value="20.015794230230394" />
+      <entry key="S30" value="31.11533680943245" />
+      <entry key="S60" value="35.18542391478431" />
+      <entry key="M2" value="37.49041326450424" />
+      <entry key="M5" value="38.97184054520611" />
+      <entry key="M10" value="39.61028799009105" />
+      <entry key="M15" value="40.2245154908534" />
+      <entry key="M30" value="42.445876037709525" />
+      <entry key="H1" value="46.45893105193136" />
+      <entry key="H2" value="59.13548854567809" />
+      <entry key="H4" value="100.55923715195699" />
+      <entry key="D1" value="251.52752008226753" />
+      <entry key="W1" value="306.45433681469353" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -100,7 +100,7 @@
     &quot;RunOnceActivity.ruby.rubocop.migration.global.runOnSaveToExternalFormatter&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP&quot;: &quot;1787798926654&quot;,
+    &quot;com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP&quot;: &quot;1787912461051&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
@@ -228,6 +228,8 @@
       <workItem from="1787646846179" duration="90000" />
       <workItem from="1787798860608" duration="15550000" />
       <workItem from="1787872804999" duration="4529000" />
+      <workItem from="1787912397596" duration="1082000" />
+      <workItem from="1787960460558" duration="2089000" />
     </task>
     <servers />
   </component>

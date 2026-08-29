@@ -1,6 +1,5 @@
 <div class="relative z-40">
   <nav class="fixed w-full z-50 top-0 start-0 transition-all duration-300" 
-       data-controller="navbar"
        x-data="{ mobileMenuOpen: false }">
     
     <!-- Main Navigation Bar -->
@@ -39,7 +38,7 @@
           </div>
 
           <!-- Right Side Actions -->
-          <div class="flex items-center space-x-4">
+          <div class="flex items-center space-x-4 relative z-50">
             <!-- Language selector -->
             <div class="hidden md:flex items-center space-x-4 text-[13px] font-bold border-r border-slate-100 pr-4 mr-2">
               <a href="#" class="flex items-center space-x-1.5 group/lang">
@@ -107,7 +106,7 @@
 
             <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="md:hidden p-2 text-slate-600 hover:text-accent transition-colors">
               <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-              <svg x-show="mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+              <svg x-show="mobileMenuOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
           </div>
         </div>
@@ -185,9 +184,9 @@
          x-transition:leave="transition ease-in duration-200"
          x-transition:leave-start="opacity-100 translate-y-0"
          x-transition:leave-end="opacity-0 -translate-y-4"
-         class="md:hidden fixed inset-0 z-20 pt-[72px]" 
+         class="md:hidden fixed inset-0 z-40" 
          x-cloak>
-      <div class="bg-white min-h-screen flex flex-col p-6 overflow-y-auto">
+      <div class="bg-white min-h-screen flex flex-col p-6 pt-24 overflow-y-auto">
         <div class="space-y-8">
           <!-- Mobile Language Selector -->
           <div class="grid grid-cols-2 gap-3 pb-6 border-b border-slate-100">
@@ -227,9 +226,8 @@
             <div class="grid grid-cols-1 gap-2">
               <% Category.roots.visible.each do |category| %>
                 <div x-data="{ open: false }">
-                  <div class="flex items-center justify-between py-4 px-5 text-sm font-bold text-slate-900 bg-slate-50 rounded-2xl border border-slate-100 hover:border-accent transition-all cursor-pointer"
-                       @click="open = !open">
-                    <div class="flex items-center">
+                  <div class="flex items-center justify-between py-4 px-5 text-sm font-bold text-slate-900 bg-slate-50 rounded-2xl border border-slate-100 hover:border-accent transition-all cursor-pointer">
+                    <%= link_to category_path(category), class: "flex items-center flex-grow", "@click": "mobileMenuOpen = false" do %>
                       <span class="w-10 h-10 flex items-center justify-center mr-3 bg-white rounded-lg text-accent flex-shrink-0 transition-all shadow-sm">
                         <% case category.slug %>
                         <% when 'refrigeration' %>
@@ -249,15 +247,20 @@
                         <% end %>
                       </span>
                       <span><%= category.localized_name %></span>
-                    </div>
+                    <% end %>
+                    
                     <% if category.children.visible.any? %>
-                      <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                      <div class="p-2 -mr-2" @click="open = !open">
+                        <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                      </div>
                     <% end %>
                   </div>
                   <% if category.children.visible.any? %>
-                    <div x-show="open" x-collapse class="pl-4 space-y-1 mt-2">
+                    <div x-show="open" x-collapse x-cloak class="pl-4 space-y-1 mt-2">
                       <% category.children.visible.each do |sub| %>
-                        <%= link_to category_path(sub), class: "block py-3 px-5 text-[13px] font-bold text-slate-600 hover:text-accent bg-slate-50 rounded-xl border border-slate-100 mt-1 transition-all" do %>
+                        <%= link_to category_path(sub), 
+                            class: "block py-3 px-5 text-[13px] font-bold text-slate-600 hover:text-accent bg-slate-50 rounded-xl border border-slate-100 mt-1 transition-all",
+                            "@click": "mobileMenuOpen = false" do %>
                           <%= sub.localized_name %>
                         <% end %>
                       <% end %>
@@ -271,10 +274,10 @@
           <div class="pt-8 border-t border-slate-100">
             <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] block mb-6">Quick Access</span>
             <div class="space-y-4">
-              <%= link_to t('navbar.home'), root_path, class: "block text-lg font-black text-slate-900" %>
-              <%= link_to t('navbar.factory'), factory_path, class: "block text-lg font-black text-slate-900" %>
-              <%= link_to t('navbar.blog'), posts_path, class: "block text-lg font-black text-slate-900" %>
-              <%= link_to t('navbar.contact_us'), contact_path, class: "block text-lg font-black text-slate-900" %>
+              <%= link_to t('navbar.home'), root_path, class: "block text-lg font-black text-slate-900", "@click": "mobileMenuOpen = false" %>
+              <%= link_to t('navbar.factory'), factory_path, class: "block text-lg font-black text-slate-900", "@click": "mobileMenuOpen = false" %>
+              <%= link_to t('navbar.blog'), posts_path, class: "block text-lg font-black text-slate-900", "@click": "mobileMenuOpen = false" %>
+              <%= link_to t('navbar.contact_us'), contact_path, class: "block text-lg font-black text-slate-900", "@click": "mobileMenuOpen = false" %>
             </div>
           </div>
 
@@ -282,7 +285,7 @@
             <div class="bg-primary rounded-3xl p-6 text-white">
               <h4 class="text-lg font-black mb-2">Ready to Start?</h4>
               <p class="text-slate-300 text-sm mb-6">Get a professional kitchen solution for your project.</p>
-              <%= link_to contact_path, class: "block w-full py-4 bg-accent text-center font-black rounded-2xl shadow-lg shadow-accent/20" do %>
+              <%= link_to contact_path, class: "block w-full py-4 bg-accent text-center font-black rounded-2xl shadow-lg shadow-accent/20", "@click": "mobileMenuOpen = false" do %>
                 REQUEST A QUOTE
               <% end %>
             </div>

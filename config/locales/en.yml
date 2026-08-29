@@ -28,6 +28,9 @@
 #       enabled: "ON"
 
 en:
+  date:
+    formats:
+      long: "%B %d, %Y"
   navbar:
     search_placeholder: "Search Products..."
     all_products: "Products"
@@ -70,8 +73,10 @@ en:
     email: "info@skyrainbow.com.cn"
     rights_reserved: "All rights reserved."
   posts:
+    meta_description: "Explore commercial kitchen equipment manufacturing insights, trends, and guides from Sinower Kitchen Factory."
     hero:
       title: "Sinower News"
+      default_subtitle: "News & Insights"
       subtitle: "LATEST ARTICLES"
       description: "Professional Commercial Kitchen Equipment Manufacturer - Shandong Sinower Electrical Appliance Co., Ltd"
     enterprise_updates:
@@ -84,6 +89,9 @@ en:
       description: "Professional analysis and insights into the global commercial kitchen equipment industry from Shandong Sinower."
     all: "All News"
     back_to_blog: "Back to News"
+    read_more: "Read More"
+    show:
+      badge: "Sinower News"
     statistics:
       title: "Blog Insights"
       subtitle: "REAL-TIME DATA"
@@ -95,11 +103,19 @@ en:
     all_products_desc: "Sinower integrates diversified commercial refrigeration and cooking kitchen equipment to deliver a complete product portfolio for global foodservice clients."
     banner_eyebrow: "SINOWER FOODSERVICE EQUIPMENT"
     explore_all: "Kitchen Equipment"
+    search_results: "Search Results: %{query}"
+    browse_categories: "Browse Categories"
     view_details: "View Details"
+    asset_lost: "Asset Lost"
+    awaiting_media: "Awaiting Media"
+    industrial_standard: "Industrial Standard"
+    ready_to_ship: "Ready to Ship"
     no_skus_title: "No Available Models"
     no_skus_desc: "This category is currently being updated. Please check back later for our latest releases."
     contact_us: "Contact Us"
   skus:
+    meta_description: "%{name} - Professional %{category} for commercial kitchen and foodservice. OEM & ODM available. Factory-direct pricing from Sinower."
+    meta_keywords: "%{name}, %{category}, commercial kitchen equipment, foodservice equipment, restaurant equipment, Sinower Kitchen"
     product_name: "Product Name"
     material: "Material"
     specification: "Specification"
@@ -124,6 +140,8 @@ en:
       color_appearance: "Color/Appearance"
     add_to_order: "ADD TO ORDER"
     add_short: "Add"
+    add_to_quote_title: "Add to Quote"
+    add_to_quote_request: "Add to Quote Request"
     get_quote: "Get Professional Quote"
     download_manual: "Download Manual"
     download_spec_sheet: "Download Spec Sheet"
@@ -143,6 +161,21 @@ en:
     smart_temp_control: "Smart Temp Control"
     low_energy: "Eco-Friendly/Low Energy"
     durability: "Built for Durability"
+    digital_asset_pending: "Digital Asset Pending"
+    technical_assurance: "Technical Assurance"
+    certified_factory_specifications: "Certified Factory Specifications"
+    in_production: "In Production"
+    global_shipping: "Global Shipping"
+    quality_warranty: "Quality Warranty"
+    technical_specifications: "Technical Specifications"
+    global_support: "Global Support"
+    sales_engineering: "Sales & Engineering"
+    direct_channel_notice: "Direct channel for wholesale, OEM projects and technical verification."
+    whatsapp_business: "WhatsApp Business"
+    global_inquiry: "Global Inquiry"
+    request_factory_quote: "Request Factory Quote"
+    related_equipment: "Related Equipment"
+    no_image: "No Image"
   home:
     faqs:
       hero_badge: "FAQs"
@@ -233,3 +266,284 @@ en:
     accept: "Accept"
     decline: "Decline"
     privacy_policy: "Privacy Policy"
+
+  languages:
+    en: "ENGLISH"
+    it: "ITALIANO"
+    fr: "FRANÇAIS"
+    zh-CN: "中文"
+  common:
+    get_quote: "Get Quote"
+    request_quote: "Request a Quote"
+    inquiry: "Inquiry"
+    list: "List"
+    scan_wechat: "Scan WeChat QR Code"
+    success: "Success"
+    added_to_order: "Added to Order List"
+  cart: { title: "Equipment Inquiry List", complete_inquiry: "Complete Your Inquiry", name: "Your Name", country: "Country", contact: "WhatsApp/WeChat", email: "Email Address", message: "Message / Specific Requirements", submit: "Get Professional Quote" }
+  seo:
+    default_description: "Sinower is a professional commercial kitchen equipment manufacturer based in Shandong, China."
+    default_keywords: "commercial kitchen equipment, refrigeration equipment, cooking equipment, foodservice equipment manufacturer, Sinower Kitchen"
+    home:
+      title: "Sinower | Commercial Kitchen Equipment Manufacturer"
+      description: "Industrial-grade commercial kitchen equipment with global manufacturing and supply capabilities."
+    factory:
+      quality_standard_certified: "Quality Standard Certified"
+      title: "Factory & Manufacturing Capability | Sinower"
+      description: "Explore Sinower's factory, automated production lines, quality control and global logistics capabilities."
+    products:
+      title: "Commercial Kitchen Equipment Catalog | Sinower"
+      description: "Browse Sinower's commercial refrigeration, cooking and stainless-steel kitchen equipment."
+    contact:
+      title: "Contact Sinower | Commercial Kitchen Equipment Support"
+      description: "Contact Sinower for product inquiries, project solutions and commercial kitchen equipment quotations."
+    faqs:
+      title: "Frequently Asked Questions | Sinower"
+      description: "Answers about Sinower products, manufacturing, customization, quality control and cooperation."
+    privacy:
+      title: "Privacy Policy | Sinower"
+      description: "Learn how Sinower collects, uses and protects personal information."
+  navbar:
+    home: "Home"
+    factory: "About us"
+    blog: "News"
+    contact_us: "Contact Us"
+    faqs: "FAQ's"
+    product_range: "Product Range"
+    quick_access: "Quick Access"
+    ready_title: "Ready to Start?"
+    ready_description: "Get a professional kitchen solution for your project."
+  footer:
+    company_name: "Shandong Sinower Electrical Appliance Co., Ltd"
+    company_desc: "Professional Commercial Kitchen Equipment Manufacturer. Spanning 140,000㎡ manufacturing base, serving 180+ countries."
+    address: "Shandong Binzhou Boxing Pangjia Town Industrial Park"
+    phone: "+86 0543 8171612"
+    email: "info@skyrainbow.com.cn"
+    rights_reserved: "All rights reserved."
+    certified_quality: "Certified Quality"
+    solutions: "Our Solutions"
+    company: "Company"
+    contact: "Contact Us"
+  privacy_policy:
+    last_updated: "Last updated: %{date}"
+  home:
+    branches:
+      spain: "Spain"
+      uk: "United Kingdom"
+      australia: "Australia"
+      boxing: "Boxing, CN"
+      paris: "Paris, FR"
+      munich: "Munich, DE"
+      czech_republic: "Czech Republic"
+      madrid: "Madrid, ES"
+      london: "London, UK"
+      sydney: "Sydney, AU"
+      sharjah: "Sharjah, UAE"
+      georgia: "Georgia, US"
+    index:
+      hero:
+        badge: "Global Supply Chain Leader"
+        title_line_one: "CONNECTING THE"
+        title_line_two: "GLOBAL KITCHEN"
+        description: "Premium commercial equipment manufactured with industrial precision."
+        highlight: "9 Strategic Global Hubs. Serving 100+ Countries."
+        request_quote: "REQUEST GLOBAL QUOTE"
+        explore_factory: "EXPLORE FACTORY"
+      metrics:
+        title: "Global Manufacturing Powerhouse"
+        production_area: "Production Area"
+        employees: "Employees"
+        automated_lines: "Automated Lines"
+        countries_served: "Countries Served"
+        annual_output: "Annual Output"
+      categories:
+        title: "Product Categories"
+        description: "Professional solutions for global foodservice partners"
+        view_all: "View All Categories"
+        view_products: "View Products"
+        refrigeration: { name: "Commercial Refrigeration", description: "Refrigerator, Freezer, Cold Storage" }
+        cooking: { name: "Cooking Equipment", description: "Oven, Fryer, Range" }
+        kitchenware: { name: "Stainless Steel Kitchenware", description: "Work Table, Sink, Cabinet" }
+      capability:
+        title: "Powerful Manufacturing Capability"
+        factory_title: "140,000㎡ Modern Factory"
+        factory_description: "Large-scale production base ensuring stable supply and scale advantage."
+        lines_title: "8 Professional Automated Lines"
+        lines_description: "Precision manufacturing powered by world-leading equipment and 5 workshops."
+        engineers_title: "50+ R&D Engineers"
+        engineers_description: "Professional engineering team for customized kitchen solutions and 2 labs."
+      quality:
+        title: "Rigorous Quality System"
+        description: "We don't just talk about quality; we demonstrate it through every step."
+        steps: ["Raw Material Inspection", "Production Inspection", "Performance Testing", "Final Inspection", "Shipment"]
+        certifications:
+          europe_safety: "Europe Safety"
+          north_america: "North America"
+          safety_standards: "Safety Standards"
+          food_safety: "Food Safety"
+          energy_rating: "Energy Rating"
+      advantages:
+        title: "Why Global Clients Choose Sinower"
+        client_needs: "Client Needs"
+        sinower_advantage: "Sinower Advantage"
+        rows:
+          - { need: "Stable Supply", advantage: "300,000+ units/year total output" }
+          - { need: "Cost Leadership", advantage: "Modern 140,000㎡ manufacturing base" }
+          - { need: "Quick Delivery", advantage: "Global logistics network & overseas subsidiaries" }
+          - { need: "Customization", advantage: "Professional R&D with OEM/ODM capability" }
+          - { need: "Long-term Trust", advantage: "10+ years of export excellence" }
+      projects:
+        title: "Success Stories & Global Projects"
+        restaurant: { title: "Restaurant Chain Project", description: "Complete kitchen solution for global fast food chains." }
+        hotel: { title: "Hotel Kitchen Solution", description: "High-end stainless steel equipment for 5-star hotels." }
+        distributor: { title: "Distributor Partnership", description: "Strategic cooperation with leading European and US distributors." }
+      news:
+        title: "Enterprise Updates"
+        description: "Keep up with Sinower's latest development."
+        read_more: "Read More News"
+      cta:
+        title_line_one: "Looking for a Reliable"
+        title_line_two: "Commercial Kitchen Equipment Supplier?"
+        description: "Contact Sinower today for a customized quote and professional solution."
+        button: "Get a Quote Now"
+    global_presence:
+      title: "Global Presence"
+      description: "Founded in 2002, our China headquarters connects worldwide offices and service networks, delivering excellence to over 180 countries."
+      map_alt: "World map"
+      global_offices: "Global Offices"
+      china: { title: "China Headquarters", location: "Shandong Binzhou, China", factory: "140,000㎡ Factory" }
+      usa: { title: "USA Subsidiary", location: "Norcross, Georgia" }
+      germany: { title: "Germany Branch", office: "European Office", location: "Munich, Germany" }
+      france: { title: "France Branch", office: "European Service Center", location: "Paris, France" }
+      czech: { office: "European Logistics Hub" }
+      uae: { title: "UAE Branch" }
+      uk: { title: "London Branch", office: "UK Office", location: "London, United Kingdom" }
+      spain: { title: "Spain Branch", office: "Iberian Service Center", location: "Madrid, Spain" }
+      australia: { title: "Sydney Branch", office: "Oceania Office", location: "Sydney, Australia" }
+    contact:
+      title: "Contact Us"
+      subtitle: "Contact Us"
+      hero_title: "Professional Manufacturer"
+      hero_desc: "Professional Commercial Kitchen Equipment Manufacturer - Shandong Sinower Electrical Appliance Co., Ltd. Contact our team for product inquiries or business partnerships."
+      send_message: "Send Message"
+      direct_factory_support: "Direct Factory Support"
+      address_title: "Our Address"
+      phone_title: "Service Phone"
+      email_title: "Official Email"
+      form:
+        name: "Your Name"
+        name_placeholder: " "
+        email: "Your Contact"
+        email_placeholder: "WhatsApp/WeChat"
+        message: "Message Details"
+        message_placeholder: "Describe your needs or questions..."
+        submit: "OK"
+        privacy_policy_agree: "I have read and agree to the"
+        privacy_policy_link: "Privacy Policy"
+        privacy_error: "Please agree to the Privacy Policy to continue."
+        verification_failed: "Please complete the security verification before submitting."
+        verification_required: "Security Verification Required"
+    faqs:
+      hero_badge: "FAQs"
+      title: "Frequently Asked Questions"
+      subtitle: "Find answers about our products, manufacturing process, customization, quality control and cooperation."
+      search_placeholder: "Search your question..."
+      categories_title: "FAQ Categories"
+      no_questions: "No FAQs available"
+      more_questions_title: "Still have questions?"
+      more_questions_desc: "If you cannot find the answer you are looking for, please feel free to contact our customer service team."
+      inquiry_cta: "Send Inquiry"
+      quality_control_link: "Learn about Quality Control"
+      explore_products_link: "Explore Products"
+      cta_title: "Ready to Start Your Project?"
+      cta_description: "Contact our professional team to get detailed solutions and competitive quotations for your commercial kitchen."
+      call_now: "Call Us Now"
+    factory:
+      hero:
+        live_feed: "Live Factory Feed"
+        badge: "Manufacturing Capability Proof"
+        title_line_one: "Advanced Manufacturing"
+        title_line_two: "for Global Excellence"
+        production_area: "Production Area"
+        professional_lines: "Professional Lines"
+        annual_capacity: "Annual Capacity"
+        total_employees: "Total Employees"
+        explore_facility: "Explore Facility"
+      overview:
+        experience: "Years Industry Experience"
+        title_line_one: "World-Class Manufacturing"
+        title_line_two: "Infrastructure"
+        description: "Founded in 2002, Sinower operates one of the industry's most technologically advanced facilities. Our 140,000㎡ production base provides the scale and stability required by global distributors and chain partners."
+        location_label: "Location"
+        location: "Binzhou, Shandong, China"
+        total_area_label: "Total Area"
+        total_area: "140,000 Square Meters"
+        staffing_label: "Staffing"
+        staffing: "500+ Skilled Technicians"
+        specialization_label: "Specialization"
+        specialization: "Full Chain Manufacturing"
+      capacity:
+        title: "Massive Annual Output"
+        description: "We maintain high-capacity production lines to ensure steady supply for large-scale global procurement."
+        units_total: "Units Total"
+        annual_capacity: "Annual Capacity"
+        refrigeration: "Refrigeration"
+        cooking_equipment: "Cooking Equipment"
+        stainless_steel: "Stainless Steel Fabrication"
+        units_per_year: "100,000+ Units/yr"
+      facilities:
+        title: "Advanced Machinery & Automation"
+        description: "Precision manufacturing powered by world-leading equipment."
+        machines: "550+ Machines"
+        digital_control: "Digital Control"
+        laser_cutting: { name: "Laser Cutting", description: "High-precision stainless steel processing for complex components." }
+        cnc_bending: { name: "CNC Bending", description: "Computerized bending for perfect angles and structural integrity." }
+        robot_welding: { name: "Robot Welding", description: "Automated welding ensuring consistent quality and high durability." }
+        digital_assembly: { name: "Digital Assembly", description: "Streamlined production lines for efficient large-scale assembly." }
+      workflow:
+        title: "Streamlined Production Workflow"
+        steps:
+          - { name: "SS Coils", description: "Raw material stainless steel coils." }
+          - { name: "Sheet Metal", description: "Precision fabrication workshop." }
+          - { name: "Laser Cutting", description: "High-precision laser cutting center." }
+          - { name: "Bending", description: "Advanced CNC bending process." }
+          - { name: "Assembly", description: "Modern assembly & testing center." }
+          - { name: "Packaging", description: "Secure export-standard packaging." }
+      quality:
+        title: "Four-Stage Quality Control System"
+        steps:
+          - { title: "IQC: Incoming Inspection", description: "100% inspection of critical raw materials and electronic components." }
+          - { title: "IPQC: In-Process Inspection", description: "Real-time monitoring at every manufacturing workstation." }
+          - { title: "FQC: Final Quality Check", description: "Comprehensive performance and safety testing before storage." }
+          - { title: "OQC: Outgoing Inspection", description: "Double-check packaging and loading specifications before shipping." }
+      research:
+        title: "Engineering & R&D Excellence"
+        description: "Our dedicated R&D team of 50+ engineers provides end-to-end support for customization, OEM, and ODM projects."
+        team: "50+ R&D Technical Team"
+        labs: "2 Professional Labs"
+        design_studio: "CAD/3D Design Studio"
+        customization: { title: "Customization", description: "Tailored dimensions, power specifications, and features to meet specific regional market requirements." }
+        oem: { title: "OEM Service", description: "High-capacity production for global brands with strict adherence to brand standards and quality." }
+        energy: { title: "Energy Efficiency", description: "Pioneering energy-saving technology that reduces operating costs and environmental impact." }
+        iot: { title: "IoT Integration", description: "Smart monitoring systems for remote performance tracking and preventive maintenance." }
+      branches:
+        title: "Global Footprint & Branches"
+        description: "With headquarters in China and strategically located branches in France, Germany, UAE and the USA, Sinower provides localized support and efficient supply-chain services worldwide."
+        china_address: "Industrial Park, Pangjia Town, Boxing County, Binzhou, Shandong"
+        france_address: "Athis-Mons, France"
+        germany_address: "Germany"
+        usa_address: "Norcross, GA, USA"
+      logistics:
+        title: "Secure Storage & Global Logistics"
+        description: "Our modern warehouse management system ensures accurate inventory control and efficient loading. Professional export packaging and a strategic location support on-time delivery to over 180 countries."
+        total_area: "Total Facility Area"
+        countries_served: "Countries Served"
+        support_title: "Global Sales Support"
+        support_description: "Direct communication with our overseas branches for localized technical support and fast delivery."
+        shipping_options: "Learn about shipping options"
+      gallery_title: "Authentic Factory Views"
+      cta:
+        title_line_one: "Ready to Partner with a"
+        title_line_two: "Global Manufacturing Leader?"
+        description: "Experience the Sinower advantage in quality, scale and professional service."
+        button: "Request Factory Tour & Quote"

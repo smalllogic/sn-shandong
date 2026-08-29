@@ -14,7 +14,7 @@
         </p>
         <!-- Certificates -->
         <div class="pt-4 border-t border-white/5">
-          <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3">Certified Quality</p>
+          <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3"><%= t('footer.certified_quality') %></p>
           <div class="flex flex-wrap gap-3 opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-500">
             <span class="px-2 py-1 bg-white/5 rounded border border-white/10 text-[10px] text-white font-black">CE</span>
             <span class="px-2 py-1 bg-white/5 rounded border border-white/10 text-[10px] text-white font-black">ETL</span>
@@ -27,7 +27,7 @@
 
       <!-- Column 2: Solutions -->
       <div>
-        <h3 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Our Solutions</h3>
+        <h3 class="text-white font-bold text-sm uppercase tracking-widest mb-6"><%= t('footer.solutions') %></h3>
         <ul class="space-y-4 text-sm">
           <% Category.visible.roots.limit(5).each do |cat| %>
             <li>
@@ -42,7 +42,7 @@
 
       <!-- Column 3: Company -->
       <div>
-        <h3 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Company</h3>
+        <h3 class="text-white font-bold text-sm uppercase tracking-widest mb-6"><%= t('footer.company') %></h3>
         <ul class="space-y-4 text-sm">
           <li><%= link_to t('navbar.home'), root_path, class: "text-slate-400 hover:text-accent transition-colors" %></li>
           <li><%= link_to t('navbar.factory'), factory_path, class: "text-slate-400 hover:text-accent transition-colors" %></li>
@@ -54,7 +54,7 @@
 
       <!-- Column 4: Contact -->
       <div>
-        <h3 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Contact Us</h3>
+        <h3 class="text-white font-bold text-sm uppercase tracking-widest mb-6"><%= t('footer.contact') %></h3>
         <div class="space-y-4 text-sm">
           <div class="flex items-start gap-3">
             <svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -85,7 +85,7 @@
     <!-- Bottom Bar -->
     <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="text-slate-500 text-xs text-center md:text-left">
-        © <%= Time.current.year %> <%= @site_config.name %>. All Rights Reserved.
+        © <%= Time.current.year %> <%= @site_config.name %>. <%= t('footer.rights_reserved') %>
       </div>
       <div class="flex items-center gap-6">
         <%= link_to t('privacy_policy.title'), privacy_path, class: "text-slate-500 hover:text-slate-300 text-xs transition-colors" %>

@@ -9,7 +9,7 @@
 
   content_for :title, "#{hero_title} - #{t('footer.company_name')}"
 %>
-<% content_for :meta_description, "Explore commercial kitchen equipment manufacturing insights, trends, and guides from Sinower Kitchen Factory." %>
+<% content_for :meta_description, t('posts.meta_description') %>
 
 <% 
   hero_subtitle = if params[:category] == 'enterprise_updates'
@@ -17,7 +17,7 @@
   elsif params[:category] == 'industry_news'
     t('posts.industry_news.subtitle')
   else
-    "News & Insights"
+    t('posts.hero.default_subtitle')
   end
 
   hero_description = if params[:category] == 'enterprise_updates'
@@ -25,7 +25,7 @@
   elsif params[:category] == 'industry_news'
     t('posts.industry_news.description')
   else
-    "Explore commercial kitchen equipment manufacturing insights, trends, and guides from Sinower Kitchen Factory."
+    t('posts.meta_description')
   end
 %>
 
@@ -197,7 +197,7 @@
                   <span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest rounded"><%= t("posts.#{post.category}.title") %></span>
                   <span class="text-slate-200">|</span>
                 <% end %>
-                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest"><%= post.published_at&.strftime("%b %d, %Y") %></span>
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest"><%= l(post.published_at.to_date, format: :long) if post.published_at.present? %></span>
                 <span class="text-slate-200">|</span>
                 <span class="flex items-center gap-1 text-xs text-slate-400 font-bold uppercase tracking-widest">
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
@@ -210,7 +210,7 @@
               <p class="text-slate-500 text-sm leading-relaxed font-medium flex-1 line-clamp-3"><%= post.summary %></p>
               <div class="mt-6">
                 <%= link_to post_path(post), class: "inline-flex items-center gap-2 text-primary font-bold text-sm hover:gap-3 transition-all" do %>
-                  Read More
+                  <%= t('posts.read_more') %>
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 <% end %>
               </div>

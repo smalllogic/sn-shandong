@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
 
   before_action :track_visitor
   before_action :set_site_config
+  around_action :switch_locale
+  helper_method :locale_switch_path
 
   def after_sign_in_path_for(resource)
     admin_root_path
@@ -14,6 +16,26 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def switch_locale(&action)
+    locale = admin_request? ? I18n.default_locale : requested_locale
+    session[:locale] = locale.to_s unless admin_request?
+    I18n.with_locale(locale, &action)
+  end
+
+  def requested_locale
+    candidate = params[:locale].presence || session[:locale] || I18n.default_locale
+    I18n.available_locales.map(&:to_s).include?(candidate.to_s) ? candidate : I18n.default_locale
+  end
+
+  def admin_request?
+    request.path.start_with?("/admin", "/users")
+  end
+
+  def locale_switch_path(locale)
+    query = (request.query_parameters || {}).merge(locale: locale)
+    query.present? ? "#{request.path}?#{query.to_query}" : request.path
+  end
 
   def set_site_config
     @site_config = SiteConfig.get

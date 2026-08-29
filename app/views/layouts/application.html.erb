@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= I18n.locale %>">
   <head>
     <title><%= content_for(:title) || @site_config.meta_title.presence || @site_config.name %></title>
-    <meta name="description" content="<%= content_for(:meta_description) || @site_config.meta_description.presence || "Sinower is a professional commercial kitchen equipment manufacturer based in Shandong, China, with 20 years of manufacturing experience." %>">
-    <meta name="keywords" content="<%= content_for(:meta_keywords) || @site_config.meta_keywords.presence || "commercial kitchen equipment, refrigeration equipment, cooking equipment, foodservice equipment manufacturer, Sinower Kitchen" %>">
+    <meta name="description" content="<%= content_for(:meta_description) || @site_config.meta_description.presence || t('seo.default_description') %>">
+    <meta name="keywords" content="<%= content_for(:meta_keywords) || @site_config.meta_keywords.presence || t('seo.default_keywords') %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -136,10 +136,10 @@
           <!-- Label -->
           <div class="relative z-10 flex flex-col items-center">
             <span class="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 group-hover:text-orange-400 transition-colors duration-300 mb-0.5">
-              Inquiry
+              <%= t('common.inquiry') %>
             </span>
             <span class="text-[11px] font-black uppercase tracking-widest text-white">
-              List
+              <%= t('common.list') %>
             </span>
           </div>
 
@@ -163,7 +163,7 @@
              class="w-72 h-72 object-contain rounded-xl">
 
         <p class="text-center mt-3 font-bold text-gray-700">
-          Scan WeChat QR Code
+          <%= t('common.scan_wechat') %>
         </p>
 
       </div>
@@ -195,7 +195,7 @@
             })
             .then(response => response.json())
             .then(data => {
-              showToast('Success', 'Added to Order List');
+              showToast(<%= t('common.success').to_json.html_safe %>, <%= t('common.added_to_order').to_json.html_safe %>);
               updateCartBadge();
             });
         }

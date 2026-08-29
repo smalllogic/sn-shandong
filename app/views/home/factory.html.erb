@@ -1,3 +1,6 @@
+<% content_for :title, t('seo.factory.title') %>
+<% content_for :meta_description, t('seo.factory.description') %>
+
 <div class="relative bg-white">
   <!-- 1. Factory Hero Section -->
   <section class="relative h-[80vh] flex items-center overflow-hidden bg-slate-900">
@@ -12,44 +15,44 @@
       <!-- Video Indicator -->
       <div class="absolute bottom-10 right-10 flex items-center gap-3 text-white/50">
         <div class="w-2 h-2 bg-accent rounded-full animate-ping"></div>
-        <span class="text-[10px] font-black tracking-widest uppercase">Live Factory Feed</span>
+        <span class="text-[10px] font-black tracking-widest uppercase"><%= t('home.factory.hero.live_feed') %></span>
       </div>
     </div>
 
     <div class="relative z-10 max-w-screen-xl mx-auto px-6 text-center text-white pt-20 lg:pt-0">
       <div class="inline-block px-4 py-1.5 bg-accent/20 backdrop-blur-md border border-accent/30 rounded-full text-accent text-xs font-bold tracking-[0.2em] uppercase mb-8">
-        Manufacturing Capability Proof
+        <%= t('home.factory.hero.badge') %>
       </div>
       <h1 class="text-5xl md:text-7xl font-black leading-tight mb-8">
-        Advanced Manufacturing <br>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-400">for Global Excellence</span>
+        <%= t('home.factory.hero.title_line_one') %> <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-400"><%= t('home.factory.hero.title_line_two') %></span>
       </h1>
       
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-16 pt-16 border-t border-white/10">
         <div>
           <div class="text-3xl md:text-4xl font-black text-white"><span data-controller="counter" data-target-value="140000" class="counter">0</span><span class="text-accent text-xl ml-1">㎡</span></div>
-          <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Production Area</div>
+          <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2"><%= t('home.factory.hero.production_area') %></div>
         </div>
         <div>
           <div class="text-3xl md:text-4xl font-black text-white"><span data-controller="counter" data-target-value="8" class="counter">0</span></div>
-          <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Professional Lines</div>
+          <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2"><%= t('home.factory.hero.professional_lines') %></div>
         </div>
         <div>
           <div class="text-3xl md:text-4xl font-black text-white"><span data-controller="counter" data-target-value="300000" class="counter">0</span><span class="text-accent text-xl ml-1">+</span></div>
-          <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Annual Capacity</div>
+          <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2"><%= t('home.factory.hero.annual_capacity') %></div>
         </div>
         <div>
           <div class="text-3xl md:text-4xl font-black text-white"><span data-controller="counter" data-target-value="500" class="counter">0</span><span class="text-accent text-xl ml-1">+</span></div>
-          <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2">Total Employees</div>
+          <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2"><%= t('home.factory.hero.total_employees') %></div>
         </div>
       </div>
 
       <div class="mt-16 flex justify-center gap-6">
         <a href="#overview" class="px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-accent hover:text-white transition-all transform hover:-translate-y-1">
-          Explore Facility
+          <%= t('home.factory.hero.explore_facility') %>
         </a>
         <%= link_to contact_path, class: "px-8 py-4 border-2 border-white/30 text-white font-bold rounded-xl hover:bg-white/10 transition-all" do %>
-          Request A Quote
+          <%= t('common.request_quote') %>
         <% end %>
       </div>
     </div>
@@ -64,34 +67,34 @@
           <%= image_tag "sinower-factory2.png", class: "relative w-full aspect-[4/3] object-cover rounded-[2rem] shadow-2xl z-10" %>
           <div class="absolute -bottom-10 -right-10 bg-primary text-white p-8 rounded-2xl shadow-xl z-20 hidden md:block border border-white/10">
             <div class="text-4xl font-black mb-1">10+</div>
-            <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-300">Years Industry Experience</div>
+            <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-300"><%= t('home.factory.overview.experience') %></div>
           </div>
         </div>
         
         <div class="space-y-10">
           <div>
-            <h2 class="text-4xl font-black text-slate-900 mb-6">World-Class Manufacturing <br>Infrastructure</h2>
+            <h2 class="text-4xl font-black text-slate-900 mb-6"><%= t('home.factory.overview.title_line_one') %> <br><%= t('home.factory.overview.title_line_two') %></h2>
             <p class="text-lg text-slate-600 leading-relaxed">
-              Founded in 2002, Sinower operates one of the most technologically advanced facilities in the industry. Our massive 140,000㎡ production base provides the scale and stability required by global distributors and chain partners.
+              <%= t('home.factory.overview.description') %>
             </p>
           </div>
           
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-accent transition-colors">
-              <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2">Location</div>
-              <div class="text-slate-900 font-bold">Binzhou, Shandong, China</div>
+              <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2"><%= t('home.factory.overview.location_label') %></div>
+              <div class="text-slate-900 font-bold"><%= t('home.factory.overview.location') %></div>
             </div>
             <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-accent transition-colors">
-              <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2">Total Area</div>
-              <div class="text-slate-900 font-bold">140,000 Square Meters</div>
+              <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2"><%= t('home.factory.overview.total_area_label') %></div>
+              <div class="text-slate-900 font-bold"><%= t('home.factory.overview.total_area') %></div>
             </div>
             <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-accent transition-colors">
-              <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2">Staffing</div>
-              <div class="text-slate-900 font-bold">500+ Skilled Technicians</div>
+              <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2"><%= t('home.factory.overview.staffing_label') %></div>
+              <div class="text-slate-900 font-bold"><%= t('home.factory.overview.staffing') %></div>
             </div>
             <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-accent transition-colors">
-              <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2">Specialization</div>
-              <div class="text-slate-900 font-bold">Full Chain Manufacturing</div>
+              <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2"><%= t('home.factory.overview.specialization_label') %></div>
+              <div class="text-slate-900 font-bold"><%= t('home.factory.overview.specialization') %></div>
             </div>
           </div>
         </div>
@@ -104,19 +107,19 @@
     <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
     <div class="max-w-screen-xl mx-auto px-6 relative z-10">
       <div class="text-center max-w-3xl mx-auto mb-20">
-        <h2 class="text-4xl font-black mb-6">Massive Annual Output</h2>
-        <p class="text-slate-300 text-lg">We maintain high-capacity production lines to ensure steady supply for large-scale global procurement.</p>
+        <h2 class="text-4xl font-black mb-6"><%= t('home.factory.capacity.title') %></h2>
+        <p class="text-slate-300 text-lg"><%= t('home.factory.capacity.description') %></p>
         <div class="mt-10 inline-flex items-center gap-4 bg-white/5 backdrop-blur-md px-8 py-4 rounded-2xl border border-white/10">
           <span class="text-5xl font-black text-accent">300,000+</span>
-          <span class="text-left text-xs font-bold uppercase tracking-widest text-slate-200">Units Total <br>Annual Capacity</span>
+          <span class="text-left text-xs font-bold uppercase tracking-widest text-slate-200"><%= t('home.factory.capacity.units_total') %> <br><%= t('home.factory.capacity.annual_capacity') %></span>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <% [
-          { name: "Refrigeration", icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4", cap: "100,000+ Units/yr" },
-          { name: "Cooking Equipment", icon: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z", cap: "100,000+ Units/yr" },
-          { name: "Stainless Steel Fab", icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4", cap: "100,000+ Units/yr" }
+          { name: t('home.factory.capacity.refrigeration'), icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4", cap: t('home.factory.capacity.units_per_year') },
+          { name: t('home.factory.capacity.cooking_equipment'), icon: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z", cap: t('home.factory.capacity.units_per_year') },
+          { name: t('home.factory.capacity.stainless_steel'), icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4", cap: t('home.factory.capacity.units_per_year') }
         ].each do |item| %>
           <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:border-accent hover:bg-white/10 transition-all group">
             <svg class="w-12 h-12 text-accent mb-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="<%= item[:icon] %>"></path></svg>
@@ -136,21 +139,21 @@
     <div class="max-w-screen-xl mx-auto px-6">
       <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
         <div class="max-w-2xl">
-          <h2 class="text-4xl font-black text-slate-900 mb-4">Advanced Machinery & Automation</h2>
-          <p class="text-slate-600">Precision manufacturing powered by world-leading equipment.</p>
+          <h2 class="text-4xl font-black text-slate-900 mb-4"><%= t('home.factory.facilities.title') %></h2>
+          <p class="text-slate-600"><%= t('home.factory.facilities.description') %></p>
         </div>
         <div class="hidden md:flex gap-4">
-           <div class="px-6 py-2 bg-slate-100 rounded-full text-xs font-bold text-slate-500 uppercase tracking-widest">550+ Machines</div>
-           <div class="px-6 py-2 bg-slate-100 rounded-full text-xs font-bold text-slate-500 uppercase tracking-widest">Digital Control</div>
+           <div class="px-6 py-2 bg-slate-100 rounded-full text-xs font-bold text-slate-500 uppercase tracking-widest"><%= t('home.factory.facilities.machines') %></div>
+           <div class="px-6 py-2 bg-slate-100 rounded-full text-xs font-bold text-slate-500 uppercase tracking-widest"><%= t('home.factory.facilities.digital_control') %></div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <% [
-          { name: "Laser Cutting", img: "sinower-factory3.png", desc: "High-precision stainless steel processing for complex components." },
-          { name: "CNC Bending", img: "sinower-factory2.png", desc: "Computerized bending for perfect angles and structural integrity." },
-          { name: "Robot Welding", img: "sinower-factory1.png", desc: "Automated welding ensuring consistent quality and high durability." },
-          { name: "Digital Assembly", img: "sinower-office.png", desc: "Streamlined production lines for efficient large-scale assembly." }
+          { name: t('home.factory.facilities.laser_cutting.name'), img: "sinower-factory3.png", desc: t('home.factory.facilities.laser_cutting.description') },
+          { name: t('home.factory.facilities.cnc_bending.name'), img: "sinower-factory2.png", desc: t('home.factory.facilities.cnc_bending.description') },
+          { name: t('home.factory.facilities.robot_welding.name'), img: "sinower-factory1.png", desc: t('home.factory.facilities.robot_welding.description') },
+          { name: t('home.factory.facilities.digital_assembly.name'), img: "sinower-office.png", desc: t('home.factory.facilities.digital_assembly.description') }
         ].each do |facility| %>
           <div class="group">
             <div class="aspect-square rounded-3xl overflow-hidden mb-6 relative">
@@ -170,27 +173,20 @@
   <!-- 5. Production Process -->
   <section class="py-24 bg-slate-50 overflow-hidden">
     <div class="max-w-screen-xl mx-auto px-6">
-      <h2 class="text-4xl font-black text-slate-900 text-center mb-20">Streamlined Production Workflow</h2>
+      <h2 class="text-4xl font-black text-slate-900 text-center mb-20"><%= t('home.factory.workflow.title') %></h2>
       
       <div class="relative">
         <!-- Path Line -->
         <div class="hidden lg:block absolute top-24 left-0 w-full h-1 bg-slate-200"></div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-12 relative z-10">
-          <% [
-            { step: "01", name: "SS Coils", desc: "Raw material stainless steel coils." },
-            { step: "02", name: "Sheet Metal", desc: "Precision fabrication workshop." },
-            { step: "03", name: "Laser Cutting", desc: "High-precision laser cutting center." },
-            { step: "04", name: "Bending", desc: "Advanced CNC bending process." },
-            { step: "05", name: "Assembly", desc: "Modern assembly & testing center." },
-            { step: "06", name: "Packaging", desc: "Secure export-standard packaging." }
-          ].each do |proc| %>
+          <% t('home.factory.workflow.steps').each_with_index do |proc, idx| %>
             <div class="flex flex-col items-center text-center group">
               <div class="w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center text-xl font-black text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-all transform group-hover:-translate-y-2 border border-slate-100">
-                <%= proc[:step] %>
+                <%= format('%02d', idx + 1) %>
               </div>
               <h4 class="font-bold text-slate-900 mb-2"><%= proc[:name] %></h4>
-              <p class="text-slate-500 text-xs leading-relaxed"><%= proc[:desc] %></p>
+              <p class="text-slate-500 text-xs leading-relaxed"><%= proc[:description] %></p>
             </div>
           <% end %>
         </div>
@@ -203,21 +199,16 @@
     <div class="max-w-screen-xl mx-auto px-6">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div>
-          <h2 class="text-4xl font-black text-slate-900 mb-8">Four-Stage Quality Control System</h2>
+          <h2 class="text-4xl font-black text-slate-900 mb-8"><%= t('home.factory.quality.title') %></h2>
           <div class="space-y-6">
-            <% [
-              { t: "IQC: Incoming Inspection", d: "100% inspection of critical raw materials and electronic components." },
-              { t: "IPQC: In-Process Inspection", d: "Real-time monitoring at every manufacturing workstation." },
-              { t: "FQC: Final Quality Check", d: "Comprehensive performance and safety testing before storage." },
-              { t: "OQC: Outgoing Inspection", d: "Double-check packaging and loading specifications before shipping." }
-            ].each do |qc| %>
+            <% t('home.factory.quality.steps').each do |qc| %>
               <div class="flex gap-6 p-6 rounded-2xl border border-slate-100 hover:bg-slate-50 transition-colors group">
                  <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 text-accent group-hover:bg-accent group-hover:text-white transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                  </div>
                  <div>
-                    <h4 class="font-bold text-slate-900 mb-1"><%= qc[:t] %></h4>
-                    <p class="text-sm text-slate-500"><%= qc[:d] %></p>
+                    <h4 class="font-bold text-slate-900 mb-1"><%= qc[:title] %></h4>
+                    <p class="text-sm text-slate-500"><%= qc[:description] %></p>
                  </div>
               </div>
             <% end %>
@@ -229,7 +220,7 @@
               <div class="absolute inset-0 flex items-center justify-center p-12">
                  <div class="text-center space-y-4">
                     <div class="text-6xl font-black text-white">ISO 9001</div>
-                    <div class="text-accent font-bold tracking-widest uppercase text-sm">Quality Standard Certified</div>
+                    <div class="text-accent font-bold tracking-widest uppercase text-sm"><%= t('home.factory.quality_standard_certified') %></div>
                     <div class="flex justify-center gap-4 pt-8 opacity-80">
                        <span class="px-4 py-1 border border-white/30 rounded text-xs text-white">CE</span>
                        <span class="px-4 py-1 border border-white/30 rounded text-xs text-white">ETL</span>
@@ -248,41 +239,41 @@
     <div class="max-w-screen-xl mx-auto px-6">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div class="lg:col-span-1">
-           <h2 class="text-4xl font-black mb-6">Engineering & R&D Excellence</h2>
+           <h2 class="text-4xl font-black mb-6"><%= t('home.factory.research.title') %></h2>
            <p class="text-slate-300 mb-8 leading-relaxed">
-             Our dedicated R&D team of 50+ engineers provides end-to-end support for customization, OEM, and ODM projects.
+             <%= t('home.factory.research.description') %>
            </p>
            <ul class="space-y-4">
              <li class="flex items-center gap-3">
                <span class="w-1.5 h-1.5 bg-accent rounded-full"></span>
-               <span class="font-bold">50+ R&D Technical Team</span>
+               <span class="font-bold"><%= t('home.factory.research.team') %></span>
              </li>
              <li class="flex items-center gap-3">
                <span class="w-1.5 h-1.5 bg-accent rounded-full"></span>
-               <span class="font-bold">2 Professional Labs</span>
+               <span class="font-bold"><%= t('home.factory.research.labs') %></span>
              </li>
              <li class="flex items-center gap-3">
                <span class="w-1.5 h-1.5 bg-accent rounded-full"></span>
-               <span class="font-bold">CAD/3D Design Studio</span>
+               <span class="font-bold"><%= t('home.factory.research.design_studio') %></span>
              </li>
            </ul>
         </div>
         <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
            <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:bg-accent/20 transition-colors">
-              <h4 class="text-xl font-bold text-accent mb-4">Customization</h4>
-              <p class="text-slate-300 text-sm">Tailored dimensions, power specifications, and features to meet specific regional market requirements.</p>
+              <h4 class="text-xl font-bold text-accent mb-4"><%= t('home.factory.research.customization.title') %></h4>
+              <p class="text-slate-300 text-sm"><%= t('home.factory.research.customization.description') %></p>
            </div>
            <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:bg-accent/20 transition-colors">
-              <h4 class="text-xl font-bold text-accent mb-4">OEM Service</h4>
-              <p class="text-slate-300 text-sm">High-capacity production for global brands with strict adherence to brand standards and quality.</p>
+              <h4 class="text-xl font-bold text-accent mb-4"><%= t('home.factory.research.oem.title') %></h4>
+              <p class="text-slate-300 text-sm"><%= t('home.factory.research.oem.description') %></p>
            </div>
            <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:bg-accent/20 transition-colors">
-              <h4 class="text-xl font-bold text-accent mb-4">Energy Efficiency</h4>
-              <p class="text-slate-300 text-sm">Pioneering energy-saving technology that reduces operating costs and environmental impact.</p>
+              <h4 class="text-xl font-bold text-accent mb-4"><%= t('home.factory.research.energy.title') %></h4>
+              <p class="text-slate-300 text-sm"><%= t('home.factory.research.energy.description') %></p>
            </div>
            <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:bg-accent/20 transition-colors">
-              <h4 class="text-xl font-bold text-accent mb-4">IoT Integration</h4>
-              <p class="text-slate-300 text-sm">Smart monitoring systems for remote performance tracking and preventive maintenance.</p>
+              <h4 class="text-xl font-bold text-accent mb-4"><%= t('home.factory.research.iot.title') %></h4>
+              <p class="text-slate-300 text-sm"><%= t('home.factory.research.iot.description') %></p>
            </div>
         </div>
       </div>
@@ -295,19 +286,19 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div class="order-2 lg:order-1 space-y-8">
           <div class="relative group">
-            <h2 class="text-4xl font-black text-slate-900 mb-6">Global Footprint & Branches</h2>
+            <h2 class="text-4xl font-black text-slate-900 mb-6"><%= t('home.factory.branches.title') %></h2>
             <p class="text-slate-600 mb-8 leading-relaxed">
-              With headquarters in China and strategically located branches in France, Germany, UAE, and USA, Sinower provides localized support and efficient supply chain services to clients worldwide.
+              <%= t('home.factory.branches.description') %>
             </p>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <% [
-                { name: t('home.branches.china'), addr: "Industrial Park, Pangjia Town, Boxing County, Binzhou, Shandong", icon: "🇨🇳" },
-                { name: t('home.branches.france'), addr: "Athis Mons, France", icon: "🇫🇷" },
-                { name: t('home.branches.germany'), addr: "Germany", icon: "🇩🇪" },
-                { name: t('home.branches.czech'), addr: "Czech Republic", icon: "🇨🇿" },
-                { name: t('home.branches.uae'), addr: "Sharjah, UAE", icon: "🇦🇪" },
-                { name: t('home.branches.usa'), addr: "Norcross, GA, USA", icon: "🇺🇸" }
+                { name: t('home.branches.china'), addr: t('home.factory.branches.china_address'), icon: "🇨🇳" },
+                { name: t('home.branches.france'), addr: t('home.factory.branches.france_address'), icon: "🇫🇷" },
+                { name: t('home.branches.germany'), addr: t('home.factory.branches.germany_address'), icon: "🇩🇪" },
+                { name: t('home.branches.czech'), addr: t('home.branches.czech_republic'), icon: "🇨🇿" },
+                { name: t('home.branches.uae'), addr: t('home.branches.sharjah'), icon: "🇦🇪" },
+                { name: t('home.branches.usa'), addr: t('home.factory.branches.usa_address'), icon: "🇺🇸" }
               ].each do |branch| %>
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 group hover:bg-white hover:shadow-lg transition-all">
                   <div class="flex items-center gap-2 mb-2">
@@ -322,18 +313,18 @@
         </div>
 
         <div class="order-1 lg:order-2 space-y-8">
-           <h2 class="text-4xl font-black text-slate-900">Secure Storage & Global Logistics</h2>
+           <h2 class="text-4xl font-black text-slate-900"><%= t('home.factory.logistics.title') %></h2>
            <p class="text-slate-600 leading-relaxed">
-             Our modern warehouse management system ensures accurate inventory control and efficient loading. With professional export packaging and strategic location, we guarantee on-time delivery to over 180 countries.
+             <%= t('home.factory.logistics.description') %>
            </p>
            <div class="grid grid-cols-2 gap-8">
               <div>
                  <div class="text-3xl font-black text-slate-900">140,000㎡</div>
-                 <div class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">Total Facility Area</div>
+                 <div class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1"><%= t('home.factory.logistics.total_area') %></div>
               </div>
               <div>
                  <div class="text-3xl font-black text-slate-900">180+</div>
-                 <div class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">Countries Served</div>
+                 <div class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1"><%= t('home.factory.logistics.countries_served') %></div>
               </div>
            </div>
            <div class="pt-4 space-y-4">
@@ -342,13 +333,13 @@
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                 </div>
                 <div>
-                  <h4 class="font-bold text-slate-900">Global Sales Support</h4>
-                  <p class="text-xs text-slate-500 mt-1">Direct communication with our overseas branches for localized technical support and fast delivery.</p>
+                  <h4 class="font-bold text-slate-900"><%= t('home.factory.logistics.support_title') %></h4>
+                  <p class="text-xs text-slate-500 mt-1"><%= t('home.factory.logistics.support_description') %></p>
                 </div>
               </div>
 
               <%= link_to contact_path, class: "inline-flex items-center gap-3 text-accent font-bold hover:gap-5 transition-all" do %>
-                Learn about shipping options <span>→</span>
+                <%= t('home.factory.logistics.shipping_options') %> <span>→</span>
               <% end %>
            </div>
         </div>
@@ -361,7 +352,7 @@
   <!-- 9. Factory Gallery -->
   <section class="py-24 bg-slate-50">
     <div class="max-w-screen-xl mx-auto px-6">
-      <h2 class="text-4xl font-black text-slate-900 text-center mb-16">Authentic Factory Sight</h2>
+      <h2 class="text-4xl font-black text-slate-900 text-center mb-16"><%= t('home.factory.gallery_title') %></h2>
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <% [
           "sinower-factory1.png", "sinower-factory2.png", "sinower-factory3.png", "sinower-office.png",
@@ -381,13 +372,13 @@
         <svg class="w-[150%] h-[150%] animate-spin-slow" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" stroke="white" stroke-width="0.5" fill="none" stroke-dasharray="10 20"/></svg>
      </div>
      <div class="relative z-10 max-w-screen-xl mx-auto px-6 text-center text-white">
-        <h2 class="text-4xl md:text-5xl font-black mb-8 italic uppercase tracking-tighter">Ready to Partner with a <br>Global Manufacturing Leader?</h2>
+        <h2 class="text-4xl md:text-5xl font-black mb-8 italic uppercase tracking-tighter"><%= t('home.factory.cta.title_line_one') %> <br><%= t('home.factory.cta.title_line_two') %></h2>
         <p class="text-xl mb-12 max-w-2xl mx-auto font-medium">
-          Experience the Sinower advantage in quality, scale, and professional service.
+          <%= t('home.factory.cta.description') %>
         </p>
         <div class="flex flex-wrap justify-center gap-6">
            <%= link_to contact_path, class: "px-12 py-5 bg-primary hover:bg-primary/90 text-white font-black rounded-2xl text-lg transition-all transform hover:-translate-y-1 shadow-2xl" do %>
-             Request Factory Tour & Quote
+             <%= t('home.factory.cta.button') %>
            <% end %>
         </div>
      </div>

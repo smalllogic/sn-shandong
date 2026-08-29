@@ -1,4 +1,5 @@
-<% content_for :title, "#{t('home.faqs.title')} - #{t('footer.company_name')}" %>
+<% content_for :title, t('seo.faqs.title') %>
+<% content_for :meta_description, t('seo.faqs.description') %>
 
 <div class="bg-slate-50 min-h-screen pb-20" x-data="{ 
   activeCategory: <%= @faq_categories.first&.id || 'null' %>,
@@ -66,7 +67,7 @@
                 <button @click="scrollToCategory(<%= category.id %>)"
                         :class="activeCategory == <%= category.id %> ? 'bg-primary text-white shadow-lg shadow-primary/20 scale-[1.02]' : 'text-slate-600 hover:bg-slate-100 border-l-4 border-transparent'"
                         class="w-full text-left px-5 py-4 rounded-2xl font-bold transition-all duration-300 flex items-center justify-between group">
-                  <span><%= category.name %></span>
+                  <span><%= clean_faq_category_name(category) %></span>
                   <svg :class="activeCategory == <%= category.id %> ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'"
                        class="w-4 h-4 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
@@ -95,36 +96,36 @@
                  class="scroll-mt-32">
               <div class="flex items-center gap-4 mb-8">
                 <div class="h-10 w-2 bg-accent rounded-full"></div>
-                <h2 class="text-3xl font-black text-slate-900 tracking-tight"><%= category.name %></h2>
+                <h2 class="text-3xl font-black text-slate-900 tracking-tight"><%= clean_faq_category_name(category) %></h2>
               </div>
               
               <div class="space-y-4">
                 <% category.faqs.each do |faq| %>
-                  <div x-show="searchQuery === '' || '<%= j faq.question.downcase %>'.includes(searchQuery.toLowerCase()) || '<%= j faq.answer.downcase %>'.includes(searchQuery.toLowerCase())"
+                  <div x-show="searchQuery === '' || '<%= j faq_search_blob(faq) %>'.includes(searchQuery.toLowerCase())"
                        class="bg-white rounded-2xl border border-slate-200 hover:border-primary/30 transition-all duration-300 shadow-sm overflow-hidden group">
                     <details class="group/details">
                       <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
                         <h3 class="text-lg font-bold text-slate-800 pr-8 group-hover/details:text-primary transition-colors">
-                          <%= faq.question %>
+                          <%= clean_faq_text(faq.question) %>
                         </h3>
                         <div class="flex-shrink-0 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-open:rotate-180 group-open:bg-primary group-open:text-white transition-all duration-300">
                           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                       </summary>
                       <div class="px-6 pb-8 text-slate-600 leading-relaxed border-t border-slate-50 pt-6 prose prose-slate max-w-none">
-                        <%= faq.answer.gsub("\n", "<br>").html_safe %>
+                        <%= simple_format(clean_faq_text(faq.answer), {}, sanitize: true) %>
                         
                         <!-- Internal Links (Example) -->
                         <div class="mt-8 pt-6 border-t border-slate-50 flex flex-wrap gap-4">
-                          <% if faq.question.downcase.include?('quality') %>
+                          <% if faq_search_blob(faq).include?('quality') %>
                             <%= link_to factory_path, class: "text-xs font-black text-accent hover:text-primary uppercase tracking-tighter flex items-center transition-colors" do %>
-                              <span>Learn about Quality Control</span>
+                              <span><%= t('home.faqs.quality_control_link') %></span>
                               <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             <% end %>
                           <% end %>
-                          <% if faq.question.downcase.include?('product') || faq.question.downcase.include?('manufacture') %>
+                          <% if faq_search_blob(faq).include?('product') || faq_search_blob(faq).include?('manufacture') %>
                             <%= link_to categories_path, class: "text-xs font-black text-accent hover:text-primary uppercase tracking-tighter flex items-center transition-colors" do %>
-                              <span>Explore Products</span>
+                              <span><%= t('home.faqs.explore_products_link') %></span>
                               <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             <% end %>
                           <% end %>
@@ -156,17 +157,17 @@
       <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
       <div class="relative z-10">
         <h2 class="text-3xl md:text-4xl font-black text-white mb-6 tracking-tight">
-          Ready to Start Your Project?
+          <%= t('home.faqs.cta_title') %>
         </h2>
         <p class="text-white/80 text-lg mb-10 max-w-2xl mx-auto">
-          Contact our professional team to get detailed solutions and competitive quotations for your commercial kitchen.
+          <%= t('home.faqs.cta_description') %>
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <%= link_to contact_path, class: "px-10 py-5 bg-white text-primary font-black rounded-2xl hover:bg-slate-50 transition-all transform hover:scale-105 shadow-xl" do %>
             <%= t('home.faqs.inquiry_cta') %>
           <% end %>
           <a href="tel:<%= t('contact_info.phone') %>" class="px-10 py-5 bg-primary/20 text-white font-black rounded-2xl border border-white/20 hover:bg-white/10 transition-all">
-            Call Us Now
+            <%= t('home.faqs.call_now') %>
           </a>
         </div>
       </div>

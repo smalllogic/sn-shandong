@@ -1,4 +1,7 @@
 zh-CN:
+  date:
+    formats:
+      long: "%Y年%m月%d日"
   navbar:
     search_placeholder: "搜索产品..."
     all_products: "产品中心"
@@ -24,8 +27,10 @@ zh-CN:
       verified: "权威验证"
       experience_years: "10+ 年制造业卓越经验"
   posts:
+    meta_description: "探索 Sinower 商用厨房设备制造领域的洞察、趋势与实用指南。"
     hero:
       title: "Sinower 资讯"
+      default_subtitle: "资讯与洞察"
       subtitle: "最新动态"
       description: "专业商用厨房设备制造商 - 山东Sinower电器有限公司"
     enterprise_updates:
@@ -38,6 +43,9 @@ zh-CN:
       description: "针对全球商用厨房设备行业的专业分析与见解。"
     all: "全部资讯"
     back_to_blog: "返回资讯列表"
+    read_more: "阅读更多"
+    show:
+      badge: "Sinower 资讯"
     statistics:
       title: "博客概览"
       subtitle: "实时数据"
@@ -50,6 +58,7 @@ zh-CN:
       hero_title: "专业制造商"
       hero_desc: "专业商用厨房设备制造商 - 山东Sinower电器有限公司。联系我们的团队进行产品咨询或业务合作。"
       send_message: "发送消息"
+      direct_factory_support: "工厂直接支持"
       success_notice: "消息发送成功。我们将尽快与您联系。"
       form:
         name: "您的姓名"
@@ -63,6 +72,7 @@ zh-CN:
         privacy_policy_link: "隐私政策"
         privacy_error: "请同意隐私政策以继续。"
         verification_failed: "提交前请完成安全验证。"
+        verification_required: "需要完成安全验证"
         assistance_title: "安全检查"
         assistance_link: "需要验证"
       address_title: "我们的地址"
@@ -81,6 +91,11 @@ zh-CN:
       more_questions_title: "还有其他问题吗？"
       more_questions_desc: "如果您没能找到想要的答案，请随时联系我们的客户服务团队。"
       inquiry_cta: "发送询价"
+      quality_control_link: "了解质量控制"
+      explore_products_link: "浏览产品"
+      cta_title: "准备启动您的项目？"
+      cta_description: "联系我们的专业团队，获取商用厨房详细解决方案和有竞争力的报价。"
+      call_now: "立即致电"
     branches:
       china: "中国总部"
       france: "法国分公司"
@@ -100,11 +115,19 @@ zh-CN:
     all_products_desc: "Sinower 整合多样化的商用制冷和烹饪厨房设备，为全球餐饮服务客户提供完整的产品组合。"
     banner_eyebrow: "SINOWER 商用厨具"
     explore_all: "Sinower 厨房设备"
+    search_results: "搜索结果：%{query}"
+    browse_categories: "分类浏览"
     view_details: "查看详情"
+    asset_lost: "素材丢失"
+    awaiting_media: "等待图片"
+    industrial_standard: "工业级标准"
+    ready_to_ship: "可快速出货"
     no_skus_title: "暂无可用型号"
     no_skus_desc: "此分类正在更新中。请稍后再来查看我们的最新发布。"
     contact_us: "联系我们"
   skus:
+    meta_description: "%{name} - 专业 %{category} 商用厨房与餐饮设备，支持 OEM / ODM，工厂直营报价。"
+    meta_keywords: "%{name}，%{category}，商用厨房设备，餐饮设备，餐厅设备，Sinower 厨具"
     product_name: "产品名称"
     material: "材质"
     specification: "规格"
@@ -120,9 +143,26 @@ zh-CN:
     carton_size: "外箱尺寸"
     gross_weight: "毛重"
     price: "价格"
-    standard_features: "Standard Features"
+    standard_features: "标准功能"
     add_to_order: "添加到订单"
     add_short: "添加"
+    add_to_quote_title: "加入询盘"
+    add_to_quote_request: "加入询盘请求"
+    digital_asset_pending: "图片资料待上传"
+    technical_assurance: "技术保障"
+    certified_factory_specifications: "工厂认证规格"
+    in_production: "生产中"
+    global_shipping: "全球发货"
+    quality_warranty: "质量保障"
+    technical_specifications: "技术规格"
+    global_support: "全球支持"
+    sales_engineering: "销售与工程"
+    direct_channel_notice: "批发、OEM 项目与技术核验的直连通道。"
+    whatsapp_business: "WhatsApp 商务"
+    global_inquiry: "全球询盘"
+    request_factory_quote: "获取工厂报价"
+    related_equipment: "相关设备"
+    no_image: "暂无图片"
   footer:
     quick_links: "了解更多"
     address: "滨州市博兴县庞家工业园"
@@ -171,3 +211,230 @@ zh-CN:
     accept: "接受"
     decline: "拒绝"
     privacy_policy: "隐私政策"
+
+  languages: { en: "ENGLISH", it: "ITALIANO", fr: "FRANÇAIS", zh-CN: "中文" }
+  common: { get_quote: "获取报价", request_quote: "索取报价", inquiry: "询盘", list: "清单", scan_wechat: "扫描微信二维码", success: "成功", added_to_order: "已加入询盘清单" }
+  cart: { title: "设备询盘清单", complete_inquiry: "完成您的询盘", name: "您的姓名", country: "国家", contact: "WhatsApp/微信", email: "邮箱地址", message: "留言 / 具体需求", submit: "获取专业报价" }
+  seo:
+    default_description: "Sinower 是一家位于中国山东的专业商用厨房设备制造商。"
+    default_keywords: "商用厨房设备, 制冷设备, 烹饪设备, 餐饮设备制造商, Sinower 厨具"
+    home: { title: "Sinower｜商用厨房设备制造商", description: "具备全球制造与供应能力的工业级商用厨房设备。" }
+    factory: { title: "工厂与制造能力｜Sinower", description: "了解 Sinower 的工厂、自动化产线、质量控制和全球物流能力。" }
+    products: { title: "商用厨房设备目录｜Sinower", description: "浏览 Sinower 商用制冷、烹饪及不锈钢厨房设备。" }
+    contact: { title: "联系 Sinower｜商用厨房设备支持", description: "联系 Sinower 获取产品咨询、项目方案和商用厨房设备报价。" }
+    faqs: { title: "常见问题｜Sinower", description: "关于 Sinower 产品、制造、定制、质量控制与合作的解答。" }
+    privacy: { title: "隐私政策｜Sinower", description: "了解 Sinower 如何收集、使用和保护个人信息。" }
+  navbar:
+    home: "首页"
+    factory: "关于我们"
+    blog: "资讯"
+    contact_us: "联系我们"
+    faqs: "常见问题"
+    product_range: "产品范围"
+    quick_access: "快捷入口"
+    ready_title: "准备开始？"
+    ready_description: "为您的项目获取专业厨房解决方案。"
+  footer:
+    company_name: "山东Sinower电器有限公司"
+    company_desc: "专业商用厨房设备制造商"
+    address: "滨州市博兴县庞家工业园"
+    phone: "+86 0543 8171612"
+    email: "info@skyrainbow.com.cn"
+    rights_reserved: "保留所有权利。"
+    certified_quality: "认证品质"
+    solutions: "解决方案"
+    company: "公司"
+    contact: "联系我们"
+  privacy_policy:
+    last_updated: "最后更新：%{date}"
+  home:
+    branches:
+      spain: "西班牙分公司"
+      uk: "英国分公司"
+      australia: "澳大利亚分公司"
+      boxing: "博兴，中国"
+      paris: "巴黎，法国"
+      munich: "慕尼黑，德国"
+      czech_republic: "捷克共和国"
+      madrid: "马德里，西班牙"
+      london: "伦敦，英国"
+      sydney: "悉尼，澳大利亚"
+      sharjah: "沙迦，阿联酋"
+      georgia: "佐治亚州，美国"
+    index:
+      hero:
+        badge: "全球供应链领导者"
+        title_line_one: "连接"
+        title_line_two: "全球厨房"
+        description: "以工业级精度制造的优质商用设备。"
+        highlight: "9 个全球战略枢纽，服务 100 多个国家。"
+        request_quote: "获取全球报价"
+        explore_factory: "探索工厂"
+      metrics: { title: "全球制造实力", production_area: "生产面积", employees: "员工人数", automated_lines: "自动化产线", countries_served: "服务国家", annual_output: "年产量" }
+      categories:
+        title: "产品分类"
+        description: "面向全球餐饮服务合作伙伴的专业解决方案"
+        view_all: "查看全部分类"
+        view_products: "查看产品"
+        refrigeration: { name: "商用制冷设备", description: "冰箱、冷冻柜、冷库" }
+        cooking: { name: "烹饪设备", description: "烤箱、炸炉、炉具" }
+        kitchenware: { name: "不锈钢厨房设备", description: "工作台、水槽、柜体" }
+      capability:
+        title: "强大的制造能力"
+        factory_title: "140,000㎡ 现代化工厂"
+        factory_description: "大规模生产基地，确保稳定供应和规模优势。"
+        lines_title: "8 条专业自动化产线"
+        lines_description: "世界先进设备和 5 个车间支持精密制造。"
+        engineers_title: "50 多名研发工程师"
+        engineers_description: "专业工程团队，配备 2 个实验室，提供定制厨房解决方案。"
+      quality:
+        title: "严谨的质量体系"
+        description: "我们不只谈质量，而是在每一个环节加以验证。"
+        steps: ["原材料检验", "生产过程检验", "性能测试", "最终检验", "出货"]
+        certifications: { europe_safety: "欧洲安全", north_america: "北美", safety_standards: "安全标准", food_safety: "食品安全", energy_rating: "能效等级" }
+      advantages:
+        title: "全球客户选择 Sinower 的理由"
+        client_needs: "客户需求"
+        sinower_advantage: "Sinower 优势"
+        rows:
+          - { need: "稳定供应", advantage: "年总产量超过 300,000 台" }
+          - { need: "成本优势", advantage: "140,000㎡ 现代化制造基地" }
+          - { need: "快速交付", advantage: "全球物流网络和海外子公司" }
+          - { need: "定制能力", advantage: "专业研发与 OEM/ODM 能力" }
+          - { need: "长期信赖", advantage: "10 多年出口经验" }
+      projects:
+        title: "成功案例与全球项目"
+        restaurant: { title: "连锁餐饮项目", description: "为全球快餐连锁提供完整厨房解决方案。" }
+        hotel: { title: "酒店厨房方案", description: "为五星级酒店提供高端不锈钢设备。" }
+        distributor: { title: "经销商合作", description: "与欧美领先经销商开展战略合作。" }
+      news: { title: "企业动态", description: "关注 Sinower 的最新发展。", read_more: "阅读更多资讯" }
+      cta: { title_line_one: "寻找可靠的", title_line_two: "商用厨房设备供应商？", description: "立即联系 Sinower 获取定制报价和专业方案。", button: "立即获取报价" }
+    global_presence:
+      title: "全球布局"
+      description: "成立于 2002 年，中国总部连接全球办事处与服务网络，卓越服务覆盖 180 多个国家。"
+      map_alt: "世界地图"
+      global_offices: "全球办事处"
+      china: { title: "中国总部", location: "中国山东滨州", factory: "140,000㎡ 工厂" }
+      usa: { title: "美国子公司", location: "美国佐治亚州诺克罗斯" }
+      germany: { title: "德国分公司", office: "欧洲办事处", location: "德国慕尼黑" }
+      france: { title: "法国分公司", office: "欧洲服务中心", location: "法国巴黎" }
+      czech: { office: "欧洲物流枢纽" }
+      uae: { title: "阿联酋分公司" }
+      uk: { title: "伦敦分公司", office: "英国办事处", location: "英国伦敦" }
+      spain: { title: "西班牙分公司", office: "伊比利亚服务中心", location: "西班牙马德里" }
+      australia: { title: "悉尼分公司", office: "大洋洲办事处", location: "澳大利亚悉尼" }
+    contact:
+      title: "联系我们"
+      subtitle: "联系我们"
+      hero_title: "专业制造商"
+      hero_desc: "专业商用厨房设备制造商 - 山东Sinower电器有限公司。联系我们的团队进行产品咨询或业务合作。"
+      send_message: "发送消息"
+      direct_factory_support: "工厂直接支持"
+      address_title: "我们的地址"
+      phone_title: "服务电话"
+      email_title: "官方邮箱"
+      form:
+        name: "您的姓名"
+        name_placeholder: " "
+        email: "联系方式"
+        email_placeholder: "WhatsApp/微信"
+        message: "留言详情"
+        message_placeholder: "请描述您的需求或问题..."
+        submit: "提交"
+        privacy_policy_agree: "我已阅读并同意"
+        privacy_policy_link: "隐私政策"
+        privacy_error: "请同意隐私政策以继续。"
+        verification_failed: "提交前请完成安全验证。"
+        verification_required: "需要完成安全验证"
+    faqs:
+      hero_badge: "常见问题"
+      title: "常见问题解答"
+      subtitle: "寻找关于我们产品、制造工艺、定制服务、质量控制及合作方式的答案。"
+      search_placeholder: "搜索您的问题..."
+      categories_title: "问题分类"
+      no_questions: "暂无问题"
+      more_questions_title: "还有其他问题吗？"
+      more_questions_desc: "如果您没能找到想要的答案，请随时联系我们的客户服务团队。"
+      inquiry_cta: "发送询价"
+      quality_control_link: "了解质量控制"
+      explore_products_link: "浏览产品"
+      cta_title: "准备启动您的项目？"
+      cta_description: "联系我们的专业团队，获取商用厨房详细解决方案和有竞争力的报价。"
+      call_now: "立即致电"
+    factory:
+      quality_standard_certified: "质量标准认证"
+      hero: { live_feed: "工厂实时展示", badge: "制造能力证明", title_line_one: "先进制造", title_line_two: "成就全球卓越", production_area: "生产面积", professional_lines: "专业产线", annual_capacity: "年产能", total_employees: "员工总数", explore_facility: "参观工厂" }
+      overview:
+        experience: "年行业经验"
+        title_line_one: "世界级制造"
+        title_line_two: "基础设施"
+        description: "成立于 2002 年，Sinower 拥有行业领先的先进制造设施。140,000㎡ 的生产基地，为全球经销商和连锁合作伙伴提供所需的规模与稳定性。"
+        location_label: "所在地"
+        location: "中国山东滨州"
+        total_area_label: "总面积"
+        total_area: "140,000 平方米"
+        staffing_label: "人员配置"
+        staffing: "500 多名技术人员"
+        specialization_label: "专业能力"
+        specialization: "全链路制造"
+      capacity:
+        title: "强大年产量"
+        description: "我们维持高产能生产线，确保大规模全球采购的稳定供应。"
+        units_total: "台套总量"
+        annual_capacity: "年产能"
+        refrigeration: "制冷设备"
+        cooking_equipment: "烹饪设备"
+        stainless_steel: "不锈钢制造"
+        units_per_year: "100,000+ 台/年"
+      facilities:
+        title: "先进机械与自动化"
+        description: "世界领先设备驱动精密制造。"
+        machines: "550 多台设备"
+        digital_control: "数字化控制"
+        laser_cutting: { name: "激光切割", description: "为复杂部件提供高精度不锈钢加工。" }
+        cnc_bending: { name: "数控折弯", description: "通过计算机控制折弯，确保精准角度与结构完整性。" }
+        robot_welding: { name: "机器人焊接", description: "自动化焊接确保一致品质和高耐用性。" }
+        digital_assembly: { name: "数字化装配", description: "流畅的生产线实现高效的大规模装配。" }
+      workflow:
+        title: "高效生产流程"
+        steps:
+          - { name: "不锈钢卷材", description: "原材料不锈钢卷材。" }
+          - { name: "钣金加工", description: "精密制造车间。" }
+          - { name: "激光切割", description: "高精度激光切割中心。" }
+          - { name: "折弯", description: "先进数控折弯工艺。" }
+          - { name: "装配", description: "现代化装配与测试中心。" }
+          - { name: "包装", description: "安全的出口标准包装。" }
+      quality:
+        title: "四阶段质量控制体系"
+        steps:
+          - { title: "IQC：来料检验", description: "关键原材料和电子部件 100% 检验。" }
+          - { title: "IPQC：过程检验", description: "每个制造工位实时监控。" }
+          - { title: "FQC：最终质量检验", description: "入库前进行全面性能和安全测试。" }
+          - { title: "OQC：出货检验", description: "出货前复核包装和装载规格。" }
+      research:
+        title: "工程与研发实力"
+        description: "由 50 多名工程师组成的专属研发团队，为定制、OEM 和 ODM 项目提供端到端支持。"
+        team: "50 多人研发技术团队"
+        labs: "2 个专业实验室"
+        design_studio: "CAD/3D 设计工作室"
+        customization: { title: "定制服务", description: "根据区域市场需求定制尺寸、电源规格和功能。" }
+        oem: { title: "OEM 服务", description: "面向全球品牌的大产能生产，严格遵循品牌标准与质量要求。" }
+        energy: { title: "能源效率", description: "创新节能技术，降低运营成本和环境影响。" }
+        iot: { title: "物联网集成", description: "智能监控系统支持远程性能追踪和预防性维护。" }
+      branches:
+        title: "全球布局与分公司"
+        description: "Sinower 总部位于中国，并在法国、德国、阿联酋和美国设有战略分支，为全球客户提供本地化支持和高效供应链服务。"
+        china_address: "山东滨州博兴县庞家镇工业园"
+        france_address: "法国阿蒂斯蒙斯"
+        germany_address: "德国"
+        usa_address: "美国佐治亚州诺克罗斯"
+      logistics:
+        title: "安全仓储与全球物流"
+        description: "现代仓储管理系统确保精准库存控制和高效装载。专业出口包装与优越区位，保障向 180 多个国家准时交付。"
+        total_area: "工厂总面积"
+        countries_served: "服务国家"
+        support_title: "全球销售支持"
+        support_description: "直接对接海外分公司，获得本地技术支持与快速交付。"
+        shipping_options: "了解运输方案"
+      gallery_title: "真实工厂实景"
+      cta: { title_line_one: "准备与全球", title_line_two: "制造领导者合作？", description: "体验 Sinower 在品质、规模和专业服务方面的优势。", button: "预约工厂参观与报价" }

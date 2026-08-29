@@ -1,3 +1,6 @@
+<% content_for :title, t('seo.home.title') %>
+<% content_for :meta_description, t('seo.home.description') %>
+
 <div class="relative min-h-screen">
   <!-- 1. New Globalization Hero Section (Fast Loading) -->
   <section class="relative bg-slate-900 py-24 lg:py-40 overflow-hidden border-b border-white/5 min-h-[850px] flex items-center">
@@ -17,43 +20,43 @@
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
           </span>
-          Global Supply Chain Leader
+          <%= t('home.index.hero.badge') %>
         </div>
         
         <h1 class="text-6xl md:text-8xl lg:text-9xl font-black text-white leading-[1.05] mb-8 tracking-tighter drop-shadow-2xl">
-          CONNECTING THE <br>
-          <span class="text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/30">GLOBAL KITCHEN</span>
+          <%= t('home.index.hero.title_line_one') %> <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/30"><%= t('home.index.hero.title_line_two') %></span>
         </h1>
         
         <p class="text-xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed font-medium">
-          Premium commercial equipment manufactured with industrial precision. 
-          <span class="text-white/60">9 Strategic Global Hubs. Serving 100+ Countries.</span>
+          <%= t('home.index.hero.description') %>
+          <span class="text-white/60"><%= t('home.index.hero.highlight') %></span>
         </p>
       </div>
       
       <div class="w-full flex flex-col items-center">
         <div class="flex flex-wrap justify-center gap-6 mb-24">
           <%= link_to contact_path, class: "group relative px-10 py-5 bg-accent text-white font-black rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-accent/20 overflow-hidden" do %>
-            <span class="relative z-10">REQUEST GLOBAL QUOTE</span>
+            <span class="relative z-10"><%= t('home.index.hero.request_quote') %></span>
             <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
           <% end %>
           <%= link_to factory_path, class: "px-10 py-5 bg-white/5 border border-white/10 text-white font-black rounded-2xl hover:bg-white/10 transition-all backdrop-blur-md border-dashed" do %>
-            EXPLORE FACTORY
+            <%= t('home.index.hero.explore_factory') %>
           <% end %>
         </div>
 
         <!-- 5 Branches Grid -->
         <div class="flex flex-wrap justify-center gap-4 max-w-6xl mx-auto w-full">
           <% [
-            { name: t('home.branches.china'), addr: "Boxing, CN", flag: "🇨🇳", tag: t('home.branches.global_hub') },
-            { name: t('home.branches.france'), addr: "Paris, FR", flag: "🇫🇷", tag: t('home.branches.europe') },
-            { name: t('home.branches.germany'), addr: "Munich, DE", flag: "🇩🇪", tag: t('home.branches.europe') },
-            { name: t('home.branches.czech'), addr: "Czech Republic", flag: "🇨🇿", tag: t('home.branches.europe') },
-            { name: t('home.branches.spain'), addr: "Madrid, ES", flag: "🇪🇸", tag: t('home.branches.europe') },
-            { name: t('home.branches.uk'), addr: "London, UK", flag: "🇬🇧", tag: t('home.branches.europe') },
-            { name: t('home.branches.australia'), addr: "Sydney, AU", flag: "🇦🇺", tag: t('home.branches.global_hub') },
-            { name: t('home.branches.uae'), addr: "Sharjah, UAE", flag: "🇦🇪", tag: t('home.branches.middle_east') },
-            { name: t('home.branches.usa'), addr: "Georgia, US", flag: "🇺🇸", tag: t('home.branches.north_america') }
+            { name: t('home.branches.china'), addr: t('home.branches.boxing'), flag: "🇨🇳", tag: t('home.branches.global_hub') },
+            { name: t('home.branches.france'), addr: t('home.branches.paris'), flag: "🇫🇷", tag: t('home.branches.europe') },
+            { name: t('home.branches.germany'), addr: t('home.branches.munich'), flag: "🇩🇪", tag: t('home.branches.europe') },
+            { name: t('home.branches.czech'), addr: t('home.branches.czech_republic'), flag: "🇨🇿", tag: t('home.branches.europe') },
+            { name: t('home.branches.spain'), addr: t('home.branches.madrid'), flag: "🇪🇸", tag: t('home.branches.europe') },
+            { name: t('home.branches.uk'), addr: t('home.branches.london'), flag: "🇬🇧", tag: t('home.branches.europe') },
+            { name: t('home.branches.australia'), addr: t('home.branches.sydney'), flag: "🇦🇺", tag: t('home.branches.global_hub') },
+            { name: t('home.branches.uae'), addr: t('home.branches.sharjah'), flag: "🇦🇪", tag: t('home.branches.middle_east') },
+            { name: t('home.branches.usa'), addr: t('home.branches.georgia'), flag: "🇺🇸", tag: t('home.branches.north_america') }
           ].each do |branch| %>
             <div class="bg-white/[0.03] p-4 rounded-xl border border-white/5 hover:border-accent/30 transition-all group backdrop-blur-sm relative overflow-hidden w-full sm:w-[calc(50%-1rem)] md:w-[calc(33.33%-1rem)] lg:w-[calc(20%-1rem)] min-w-[160px]">
               <div class="flex justify-between items-center mb-4">
@@ -163,27 +166,27 @@
   <!-- 2. Core Data (Digital Trust) -->
   <section class="py-20 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-16">Global Manufacturing Powerhouse</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-16"><%= t('home.index.metrics.title') %></h2>
       <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
         <div class="space-y-2 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all group">
           <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="700000" class="counter">0</span>㎡</div>
-          <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Production Area</div>
+          <div class="text-slate-500 text-xs font-bold uppercase tracking-wider"><%= t('home.index.metrics.production_area') %></div>
         </div>
         <div class="space-y-2 p-6 rounded-2xl bg-primary/5 border border-primary/10 hover:shadow-lg transition-all text-primary group">
           <div class="text-3xl md:text-4xl font-extrabold group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="500" class="counter">0</span>+</div>
-          <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Employees</div>
+          <div class="text-slate-500 text-xs font-bold uppercase tracking-wider"><%= t('home.index.metrics.employees') %></div>
         </div>
         <div class="space-y-2 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all group">
           <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="8" class="counter">0</span></div>
-          <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Automated Lines</div>
+          <div class="text-slate-500 text-xs font-bold uppercase tracking-wider"><%= t('home.index.metrics.automated_lines') %></div>
         </div>
         <div class="space-y-2 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all group">
           <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="180" class="counter">0</span></div>
-          <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Countries Served</div>
+          <div class="text-slate-500 text-xs font-bold uppercase tracking-wider"><%= t('home.index.metrics.countries_served') %></div>
         </div>
         <div class="space-y-2 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all group">
           <div class="text-3xl md:text-4xl font-extrabold text-primary group-hover:scale-110 transition-transform"><span data-controller="counter" data-target-value="300000" class="counter">0</span></div>
-          <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Annual Output</div>
+          <div class="text-slate-500 text-xs font-bold uppercase tracking-wider"><%= t('home.index.metrics.annual_output') %></div>
         </div>
       </div>
     </div>
@@ -194,19 +197,19 @@
     <div class="max-w-screen-xl mx-auto px-6">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
         <div>
-          <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Product Categories</h2>
-          <p class="text-slate-600 mt-2">Professional solutions for global foodservice partners</p>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-900"><%= t('home.index.categories.title') %></h2>
+          <p class="text-slate-600 mt-2"><%= t('home.index.categories.description') %></p>
         </div>
         <%= link_to categories_path, class: "text-accent font-bold hover:underline flex items-center" do %>
-          View All Categories <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+          <%= t('home.index.categories.view_all') %> <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         <% end %>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <% [
-          { name: "Commercial Refrigeration", image: "sinower-factory2.png", desc: "Refrigerator, Freezer, Cold Storage" },
-          { name: "Cooking Equipment", image: "sinower-factory3.png", desc: "Oven, Fryer, Range" },
-          { name: "Stainless Steel Kitchenware", image: "sinower-door.png", desc: "Work Table, Sink, Cabinet" }
+          { name: t('home.index.categories.refrigeration.name'), image: "sinower-factory2.png", desc: t('home.index.categories.refrigeration.description') },
+          { name: t('home.index.categories.cooking.name'), image: "sinower-factory3.png", desc: t('home.index.categories.cooking.description') },
+          { name: t('home.index.categories.kitchenware.name'), image: "sinower-door.png", desc: t('home.index.categories.kitchenware.description') }
         ].each do |cat| %>
           <div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100">
             <div class="h-64 overflow-hidden relative">
@@ -221,7 +224,7 @@
               <h3 class="text-xl font-bold text-slate-900 group-hover:text-accent transition-colors"><%= cat[:name] %></h3>
               <p class="text-slate-500 mt-2 text-sm"><%= cat[:desc] %></p>
               <div class="mt-6 flex items-center text-slate-900 font-bold text-sm">
-                View Products <span class="ml-2 group-hover:translate-x-2 transition-transform text-accent">→</span>
+                <%= t('home.index.categories.view_products') %> <span class="ml-2 group-hover:translate-x-2 transition-transform text-accent">→</span>
               </div>
             </div>
           </div>
@@ -235,27 +238,27 @@
     <div class="max-w-screen-xl mx-auto px-6">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div class="space-y-8">
-          <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Powerful Manufacturing Capability</h2>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-900"><%= t('home.index.capability.title') %></h2>
           <div class="space-y-6">
             <div class="flex gap-4">
               <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0 text-accent font-bold">01</div>
               <div>
-                <h4 class="font-bold text-slate-900">140,000㎡ Modern Factory</h4>
-                <p class="text-slate-600 text-sm">Large-scale production base ensuring stable supply and scale advantage.</p>
+                <h4 class="font-bold text-slate-900"><%= t('home.index.capability.factory_title') %></h4>
+                <p class="text-slate-600 text-sm"><%= t('home.index.capability.factory_description') %></p>
               </div>
             </div>
             <div class="flex gap-4">
               <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0 text-accent font-bold">02</div>
               <div>
-                <h4 class="font-bold text-slate-900">8 Professional Automated Lines</h4>
-                <p class="text-slate-600 text-sm">Precision manufacturing powered by world-leading equipment and 5 workshops.</p>
+                <h4 class="font-bold text-slate-900"><%= t('home.index.capability.lines_title') %></h4>
+                <p class="text-slate-600 text-sm"><%= t('home.index.capability.lines_description') %></p>
               </div>
             </div>
             <div class="flex gap-4">
               <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0 text-accent font-bold">03</div>
               <div>
-                <h4 class="font-bold text-slate-900">50+ R&D Engineers</h4>
-                <p class="text-slate-600 text-sm">Professional engineering team for customized kitchen solutions and 2 labs.</p>
+                <h4 class="font-bold text-slate-900"><%= t('home.index.capability.engineers_title') %></h4>
+                <p class="text-slate-600 text-sm"><%= t('home.index.capability.engineers_description') %></p>
               </div>
             </div>
           </div>
@@ -278,8 +281,8 @@
   <section class="py-20 bg-primary text-white">
     <div class="max-w-screen-xl mx-auto px-6">
       <div class="text-center max-w-2xl mx-auto mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Rigorous Quality System</h2>
-        <p class="text-slate-300">We don't just talk about quality; we demonstrate it through every step.</p>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4"><%= t('home.index.quality.title') %></h2>
+        <p class="text-slate-300"><%= t('home.index.quality.description') %></p>
       </div>
       
       <div class="relative">
@@ -287,9 +290,7 @@
         <div class="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-white/20 -translate-y-1/2"></div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 relative z-10">
-          <% [
-            "Raw Material Inspection", "Production Inspection", "Performance Testing", "Final Inspection", "Shipment"
-          ].each_with_index do |step, idx| %>
+          <% t('home.index.quality.steps').each_with_index do |step, idx| %>
             <div class="bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10 text-center relative group hover:border-accent transition-colors">
               <div class="w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold relative z-10">
                 <%= idx + 1 %>
@@ -304,23 +305,23 @@
          <!-- Placeholder for Certification Logos -->
          <div class="flex flex-col items-center group">
             <span class="text-4xl font-black group-hover:text-accent transition-colors">CE</span>
-            <span class="text-[10px] text-slate-500 mt-1 font-bold">Europe Safety</span>
+            <span class="text-[10px] text-slate-500 mt-1 font-bold"><%= t('home.index.quality.certifications.europe_safety') %></span>
          </div>
          <div class="flex flex-col items-center group">
             <span class="text-4xl font-black group-hover:text-accent transition-colors">ETL</span>
-            <span class="text-[10px] text-slate-500 mt-1 font-bold">North America</span>
+            <span class="text-[10px] text-slate-500 mt-1 font-bold"><%= t('home.index.quality.certifications.north_america') %></span>
          </div>
          <div class="flex flex-col items-center group">
             <span class="text-4xl font-black group-hover:text-accent transition-colors">UL</span>
-            <span class="text-[10px] text-slate-500 mt-1 font-bold">Safety Standards</span>
+            <span class="text-[10px] text-slate-500 mt-1 font-bold"><%= t('home.index.quality.certifications.safety_standards') %></span>
          </div>
          <div class="flex flex-col items-center group">
             <span class="text-4xl font-black group-hover:text-accent transition-colors">NSF</span>
-            <span class="text-[10px] text-slate-500 mt-1 font-bold">Food Safety</span>
+            <span class="text-[10px] text-slate-500 mt-1 font-bold"><%= t('home.index.quality.certifications.food_safety') %></span>
          </div>
          <div class="flex flex-col items-center group">
             <span class="text-4xl font-black group-hover:text-accent transition-colors">GEMS</span>
-            <span class="text-[10px] text-slate-500 mt-1 font-bold">Energy Rating</span>
+            <span class="text-[10px] text-slate-500 mt-1 font-bold"><%= t('home.index.quality.certifications.energy_rating') %></span>
          </div>
          <div class="flex flex-col items-center group">
             <span class="text-4xl font-black group-hover:text-accent transition-colors">ISO</span>
@@ -334,36 +335,22 @@
   <!-- 7. Why Choose Us -->
   <section class="py-20 bg-slate-50">
     <div class="max-w-screen-xl mx-auto px-6">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-16">Why Global Clients Choose Sinower</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-16"><%= t('home.index.advantages.title') %></h2>
       <div class="overflow-x-auto">
         <table class="w-full text-left bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200">
           <thead class="bg-slate-900 text-white">
             <tr>
-              <th class="p-6 font-bold">Client Needs</th>
-              <th class="p-6 font-bold">Sinower Advantage</th>
+              <th class="p-6 font-bold"><%= t('home.index.advantages.client_needs') %></th>
+              <th class="p-6 font-bold"><%= t('home.index.advantages.sinower_advantage') %></th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-200">
-            <tr>
-              <td class="p-6 text-slate-900 font-bold">Stable Supply</td>
-              <td class="p-6 text-slate-600">300,000+ units/year total output</td>
-            </tr>
-            <tr>
-              <td class="p-6 text-slate-900 font-bold">Cost Leadership</td>
-              <td class="p-6 text-slate-600">Modern 140,000㎡ manufacturing base</td>
-            </tr>
-            <tr>
-              <td class="p-6 text-slate-900 font-bold">Quick Delivery</td>
-              <td class="p-6 text-slate-600">Global logistics network & overseas subsidiaries</td>
-            </tr>
-            <tr>
-              <td class="p-6 text-slate-900 font-bold">Customization</td>
-              <td class="p-6 text-slate-600">Professional R&D with OEM/ODM capability</td>
-            </tr>
-            <tr>
-              <td class="p-6 text-slate-900 font-bold">Long-term Trust</td>
-              <td class="p-6 text-slate-600">10+ years of export excellence</td>
-            </tr>
+            <% t('home.index.advantages.rows').each do |row| %>
+              <tr>
+                <td class="p-6 text-slate-900 font-bold"><%= row[:need] %></td>
+                <td class="p-6 text-slate-600"><%= row[:advantage] %></td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
       </div>
@@ -373,12 +360,12 @@
   <!-- 8. Case Study / Projects -->
   <section class="py-20 bg-white">
     <div class="max-w-screen-xl mx-auto px-6">
-      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-12">Success Stories & Global Projects</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-12"><%= t('home.index.projects.title') %></h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <% [
-          { title: "Restaurant Chain Project", desc: "Complete kitchen solution for global fast food chains.", img: "sinower-factory1.png" },
-          { title: "Hotel Kitchen Solution", desc: "High-end stainless steel equipment for 5-star hotels.", img: "sinower-office.png" },
-          { title: "Distributor Partnership", desc: "Strategic cooperation with leading European and US distributors.", img: "sinower-factory2.png" }
+          { title: t('home.index.projects.restaurant.title'), desc: t('home.index.projects.restaurant.description'), img: "sinower-factory1.png" },
+          { title: t('home.index.projects.hotel.title'), desc: t('home.index.projects.hotel.description'), img: "sinower-office.png" },
+          { title: t('home.index.projects.distributor.title'), desc: t('home.index.projects.distributor.description'), img: "sinower-factory2.png" }
         ].each do |item| %>
           <div class="group cursor-pointer">
             <div class="aspect-video rounded-2xl overflow-hidden mb-6 shadow-md border border-slate-100">
@@ -396,11 +383,11 @@
   <section class="py-20 bg-slate-50">
     <div class="max-w-screen-xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
        <div>
-         <h2 class="text-3xl font-bold text-slate-900">Enterprise Updates</h2>
-         <p class="text-slate-600 mt-2">Keep up with Sinower's latest development.</p>
+         <h2 class="text-3xl font-bold text-slate-900"><%= t('home.index.news.title') %></h2>
+         <p class="text-slate-600 mt-2"><%= t('home.index.news.description') %></p>
        </div>
        <%= link_to posts_path, class: "mt-6 md:mt-0 px-6 py-3 border border-slate-300 rounded-lg font-bold text-slate-900 hover:bg-white transition-all" do %>
-         Read More News
+         <%= t('home.index.news.read_more') %>
        <% end %>
     </div>
   </section>
@@ -411,13 +398,13 @@
         <%= image_tag "sinower-factory1.png", class: "w-full h-full object-cover" %>
      </div>
      <div class="relative z-10 max-w-screen-xl mx-auto px-6 text-center">
-       <h2 class="text-3xl md:text-5xl font-bold text-white mb-8">Looking for a Reliable <br>Commercial Kitchen Equipment Supplier?</h2>
+       <h2 class="text-3xl md:text-5xl font-bold text-white mb-8"><%= t('home.index.cta.title_line_one') %> <br><%= t('home.index.cta.title_line_two') %></h2>
        <p class="text-xl text-slate-200 mb-12 max-w-2xl mx-auto">
-         Contact Sinower today for a customized quote and professional solution.
+         <%= t('home.index.cta.description') %>
        </p>
        <div class="flex flex-wrap justify-center gap-6">
          <%= link_to contact_path, class: "px-10 py-5 bg-accent hover:bg-accent/90 text-white font-bold rounded-xl text-lg shadow-2xl shadow-accent/20 transition-all transform hover:-translate-y-1" do %>
-           Get A Quote Now
+           <%= t('home.index.cta.button') %>
          <% end %>
        </div>
      </div>

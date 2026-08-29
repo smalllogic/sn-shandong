@@ -132,14 +132,14 @@
 <section class="global-presence-section">
   <div class="max-w-screen-xl mx-auto">
     <div class="text-center mb-16 px-4">
-      <h2 class="text-4xl md:text-5xl font-black mb-6 text-white tracking-tight">Global Presence</h2>
+      <h2 class="text-4xl md:text-5xl font-black mb-6 text-white tracking-tight"><%= t('home.global_presence.title') %></h2>
       <p class="text-slate-400 text-lg max-w-2xl mx-auto">
-        Founded in 2002, China Headquarters connecting worldwide offices and service networks, delivering excellence to over 180 countries.
+        <%= t('home.global_presence.description') %>
       </p>
     </div>
 
     <div class="map-container" id="global-map-container">
-      <%= image_tag "world.svg", class: "world-map", alt: "World Map" %>
+      <%= image_tag "world.svg", class: "world-map", alt: t('home.global_presence.map_alt') %>
 
       <svg class="connections" id="global-connections-svg"></svg>
 
@@ -147,10 +147,10 @@
       <div class="map-point china" data-name="china">
         <span></span>
         <div class="card">
-          <h3>China Headquarters</h3>
+          <h3><%= t('home.global_presence.china.title') %></h3>
           <p><strong>Sinower Electrical</strong></p>
-          <p>Shandong Binzhou, China</p>
-          <p>140,000㎡ Factory</p>
+          <p><%= t('home.global_presence.china.location') %></p>
+          <p><%= t('home.global_presence.china.factory') %></p>
         </div>
       </div>
 
@@ -158,9 +158,9 @@
       <div class="map-point usa" data-name="usa">
         <span></span>
         <div class="card">
-          <h3>USA Subsidiary</h3>
+          <h3><%= t('home.global_presence.usa.title') %></h3>
           <p><strong>Skyrainbow USA</strong></p>
-          <p>Norcross, Georgia</p>
+          <p><%= t('home.global_presence.usa.location') %></p>
         </div>
       </div>
 
@@ -168,9 +168,9 @@
       <div class="map-point germany" data-name="germany">
         <span></span>
         <div class="card">
-          <h3>Germany Branch</h3>
-          <p>European Office</p>
-          <p>Munich, Germany</p>
+          <h3><%= t('home.global_presence.germany.title') %></h3>
+          <p><%= t('home.global_presence.germany.office') %></p>
+          <p><%= t('home.global_presence.germany.location') %></p>
         </div>
       </div>
 
@@ -178,9 +178,9 @@
       <div class="map-point france" data-name="france">
         <span></span>
         <div class="card">
-          <h3>France Branch</h3>
-          <p>European Service Center</p>
-          <p>Paris, France</p>
+          <h3><%= t('home.global_presence.france.title') %></h3>
+          <p><%= t('home.global_presence.france.office') %></p>
+          <p><%= t('home.global_presence.france.location') %></p>
         </div>
       </div>
 
@@ -189,8 +189,8 @@
         <span></span>
         <div class="card">
           <h3><%= t('home.branches.czech') %></h3>
-          <p>European Logistics Hub</p>
-          <p>Czech Republic</p>
+          <p><%= t('home.global_presence.czech.office') %></p>
+          <p><%= t('home.branches.czech_republic') %></p>
         </div>
       </div>
 
@@ -198,8 +198,8 @@
       <div class="map-point uae" data-name="uae">
         <span></span>
         <div class="card">
-          <h3>UAE Branch</h3>
-          <p>Sharjah, UAE</p>
+          <h3><%= t('home.global_presence.uae.title') %></h3>
+          <p><%= t('home.branches.sharjah') %></p>
         </div>
       </div>
 
@@ -207,9 +207,9 @@
       <div class="map-point london" data-name="london">
         <span></span>
         <div class="card">
-          <h3>London Branch</h3>
-          <p>UK Office</p>
-          <p>London, United Kingdom</p>
+          <h3><%= t('home.global_presence.uk.title') %></h3>
+          <p><%= t('home.global_presence.uk.office') %></p>
+          <p><%= t('home.global_presence.uk.location') %></p>
         </div>
       </div>
 
@@ -217,9 +217,9 @@
       <div class="map-point spain" data-name="spain">
         <span></span>
         <div class="card">
-          <h3>Spain Branch</h3>
-          <p>Iberian Service Center</p>
-          <p>Madrid, Spain</p>
+          <h3><%= t('home.global_presence.spain.title') %></h3>
+          <p><%= t('home.global_presence.spain.office') %></p>
+          <p><%= t('home.global_presence.spain.location') %></p>
         </div>
       </div>
 
@@ -227,9 +227,9 @@
       <div class="map-point sydney" data-name="sydney">
         <span></span>
         <div class="card">
-          <h3>Sydney Branch</h3>
-          <p>Oceania Office</p>
-          <p>Sydney, Australia</p>
+          <h3><%= t('home.global_presence.australia.title') %></h3>
+          <p><%= t('home.global_presence.australia.office') %></p>
+          <p><%= t('home.global_presence.australia.location') %></p>
         </div>
       </div>
 
@@ -239,11 +239,11 @@
     <div class="flex justify-center gap-8 mt-12 text-sm font-bold uppercase tracking-widest">
       <div class="flex items-center gap-2">
         <span class="w-3 h-3 rounded-full bg-[#22c55e]"></span>
-        <span class="text-[#22c55e]">China Headquarters</span>
+        <span class="text-[#22c55e]"><%= t('home.global_presence.china.title') %></span>
       </div>
       <div class="flex items-center gap-2">
         <span class="w-3 h-3 rounded-full bg-[#f97316]"></span>
-        <span class="text-[#f97316]">Global Offices</span>
+        <span class="text-[#f97316]"><%= t('home.global_presence.global_offices') %></span>
       </div>
     </div>
   </div>

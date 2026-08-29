@@ -27,7 +27,9 @@ module Sinower
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    config.i18n.available_locales = [:"zh-CN", :en, :it, :fr]
     config.i18n.default_locale = :en
+    config.i18n.fallbacks = { it: :en, fr: :en, :"zh-CN" => :en }
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
 
     # Configuration for the application, engines, and railties goes here.

@@ -99,7 +99,7 @@ class Category < ApplicationRecord
     when :"zh-CN", :zh
       name_zh.presence || name
     else
-      name_zh.presence || name
+      name
     end
   end
 

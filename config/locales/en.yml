@@ -329,6 +329,8 @@ en:
     last_updated: "Last updated: %{date}"
   home:
     branches:
+      uae: "UAE"
+      usa: "USA"
       spain: "Spain"
       uk: "United Kingdom"
       australia: "Australia"

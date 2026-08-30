@@ -48,21 +48,21 @@
         <!-- 5 Branches Grid -->
         <div class="flex flex-wrap justify-center gap-4 max-w-6xl mx-auto w-full">
           <% [
-            { name: t('home.branches.china'), addr: t('home.branches.boxing'), flag: "🇨🇳", tag: t('home.branches.global_hub') },
-            { name: t('home.branches.france'), addr: t('home.branches.paris'), flag: "🇫🇷", tag: t('home.branches.europe') },
-            { name: t('home.branches.germany'), addr: t('home.branches.munich'), flag: "🇩🇪", tag: t('home.branches.europe') },
-            { name: t('home.branches.czech'), addr: t('home.branches.czech_republic'), flag: "🇨🇿", tag: t('home.branches.europe') },
-            { name: t('home.branches.spain'), addr: t('home.branches.madrid'), flag: "🇪🇸", tag: t('home.branches.europe') },
-            { name: t('home.branches.uk'), addr: t('home.branches.london'), flag: "🇬🇧", tag: t('home.branches.europe') },
-            { name: t('home.branches.australia'), addr: t('home.branches.sydney'), flag: "🇦🇺", tag: t('home.branches.global_hub') },
-            { name: t('home.branches.uae'), addr: t('home.branches.sharjah'), flag: "🇦🇪", tag: t('home.branches.middle_east') },
-            { name: t('home.branches.usa'), addr: t('home.branches.georgia'), flag: "🇺🇸", tag: t('home.branches.north_america') }
+            { name: t('home.branches.china'), addr: t('home.branches.boxing'), flag: "CN", tag: t('home.branches.global_hub') },
+            { name: t('home.branches.france'), addr: t('home.branches.paris'), flag: "FR", tag: t('home.branches.europe') },
+            { name: t('home.branches.germany'), addr: t('home.branches.munich'), flag: "DE", tag: t('home.branches.europe') },
+            { name: t('home.branches.czech'), addr: t('home.branches.czech_republic'), flag: "CZ", tag: t('home.branches.europe') },
+            { name: t('home.branches.spain'), addr: t('home.branches.madrid'), flag: "ES", tag: t('home.branches.europe') },
+            { name: t('home.branches.uk'), addr: t('home.branches.london'), flag: "GB", tag: t('home.branches.europe') },
+            { name: t('home.branches.australia'), addr: t('home.branches.sydney'), flag: "AU", tag: t('home.branches.global_hub') },
+            { name: t('home.branches.uae'), addr: "Dubai, UAE", flag: "AE", tag: t('home.branches.middle_east') },
+            { name: t('home.branches.usa'), addr: t('home.branches.georgia'), flag: "US", tag: t('home.branches.north_america') }
           ].each do |branch| %>
             <div class="bg-white/[0.03] p-4 rounded-xl border border-white/5 hover:border-accent/30 transition-all group backdrop-blur-sm relative overflow-hidden w-full sm:w-[calc(50%-1rem)] md:w-[calc(33.33%-1rem)] lg:w-[calc(20%-1rem)] min-w-[160px]">
               <div class="flex justify-between items-center mb-4">
                 <div class="text-[9px] font-black text-accent tracking-tighter uppercase"><%= branch[:tag] %></div>
                 <div class="flex items-center gap-2">
-                  <span class="text-xl drop-shadow-sm"><%= branch[:flag] %></span>
+                  <%= flag_svg(branch[:flag], classes: "h-5 w-7 rounded-sm drop-shadow-sm shadow-black/20") %>
                   <div class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
                 </div>
               </div>

@@ -293,16 +293,16 @@
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <% [
-                { name: t('home.branches.china'), addr: t('home.factory.branches.china_address'), icon: "🇨🇳" },
-                { name: t('home.branches.france'), addr: t('home.factory.branches.france_address'), icon: "🇫🇷" },
-                { name: t('home.branches.germany'), addr: t('home.factory.branches.germany_address'), icon: "🇩🇪" },
-                { name: t('home.branches.czech'), addr: t('home.branches.czech_republic'), icon: "🇨🇿" },
-                { name: t('home.branches.uae'), addr: t('home.branches.sharjah'), icon: "🇦🇪" },
-                { name: t('home.branches.usa'), addr: t('home.factory.branches.usa_address'), icon: "🇺🇸" }
+                { name: t('home.branches.china'), addr: t('home.factory.branches.china_address'), icon: "CN" },
+                { name: t('home.branches.france'), addr: t('home.factory.branches.france_address'), icon: "FR" },
+                { name: t('home.branches.germany'), addr: t('home.factory.branches.germany_address'), icon: "DE" },
+                { name: t('home.branches.czech'), addr: t('home.branches.czech_republic'), icon: "CZ" },
+                { name: t('home.branches.uae'), addr: t('home.branches.sharjah'), icon: "AE" },
+                { name: t('home.branches.usa'), addr: t('home.factory.branches.usa_address'), icon: "US" }
               ].each do |branch| %>
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 group hover:bg-white hover:shadow-lg transition-all">
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-xl"><%= branch[:icon] %></span>
+                    <%= flag_svg(branch[:icon], classes: "h-5 w-7 rounded-sm shadow-sm shadow-slate-300/70") %>
                     <h4 class="font-bold text-slate-900 text-sm group-hover:text-accent transition-colors"><%= branch[:name] %></h4>
                   </div>
                   <p class="text-[10px] text-slate-500 leading-tight"><%= branch[:addr] %></p>

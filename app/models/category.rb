@@ -26,6 +26,7 @@ class Category < ApplicationRecord
 
   default_scope { order(:position, :id) }
 
+  before_validation :sync_legacy_name
   validates :name, presence: true
   validates :keywords, length: { maximum: 255 }
   before_validation :generate_slug, if: -> { slug.blank? }
@@ -168,6 +169,12 @@ class Category < ApplicationRecord
   end
 
   private
+
+  # The admin form stores translated names; keep the legacy fallback column populated.
+  def sync_legacy_name
+    translated_name = name_en.presence || name_zh.presence || name_it.presence || name_fr.presence
+    self.name = translated_name if translated_name.present?
+  end
 
   def generate_slug
     return if name.blank?

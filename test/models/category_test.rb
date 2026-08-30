@@ -21,4 +21,13 @@ class CategoryTest < ActiveSupport::TestCase
     category = Category.new(name: "Test", category_kind: "a")
     assert_not category.valid?
   end
+
+  test "uses an admin translated name as the required fallback name" do
+    parent = Category.create!(name: "Refrigeration", slug: "refrigeration")
+    child = Category.new(name_en: "Counter Refrigerator", parent: parent)
+
+    assert child.valid?
+    assert_equal "Counter Refrigerator", child.name
+    assert_equal "counter-refrigerator", child.slug
+  end
 end

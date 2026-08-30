@@ -277,10 +277,11 @@
                 const dy = ey - sy;
                 const dr = Math.sqrt(dx * dx + dy * dy);
 
-                // Using a quadratic curve with a control point pulled upwards
-                // The height of the curve depends on the distance
+                // Keep the arc inside the map bounds so short European routes
+                // do not create a stray line near the top edge.
                 const cx = (sx + ex) / 2;
-                const cy = Math.min(sy, ey) - (dr * 0.15); // Adjust multiplier for curve height
+                const curveLift = Math.min(dr * 0.15, 60);
+                const cy = Math.max(24, Math.min(sy, ey) - curveLift);
 
                 path.setAttribute("d", `M ${sx} ${sy} Q ${cx} ${cy} ${ex} ${ey}`);
                 path.classList.add("connection-line");

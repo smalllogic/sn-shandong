@@ -182,7 +182,7 @@
             <%= link_to post_path(post), class: "block" do %>
               <% if post.cover_image.attached? %>
                 <div class="h-52 overflow-hidden bg-slate-100">
-                  <%= image_tag post.cover_image.variant(:thumb), class: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-700", alt: post.title %>
+                  <%= image_tag post.cover_image.variant(:thumb), class: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-700", alt: post.localized_title %>
                 </div>
               <% else %>
                 <div class="h-52 bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
@@ -205,9 +205,9 @@
                 </span>
               </div>
               <h2 class="text-xl font-black text-slate-900 mb-3 leading-snug group-hover:text-primary transition-colors">
-                <%= link_to post.title, post_path(post) %>
+                <%= link_to post.localized_title, post_path(post) %>
               </h2>
-              <p class="text-slate-500 text-sm leading-relaxed font-medium flex-1 line-clamp-3"><%= post.summary %></p>
+              <p class="text-slate-500 text-sm leading-relaxed font-medium flex-1 line-clamp-3"><%= post.localized_summary %></p>
               <div class="mt-6">
                 <%= link_to post_path(post), class: "inline-flex items-center gap-2 text-primary font-bold text-sm hover:gap-3 transition-all" do %>
                   <%= t('posts.read_more') %>

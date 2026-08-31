@@ -1,5 +1,5 @@
 class Admin::PostsController < Admin::BaseController
-  before_action :set_post, only: [:edit, :update, :destroy]
+  before_action :set_post, only: [ :edit, :update, :destroy ]
 
   def index
     @posts = Post.order(created_at: :desc)
@@ -42,6 +42,14 @@ class Admin::PostsController < Admin::BaseController
   end
 
   def post_params
-    params.require(:post).permit(:title, :summary, :content, :status, :cover_image, :category, :meta_title, :meta_description, :meta_keywords, :views_count)
+    params.require(:post).permit(
+      :title, :title_zh, :title_it, :title_fr,
+      :summary, :summary_zh, :summary_it, :summary_fr,
+      :content, :content_zh, :content_it, :content_fr,
+      :status, :cover_image, :category, :views_count,
+      :meta_title, :meta_title_zh, :meta_title_it, :meta_title_fr,
+      :meta_description, :meta_description_zh, :meta_description_it, :meta_description_fr,
+      :meta_keywords, :meta_keywords_zh, :meta_keywords_it, :meta_keywords_fr
+    )
   end
 end

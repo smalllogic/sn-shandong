@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_29_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_31_110000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -104,16 +104,25 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_29_120000) do
   create_table "faq_categories", force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.text "name"
+    t.text "name_fr"
+    t.text "name_it"
+    t.text "name_zh"
     t.integer "position", default: 0
     t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "faqs", force: :cascade do |t|
     t.text "answer"
+    t.text "answer_fr"
+    t.text "answer_it"
+    t.text "answer_zh"
     t.datetime "created_at", precision: nil, null: false
     t.integer "faq_category_id", null: false
     t.integer "position", default: 0
     t.text "question"
+    t.text "question_fr"
+    t.text "question_it"
+    t.text "question_zh"
     t.datetime "updated_at", precision: nil, null: false
   end
 
@@ -167,12 +176,27 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_29_120000) do
     t.string "category"
     t.datetime "created_at", null: false
     t.text "meta_description"
+    t.text "meta_description_fr"
+    t.text "meta_description_it"
+    t.text "meta_description_zh"
     t.string "meta_keywords"
+    t.string "meta_keywords_fr"
+    t.string "meta_keywords_it"
+    t.string "meta_keywords_zh"
     t.string "meta_title"
+    t.string "meta_title_fr"
+    t.string "meta_title_it"
+    t.string "meta_title_zh"
     t.datetime "published_at"
     t.string "status"
     t.text "summary"
+    t.text "summary_fr"
+    t.text "summary_it"
+    t.text "summary_zh"
     t.string "title"
+    t.string "title_fr"
+    t.string "title_it"
+    t.string "title_zh"
     t.datetime "updated_at", null: false
     t.integer "views_count", default: 0
     t.index ["category"], name: "index_posts_on_category"

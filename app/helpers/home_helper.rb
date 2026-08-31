@@ -78,7 +78,7 @@ module HomeHelper
         <rect x="16" y="32" width="48" height="16" rx="6" fill="#000000"/>
       </svg>
     SVG
-    "US" => <<~SVG.freeze,
+    "US" => <<~SVG.freeze
       <svg viewBox="0 0 64 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
         <rect width="64" height="48" rx="6" fill="#FFFFFF"/>
         <g fill="#B22234">
@@ -113,11 +113,11 @@ module HomeHelper
   end
 
   def clean_faq_category_name(category)
-    strip_tags(category.name.to_s).squish
+    strip_tags(category.localized_name.to_s).squish
   end
 
   def faq_search_blob(faq)
-    [clean_faq_text(faq.question), clean_faq_text(faq.answer)].join(" ").downcase
+    [ clean_faq_text(faq.localized_question), clean_faq_text(faq.localized_answer) ].join(" ").downcase
   end
 
   def flag_svg(code, classes: "")

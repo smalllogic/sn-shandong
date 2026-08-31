@@ -29,6 +29,13 @@
           <td class="px-6 py-4">
             <div class="text-sm font-semibold text-slate-900"><%= faq.question %></div>
             <div class="text-xs text-slate-400 mt-1 line-clamp-1"><%= faq.answer %></div>
+            <div class="flex flex-wrap gap-1.5 mt-2">
+              <% { "中" => faq.question_zh, "IT" => faq.question_it, "FR" => faq.question_fr }.each do |label, translated_question| %>
+                <span class="px-1.5 py-0.5 rounded text-[10px] font-bold <%= translated_question.present? ? 'bg-blue-50 text-blue-600' : 'bg-slate-100 text-slate-400' %>">
+                  <%= label %><%= translated_question.present? ? " ✓" : " —" %>
+                </span>
+              <% end %>
+            </div>
           </td>
           <td class="px-6 py-4 text-sm text-slate-500">
             <%= faq.position %>

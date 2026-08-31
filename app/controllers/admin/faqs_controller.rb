@@ -1,8 +1,8 @@
 class Admin::FaqsController < Admin::BaseController
-  before_action :set_faq, only: [:edit, :update, :destroy]
+  before_action :set_faq, only: [ :edit, :update, :destroy ]
 
   def index
-    @faqs = Faq.includes(:faq_category).order('faq_categories.position ASC, faqs.position ASC')
+    @faqs = Faq.includes(:faq_category).order("faq_categories.position ASC, faqs.position ASC")
   end
 
   def new
@@ -40,6 +40,10 @@ class Admin::FaqsController < Admin::BaseController
   end
 
   def faq_params
-    params.require(:faq).permit(:question, :answer, :faq_category_id, :position)
+    params.require(:faq).permit(
+      :question, :question_zh, :question_it, :question_fr,
+      :answer, :answer_zh, :answer_it, :answer_fr,
+      :faq_category_id, :position
+    )
   end
 end

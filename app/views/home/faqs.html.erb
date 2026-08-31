@@ -106,14 +106,14 @@
                     <details class="group/details">
                       <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
                         <h3 class="text-lg font-bold text-slate-800 pr-8 group-hover/details:text-primary transition-colors">
-                          <%= clean_faq_text(faq.question) %>
+                          <%= clean_faq_text(faq.localized_question) %>
                         </h3>
                         <div class="flex-shrink-0 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-open:rotate-180 group-open:bg-primary group-open:text-white transition-all duration-300">
                           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                       </summary>
                       <div class="px-6 pb-8 text-slate-600 leading-relaxed border-t border-slate-50 pt-6 prose prose-slate max-w-none">
-                        <%= simple_format(clean_faq_text(faq.answer), {}, sanitize: true) %>
+                        <%= simple_format(clean_faq_text(faq.localized_answer), {}, sanitize: true) %>
                         
                         <!-- Internal Links (Example) -->
                         <div class="mt-8 pt-6 border-t border-slate-50 flex flex-wrap gap-4">

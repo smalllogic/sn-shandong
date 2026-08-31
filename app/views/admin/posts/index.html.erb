@@ -22,6 +22,13 @@
           <td class="px-6 py-4">
             <div class="font-semibold text-slate-900 text-sm"><%= post.title %></div>
             <div class="text-xs text-slate-400 mt-1 line-clamp-1"><%= post.summary %></div>
+            <div class="flex flex-wrap gap-1.5 mt-2">
+              <% { "中" => post.title_zh, "IT" => post.title_it, "FR" => post.title_fr }.each do |label, translated_title| %>
+                <span class="px-1.5 py-0.5 rounded text-[10px] font-bold <%= translated_title.present? ? 'bg-blue-50 text-blue-600' : 'bg-slate-100 text-slate-400' %>">
+                  <%= label %><%= translated_title.present? ? " ✓" : " —" %>
+                </span>
+              <% end %>
+            </div>
           </td>
           <td class="px-6 py-4">
             <% if post.published? %>
@@ -46,7 +53,7 @@
       <% end %>
       <% if @posts.empty? %>
         <tr>
-          <td colspan="4" class="px-6 py-12 text-center text-slate-400 text-sm">暂无文章</td>
+          <td colspan="5" class="px-6 py-12 text-center text-slate-400 text-sm">暂无文章</td>
         </tr>
       <% end %>
     </tbody>

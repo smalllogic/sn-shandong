@@ -1,7 +1,7 @@
-<% content_for :title, @post.meta_title.presence || "#{@post.title} - #{t('posts.hero.title')}" %>
-<% content_for :meta_description, @post.meta_description.presence || @post.summary %>
-<% if @post.meta_keywords.present? %>
-  <% content_for :meta_keywords, @post.meta_keywords %>
+<% content_for :title, @post.localized_meta_title.presence || "#{@post.localized_title} - #{t('posts.hero.title')}" %>
+<% content_for :meta_description, @post.localized_meta_description.presence || @post.localized_summary %>
+<% if @post.localized_meta_keywords.present? %>
+  <% content_for :meta_keywords, @post.localized_meta_keywords %>
 <% end %>
 
 <div class="max-w-screen-lg mx-auto px-6 py-16">
@@ -11,7 +11,7 @@
       <%= t("posts.#{@post.category}.title") %>
     <% end %>
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-    <span class="text-slate-600 font-medium truncate"><%= @post.title %></span>
+    <span class="text-slate-600 font-medium truncate"><%= @post.localized_title %></span>
   </nav>
 
   <!-- Article header -->
@@ -27,16 +27,16 @@
         <%= number_with_delimiter(@post.views_count) %>
       </span>
     </div>
-    <h1 class="text-4xl md:text-5xl font-black text-slate-900 leading-tight tracking-tight mb-6"><%= @post.title %></h1>
-    <% if @post.summary.present? %>
-      <p class="text-xl text-slate-500 font-medium leading-relaxed border-l-4 border-primary pl-6 py-1"><%= @post.summary %></p>
+    <h1 class="text-4xl md:text-5xl font-black text-slate-900 leading-tight tracking-tight mb-6"><%= @post.localized_title %></h1>
+    <% if @post.localized_summary.present? %>
+      <p class="text-xl text-slate-500 font-medium leading-relaxed border-l-4 border-primary pl-6 py-1"><%= @post.localized_summary %></p>
     <% end %>
   </header>
 
   <!-- Cover image -->
   <% if @post.cover_image.attached? %>
     <div class="mb-12 rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-100 aspect-[16/7]">
-      <%= image_tag @post.cover_image.variant(:large), class: "w-full h-full object-cover", alt: @post.title %>
+      <%= image_tag @post.cover_image.variant(:large), class: "w-full h-full object-cover", alt: @post.localized_title %>
     </div>
   <% end %>
 
@@ -49,7 +49,7 @@
     prose-blockquote:border-l-primary prose-blockquote:bg-slate-50 prose-blockquote:rounded-r-2xl prose-blockquote:py-2 prose-blockquote:pr-4
     prose-strong:text-slate-800
     prose-li:text-slate-600">
-    <%= @post.content %>
+    <%= @post.localized_content %>
   </div>
 
   <!-- Back link -->

@@ -23,6 +23,13 @@
         <tr class="hover:bg-slate-50 transition-colors">
           <td class="px-6 py-4 text-sm font-semibold text-slate-900">
             <%= category.name %>
+            <div class="flex flex-wrap gap-1.5 mt-2">
+              <% { "中" => category.name_zh, "IT" => category.name_it, "FR" => category.name_fr }.each do |label, translated_name| %>
+                <span class="px-1.5 py-0.5 rounded text-[10px] font-bold <%= translated_name.present? ? 'bg-blue-50 text-blue-600' : 'bg-slate-100 text-slate-400' %>">
+                  <%= label %><%= translated_name.present? ? " ✓" : " —" %>
+                </span>
+              <% end %>
+            </div>
           </td>
           <td class="px-6 py-4 text-sm text-slate-500">
             <%= category.position %>

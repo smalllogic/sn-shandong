@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="69105836-b536-45f9-8b97-f315a7f5c2b5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/development.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db/development.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="353" />
+    <option name="cachedIndexableFilesCount" value="349" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -25,23 +26,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.4034133881193058" />
-      <entry key="MS500" value="2.171634202519429" />
-      <entry key="S2" value="3.869994902596466" />
-      <entry key="S5" value="4.89864585898006" />
-      <entry key="S10" value="5.392300516027112" />
-      <entry key="S30" value="5.782773494634976" />
-      <entry key="S60" value="5.889411709555059" />
-      <entry key="M2" value="5.9442006322128185" />
-      <entry key="M5" value="5.9775574977465125" />
-      <entry key="M10" value="5.988758163075018" />
-      <entry key="M15" value="5.992500857996999" />
-      <entry key="M30" value="5.996248176008805" />
-      <entry key="H1" value="5.999804764664735" />
-      <entry key="H2" value="6.465226112887479" />
-      <entry key="H4" value="16.174845349479348" />
-      <entry key="D1" value="215.14614384480737" />
-      <entry key="W1" value="378.65445422623367" />
+      <entry key="MS100" value="1.0010322782573944" />
+      <entry key="MS500" value="1.3518473261557276" />
+      <entry key="S2" value="4.126347471161556" />
+      <entry key="S5" value="6.775391735178394" />
+      <entry key="S10" value="8.185256405673194" />
+      <entry key="S30" value="9.342936550719807" />
+      <entry key="S60" value="9.664439963812777" />
+      <entry key="M2" value="9.830839750661712" />
+      <entry key="M5" value="10.287584702867111" />
+      <entry key="M10" value="13.340094751764576" />
+      <entry key="M15" value="17.119403525039722" />
+      <entry key="M30" value="25.10639043272948" />
+      <entry key="H1" value="31.990175850443695" />
+      <entry key="H2" value="36.91317080196863" />
+      <entry key="H4" value="48.397138195745804" />
+      <entry key="D1" value="247.3964255559264" />
+      <entry key="W1" value="413.7493619705815" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -63,23 +64,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.3596339610225612" />
-      <entry key="MS500" value="2.154907271892449" />
-      <entry key="S2" value="3.851309543554317" />
-      <entry key="S5" value="4.88324331473967" />
-      <entry key="S10" value="5.382187480969143" />
-      <entry key="S30" value="5.77870243415715" />
-      <entry key="S60" value="5.887276152024209" />
-      <entry key="M2" value="5.943106808121741" />
-      <entry key="M5" value="5.977113579790781" />
-      <entry key="M10" value="5.98853512773073" />
-      <entry key="M15" value="5.992351927705251" />
-      <entry key="M30" value="5.996173590612585" />
-      <entry key="H1" value="5.999767416783672" />
-      <entry key="H2" value="6.465203914512413" />
-      <entry key="H4" value="16.174793910452806" />
-      <entry key="D1" value="215.14597652004448" />
-      <entry key="W1" value="378.6544110214173" />
+      <entry key="MS100" value="0.06250192670775262" />
+      <entry key="MS500" value="0.7438413624585437" />
+      <entry key="S2" value="3.7936876878356616" />
+      <entry key="S5" value="6.607158447174749" />
+      <entry key="S10" value="8.093381224074639" />
+      <entry key="S30" value="9.310342897115403" />
+      <entry key="S60" value="9.647879417408289" />
+      <entry key="M2" value="9.822491994574916" />
+      <entry key="M5" value="10.284185917206242" />
+      <entry key="M10" value="13.33820858675812" />
+      <entry key="M15" value="17.117992309590363" />
+      <entry key="M30" value="25.10552241439019" />
+      <entry key="H1" value="31.989671858832146" />
+      <entry key="H2" value="36.91289282676943" />
+      <entry key="H4" value="48.396955719123014" />
+      <entry key="D1" value="247.39623733749684" />
+      <entry key="W1" value="413.74931548302754" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -100,7 +101,7 @@
     &quot;RunOnceActivity.ruby.rubocop.migration.global.runOnSaveToExternalFormatter&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP&quot;: &quot;1787912461051&quot;,
+    &quot;com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP&quot;: &quot;1788056550070&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
@@ -233,6 +234,8 @@
       <workItem from="1787969543023" duration="4599000" />
       <workItem from="1787977018063" duration="1076000" />
       <workItem from="1787985535451" duration="8848000" />
+      <workItem from="1788056491072" duration="4993000" />
+      <workItem from="1788080102884" duration="364000" />
     </task>
     <servers />
   </component>

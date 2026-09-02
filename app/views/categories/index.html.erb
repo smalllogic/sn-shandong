@@ -229,6 +229,12 @@
                     
                     <!-- 工业风分隔线 -->
                     <div class="w-8 h-[2px] bg-primary mb-3"></div>
+
+                    <% if sku.sku_code.present? %>
+                      <div class="mb-3 text-[9px] font-bold text-slate-400 uppercase tracking-[0.15em]">
+                        <%= t('skus.sku_code') %>: <span class="text-slate-700"><%= sku.sku_code %></span>
+                      </div>
+                    <% end %>
                     
                     <!-- 描述摘要 -->
                     <div class="mb-4">

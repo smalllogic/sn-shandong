@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_31_110000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_02_000000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -251,10 +251,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_31_110000) do
     t.string "name_zh"
     t.integer "position", default: 0, null: false
     t.decimal "price", precision: 10, scale: 2
+    t.string "sku_code"
     t.json "specifications", default: {}
     t.string "status", default: "draft"
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_skus_on_category_id"
+    t.index ["sku_code"], name: "index_skus_on_sku_code"
     t.index ["status"], name: "index_skus_on_status"
   end
 

@@ -51,6 +51,7 @@ class SkuImportService
   def map_row_to_attributes(row)
     {
       name: row["SKU名称"],
+      sku_code: row["SKU代码"],
       category_id: row["分类ID"],
       price: row["价格"],
       status: row["状态"] || 'draft',

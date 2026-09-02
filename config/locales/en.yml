@@ -116,6 +116,7 @@ en:
   skus:
     meta_description: "%{name} - Professional %{category} for commercial kitchen and foodservice. OEM & ODM available. Factory-direct pricing from Sinower."
     meta_keywords: "%{name}, %{category}, commercial kitchen equipment, foodservice equipment, restaurant equipment, Sinower Kitchen"
+    sku_code: "SKU Code"
     product_name: "Product Name"
     material: "Material"
     specification: "Specification"

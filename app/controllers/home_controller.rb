@@ -11,7 +11,8 @@ class HomeController < ApplicationController
     if params[:q].present?
       @categories = Category.visible.where(parent_id: nil).includes(children: { children: { children: :children } })
       @skus = Sku.joins(:category).where(categories: { hidden: false }, status: 'active')
-                 .where("LOWER(skus.name) LIKE ?", "%#{params[:q].downcase}%")
+                 .where("LOWER(skus.name) LIKE :query OR LOWER(skus.sku_code) LIKE :query",
+                        query: "%#{ActiveRecord::Base.sanitize_sql_like(params[:q].downcase)}%")
                  .includes(:category, images_attachments: :blob)
                  .order(position: :asc, created_at: :desc)
                  .page(params[:page]).per(20)

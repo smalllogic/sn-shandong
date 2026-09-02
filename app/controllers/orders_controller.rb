@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
     cart = session[:cart] || {}
     skus = Sku.where(id: cart.keys)
     render json: {
-      items: skus.map { |sku| { id: sku.id, name: sku.name, quantity: cart[sku.id.to_s] } },
+      items: skus.map { |sku| { id: sku.id, name: sku.name, sku_code: sku.sku_code, quantity: cart[sku.id.to_s] } },
       count: cart.values.sum
     }
   end

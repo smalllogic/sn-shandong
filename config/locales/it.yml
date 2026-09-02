@@ -79,6 +79,7 @@ it:
   skus:
     meta_description: "%{name} - %{category} professionale per cucine commerciali e foodservice. OEM e ODM disponibili. Prezzi diretti dalla fabbrica Sinower."
     meta_keywords: "%{name}, %{category}, attrezzature per cucine commerciali, attrezzature foodservice, attrezzature per ristoranti, Sinower Kitchen"
+    sku_code: "Codice SKU"
     standard_features: "Caratteristiche standard"
     default_feature_desc: "Contattaci per ricevere le caratteristiche standard e le specifiche aggiornate di questo modello."
     add_short: "Aggiungi"

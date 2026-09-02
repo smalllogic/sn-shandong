@@ -22,7 +22,8 @@ class CategoriesController < ApplicationController
         @skus = @current_category.all_descendant_skus.where(status: 'active').includes(:category, images_attachments: :blob)
         
         if params[:q].present?
-          @skus = @skus.where("LOWER(name) LIKE ?", "%#{params[:q].downcase}%")
+          query = "%#{ActiveRecord::Base.sanitize_sql_like(params[:q].downcase)}%"
+          @skus = @skus.where("LOWER(skus.name) LIKE :query OR LOWER(skus.sku_code) LIKE :query", query: query)
         end
 
         @skus = @skus.page(params[:page]).per(20)
@@ -38,7 +39,8 @@ class CategoriesController < ApplicationController
       end
 
       if params[:q].present?
-        @skus = @skus.where("LOWER(skus.name) LIKE ?", "%#{params[:q].downcase}%")
+        query = "%#{ActiveRecord::Base.sanitize_sql_like(params[:q].downcase)}%"
+        @skus = @skus.where("LOWER(skus.name) LIKE :query OR LOWER(skus.sku_code) LIKE :query", query: query)
       end
 
       @skus = @skus.page(params[:page]).per(20)

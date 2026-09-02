@@ -128,6 +128,7 @@ zh-CN:
   skus:
     meta_description: "%{name} - 专业 %{category} 商用厨房与餐饮设备，支持 OEM / ODM，工厂直营报价。"
     meta_keywords: "%{name}，%{category}，商用厨房设备，餐饮设备，餐厅设备，Sinower 厨具"
+    sku_code: "SKU代码"
     product_name: "产品名称"
     material: "材质"
     specification: "规格"

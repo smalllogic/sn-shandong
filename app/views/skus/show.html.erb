@@ -88,6 +88,12 @@
       <div class="mb-auto">
         <div class="flex flex-col mb-10">
           <h1 class="text-4xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-none uppercase mb-6"><%= @sku.localized_name %></h1>
+          <% if @sku.sku_code.present? %>
+            <p class="mb-5 text-xs font-bold text-slate-400 uppercase tracking-[0.2em]">
+              <span><%= t('skus.sku_code') %>:</span>
+              <span class="text-slate-700"><%= @sku.sku_code %></span>
+            </p>
+          <% end %>
           <div class="w-20 h-2 bg-primary"></div>
         </div>
         
@@ -269,6 +275,9 @@
             </div>
             <div class="p-6 bg-white">
               <p class="text-[8px] font-black text-primary uppercase tracking-[0.2em] mb-2"><%= s.category.localized_name %></p>
+              <% if s.sku_code.present? %>
+                <p class="text-[9px] font-bold text-slate-400 uppercase tracking-[0.15em] mb-2"><%= t('skus.sku_code') %>: <span class="text-slate-700"><%= s.sku_code %></span></p>
+              <% end %>
               <h3 class="font-black text-slate-900 text-xs leading-tight uppercase group-hover:text-primary transition-colors line-clamp-2"><%= s.localized_name %></h3>
             </div>
           <% end %>

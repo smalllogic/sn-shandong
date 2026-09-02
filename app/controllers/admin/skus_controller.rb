@@ -9,7 +9,8 @@ class Admin::SkusController < Admin::BaseController
     @skus = Sku.all.includes(category: :parent, images_attachments: :blob).order(position: :asc, created_at: :desc)
 
     if @q.present?
-      @skus = @skus.where("LOWER(name) LIKE ?", "%#{@q.downcase}%")
+      query = "%#{ActiveRecord::Base.sanitize_sql_like(@q.downcase)}%"
+      @skus = @skus.where("LOWER(name) LIKE :query OR LOWER(sku_code) LIKE :query", query: query)
     end
 
     if @category_id.present?
@@ -61,7 +62,7 @@ class Admin::SkusController < Admin::BaseController
 
   def download_template
     headers = [
-      "SKU名称", "分类ID", "价格", "状态", "排序",
+      "SKU名称", "SKU代码", "分类ID", "价格", "状态", "排序",
       "中文名称", "英文名称", "意大利语名称", "法语名称",
       "中文功能特点", "英文功能特点", "意大利语功能特点", "法语功能特点",
       "技术规格(JSON)",
@@ -73,7 +74,7 @@ class Admin::SkusController < Admin::BaseController
     csv_data = CSV.generate(headers: true) do |csv|
       csv << headers
       csv << [
-        "示例产品", "561", "99.99", "active", "1",
+        "示例产品", "SKU-001", "561", "99.99", "active", "1",
         "示例产品(中)", "Sample Product(EN)", "Prodotto di esempio", "Produit exemple",
         "特点1\n特点2", "Feature 1\nFeature 2", "Caratteristica 1\nCaratteristica 2", "Caractéristique 1\nCaractéristique 2",
         '[{"key":"Material","value":"Steel","key_zh":"材质","value_zh":"钢","key_it":"Materiale","value_it":"Acciaio","key_fr":"Matériau","value_fr":"Acier"}]',
@@ -214,7 +215,7 @@ class Admin::SkusController < Admin::BaseController
   def generate_csv(skus)
     CSV.generate(headers: true) do |csv|
       # 定义表头
-      base_headers = ["ID", "Position", "Name", "Channel", "Category Path", "Price", "Status", "Image URLs"]
+      base_headers = ["ID", "SKU Code", "Position", "Name", "Channel", "Category Path", "Price", "Status", "Image URLs"]
       csv << base_headers + [Sku.human_attribute_name(:standard_features)]
 
       categories_cache = Category.all.includes(:parent).index_by(&:id)
@@ -231,7 +232,7 @@ class Admin::SkusController < Admin::BaseController
         image_urls = sku.images.attached? ? sku.images.map { |img| url_for(img) }.join(",") : ""
         
         row = [
-          sku.id, sku.position, sku.name, sku.category.category_kind, category_path, sku.price, sku.status,
+          sku.id, sku.sku_code, sku.position, sku.name, sku.category.category_kind, category_path, sku.price, sku.status,
           image_urls
         ]
         
@@ -279,7 +280,7 @@ class Admin::SkusController < Admin::BaseController
 
   def sku_params
     params.require(:sku).permit(
-      :name, :name_zh, :name_en, :name_it, :name_fr,
+      :name, :sku_code, :name_zh, :name_en, :name_it, :name_fr,
       :category_id, :price, :status, :position,
       :standard_features, :standard_features_zh, :standard_features_it, :standard_features_fr,
       :meta_title, :meta_title_zh, :meta_title_en, :meta_title_it, :meta_title_fr,

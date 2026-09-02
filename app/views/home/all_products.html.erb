@@ -81,7 +81,7 @@
                                 <li>
                                   <%= link_to sku_path(sku), class: "text-sm text-slate-500 hover:text-primary flex items-center group/sku py-0.5" do %>
                                     <span class="w-1 h-1 bg-slate-200 group-hover/sku:bg-primary rounded-full mr-2 transition-colors"></span>
-                                    <span class="truncate"><%= sku.name %></span>
+                                    <span class="truncate"><%= sku.sku_code.present? ? "#{sku.sku_code} · #{sku.name}" : sku.name %></span>
                                   <% end %>
                                 </li>
                               <% end %>
@@ -97,7 +97,7 @@
                           <li>
                             <%= link_to sku_path(sku), class: "text-sm text-slate-500 hover:text-secondary flex items-center group/sku py-0.5" do %>
                               <span class="w-1 h-1 bg-slate-200 group-hover/sku:bg-secondary rounded-full mr-2 transition-colors"></span>
-                              <span class="truncate"><%= sku.name %></span>
+                              <span class="truncate"><%= sku.sku_code.present? ? "#{sku.sku_code} · #{sku.name}" : sku.name %></span>
                             <% end %>
                           </li>
                         <% end %>
@@ -114,7 +114,7 @@
                       <li>
                         <%= link_to sku_path(sku), class: "text-sm text-slate-500 hover:text-primary flex items-center group/sku py-0.5" do %>
                           <span class="w-1 h-1 bg-slate-200 group-hover/sku:bg-primary rounded-full mr-2 transition-colors"></span>
-                          <span class="truncate"><%= sku.name %></span>
+                          <span class="truncate"><%= sku.sku_code.present? ? "#{sku.sku_code} · #{sku.name}" : sku.name %></span>
                         <% end %>
                       </li>
                     <% end %>

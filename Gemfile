@@ -31,6 +31,7 @@ gem "tzinfo-data", platforms: %i[ mswin mingw x64_mingw jruby ]
 # Cloudflare R2 (S3 compatible) for Active Storage (production)
 gem "aws-sdk-s3", require: false
 gem "csv"
+gem "rubyzip", "~> 3.2"
 
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
 gem "solid_cache"

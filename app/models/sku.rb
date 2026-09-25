@@ -1,4 +1,5 @@
 class Sku < ApplicationRecord
+  before_validation :normalize_sku_code
   after_commit :clear_dashboard_cache
 
   belongs_to :category
@@ -110,6 +111,7 @@ class Sku < ApplicationRecord
     end.reject { |s| s[:key].blank? }
   end
   validates :position, numericality: { only_integer: true }
+  validates :sku_code, uniqueness: { allow_blank: true }
   validate :category_must_be_leaf
   validate :images_must_be_bmp_or_png_jpg_images
 
@@ -117,6 +119,10 @@ class Sku < ApplicationRecord
   # 不再使用 store_accessor，因为内容是动态且多语言的数组
 
   private
+
+  def normalize_sku_code
+    self.sku_code = sku_code.strip if sku_code
+  end
 
   def images_must_be_bmp_or_png_jpg_images
     return unless images.attached?

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "dashboard#index"
     get "dashboard", to: "dashboard#index"
+    get "catalog_export", to: "dashboard#catalog_export"
+    post "catalog_import", to: "dashboard#catalog_import"
     resources :categories
     resources :skus do
       collection do

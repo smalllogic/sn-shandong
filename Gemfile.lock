@@ -429,6 +429,7 @@ DEPENDENCIES
   rails (= 8.1.3)
   resend
   rubocop-rails-omakase
+  rubyzip (~> 3.2)
   selenium-webdriver
   sitemap_generator
   solid_cache

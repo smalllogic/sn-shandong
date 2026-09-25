@@ -44,6 +44,7 @@ class Category < ApplicationRecord
   validate :root_category_slug_and_kind_consistency, if: -> { parent_id.nil? }
   validate :prevent_root_slug_change_if_has_children, if: -> { parent_id.nil? && !new_record? }
   validate :validate_root_category_slug, if: -> { parent_id.nil? }
+  validate :validate_parent_relationship, if: -> { parent_id.present? }
 
   def validate_root_category_slug
     if !ROOT_CATEGORIES.key?(slug)
@@ -169,6 +170,28 @@ class Category < ApplicationRecord
   end
 
   private
+
+  def validate_parent_relationship
+    unless parent
+      errors.add(:parent_id, "父分类不存在")
+      return
+    end
+
+    if parent.skus.exists?
+      errors.add(:parent_id, "父分类已有 SKU，不能再添加子分类")
+    end
+
+    seen = {}
+    node = parent
+    while node
+      if node == self || seen[node.id]
+        errors.add(:parent_id, "分类层级不能形成循环")
+        break
+      end
+      seen[node.id] = true
+      node = node.parent
+    end
+  end
 
   # The admin form stores translated names; keep the legacy fallback column populated.
   def sync_legacy_name

@@ -85,4 +85,27 @@
     </div>
   </div>
 
+  <% if current_user.super_admin? %>
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+      <div class="p-6 border-b border-slate-200">
+        <h3 class="font-bold text-slate-800">分类与 SKU 导入导出</h3>
+        <p class="mt-1 text-sm text-slate-500">导出一个 ZIP，包含全部分类和 SKU 数据；导入时先处理分类，再处理 SKU。</p>
+      </div>
+      <div class="p-6 space-y-5">
+        <div>
+          <%= link_to "导出分类和 SKU", admin_catalog_export_path,
+            class: "inline-flex items-center rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700" %>
+        </div>
+        <%= form_with url: admin_catalog_import_path, method: :post, multipart: true, local: true, class: "space-y-3" do |form| %>
+          <%= form.label :file, "导入分类和 SKU ZIP", class: "block text-sm font-semibold text-slate-700" %>
+          <%= form.file_field :file, accept: ".zip,application/zip", required: true,
+            class: "block w-full rounded-lg border border-slate-300 p-2 text-sm text-slate-700" %>
+          <p class="text-xs text-slate-500">仅接受本功能导出的 ZIP（最大 50 MB）。按分类 Slug、SKU 代码更新已有记录；任一错误都会回滚整包。分类图片、SKU 图片和富文本附件不包含在数据包中。</p>
+          <%= form.submit "导入分类和 SKU", data: { turbo_confirm: "确定导入并更新同 Slug 分类与同代码 SKU 吗？" },
+            class: "rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 cursor-pointer" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
 </div>

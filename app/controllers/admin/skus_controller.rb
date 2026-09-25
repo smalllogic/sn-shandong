@@ -21,80 +21,9 @@ class Admin::SkusController < Admin::BaseController
 
     respond_to do |format|
       format.html
-      format.csv do
-        unless current_user.super_admin?
-          return redirect_to admin_skus_path, alert: "只有大管理员才能导出 CSV。"
-        end
-        @export_skus = @skus
-        send_data generate_csv(@export_skus), filename: "skus-#{Date.today}.csv"
-      end
     end
   end
 
-  def import
-  end
-
-  def do_import
-    file = params[:file]
-    if file.blank?
-      flash.now[:alert] = "请选择要上传的 CSV 文件。"
-      render :import, status: :unprocessable_entity
-      return
-    end
-
-    begin
-      import_service = SkuImportService.new(file.path)
-      result = import_service.call
-      
-      if result[:success] > 0 || result[:errors].empty?
-        notice = "成功导入 #{result[:success]} 条记录。"
-        notice += " 失败 #{result[:failed]} 条。" if result[:failed] > 0
-        redirect_to admin_skus_path, notice: notice
-      else
-        flash.now[:alert] = "导入失败：#{result[:errors].join(', ')}"
-        render :import, status: :unprocessable_entity
-      end
-    rescue StandardError => e
-      flash.now[:alert] = "解析文件时发生错误：#{e.message}"
-      render :import, status: :unprocessable_entity
-    end
-  end
-
-  def download_template
-    headers = [
-      "SKU名称", "SKU代码", "分类ID", "价格", "状态", "排序",
-      "分类Slug",
-      "中文名称", "英文名称", "意大利语名称", "法语名称",
-      "中文功能特点", "英文功能特点", "意大利语功能特点", "法语功能特点",
-      "技术规格(JSON)",
-      "中文SEO标题", "英文SEO标题", "意语SEO标题", "法语SEO标题",
-      "中文SEO描述", "英文SEO描述", "意语SEO描述", "法语SEO描述",
-      "中文SEO关键词", "英文SEO关键词", "意语SEO关键词", "法语SEO关键词"
-    ]
-    
-    csv_data = CSV.generate(headers: true) do |csv|
-      csv << headers
-      csv << [
-        "示例产品", "SKU-001", "561", "99.99", "active", "1", "refrigeration-example",
-        "示例产品(中)", "Sample Product(EN)", "Prodotto di esempio", "Produit exemple",
-        "特点1\n特点2", "Feature 1\nFeature 2", "Caratteristica 1\nCaratteristica 2", "Caractéristique 1\nCaractéristique 2",
-        '[{"key":"Material","value":"Steel","key_zh":"材质","value_zh":"钢","key_it":"Materiale","value_it":"Acciaio","key_fr":"Matériau","value_fr":"Acier"}]',
-        "SEO标题", "SEO Title", "Titolo SEO", "Titre SEO",
-        "SEO描述", "SEO Description", "Descrizione SEO", "Description SEO",
-        "关键词", "Keywords", "Parole chiave", "Mots-clés"
-      ]
-    end
-
-    send_data "\xEF\xBB\xBF" + csv_data, filename: "sku_import_template.csv", type: 'text/csv; charset=utf-8; header=present'
-  end
-
-  def export
-    unless current_user.super_admin?
-      return redirect_to admin_skus_path, alert: "只有大管理员才能导出 CSV。"
-    end
-    @skus = Sku.includes(category: :parent, images_attachments: :blob).order(position: :asc, created_at: :desc)
-    send_data generate_csv(@skus), filename: "all-skus-#{Date.today}.csv"
-  end
 
 
   def update_positions
@@ -213,34 +142,6 @@ class Admin::SkusController < Admin::BaseController
 
   private
 
-  def generate_csv(skus)
-    CSV.generate(headers: true) do |csv|
-      # 定义表头
-      base_headers = ["ID", "SKU Code", "Position", "Name", "Channel", "Category Path", "Price", "Status", "Image URLs"]
-      csv << base_headers + [Sku.human_attribute_name(:standard_features)]
-
-      categories_cache = Category.all.includes(:parent).index_by(&:id)
-
-      skus.each do |sku|
-        cat = categories_cache[sku.category_id]
-        path_segments = []
-        while cat
-          path_segments.unshift(cat.name)
-          cat = categories_cache[cat.parent_id]
-        end
-        category_path = path_segments.join(" > ")
-
-        image_urls = sku.images.attached? ? sku.images.map { |img| url_for(img) }.join(",") : ""
-        
-        row = [
-          sku.id, sku.sku_code, sku.position, sku.name, sku.category.category_kind, category_path, sku.price, sku.status,
-          image_urls
-        ]
-        
-        csv << row + [sku.standard_features.to_s]
-      end
-    end
-  end
 
   def sku_list_path
     category_id = session[:sku_list_category_id]

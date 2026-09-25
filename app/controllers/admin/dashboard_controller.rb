@@ -14,16 +14,4 @@ class Admin::DashboardController < Admin::BaseController
     @vips_installed = system("vips --version") rescue false
   end
 
-  def import_wizard
-    @categories_import_completed = session[:category_import_completed] == true
-  end
-
-  def data_transfer_export
-    unless current_user.super_admin?
-      return redirect_to admin_root_path, alert: "只有大管理员才能导出分类和 SKU 数据。"
-    end
-
-    data = AdminDataTransferExport.new.call
-    send_data data, filename: "categories-and-skus-#{Date.current}.zip", type: "application/zip"
-  end
 end

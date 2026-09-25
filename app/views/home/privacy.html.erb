@@ -21,11 +21,12 @@
 <div class="py-20 bg-white">
   <div class="max-w-screen-xl mx-auto px-6">
     <div class="max-w-4xl space-y-12">
-      <% ['data_collection', 'usage', 'sharing', 'deletion', 'contact_us'].each do |section| %>
+      <% sections = t('privacy_policy').select { |k, v| v.is_a?(Hash) && v.has_key?(:title) && !['ip_banner', 'last_updated'].include?(k.to_s) }.keys %>
+      <% sections.each_with_index do |section, index| %>
         <section class="group">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-primary border border-slate-100 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-              <span class="text-xl font-black">0<%= ['data_collection', 'usage', 'sharing', 'deletion', 'contact_us'].index(section) + 1 %></span>
+              <span class="text-xl font-black"><%= (index + 1).to_s.rjust(2, '0') %></span>
             </div>
             <h2 class="text-2xl font-black text-slate-900 tracking-tight"><%= t("privacy_policy.#{section}.title") %></h2>
           </div>

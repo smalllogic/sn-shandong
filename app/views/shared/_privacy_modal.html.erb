@@ -1,7 +1,9 @@
 <div x-data="{ openPrivacy: false }" 
-     @open-privacy.window="openPrivacy = true"
+     @open-privacy.window="openPrivacy = true; document.body.classList.add('overflow-hidden')"
+     @keydown.escape.window="openPrivacy = false; document.body.classList.remove('overflow-hidden')"
      class="relative z-[100]">
   <div x-show="openPrivacy" 
+       style="display: none;"
        x-transition:enter="transition ease-out duration-300"
        x-transition:enter-start="opacity-0"
        x-transition:enter-end="opacity-100"
@@ -12,6 +14,7 @@
        x-cloak></div>
 
   <div x-show="openPrivacy" 
+       style="display: none;"
        x-transition:enter="transition ease-out duration-300"
        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
@@ -21,11 +24,11 @@
        class="fixed inset-0 z-10 overflow-y-auto"
        x-cloak>
     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-      <div class="relative transform overflow-hidden rounded-[2.5rem] bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-2xl" @click.away="openPrivacy = false">
+      <div class="relative transform overflow-hidden rounded-[2.5rem] bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-2xl" @click.away="openPrivacy = false; document.body.classList.remove('overflow-hidden')">
         <div class="bg-white px-8 pt-10 pb-8">
           <div class="flex items-center justify-between mb-8">
             <h3 class="text-3xl font-black text-slate-900 tracking-tight"><%= t('privacy_policy.title') %></h3>
-            <button @click="openPrivacy = false" class="text-slate-400 hover:text-slate-600 transition-colors">
+            <button @click="openPrivacy = false; document.body.classList.remove('overflow-hidden')" class="text-slate-400 hover:text-slate-600 transition-colors">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
           </div>
@@ -33,7 +36,8 @@
           <div class="prose prose-slate max-w-none space-y-8 overflow-y-auto max-h-[60vh] pr-4 custom-scrollbar">
             <p class="text-slate-500 font-medium leading-relaxed"><%= t('privacy_policy.introduction') %></p>
             
-            <% ['data_collection', 'usage', 'sharing', 'deletion', 'contact_us'].each do |section| %>
+            <% sections = t('privacy_policy').select { |k, v| v.is_a?(Hash) && v.has_key?(:title) && !['ip_banner', 'last_updated'].include?(k.to_s) }.keys %>
+            <% sections.each do |section| %>
               <div class="bg-slate-50 rounded-3xl p-6 border border-slate-100">
                 <h4 class="text-lg font-black text-slate-900 mb-3"><%= t("privacy_policy.#{section}.title") %></h4>
                 <p class="text-slate-600 font-medium leading-relaxed"><%= t("privacy_policy.#{section}.content") %></p>
@@ -42,7 +46,7 @@
           </div>
         </div>
         <div class="bg-slate-50 px-8 py-6 flex justify-end">
-          <button @click="openPrivacy = false" class="px-8 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-black transition-all shadow-lg shadow-slate-200">
+          <button @click="openPrivacy = false; document.body.classList.remove('overflow-hidden')" class="px-8 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-black transition-all shadow-lg shadow-slate-200">
             <%= t('privacy_policy.close') %>
           </button>
         </div>

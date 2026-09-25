@@ -109,11 +109,21 @@ fr:
   privacy_policy:
     title: "Politique de confidentialité"
     introduction: "Votre vie privée est importante pour nous. Cette politique explique comment nous collectons, utilisons et protégeons vos informations."
-    data_collection: { title: "Informations collectées", content: "Nous collectons les informations fournies via nos formulaires, notamment votre nom, vos coordonnées et les détails produits." }
-    usage: { title: "Utilisation des informations", content: "Les informations collectées servent à répondre à vos demandes, fournir une assistance professionnelle et améliorer nos services." }
-    sharing: { title: "Partage des informations", content: "Nous ne vendons pas les informations personnelles. Elles peuvent être partagées uniquement avec des prestataires autorisés pour répondre aux demandes de service." }
-    deletion: { title: "Suppression des données", content: "Vous avez le droit de demander la suppression de vos données personnelles." }
-    contact_us: { title: "Nous contacter pour supprimer vos données", content: "Pour demander la suppression de données ou poser une question sur la confidentialité, contactez info@skyrainbow.com.cn." }
+    data_collection:
+      title: "Informations collectées"
+      content: "Nous collectons les informations fournies via nos formulaires, notamment votre nom, vos coordonnées et les détails produits. Nous collectons également les adresses IP à des fins d'analyse et de sécurité."
+    usage:
+      title: "Utilisation des informations"
+      content: "Les informations collectées servent à répondre à vos demandes, fournir une assistance professionnelle et améliorer nos services."
+    sharing:
+      title: "Partage des informations"
+      content: "Nous ne vendons pas les informations personnelles. Elles peuvent être partagées uniquement avec des prestataires autorisés pour répondre aux demandes de service."
+    deletion:
+      title: "Suppression des données"
+      content: "Vous avez le droit de demander la suppression de vos données personnelles."
+    contact_us:
+      title: "Nous contacter"
+      content: "Pour demander la suppression de données ou poser une question sur la confidentialité, contactez info@skyrainbow.com.cn."
     close: "Fermer"
     last_updated: "Dernière mise à jour : %{date}"
     ip_banner: { title: "Expérience visiteur et analyses", content: "Nous collectons l'adresse IP et les données de visite afin d'améliorer les services et la sécurité.", accept: "Accepter", decline: "Refuser", learn_more: "Confidentialité" }

@@ -109,11 +109,21 @@ it:
   privacy_policy:
     title: "Informativa sulla privacy"
     introduction: "La tua privacy è importante per noi. Questa informativa spiega come raccogliamo, utilizziamo e proteggiamo le tue informazioni."
-    data_collection: { title: "Informazioni raccolte", content: "Raccogliamo le informazioni fornite tramite i moduli di contatto, inclusi nome, contatto e dettagli dei prodotti." }
-    usage: { title: "Come utilizziamo le informazioni", content: "Le informazioni raccolte vengono utilizzate per rispondere alle richieste, fornire supporto professionale e migliorare i servizi." }
-    sharing: { title: "Condivisione delle informazioni", content: "Non vendiamo informazioni personali. Possiamo condividerle solo con fornitori autorizzati per soddisfare le richieste di servizio." }
-    deletion: { title: "Come eliminare i dati", content: "Hai il diritto di richiedere l'eliminazione dei tuoi dati personali." }
-    contact_us: { title: "Contattaci per l'eliminazione", content: "Per richiedere l'eliminazione dei dati o per domande sulla privacy, contattaci a info@skyrainbow.com.cn." }
+    data_collection:
+      title: "Informazioni raccolte"
+      content: "Raccogliamo le informazioni fornite tramite i moduli di contatto, inclusi nome, contatto e dettagli dei prodotti. Raccogliamo anche gli indirizzi IP a scopo di analisi e sicurezza."
+    usage:
+      title: "Come utilizziamo le informazioni"
+      content: "Le informazioni raccolte vengono utilizzate per rispondere alle richieste, fornire supporto professionale e migliorare i servizi."
+    sharing:
+      title: "Condivisione delle informazioni"
+      content: "Non vendiamo informazioni personali. Possiamo condividerle solo con fornitori autorizzati per soddisfare le richieste di servizio."
+    deletion:
+      title: "Come eliminare i dati"
+      content: "Hai il diritto di richiedere l'eliminazione dei tuoi dati personali."
+    contact_us:
+      title: "Contattaci"
+      content: "Per richiedere l'eliminazione dei dati o per domande sulla privacy, contattaci a info@skyrainbow.com.cn."
     close: "Chiudi"
     last_updated: "Ultimo aggiornamento: %{date}"
     ip_banner: { title: "Esperienza visitatore e analisi", content: "Raccogliamo indirizzo IP e dati di visita per migliorare servizi e sicurezza.", accept: "Accetta", decline: "Rifiuta", learn_more: "Privacy" }

@@ -258,9 +258,10 @@ en:
       title: "How to Delete Your Data"
       content: "You have the right to request the deletion of your personal data."
     contact_us:
-      title: "Contact Us to Delete"
+      title: "Contact Us"
       content: "To request data deletion or if you have questions about our privacy practices, please contact us at info@skyrainbow.com.cn."
     close: "Close"
+    last_updated: "Last updated: %{date}"
 
   cookie_banner:
     message: "We collect IP addresses for analysis and security purposes."
@@ -326,8 +327,8 @@ en:
     solutions: "Our Solutions"
     company: "Company"
     contact: "Contact Us"
-  privacy_policy:
-    last_updated: "Last updated: %{date}"
+    quick_links: "Know More"
+
   home:
     branches:
       uae: "UAE"

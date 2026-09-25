@@ -203,9 +203,10 @@ zh-CN:
       title: "如何删除您的数据"
       content: "您有权要求删除您的个人数据。"
     contact_us:
-      title: "联系我们删除"
+      title: "联系我们"
       content: "如需请求删除数据或对我们的隐私惯例有任何疑问，请通过 info@skyrainbow.com.cn 与我们联系。"
     close: "关闭"
+    last_updated: "最后更新：%{date}"
 
   cookie_banner:
     message: "我们出于分析和安全目的收集 IP 地址。"
@@ -247,8 +248,8 @@ zh-CN:
     solutions: "解决方案"
     company: "公司"
     contact: "联系我们"
-  privacy_policy:
-    last_updated: "最后更新：%{date}"
+    quick_links: "了解更多"
+
   home:
     branches:
       spain: "西班牙分公司"

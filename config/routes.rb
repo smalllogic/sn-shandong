@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "dashboard#index"
     get "dashboard", to: "dashboard#index"
-    resources :categories
+    resources :categories do
+      collection do
+        get :export
+      end
+    end
     resources :skus do
       collection do
         get :export

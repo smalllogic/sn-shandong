@@ -5,6 +5,38 @@ class Admin::CategoriesController < Admin::BaseController
     @categories = Category.unscoped.where(parent_id: nil).order(:position, :id).includes(:children)
   end
 
+  def export
+    @categories = Category.unscoped.order(:id)
+    
+    respond_to do |format|
+      format.csv do
+        filename = "categories-#{Time.now.strftime('%Y%m%d%H%M%S')}.csv"
+        
+        headers = %w[ID 名称(ZH) 名称(EN) Slug 父级ID 分类类型 排序 是否显示 是否推荐 推荐排序]
+        
+        csv_data = CSV.generate(headers: true) do |csv|
+          csv << headers
+          @categories.each do |category|
+            csv << [
+              category.id,
+              category.name_zh,
+              category.name_en,
+              category.slug,
+              category.parent_id,
+              category.category_kind,
+              category.position,
+              category.hidden ? '否' : '是',
+              category.featured ? '是' : '否',
+              category.featured_position
+            ]
+          end
+        end
+        
+        send_data csv_data, filename: filename, type: 'text/csv'
+      end
+    end
+  end
+
   def show
   end
 

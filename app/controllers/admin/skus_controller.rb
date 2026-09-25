@@ -63,6 +63,7 @@ class Admin::SkusController < Admin::BaseController
   def download_template
     headers = [
       "SKU名称", "SKU代码", "分类ID", "价格", "状态", "排序",
+      "分类Slug",
       "中文名称", "英文名称", "意大利语名称", "法语名称",
       "中文功能特点", "英文功能特点", "意大利语功能特点", "法语功能特点",
       "技术规格(JSON)",
@@ -74,7 +75,7 @@ class Admin::SkusController < Admin::BaseController
     csv_data = CSV.generate(headers: true) do |csv|
       csv << headers
       csv << [
-        "示例产品", "SKU-001", "561", "99.99", "active", "1",
+        "示例产品", "SKU-001", "561", "99.99", "active", "1", "refrigeration-example",
         "示例产品(中)", "Sample Product(EN)", "Prodotto di esempio", "Produit exemple",
         "特点1\n特点2", "Feature 1\nFeature 2", "Caratteristica 1\nCaratteristica 2", "Caractéristique 1\nCaractéristique 2",
         '[{"key":"Material","value":"Steel","key_zh":"材质","value_zh":"钢","key_it":"Materiale","value_it":"Acciaio","key_fr":"Matériau","value_fr":"Acier"}]',

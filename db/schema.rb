@@ -102,13 +102,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_02_000000) do
   end
 
   create_table "faq_categories", force: :cascade do |t|
-    t.datetime "created_at", precision: nil, null: false
-    t.text "name"
+    t.datetime "created_at", null: false
+    t.string "name"
     t.text "name_fr"
     t.text "name_it"
     t.text "name_zh"
     t.integer "position", default: 0
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "faqs", force: :cascade do |t|
@@ -116,14 +116,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_02_000000) do
     t.text "answer_fr"
     t.text "answer_it"
     t.text "answer_zh"
-    t.datetime "created_at", precision: nil, null: false
+    t.datetime "created_at", null: false
     t.integer "faq_category_id", null: false
     t.integer "position", default: 0
-    t.text "question"
+    t.string "question"
     t.text "question_fr"
     t.text "question_it"
     t.text "question_zh"
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "updated_at", null: false
+    t.index ["faq_category_id"], name: "index_faqs_on_faq_category_id"
   end
 
   create_table "login_logs", force: :cascade do |t|
@@ -165,7 +166,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_02_000000) do
     t.string "country"
     t.datetime "created_at", null: false
     t.string "email"
-    t.text "message"
     t.string "name"
     t.string "phone"
     t.string "status"
@@ -256,6 +256,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_02_000000) do
     t.string "status", default: "draft"
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_skus_on_category_id"
+    t.index ["position"], name: "index_skus_on_position"
     t.index ["sku_code"], name: "index_skus_on_sku_code"
     t.index ["status"], name: "index_skus_on_status"
   end
@@ -438,48 +439,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_02_000000) do
     t.index ["session_id", "visit_time"], name: "index_visit_records_on_session_id_and_visit_time"
     t.index ["session_id"], name: "index_visit_records_on_session_id"
     t.index ["visit_time"], name: "index_visit_records_on_visit_time"
-  end
-
-  create_table "visits", force: :cascade do |t|
-    t.string "city"
-    t.string "country"
-    t.datetime "created_at", null: false
-    t.string "ip_address"
-    t.string "isp"
-    t.string "page_name"
-    t.string "page_url"
-    t.string "referer"
-    t.string "region"
-    t.datetime "updated_at", null: false
-    t.text "user_agent"
-    t.datetime "visited_at"
-    t.index ["country", "region", "city"], name: "index_visits_on_country_and_region_and_city"
-    t.index ["ip_address"], name: "index_visits_on_ip_address"
-    t.index ["page_url"], name: "index_visits_on_page_url"
-    t.index ["visited_at"], name: "index_visits_on_visited_at"
-  end
-
-  create_table "warranty_inquiries", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.text "description"
-    t.string "email"
-    t.string "model_number"
-    t.string "name"
-    t.string "phone"
-    t.string "product_type"
-    t.string "status"
-    t.string "subject"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "warranty_pdfs", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "description"
-    t.string "name", null: false
-    t.string "pdf_type", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_warranty_pdfs_on_name"
-    t.index ["pdf_type"], name: "index_warranty_pdfs_on_pdf_type", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

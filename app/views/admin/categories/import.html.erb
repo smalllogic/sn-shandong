@@ -1,23 +1,23 @@
-<% content_for :admin_title, "批量导入 SKU" %>
+<% content_for :admin_title, "批量导入分类" %>
 
 <div class="mb-6">
-  <%= link_to admin_skus_path, class: "text-slate-500 hover:text-slate-700 flex items-center text-sm font-medium transition-colors" do %>
+  <%= link_to admin_categories_path, class: "text-slate-500 hover:text-slate-700 flex items-center text-sm font-medium transition-colors" do %>
     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="10 19l-7-7m0 0l7-7m-7 7h18"></path>
     </svg>
-    返回 SKU 列表
+    返回分类列表
   <% end %>
 </div>
 
 <div class="max-w-2xl mx-auto">
   <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
     <div class="p-6 border-b border-slate-100 bg-slate-50/50">
-      <h3 class="text-lg font-bold text-slate-800">上传 Excel/CSV 文件</h3>
-      <p class="text-sm text-slate-500 mt-1">请上传符合格式要求的 CSV 文件进行批量导入。</p>
+      <h3 class="text-lg font-bold text-slate-800">上传 CSV 文件</h3>
+      <p class="text-sm text-slate-500 mt-1">请上传符合格式要求的 CSV 文件进行分类批量导入或更新。</p>
     </div>
 
     <div class="p-6">
-      <%= form_with url: do_import_admin_skus_path, method: :post, local: true, multipart: true, class: "space-y-6" do |f| %>
+      <%= form_with url: do_import_admin_categories_path, method: :post, local: true, multipart: true, class: "space-y-6" do |f| %>
         <div class="space-y-2">
           <label class="block text-sm font-semibold text-slate-700">选择文件</label>
           <div class="flex items-center justify-center w-full">
@@ -45,19 +45,14 @@
               <h3 class="text-sm font-medium text-blue-800">导入提示与规格说明</h3>
               <div class="mt-2 text-sm text-blue-700 space-y-3">
                 <ul class="list-disc list-inside space-y-1">
-                  <li><strong>分类Slug</strong>: 推荐填写分类的 Slug；跨服务器导入时会优先按 Slug 匹配，并且必须匹配到<strong>末级分类</strong>。旧模板也可只填写分类 ID。</li>
-                  <li><strong>功能特点</strong>: 支持换行（自动转为 &lt;br&gt;）或直接填写 HTML 标签。</li>
-                  <li><strong>技术规格 (JSON)</strong>: 请严格按照以下 JSON 数组格式填写：</li>
+                  <li><strong>更新机制</strong>: 如果提供了 <code>ID</code> 或已存在的 <code>Slug</code>，系统将更新对应的分类信息；否则将创建新分类。</li>
+                  <li><strong>父级ID</strong>: 如果是子分类，请填写其直接父级的 <code>ID</code>。顶级分类请留空。</li>
+                  <li><strong>顶级分类 Slug</strong>: 必须是预定义的类型之一（如 <code>refrigeration</code>, <code>cooking-equipment</code> 等）。</li>
+                  <li><strong>分类类型 (category_kind)</strong>: 建议与顶级分类的 Slug 保持一致。</li>
                 </ul>
-                
-                <div class="bg-blue-900/5 rounded p-3 font-mono text-xs text-blue-900 break-all overflow-x-auto">
-                  [{"key":"Material","value":"Steel","key_zh":"材质","value_zh":"钢","key_it":"Materiale","value_it":"Acciaio","key_fr":"Matériau","value_fr":"Acier"}]
-                </div>
-                
-                <p class="text-xs">说明：每个对象代表一行规格。<code>key</code> 和 <code>value</code> 是默认/英文，多语言后缀为 <code>_zh</code> (中), <code>_it</code> (意), <code>_fr</code> (法)。</p>
               </div>
               <div class="mt-4">
-                <%= link_to download_template_admin_skus_path, class: "text-sm font-bold text-blue-700 hover:text-blue-900 underline flex items-center" do %>
+                <%= link_to download_template_admin_categories_path, class: "text-sm font-bold text-blue-700 hover:text-blue-900 underline flex items-center" do %>
                   <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                   </svg>

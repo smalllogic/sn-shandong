@@ -1,6 +1,6 @@
 class DropHomeProducts < ActiveRecord::Migration[7.1]
   def change
-    drop_table :home_products do |t|
+    drop_table :home_products, if_exists: true do |t|
       t.boolean "active"
       t.datetime "created_at", null: false
       t.string "link"

@@ -15,9 +15,14 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "dashboard#index"
     get "dashboard", to: "dashboard#index"
+    get "import_wizard", to: "dashboard#import_wizard"
+    get "data_transfer_export", to: "dashboard#data_transfer_export"
     resources :categories do
       collection do
         get :export
+        get :import
+        post :import, to: 'categories#do_import', as: :do_import
+        get :download_template
       end
     end
     resources :skus do

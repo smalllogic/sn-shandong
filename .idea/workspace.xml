@@ -25,23 +25,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.00132488435867" />
-      <entry key="MS500" value="1.3794087973129234" />
-      <entry key="S2" value="5.054419973331944" />
-      <entry key="S5" value="12.255352636995386" />
-      <entry key="S10" value="21.269812612728334" />
-      <entry key="S30" value="37.04471206590139" />
-      <entry key="S60" value="43.983353920147145" />
-      <entry key="M2" value="48.23609155856108" />
-      <entry key="M5" value="52.2344025329568" />
-      <entry key="M10" value="57.424856456388554" />
-      <entry key="M15" value="62.57461843286657" />
-      <entry key="M30" value="74.80780339496499" />
-      <entry key="H1" value="87.55382044233495" />
-      <entry key="H2" value="97.47867996450185" />
-      <entry key="H4" value="111.64005744083123" />
-      <entry key="D1" value="311.9027368068357" />
-      <entry key="W1" value="480.92611467166813" />
+      <entry key="MS100" value="1.3438857803318596" />
+      <entry key="MS500" value="1.893367150978722" />
+      <entry key="S2" value="4.501240026655674" />
+      <entry key="S5" value="8.058133952080624" />
+      <entry key="S10" value="13.399200081903288" />
+      <entry key="S30" value="33.923080850654735" />
+      <entry key="S60" value="48.52025953507926" />
+      <entry key="M2" value="59.192272891283764" />
+      <entry key="M5" value="68.16914303258423" />
+      <entry key="M10" value="75.1826886427027" />
+      <entry key="M15" value="80.9547200459587" />
+      <entry key="M30" value="93.85381534091242" />
+      <entry key="H1" value="107.00260169843675" />
+      <entry key="H2" value="117.17426538818349" />
+      <entry key="H4" value="131.46745472681616" />
+      <entry key="D1" value="331.8261070444204" />
+      <entry key="W1" value="500.9093969756157" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -63,23 +63,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.0824722478594403" />
-      <entry key="MS500" value="0.7972612924850914" />
-      <entry key="S2" value="4.7212750397137855" />
-      <entry key="S5" value="12.044482231183876" />
-      <entry key="S10" value="21.12673479363867" />
-      <entry key="S30" value="36.980276947891376" />
-      <entry key="S60" value="43.94798033474545" />
-      <entry key="M2" value="48.21748929786959" />
-      <entry key="M5" value="52.22648354715307" />
-      <entry key="M10" value="57.420181322696365" />
-      <entry key="M15" value="62.570984118079515" />
-      <entry key="M30" value="74.80543518782662" />
-      <entry key="H1" value="87.55238387168599" />
-      <entry key="H2" value="97.47787116174938" />
-      <entry key="H4" value="111.63959272656257" />
-      <entry key="D1" value="311.90250017996544" />
-      <entry key="W1" value="480.92606095813164" />
+      <entry key="MS100" value="1.2691913590083546" />
+      <entry key="MS500" value="1.8676539968187968" />
+      <entry key="S2" value="4.485110477456988" />
+      <entry key="S5" value="8.042591873765671" />
+      <entry key="S10" value="13.371651173349623" />
+      <entry key="S30" value="33.88525877356544" />
+      <entry key="S60" value="48.49190461092073" />
+      <entry key="M2" value="59.174797135223926" />
+      <entry key="M5" value="68.16097814925755" />
+      <entry key="M10" value="75.17777704273664" />
+      <entry key="M15" value="80.95090319787923" />
+      <entry key="M30" value="93.85134071074899" />
+      <entry key="H1" value="107.00110638728268" />
+      <entry key="H2" value="117.17342536330422" />
+      <entry key="H4" value="131.46697389425051" />
+      <entry key="D1" value="331.8258676746391" />
+      <entry key="W1" value="500.9093428639404" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -91,31 +91,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.ruby.rubocop.migration.global.runOnSaveToExternalFormatter": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP": "1789794522919",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "junie.plugin.stays.banner.dismissed": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ruby.structure.view.model.defaults.configured": "true",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ruby.rubocop.migration.global.runOnSaveToExternalFormatter&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP&quot;: &quot;1790295194484&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ruby.structure.view.model.defaults.configured&quot;: &quot;true&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/assets/images" />
@@ -238,6 +238,8 @@
       <workItem from="1788165213073" duration="1946000" />
       <workItem from="1788317257241" duration="426000" />
       <workItem from="1789794457654" duration="102000" />
+      <workItem from="1790295128424" duration="1130000" />
+      <workItem from="1790296272956" duration="693000" />
     </task>
     <servers />
   </component>

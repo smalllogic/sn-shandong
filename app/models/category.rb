@@ -96,13 +96,13 @@ class Category < ApplicationRecord
   def localized_name
     case I18n.locale.to_sym
     when :en
-      name_en.presence || name
+      respond_to?(:name_en) ? (name_en.presence || name) : name
     when :it
-      name_it.presence || name
+      respond_to?(:name_it) ? (name_it.presence || name) : name
     when :fr
-      name_fr.presence || name
+      respond_to?(:name_fr) ? (name_fr.presence || name) : name
     when :"zh-CN", :zh
-      name_zh.presence || name
+      respond_to?(:name_zh) ? (name_zh.presence || name) : name
     else
       name
     end
@@ -111,13 +111,13 @@ class Category < ApplicationRecord
   def localized_meta_title
     case I18n.locale.to_sym
     when :en
-      meta_title_en.presence || meta_title
+      (respond_to?(:meta_title_en) ? meta_title_en.presence : nil) || meta_title
     when :it
-      meta_title_it.presence || meta_title
+      (respond_to?(:meta_title_it) ? meta_title_it.presence : nil) || meta_title
     when :fr
-      meta_title_fr.presence || meta_title
+      (respond_to?(:meta_title_fr) ? meta_title_fr.presence : nil) || meta_title
     when :"zh-CN", :zh
-      meta_title_zh.presence || meta_title
+      (respond_to?(:meta_title_zh) ? meta_title_zh.presence : nil) || meta_title
     else
       meta_title
     end
@@ -126,13 +126,13 @@ class Category < ApplicationRecord
   def localized_meta_description
     case I18n.locale.to_sym
     when :en
-      meta_description_en.presence || meta_description
+      (respond_to?(:meta_description_en) ? meta_description_en.presence : nil) || meta_description
     when :it
-      meta_description_it.presence || meta_description
+      (respond_to?(:meta_description_it) ? meta_description_it.presence : nil) || meta_description
     when :fr
-      meta_description_fr.presence || meta_description
+      (respond_to?(:meta_description_fr) ? meta_description_fr.presence : nil) || meta_description
     when :"zh-CN", :zh
-      meta_description_zh.presence || meta_description
+      (respond_to?(:meta_description_zh) ? meta_description_zh.presence : nil) || meta_description
     else
       meta_description
     end
@@ -141,13 +141,13 @@ class Category < ApplicationRecord
   def localized_meta_keywords
     case I18n.locale.to_sym
     when :en
-      meta_keywords_en.presence || meta_keywords
+      (respond_to?(:meta_keywords_en) ? meta_keywords_en.presence : nil) || meta_keywords
     when :it
-      meta_keywords_it.presence || meta_keywords
+      (respond_to?(:meta_keywords_it) ? meta_keywords_it.presence : nil) || meta_keywords
     when :fr
-      meta_keywords_fr.presence || meta_keywords
+      (respond_to?(:meta_keywords_fr) ? meta_keywords_fr.presence : nil) || meta_keywords
     when :"zh-CN", :zh
-      meta_keywords_zh.presence || meta_keywords
+      (respond_to?(:meta_keywords_zh) ? meta_keywords_zh.presence : nil) || meta_keywords
     else
       meta_keywords
     end
@@ -156,13 +156,13 @@ class Category < ApplicationRecord
   def localized_keywords
     case I18n.locale.to_sym
     when :en
-      keywords_en.presence || keywords
+      (respond_to?(:keywords_en) ? keywords_en.presence : nil) || keywords
     when :it
-      keywords_it.presence || keywords
+      (respond_to?(:keywords_it) ? keywords_it.presence : nil) || keywords
     when :fr
-      keywords_fr.presence || keywords
+      (respond_to?(:keywords_fr) ? keywords_fr.presence : nil) || keywords
     when :"zh-CN", :zh
-      keywords_zh.presence || keywords
+      (respond_to?(:keywords_zh) ? keywords_zh.presence : nil) || keywords
     else
       keywords
     end
@@ -172,6 +172,7 @@ class Category < ApplicationRecord
 
   # The admin form stores translated names; keep the legacy fallback column populated.
   def sync_legacy_name
+    return unless respond_to?(:name_en)
     translated_name = name_en.presence || name_zh.presence || name_it.presence || name_fr.presence
     self.name = translated_name if translated_name.present?
   end

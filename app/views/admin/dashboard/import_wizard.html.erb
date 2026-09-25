@@ -1,0 +1,34 @@
+<% content_for :admin_title, "分类与 SKU 导入向导" %>
+
+<div class="max-w-3xl mx-auto space-y-6">
+  <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+    <h2 class="text-lg font-bold text-slate-800">按顺序导入迁移数据</h2>
+    <p class="text-sm text-slate-600 mt-2">请先导入分类，确认分类导入成功后，再导入 SKU。ZIP 导出包中的两个 CSV 可直接用于此流程。</p>
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    <section class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+      <p class="text-xs font-semibold text-blue-700">第 1 步</p>
+      <h3 class="mt-2 font-bold text-slate-800">导入分类</h3>
+      <p class="mt-2 text-sm text-slate-500">先建立分类层级。导入文件支持用父级 Slug 对应父分类。</p>
+      <%= link_to "前往分类导入", import_admin_categories_path,
+        class: "mt-5 inline-flex px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700" %>
+    </section>
+
+    <section class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 <%= 'opacity-60' unless @categories_import_completed %>">
+      <p class="text-xs font-semibold text-emerald-700">第 2 步</p>
+      <h3 class="mt-2 font-bold text-slate-800">确认后导入 SKU</h3>
+      <p class="mt-2 text-sm text-slate-500">在分类导入成功并检查分类列表后，再上传 SKU。优先使用“分类Slug”关联末级分类。</p>
+      <% if @categories_import_completed %>
+        <%= link_to "前往 SKU 导入", import_admin_skus_path,
+          class: "mt-5 inline-flex px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700" %>
+      <% else %>
+        <p class="mt-5 text-sm font-medium text-slate-500">完成第 1 步后，此步骤会解锁。</p>
+      <% end %>
+    </section>
+  </div>
+
+  <div class="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+    slug 列有值时，系统只按 slug 查找分类；slug 未匹配会导致该行导入失败，不会退回到可能指向其他分类的 ID。旧模板没有 slug 列时仍按分类 ID 导入。
+  </div>
+</div>

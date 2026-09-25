@@ -1,6 +1,6 @@
 class DropAboutCarousels < ActiveRecord::Migration[8.1]
   def change
-    drop_table :about_carousels do |t|
+    drop_table :about_carousels, if_exists: true do |t|
       t.string :title
       t.text :description
       t.string :link

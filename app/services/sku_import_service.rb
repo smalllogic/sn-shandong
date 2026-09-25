@@ -10,10 +10,16 @@ class SkuImportService
     failed_count = 0
     errors = []
 
-    CSV.foreach(@file_path, headers: true, encoding: 'bom|utf-8') do |row|
-      begin
-        sku_attributes = map_row_to_attributes(row)
-        sku = Sku.new(sku_attributes)
+    Sku.transaction do
+      CSV.foreach(@file_path, headers: true, encoding: 'bom|utf-8') do |row|
+        begin
+          sku_attributes = map_row_to_attributes(row)
+          sku = if row["SKU代码"].present?
+            Sku.find_by(sku_code: row["SKU代码"].to_s.strip) || Sku.new
+          else
+            Sku.new
+          end
+          sku.assign_attributes(sku_attributes)
         
         # 处理 Rich Text
         # 如果包含换行符，将其转换为 <br> 以在富文本编辑器中保持换行
@@ -22,37 +28,51 @@ class SkuImportService
         sku.standard_features_it = format_rich_text(row["意大利语功能特点"]) if row["意大利语功能特点"].present?
         sku.standard_features_fr = format_rich_text(row["法语功能特点"]) if row["法语功能特点"].present?
 
-        if sku.save
-          success_count += 1
-        else
-          failed_count += 1
-          error_msg = sku.errors.full_messages.join(', ')
-          if sku.errors[:category_id].any?
-            category = Category.find_by(id: row["分类ID"])
-            if category.nil?
-              error_msg = "分类ID #{row["分类ID"]} 不存在"
-            elsif !category.leaf?
-              error_msg = "分类 '#{category.name}' (ID: #{category.id}) 不是末级分类，SKU 只能绑定到末级分类"
+          if sku.save
+            success_count += 1
+          else
+            failed_count += 1
+            error_msg = sku.errors.full_messages.join(', ')
+            if sku.errors[:category_id].any?
+              category = if row["分类Slug"].present?
+                Category.unscoped.find_by(slug: row["分类Slug"].to_s.strip)
+              else
+                Category.find_by(id: row["分类ID"])
+              end
+              if category.nil?
+                error_msg = "分类 #{row["分类Slug"].presence || row["分类ID"]} 不存在"
+              elsif !category.leaf?
+                error_msg = "分类 '#{category.name}' (Slug: #{category.slug}) 不是末级分类，SKU 只能绑定到末级分类"
+              end
             end
+            errors << "第 #{$. } 行: #{error_msg}"
           end
-          errors << "第 #{$. } 行: #{error_msg}"
+        rescue StandardError => e
+          failed_count += 1
+          errors << "第 #{$. } 行解析错误: #{e.message}"
         end
-      rescue StandardError => e
-        failed_count += 1
-        errors << "第 #{$. } 行解析错误: #{e.message}"
       end
+
+      raise ActiveRecord::Rollback if failed_count.positive?
     end
 
-    { success: success_count, failed: failed_count, errors: errors }
+    success_count = 0 if failed_count.positive?
+    { success: success_count, failed: failed_count, errors: errors, rolled_back: failed_count.positive? }
   end
 
   private
 
   def map_row_to_attributes(row)
+    category = if row["分类Slug"].present?
+      Category.unscoped.find_by(slug: row["分类Slug"].to_s.strip)
+    elsif row["分类ID"].present?
+      Category.unscoped.find_by(id: row["分类ID"])
+    end
+
     {
       name: row["SKU名称"],
       sku_code: row["SKU代码"],
-      category_id: row["分类ID"],
+      category_id: row["分类Slug"].present? ? category&.id : row["分类ID"],
       price: row["价格"],
       status: row["状态"] || 'draft',
       position: row["排序"] || 0,

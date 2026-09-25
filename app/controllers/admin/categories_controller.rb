@@ -12,7 +12,7 @@ class Admin::CategoriesController < Admin::BaseController
       format.csv do
         filename = "categories-#{Time.now.strftime('%Y%m%d%H%M%S')}.csv"
         
-        headers = %w[ID 名称(ZH) 名称(EN) Slug 父级ID 分类类型 排序 是否显示 是否推荐 推荐排序]
+        headers = %w[ID 名称(ZH) 名称(EN) Slug 父级ID 父级Slug 分类类型 排序 是否显示 是否推荐 推荐排序 中文SEO标题 英文SEO标题 中文SEO描述 英文SEO描述 中文SEO关键词 英文SEO关键词]
         
         csv_data = CSV.generate(headers: true) do |csv|
           csv << headers
@@ -23,18 +23,71 @@ class Admin::CategoriesController < Admin::BaseController
               category.name_en,
               category.slug,
               category.parent_id,
+              category.parent&.slug,
               category.category_kind,
               category.position,
               category.hidden ? '否' : '是',
               category.featured ? '是' : '否',
-              category.featured_position
+              category.featured_position,
+              category.meta_title_zh,
+              category.meta_title_en,
+              category.meta_description_zh,
+              category.meta_description_en,
+              category.meta_keywords_zh,
+              category.meta_keywords_en
             ]
           end
         end
         
-        send_data csv_data, filename: filename, type: 'text/csv'
+        send_data "\xEF\xBB\xBF" + csv_data, filename: filename, type: 'text/csv; charset=utf-8; header=present'
       end
     end
+  end
+
+  def import
+  end
+
+  def do_import
+    session[:category_import_completed] = false
+    file = params[:file]
+    if file.blank?
+      flash.now[:alert] = "请选择要上传的 CSV 文件。"
+      render :import, status: :unprocessable_entity
+      return
+    end
+
+    begin
+      import_service = CategoryImportService.new(file.path)
+      result = import_service.call
+
+      if result[:success] > 0 && result[:failed].zero?
+        session[:category_import_completed] = true
+        notice = "成功导入 #{result[:success]} 条记录。"
+        notice += " 失败 #{result[:failed]} 条。" if result[:failed] > 0
+        redirect_to admin_categories_path, notice: notice
+      else
+        session[:category_import_completed] = false
+        flash.now[:alert] = "导入失败：#{result[:errors].join(', ')}"
+        render :import, status: :unprocessable_entity
+      end
+    rescue StandardError => e
+      flash.now[:alert] = "解析文件时发生错误：#{e.message}"
+      render :import, status: :unprocessable_entity
+    end
+  end
+
+  def download_template
+    headers = %w[ID 名称(ZH) 名称(EN) Slug 父级ID 父级Slug 分类类型 排序 是否显示 是否推荐 推荐排序 中文SEO标题 英文SEO标题 中文SEO描述 英文SEO描述 中文SEO关键词 英文SEO关键词]
+
+    csv_data = CSV.generate(headers: true) do |csv|
+      csv << headers
+      csv << [
+        "", "冷链设备", "Refrigeration", "refrigeration", "", "", "refrigeration", "1", "是", "否", "0",
+        "冷链设备", "Refrigeration", "专业冷链设备描述", "Professional Refrigeration Description", "冷链,设备", "Refrigeration,Equipment"
+      ]
+    end
+
+    send_data "\xEF\xBB\xBF" + csv_data, filename: "category_import_template.csv", type: 'text/csv; charset=utf-8; header=present'
   end
 
   def show

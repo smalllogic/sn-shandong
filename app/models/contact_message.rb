@@ -1,4 +1,6 @@
 class ContactMessage < ApplicationRecord
+  belongs_to :user, optional: true
+
   after_commit :clear_dashboard_cache
 
   validates :name, presence: true

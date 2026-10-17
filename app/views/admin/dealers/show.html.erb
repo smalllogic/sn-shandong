@@ -1,0 +1,141 @@
+<% content_for :admin_title, "经销商详情" %>
+
+<div class="space-y-6">
+  <!-- Top Bar -->
+  <div class="flex items-center justify-between">
+    <%= link_to admin_dealers_path, class: "inline-flex items-center text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors" do %>
+      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      返回经销商列表
+    <% end %>
+
+    <div class="flex items-center space-x-3">
+      <%= link_to "编辑资料", edit_admin_dealer_path(@dealer), class: "px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors" %>
+      
+      <% if @dealer.dealer_status == 'pending' || @dealer.dealer_status == 'rejected' %>
+        <%= button_to approve_admin_dealer_path(@dealer), method: :patch, class: "px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-sm transition-colors", data: { turbo_confirm: "确定批准该经销商申请？" } do %>
+          批准成为经销商
+        <% end %>
+      <% end %>
+
+      <% if @dealer.dealer_status == 'pending' || @dealer.dealer_approved? %>
+        <%= button_to reject_admin_dealer_path(@dealer), method: :patch, class: "px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs rounded-xl transition-colors", data: { turbo_confirm: "确定拒绝/撤销经销商资格？" } do %>
+          拒绝申请
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Dealer Info Card -->
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+      <div>
+        <div class="flex items-center space-x-3">
+          <h2 class="text-2xl font-black text-slate-900"><%= @dealer.company_name.presence || "未填写公司名称" %></h2>
+          <% if @dealer.dealer_approved? || @dealer.role == 'dealer' %>
+            <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full">已认证经销商</span>
+          <% elsif @dealer.dealer_status == 'pending' %>
+            <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full">申请待审核</span>
+          <% elsif @dealer.dealer_status == 'rejected' %>
+            <span class="px-3 py-1 bg-red-100 text-red-800 text-xs font-bold rounded-full">申请已拒绝</span>
+          <% else %>
+            <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-full">普通用户</span>
+          <% end %>
+        </div>
+        <p class="text-xs text-slate-500 mt-1">注册时间: <%= @dealer.created_at.strftime("%Y-%m-%d %H:%M:%S") %> <% if @dealer.dealer_approved_at %>| 批准时间: <%= @dealer.dealer_approved_at.strftime("%Y-%m-%d %H:%M") %><% end %></p>
+      </div>
+      <div class="flex items-center space-x-4">
+        <div class="text-center px-4 py-2 bg-slate-50 rounded-xl border border-slate-100">
+          <div class="text-xs text-slate-400 font-medium">提交询盘数</div>
+          <div class="text-lg font-black text-slate-900"><%= @inquiries.count %></div>
+        </div>
+        <div class="text-center px-4 py-2 bg-slate-50 rounded-xl border border-slate-100">
+          <div class="text-xs text-slate-400 font-medium">提交订单数</div>
+          <div class="text-lg font-black text-slate-900"><%= @orders.count %></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detail Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-6">
+      <div>
+        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">登录邮箱</span>
+        <span class="text-sm font-semibold text-slate-800"><%= @dealer.email %></span>
+      </div>
+      <div>
+        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">联系人姓名</span>
+        <span class="text-sm font-semibold text-slate-800"><%= @dealer.contact_name.presence || "-" %></span>
+      </div>
+      <div>
+        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">联系电话 / WhatsApp</span>
+        <span class="text-sm font-semibold text-slate-800"><%= @dealer.phone.presence || "-" %></span>
+      </div>
+      <div>
+        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">国家 / 地区</span>
+        <span class="text-sm font-semibold text-slate-800"><%= @dealer.country.presence || "-" %></span>
+      </div>
+    </div>
+
+    <% if @dealer.dealer_notes.present? %>
+      <div class="mt-6 p-4 bg-slate-50 rounded-xl border border-slate-100">
+        <span class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">申请说明 / 业务描述</span>
+        <p class="text-sm text-slate-700 whitespace-pre-wrap"><%= @dealer.dealer_notes %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Related Inquiries and Orders Tabs/Tables -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Inquiries Table -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+        <h3 class="font-black text-slate-900 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+          已提交的询盘 (<%= @inquiries.count %>)
+        </h3>
+      </div>
+      <div class="divide-y divide-slate-100">
+        <% if @inquiries.empty? %>
+          <div class="p-8 text-center text-slate-400 text-sm">该用户暂无提交询盘记录</div>
+        <% else %>
+          <% @inquiries.limit(10).each do |msg| %>
+            <div class="p-4 hover:bg-slate-50 transition-colors">
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                <span><%= msg.created_at.strftime("%Y-%m-%d %H:%M") %></span>
+                <%= link_to "查看详情", admin_contact_message_path(msg), class: "text-primary font-bold hover:underline" %>
+              </div>
+              <p class="text-sm text-slate-700 font-medium line-clamp-2"><%= msg.message %></p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Orders Table -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+        <h3 class="font-black text-slate-900 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+          已提交的订单 (<%= @orders.count %>)
+        </h3>
+      </div>
+      <div class="divide-y divide-slate-100">
+        <% if @orders.empty? %>
+          <div class="p-8 text-center text-slate-400 text-sm">该用户暂无提交订单记录</div>
+        <% else %>
+          <% @orders.limit(10).each do |order| %>
+            <div class="p-4 hover:bg-slate-50 transition-colors">
+              <div class="flex items-center justify-between text-xs mb-1">
+                <span class="font-bold text-slate-900">订单 #<%= order.id %></span>
+                <span class="text-slate-400"><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></span>
+              </div>
+              <div class="flex items-center justify-between text-xs text-slate-500">
+                <span>包含 <%= order.order_items.count %> 项产品</span>
+                <%= link_to "查看订单", admin_order_path(order), class: "text-primary font-bold hover:underline" %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

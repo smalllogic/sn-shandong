@@ -4,15 +4,29 @@ class ApplicationController < ActionController::Base
 
   before_action :track_visitor
   before_action :set_site_config
+  before_action :configure_permitted_parameters, if: :devise_controller?
   around_action :switch_locale
   helper_method :locale_switch_path
 
   def after_sign_in_path_for(resource)
-    admin_root_path
+    if resource.admin_role?
+      admin_root_path
+    elsif resource.dealer? || resource.dealer_pending? || resource.dealer_applicant?
+      dealer_root_path
+    else
+      root_path
+    end
   end
 
   def after_sign_out_path_for(resource_or_scope)
     root_path
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:apply_dealer, :company_name, :contact_name, :phone, :country, :dealer_notes])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:company_name, :contact_name, :phone, :country, :dealer_notes])
   end
 
   private
@@ -29,7 +43,7 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_request?
-    request.path.start_with?("/admin", "/users")
+    request.path.start_with?("/admin", "/users", "/dealer")
   end
 
   def locale_switch_path(locale)

@@ -1,0 +1,64 @@
+<% content_for :admin_title, "编辑经销商信息" %>
+
+<div class="max-w-2xl mx-auto space-y-6">
+  <div class="flex items-center justify-between">
+    <%= link_to admin_dealer_path(@dealer), class: "inline-flex items-center text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors" do %>
+      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      返回详情
+    <% end %>
+  </div>
+
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+    <h2 class="text-xl font-black text-slate-900 mb-6">编辑经销商资料与权限</h2>
+
+    <%= form_with model: [:admin, @dealer], url: admin_dealer_path(@dealer), method: :patch, class: "space-y-5" do |f| %>
+      <% if @dealer.errors.any? %>
+        <div class="p-4 bg-red-50 text-red-700 rounded-xl text-sm mb-4">
+          <%= @dealer.errors.full_messages.join(', ') %>
+        </div>
+      <% end %>
+
+      <div>
+        <%= f.label :company_name, "公司名称", class: "block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" %>
+        <%= f.text_field :company_name, class: "w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent" %>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <%= f.label :contact_name, "联系人", class: "block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" %>
+          <%= f.text_field :contact_name, class: "w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent" %>
+        </div>
+        <div>
+          <%= f.label :phone, "联系电话", class: "block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" %>
+          <%= f.text_field :phone, class: "w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent" %>
+        </div>
+      </div>
+
+      <div>
+        <%= f.label :country, "国家 / 地区", class: "block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" %>
+        <%= f.text_field :country, class: "w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent" %>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <%= f.label :dealer_status, "审核状态", class: "block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" %>
+          <%= f.select :dealer_status, [["待审核", "pending"], ["已批准", "approved"], ["已拒绝", "rejected"], ["无申请", "none"]], {}, class: "w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent bg-white" %>
+        </div>
+        <div>
+          <%= f.label :role, "系统角色", class: "block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" %>
+          <%= f.select :role, [["普通用户 (user)", "user"], ["经销商 (dealer)", "dealer"], ["编辑人员 (editor)", "editor"], ["小管理员 (admin)", "admin"]], {}, class: "w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent bg-white" %>
+        </div>
+      </div>
+
+      <div>
+        <%= f.label :dealer_notes, "申请备注", class: "block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" %>
+        <%= f.text_area :dealer_notes, rows: 3, class: "w-full px-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent" %>
+      </div>
+
+      <div class="pt-4 flex items-center justify-end space-x-3">
+        <%= link_to "取消", admin_dealer_path(@dealer), class: "px-5 py-2.5 border border-slate-200 text-slate-600 font-bold text-xs rounded-xl hover:bg-slate-50 transition-colors" %>
+        <%= f.submit "保存更改", class: "px-6 py-2.5 bg-slate-900 hover:bg-primary text-white font-bold text-xs rounded-xl shadow-md transition-colors cursor-pointer" %>
+      </div>
+    <% end %>
+  </div>
+</div>

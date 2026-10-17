@@ -316,6 +316,11 @@ en:
     quick_access: "Quick Access"
     ready_title: "Ready to Start?"
     ready_description: "Get a professional kitchen solution for your project."
+    login: "Sign In"
+    register: "Register / Dealer"
+    dealer_portal: "Dealer Portal"
+    admin_portal: "Admin Portal"
+    logout: "Sign Out"
   footer:
     company_name: "Shandong Sinower Electrical Appliance Co., Ltd"
     company_desc: "Professional Commercial Kitchen Equipment Manufacturer. Spanning 140,000㎡ manufacturing base, serving 180+ countries."

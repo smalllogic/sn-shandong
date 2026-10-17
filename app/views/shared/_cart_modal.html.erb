@@ -22,10 +22,10 @@
         <%= t('cart.complete_inquiry') %>
       </h3>
       <%= form_with url: order_path, method: :post, id: "orderForm", class: "space-y-4" do |f| %>
-        <%= f.text_field :name, placeholder: t('cart.name'), class: "w-full border-2 border-gray-100 p-4 rounded-xl focus:border-primary focus:ring-primary transition-all bg-gray-50", required: true %>
-        <%= f.text_field :country, placeholder: t('cart.country'), class: "w-full border-2 border-gray-100 p-4 rounded-xl focus:border-primary focus:ring-primary transition-all bg-gray-50", required: true %>
-        <%= f.text_field :phone, placeholder: t('cart.contact'), class: "w-full border-2 border-gray-100 p-4 rounded-xl focus:border-primary focus:ring-primary transition-all bg-gray-50", required: true %>
-        <%= f.email_field :email, placeholder: t('cart.email'), class: "w-full border-2 border-gray-100 p-4 rounded-xl focus:border-primary focus:ring-primary transition-all bg-gray-50", required: true %>
+        <%= f.text_field :name, value: (current_user&.contact_name.presence || current_user&.display_name), placeholder: t('cart.name'), class: "w-full border-2 border-gray-100 p-4 rounded-xl focus:border-primary focus:ring-primary transition-all bg-gray-50", required: true %>
+        <%= f.text_field :country, value: current_user&.country, placeholder: t('cart.country'), class: "w-full border-2 border-gray-100 p-4 rounded-xl focus:border-primary focus:ring-primary transition-all bg-gray-50", required: true %>
+        <%= f.text_field :phone, value: current_user&.phone, placeholder: t('cart.contact'), class: "w-full border-2 border-gray-100 p-4 rounded-xl focus:border-primary focus:ring-primary transition-all bg-gray-50", required: true %>
+        <%= f.email_field :email, value: current_user&.email, placeholder: t('cart.email'), class: "w-full border-2 border-gray-100 p-4 rounded-xl focus:border-primary focus:ring-primary transition-all bg-gray-50", required: true %>
         <%= f.text_area :message, placeholder: t('cart.message'), rows: 4, class: "w-full border-2 border-gray-100 p-4 rounded-xl focus:border-primary focus:ring-primary transition-all bg-gray-50" %>
         <div class="pt-4">
         <%= f.submit t('cart.submit'), class: "w-full bg-primary hover:bg-accent text-white p-5 rounded-xl font-bold text-lg shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] cursor-pointer" %>

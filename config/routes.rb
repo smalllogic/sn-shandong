@@ -30,6 +30,12 @@ Rails.application.routes.draw do
     resources :faq_categories
     resources :faqs
     resources :contact_messages, only: [:index, :show, :destroy]
+    resources :dealers, only: [:index, :show, :edit, :update] do
+      member do
+        patch :approve
+        patch :reject
+      end
+    end
     resources :visit_records, only: [:index] do
       collection do
         delete :clean
@@ -55,6 +61,14 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show, :destroy, :update]
   end
 
+  namespace :dealer do
+    root to: "dashboard#index"
+    get "dashboard", to: "dashboard#index"
+    resources :inquiries, only: [:index, :show]
+    resources :orders, only: [:index, :show]
+    resource :profile, controller: 'profiles', only: [:show, :edit, :update]
+  end
+
   # 动态频道路由：根据顶级分类的 category_kind (即 slug) 自动生成频道页面
   get ':kind', to: 'categories#index', constraints: ->(req) { 
     Category.unscoped.roots.exists?(slug: req.params[:kind]) 
@@ -71,7 +85,8 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
   }
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

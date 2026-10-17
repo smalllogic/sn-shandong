@@ -6,6 +6,29 @@
   <component name="ChangeListManager">
     <list default="true" id="69105836-b536-45f9-8b97-f315a7f5c2b5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/admin/base_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/admin/base_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/home_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/home_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/orders_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/orders_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/contact_message.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/contact_message.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/order.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/order.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/shared/_sidebar.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/shared/_sidebar.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/users/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/users/index.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/layouts/_navbar.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/_navbar.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/locales/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/en.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/locales/zh-CN.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/zh-CN.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/development.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db/development.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/controllers/categories_controller_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/controllers/categories_controller_test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/controllers/skus_controller_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/controllers/skus_controller_test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/about_carousels.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/categories.yml" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/categories.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/skus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/skus.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/models/category_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/models/category_test.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +36,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="356" />
-    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+    <option name="cachedIndexableFilesCount" value="354" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -25,23 +47,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.3438857803318596" />
-      <entry key="MS500" value="1.893367150978722" />
-      <entry key="S2" value="4.501240026655674" />
-      <entry key="S5" value="8.058133952080624" />
-      <entry key="S10" value="13.399200081903288" />
-      <entry key="S30" value="33.923080850654735" />
-      <entry key="S60" value="48.52025953507926" />
-      <entry key="M2" value="59.192272891283764" />
-      <entry key="M5" value="68.16914303258423" />
-      <entry key="M10" value="75.1826886427027" />
-      <entry key="M15" value="80.9547200459587" />
-      <entry key="M30" value="93.85381534091242" />
-      <entry key="H1" value="107.00260169843675" />
-      <entry key="H2" value="117.17426538818349" />
-      <entry key="H4" value="131.46745472681616" />
-      <entry key="D1" value="331.8261070444204" />
-      <entry key="W1" value="500.9093969756157" />
+      <entry key="MS100" value="1.7422617853145246" />
+      <entry key="MS500" value="1.9421312739048089" />
+      <entry key="S2" value="1.9852078307492012" />
+      <entry key="S5" value="1.994056666148467" />
+      <entry key="S10" value="1.997023904502027" />
+      <entry key="S30" value="1.9990069824098076" />
+      <entry key="S60" value="1.999503367883174" />
+      <entry key="M2" value="1.9997516861343116" />
+      <entry key="M5" value="2.005933653999012" />
+      <entry key="M10" value="2.387526426439874" />
+      <entry key="M15" value="3.770551061498957" />
+      <entry key="M30" value="13.104826095201268" />
+      <entry key="H1" value="43.44408889917185" />
+      <entry key="H2" value="98.37090814136194" />
+      <entry key="H4" value="160.88051864358513" />
+      <entry key="D1" value="419.97021315485625" />
+      <entry key="W1" value="619.0183856966864" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -63,23 +85,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.2691913590083546" />
-      <entry key="MS500" value="1.8676539968187968" />
-      <entry key="S2" value="4.485110477456988" />
-      <entry key="S5" value="8.042591873765671" />
-      <entry key="S10" value="13.371651173349623" />
-      <entry key="S30" value="33.88525877356544" />
-      <entry key="S60" value="48.49190461092073" />
-      <entry key="M2" value="59.174797135223926" />
-      <entry key="M5" value="68.16097814925755" />
-      <entry key="M10" value="75.17777704273664" />
-      <entry key="M15" value="80.95090319787923" />
-      <entry key="M30" value="93.85134071074899" />
-      <entry key="H1" value="107.00110638728268" />
-      <entry key="H2" value="117.17342536330422" />
-      <entry key="H4" value="131.46697389425051" />
-      <entry key="D1" value="331.8258676746391" />
-      <entry key="W1" value="500.9093428639404" />
+      <entry key="MS100" value="1.33964864108358" />
+      <entry key="MS500" value="1.8144031961891018" />
+      <entry key="S2" value="1.9502465410949241" />
+      <entry key="S5" value="1.9798142049924314" />
+      <entry key="S10" value="1.9898590772343652" />
+      <entry key="S30" value="1.9966089617481286" />
+      <entry key="S60" value="1.9983031358757342" />
+      <entry key="M2" value="1.9991512644373273" />
+      <entry key="M5" value="2.005692954137162" />
+      <entry key="M10" value="2.3873927422540686" />
+      <entry key="M15" value="3.7704335898871695" />
+      <entry key="M30" value="13.104675325332318" />
+      <entry key="H1" value="43.44381183283355" />
+      <entry key="H2" value="98.37054157254258" />
+      <entry key="H4" value="160.88018310149315" />
+      <entry key="D1" value="419.9699820192732" />
+      <entry key="W1" value="619.0183303150018" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -100,7 +122,7 @@
     &quot;RunOnceActivity.ruby.rubocop.migration.global.runOnSaveToExternalFormatter&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP&quot;: &quot;1790295194484&quot;,
+    &quot;com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP&quot;: &quot;1790590847005&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
@@ -240,6 +262,14 @@
       <workItem from="1789794457654" duration="102000" />
       <workItem from="1790295128424" duration="1130000" />
       <workItem from="1790296272956" duration="693000" />
+      <workItem from="1790310992209" duration="11406000" />
+      <workItem from="1790590759721" duration="11000" />
+      <workItem from="1790590782089" duration="815000" />
+      <workItem from="1791266431580" duration="26000" />
+      <workItem from="1791942384389" duration="2032000" />
+      <workItem from="1792029478179" duration="20000" />
+      <workItem from="1792030356071" duration="53000" />
+      <workItem from="1792206876556" duration="1738000" />
     </task>
     <servers />
   </component>

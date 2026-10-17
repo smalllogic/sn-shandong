@@ -37,8 +37,12 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.status = 'pending'
+    @order.user = current_user if user_signed_in?
+    if !@order.user && @order.email.present?
+      @order.user = User.find_by(email: @order.email.strip.downcase)
+    end
     if @order.save
-      session[:cart].each do |sku_id, quantity|
+      session[:cart]&.each do |sku_id, quantity|
         @order.order_items.create!(sku_id: sku_id, quantity: quantity)
       end
       session[:cart] = {}

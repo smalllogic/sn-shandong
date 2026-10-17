@@ -1,11 +1,1 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  name: MyString
-  slug: my-string-1
-  category_kind: a
-
-two:
-  name: MyString
-  slug: my-string-2
-  category_kind: a
+# Empty categories fixture

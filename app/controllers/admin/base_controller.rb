@@ -55,6 +55,9 @@ class Admin::BaseController < ApplicationController
     @unread_messages_count = Rails.cache.fetch("admin_unread_messages_count", expires_in: 5.minutes) do
       ContactMessage.where(read: false).count
     end
+    @pending_dealers_count = Rails.cache.fetch("admin_pending_dealers_count", expires_in: 5.minutes) do
+      User.where(dealer_status: 'pending').count
+    end
   end
   
   def check_admin

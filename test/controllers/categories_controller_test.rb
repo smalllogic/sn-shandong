@@ -14,7 +14,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get show" do
-    @category = categories(:one)
+    @category = Category.create!(name: "Refrigeration", slug: "refrigeration")
     get categories_index_url(category_id: @category.id)
     assert_response :success
   end

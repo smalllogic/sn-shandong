@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_25_000000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_17_000001) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -98,7 +98,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_000000) do
     t.boolean "read", default: false
     t.string "subject"
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["read"], name: "index_contact_messages_on_read"
+    t.index ["user_id"], name: "index_contact_messages_on_user_id"
   end
 
   create_table "faq_categories", force: :cascade do |t|
@@ -166,10 +168,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_000000) do
     t.string "country"
     t.datetime "created_at", null: false
     t.string "email"
+    t.text "message"
     t.string "name"
     t.string "phone"
     t.string "status"
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -405,19 +410,27 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_000000) do
 
   create_table "users", force: :cascade do |t|
     t.boolean "admin", default: false
+    t.string "company_name"
+    t.string "contact_name"
+    t.string "country"
     t.datetime "created_at", null: false
+    t.datetime "dealer_approved_at"
+    t.text "dealer_notes"
+    t.string "dealer_status", default: "none"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.integer "failed_attempts", default: 0, null: false
     t.datetime "locked_at"
     t.string "login_otp"
     t.datetime "login_otp_sent_at"
+    t.string "phone"
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
     t.string "role", default: "user"
     t.string "unlock_token"
     t.datetime "updated_at", null: false
+    t.index ["dealer_status"], name: "index_users_on_dealer_status"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
@@ -443,10 +456,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_000000) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "contact_messages", "users"
   add_foreign_key "faqs", "faq_categories"
   add_foreign_key "login_logs", "users"
   add_foreign_key "operation_logs", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "skus"
+  add_foreign_key "orders", "users"
   add_foreign_key "skus", "categories"
 end

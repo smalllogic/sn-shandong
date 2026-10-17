@@ -20,6 +20,18 @@
         </svg>
         用户管理
       </a>
+
+      <a href="<%= admin_dealers_path %>" class="flex items-center p-3 text-slate-300 hover:bg-white/5 hover:text-white rounded-lg transition-colors group relative">
+        <svg class="w-5 h-5 mr-3 text-slate-400 group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+        </svg>
+        经销商管理
+        <% if @pending_dealers_count && @pending_dealers_count > 0 %>
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 flex h-5 w-5 items-center justify-center rounded-full bg-amber-500 text-[10px] font-bold text-white">
+            <%= @pending_dealers_count > 99 ? '99+' : @pending_dealers_count %>
+          </span>
+        <% end %>
+      </a>
     <% end %>
 
     <a href="<%= admin_categories_path %>" class="flex items-center p-3 text-slate-300 hover:bg-white/5 hover:text-white rounded-lg transition-colors group">

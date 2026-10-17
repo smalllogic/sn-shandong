@@ -25,6 +25,10 @@ class HomeController < ApplicationController
 
   def contact
     @contact_message = ContactMessage.new
+    if user_signed_in?
+      @contact_message.name = current_user.contact_name.presence || current_user.display_name
+      @contact_message.email = current_user.email
+    end
   end
 
   def faqs
@@ -52,6 +56,10 @@ class HomeController < ApplicationController
     end
 
     @contact_message = ContactMessage.new(contact_params)
+    @contact_message.user = current_user if user_signed_in?
+    if !@contact_message.user && @contact_message.email.present?
+      @contact_message.user = User.find_by(email: @contact_message.email.strip.downcase)
+    end
     if @contact_message.save
       begin
         # 记录调试信息到日志

@@ -1,0 +1,46 @@
+<% content_for :dealer_title, "询盘详情" %>
+
+<div class="max-w-3xl mx-auto space-y-6">
+  <div class="flex items-center justify-between">
+    <%= link_to dealer_inquiries_path, class: "inline-flex items-center text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors" do %>
+      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      返回询盘列表
+    <% end %>
+
+    <span class="text-xs text-slate-400">
+      提交于: <%= @inquiry.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+    </span>
+  </div>
+
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+    <div class="p-6 md:p-8 border-b border-slate-100 bg-slate-50/50">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-primary block mb-1">询盘记录 #<%= @inquiry.id %></span>
+          <h2 class="text-xl font-black text-slate-900"><%= @inquiry.name %></h2>
+          <p class="text-xs text-slate-500 mt-0.5">联系方式: <%= @inquiry.email %></p>
+        </div>
+        <div class="px-3 py-1.5 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl border border-blue-100 self-start sm:self-auto">
+          工厂已收悉
+        </div>
+      </div>
+    </div>
+
+    <div class="p-6 md:p-8 space-y-6">
+      <div>
+        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">询盘详细需求与内容</label>
+        <div class="p-5 bg-slate-50 rounded-xl border border-slate-200/80 text-sm font-medium text-slate-800 whitespace-pre-wrap leading-relaxed">
+          <%= @inquiry.message %>
+        </div>
+      </div>
+
+      <div class="p-4 bg-primary/5 rounded-xl border border-primary/10 flex items-start space-x-3">
+        <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div class="text-xs text-slate-600">
+          <p class="font-bold text-slate-800">工厂专属跟进服务</p>
+          <p class="mt-0.5">我们的外贸专员将根据您提交的联系信息与您对接（WhatsApp/微信/邮箱），提供精准技术选型与出厂报价单。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

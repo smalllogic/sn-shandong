@@ -237,6 +237,11 @@ zh-CN:
     quick_access: "快捷入口"
     ready_title: "准备开始？"
     ready_description: "为您的项目获取专业厨房解决方案。"
+    login: "登录"
+    register: "注册 / 成为经销商"
+    dealer_portal: "经销商中心"
+    admin_portal: "管理后台"
+    logout: "退出登录"
   footer:
     company_name: "山东Sinower电器有限公司"
     company_desc: "专业商用厨房设备制造商"

@@ -1,0 +1,63 @@
+<% content_for :dealer_title, "企业 / 账户资料" %>
+
+<div class="max-w-3xl mx-auto space-y-6">
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+      <div>
+        <h2 class="text-xl font-black text-slate-900">企业与经销商账户信息</h2>
+        <p class="text-xs text-slate-500 mt-1">管理您的企业基本信息及登录安全设置</p>
+      </div>
+      <%= link_to "编辑资料 / 修改密码", edit_dealer_profile_path, class: "px-4 py-2 bg-slate-900 hover:bg-primary text-white font-bold text-xs rounded-xl shadow-sm transition-colors text-center" %>
+    </div>
+
+    <!-- Info Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
+      <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">登录账号 / 邮箱</span>
+        <span class="text-sm font-bold text-slate-900"><%= @user.email %></span>
+      </div>
+
+      <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">认证状态</span>
+        <div>
+          <% if @user.dealer_approved? || @user.dealer? %>
+            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full">已认证经销商</span>
+          <% elsif @user.dealer_pending? %>
+            <span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full">申请审核中</span>
+          <% elsif @user.dealer_rejected? %>
+            <span class="px-2.5 py-1 bg-red-100 text-red-800 text-xs font-bold rounded-full">未通过审核</span>
+          <% else %>
+            <span class="px-2.5 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-full">普通用户</span>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">公司名称 / 企业名称</span>
+        <span class="text-sm font-bold text-slate-900"><%= @user.company_name.presence || "未填写" %></span>
+      </div>
+
+      <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">联系人姓名</span>
+        <span class="text-sm font-bold text-slate-900"><%= @user.contact_name.presence || "未填写" %></span>
+      </div>
+
+      <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">联系电话 / WhatsApp</span>
+        <span class="text-sm font-bold text-slate-900"><%= @user.phone.presence || "未填写" %></span>
+      </div>
+
+      <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">所在国家 / 地区</span>
+        <span class="text-sm font-bold text-slate-900"><%= @user.country.presence || "未填写" %></span>
+      </div>
+    </div>
+
+    <% if @user.dealer_notes.present? %>
+      <div class="mt-6 p-4 bg-slate-50 rounded-xl border border-slate-100">
+        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">业务描述 / 申请说明</span>
+        <p class="text-sm text-slate-700 whitespace-pre-wrap"><%= @user.dealer_notes %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

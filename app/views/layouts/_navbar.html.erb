@@ -100,6 +100,53 @@
               <% end %>
             </div>
 
+            <!-- User Auth Buttons -->
+            <% if user_signed_in? %>
+              <div class="hidden md:flex items-center space-x-2 relative" x-data="{ userMenuOpen: false }">
+                <button @click="userMenuOpen = !userMenuOpen" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-700 hover:text-primary hover:border-primary text-[12px] font-bold transition-all bg-slate-50">
+                  <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                  </svg>
+                  <span class="max-w-[100px] truncate"><%= current_user.display_name %></span>
+                  <% if current_user.dealer_approved? || current_user.dealer? %>
+                    <span class="px-1.5 py-0.5 text-[10px] bg-amber-100 text-amber-800 rounded font-semibold">经销商</span>
+                  <% end %>
+                  <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div x-show="userMenuOpen" @click.away="userMenuOpen = false" x-cloak
+                     class="absolute right-0 top-full mt-2 w-48 bg-white border border-slate-100 rounded-xl shadow-xl py-2 z-[60]">
+                  <% if current_user.admin_role? %>
+                    <%= link_to admin_root_path, class: "flex items-center px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-primary" do %>
+                      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                      <%= t('navbar.admin_portal', default: '管理后台') %>
+                    <% end %>
+                  <% end %>
+                  <% if current_user.dealer? || current_user.dealer_pending? || current_user.dealer_applicant? || current_user.super_admin? %>
+                    <%= link_to dealer_root_path, class: "flex items-center px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-primary" do %>
+                      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                      <%= t('navbar.dealer_portal', default: '经销商中心') %>
+                    <% end %>
+                  <% end %>
+                  <div class="border-t border-slate-100 my-1"></div>
+                  <%= button_to destroy_user_session_path, method: :delete, class: "w-full text-left flex items-center px-4 py-2 text-xs font-bold text-red-600 hover:bg-red-50" do %>
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    <%= t('navbar.logout', default: '退出登录') %>
+                  <% end %>
+                </div>
+              </div>
+            <% else %>
+              <div class="hidden md:flex items-center space-x-2">
+                <%= link_to new_user_session_path, class: "px-3 py-1.5 text-[12px] font-bold text-slate-700 hover:text-primary transition-colors flex items-center" do %>
+                  <svg class="w-4 h-4 mr-1 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+                  <%= t('navbar.login', default: '登录') %>
+                <% end %>
+                <%= link_to new_user_registration_path, class: "px-3 py-1.5 bg-slate-900 text-white hover:bg-primary text-[12px] font-bold rounded-lg transition-colors flex items-center shadow-sm" do %>
+                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                  <%= t('navbar.register', default: '注册/成为经销商') %>
+                <% end %>
+              </div>
+            <% end %>
+
             <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="md:hidden p-2 text-slate-600 hover:text-accent transition-colors">
               <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
               <svg x-show="mobileMenuOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -211,6 +258,52 @@
                 </span>
               </span>
               <span><%= t('languages.zh-CN') %></span>
+            <% end %>
+          </div>
+
+          <!-- Mobile User / Auth Section -->
+          <div class="pb-6 border-b border-slate-100">
+            <% if user_signed_in? %>
+              <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">
+                      <%= current_user.display_name.first.upcase %>
+                    </div>
+                    <div>
+                      <div class="text-xs font-bold text-slate-900"><%= current_user.display_name %></div>
+                      <div class="text-[10px] text-slate-500"><%= current_user.email %></div>
+                    </div>
+                  </div>
+                  <% if current_user.dealer_approved? || current_user.dealer? %>
+                    <span class="px-2 py-0.5 text-[10px] bg-amber-100 text-amber-800 rounded-full font-semibold">经销商</span>
+                  <% end %>
+                </div>
+                <div class="grid grid-cols-1 gap-2 pt-2 border-t border-slate-200/60">
+                  <% if current_user.admin_role? %>
+                    <%= link_to admin_root_path, class: "flex items-center justify-center py-2 px-3 bg-slate-900 text-white text-xs font-bold rounded-xl", "@click": "mobileMenuOpen = false" do %>
+                      <%= t('navbar.admin_portal', default: '管理后台') %>
+                    <% end %>
+                  <% end %>
+                  <% if current_user.dealer? || current_user.dealer_pending? || current_user.dealer_applicant? || current_user.super_admin? %>
+                    <%= link_to dealer_root_path, class: "flex items-center justify-center py-2 px-3 bg-primary text-white text-xs font-bold rounded-xl", "@click": "mobileMenuOpen = false" do %>
+                      <%= t('navbar.dealer_portal', default: '经销商中心') %>
+                    <% end %>
+                  <% end %>
+                  <%= button_to destroy_user_session_path, method: :delete, class: "w-full py-2 text-center text-xs font-bold text-red-600 hover:text-red-700 bg-red-50 rounded-xl" do %>
+                    <%= t('navbar.logout', default: '退出登录') %>
+                  <% end %>
+                </div>
+              </div>
+            <% else %>
+              <div class="grid grid-cols-2 gap-3">
+                <%= link_to new_user_session_path, class: "flex items-center justify-center py-3 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs rounded-xl border border-slate-200 transition-colors", "@click": "mobileMenuOpen = false" do %>
+                  <%= t('navbar.login', default: '登录') %>
+                <% end %>
+                <%= link_to new_user_registration_path, class: "flex items-center justify-center py-3 bg-slate-900 hover:bg-primary text-white font-bold text-xs rounded-xl transition-colors shadow-sm", "@click": "mobileMenuOpen = false" do %>
+                  <%= t('navbar.register', default: '注册/成为经销商') %>
+                <% end %>
+              </div>
             <% end %>
           </div>
 

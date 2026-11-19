@@ -3,6 +3,8 @@ class Sku < ApplicationRecord
   after_commit :clear_dashboard_cache
 
   belongs_to :category
+  scope :visible, -> { where(status: 'active', category_id: Category.visible.select(:id)) }
+  scope :in_catalog_order, -> { order(position: :asc, created_at: :desc, id: :desc) }
   has_many_attached :images do |attachable|
     attachable.variant :thumb, resize_to_limit: [200, 200], format: :webp, saver: { quality: 80 }
     attachable.variant :medium, resize_to_limit: [800, 800], format: :webp, saver: { quality: 85 }

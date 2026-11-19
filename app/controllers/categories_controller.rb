@@ -2,8 +2,8 @@ class CategoriesController < ApplicationController
   def index
     @kind = params[:kind]
     
-    # 安全检查: 只允许指定频道，防止 Dangerous Send 漏洞
-    unless @kind.nil? || %w[apple huawei oppo vivo xiaomi custom].include?(@kind)
+    # 频道标识与分类模型允许的顶级分类保持一致。
+    unless @kind.nil? || Category.root_slugs.include?(@kind)
       redirect_to categories_path, alert: "无效的分类频道"
       return
     end
@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
         @current_category = Category.visible.includes(parent: { parent: :parent }).find_by(slug: params[:category_id])
         @current_category ||= Category.visible.includes(parent: { parent: :parent }).find(params[:category_id])
         
-        @skus = @current_category.all_descendant_skus.where(status: 'active').includes(:category, images_attachments: :blob)
+        @skus = @current_category.all_descendant_skus.visible.includes(:category, images_attachments: :blob)
         
         if params[:q].present?
           query = "%#{ActiveRecord::Base.sanitize_sql_like(params[:q].downcase)}%"
@@ -32,7 +32,7 @@ class CategoriesController < ApplicationController
         return
       end
     else
-      @skus = Sku.joins(:category).where(categories: { hidden: false }, status: 'active').includes(:category, images_attachments: :blob).order(position: :asc, created_at: :desc)
+      @skus = Sku.visible.joins(:category).includes(:category, images_attachments: :blob).in_catalog_order
       
       if @kind.present?
         @skus = @skus.where(categories: { category_kind: @kind })
@@ -48,7 +48,8 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find_by(slug: params[:id]) || Category.find(params[:id])
+    @category = Category.visible.find_by(slug: params[:id]) || Category.visible.find_by(id: params[:id])
+    return redirect_to categories_path, alert: "未找到指定的分类" unless @category
     redirect_to categories_path(category_id: @category.slug.presence || @category.id)
   end
 end

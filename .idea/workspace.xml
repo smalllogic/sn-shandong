@@ -6,29 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="69105836-b536-45f9-8b97-f315a7f5c2b5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/admin/base_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/admin/base_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/home_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/home_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/orders_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/orders_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/contact_message.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/contact_message.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/order.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/order.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/shared/_sidebar.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/shared/_sidebar.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/users/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/users/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/_navbar.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/_navbar.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/locales/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/en.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/locales/zh-CN.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/zh-CN.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/development.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db/development.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/controllers/categories_controller_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/controllers/categories_controller_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/controllers/skus_controller_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/controllers/skus_controller_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/fixtures/about_carousels.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/fixtures/categories.yml" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/categories.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/fixtures/skus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/skus.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/models/category_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/models/category_test.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,23 +24,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.7422617853145246" />
-      <entry key="MS500" value="1.9421312739048089" />
-      <entry key="S2" value="1.9852078307492012" />
-      <entry key="S5" value="1.994056666148467" />
-      <entry key="S10" value="1.997023904502027" />
-      <entry key="S30" value="1.9990069824098076" />
-      <entry key="S60" value="1.999503367883174" />
-      <entry key="M2" value="1.9997516861343116" />
-      <entry key="M5" value="2.005933653999012" />
-      <entry key="M10" value="2.387526426439874" />
-      <entry key="M15" value="3.770551061498957" />
-      <entry key="M30" value="13.104826095201268" />
-      <entry key="H1" value="43.44408889917185" />
-      <entry key="H2" value="98.37090814136194" />
-      <entry key="H4" value="160.88051864358513" />
-      <entry key="D1" value="419.97021315485625" />
-      <entry key="W1" value="619.0183856966864" />
+      <entry key="MS100" value="1.0000110163425913" />
+      <entry key="MS500" value="1.1243020327260138" />
+      <entry key="S2" value="3.4864168939907376" />
+      <entry key="S5" value="7.394000684168781" />
+      <entry key="S10" value="10.047107972355116" />
+      <entry key="S30" value="12.501120875694593" />
+      <entry key="S60" value="13.22510005410088" />
+      <entry key="M2" value="13.605952282790543" />
+      <entry key="M5" value="13.84669926059456" />
+      <entry key="M10" value="14.304450276273732" />
+      <entry key="M15" value="15.707390968324455" />
+      <entry key="M30" value="25.047145948870973" />
+      <entry key="H1" value="55.3728445607326" />
+      <entry key="H2" value="110.29689244644293" />
+      <entry key="H4" value="172.82166053145826" />
+      <entry key="D1" value="431.9453100960194" />
+      <entry key="W1" value="631.0131716235217" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -85,23 +62,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.33964864108358" />
-      <entry key="MS500" value="1.8144031961891018" />
-      <entry key="S2" value="1.9502465410949241" />
-      <entry key="S5" value="1.9798142049924314" />
-      <entry key="S10" value="1.9898590772343652" />
-      <entry key="S30" value="1.9966089617481286" />
-      <entry key="S60" value="1.9983031358757342" />
-      <entry key="M2" value="1.9991512644373273" />
-      <entry key="M5" value="2.005692954137162" />
-      <entry key="M10" value="2.3873927422540686" />
-      <entry key="M15" value="3.7704335898871695" />
-      <entry key="M30" value="13.104675325332318" />
-      <entry key="H1" value="43.44381183283355" />
-      <entry key="H2" value="98.37054157254258" />
-      <entry key="H4" value="160.88018310149315" />
-      <entry key="D1" value="419.9699820192732" />
-      <entry key="W1" value="619.0183303150018" />
+      <entry key="MS100" value="0.05006686974212195" />
+      <entry key="MS500" value="0.5900713218133354" />
+      <entry key="S2" value="3.137138993832403" />
+      <entry key="S5" value="7.1923133738174085" />
+      <entry key="S10" value="9.930419517781894" />
+      <entry key="S30" value="12.457891497791465" />
+      <entry key="S60" value="13.202881356709137" />
+      <entry key="M2" value="13.594686726696281" />
+      <entry key="M5" value="13.842154407428575" />
+      <entry key="M10" value="14.302158215007983" />
+      <entry key="M15" value="15.705833282865859" />
+      <entry key="M30" value="25.046274561519322" />
+      <entry key="H1" value="55.37220721109977" />
+      <entry key="H2" value="110.29634576078163" />
+      <entry key="H4" value="172.8212349106721" />
+      <entry key="D1" value="431.9450639399286" />
+      <entry key="W1" value="631.0131140945556" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -113,31 +90,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ruby.rubocop.migration.global.runOnSaveToExternalFormatter&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP&quot;: &quot;1790590847005&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ruby.structure.view.model.defaults.configured&quot;: &quot;true&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.ruby.rubocop.migration.global.runOnSaveToExternalFormatter": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP": "1792485357697",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "junie.plugin.stays.banner.dismissed": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ruby.structure.view.model.defaults.configured": "true",
+    "to.speed.mode.migration.done": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/assets/images" />
@@ -269,7 +246,8 @@
       <workItem from="1791942384389" duration="2032000" />
       <workItem from="1792029478179" duration="20000" />
       <workItem from="1792030356071" duration="53000" />
-      <workItem from="1792206876556" duration="1738000" />
+      <workItem from="1792206876556" duration="6902000" />
+      <workItem from="1792485293947" duration="277000" />
     </task>
     <servers />
   </component>

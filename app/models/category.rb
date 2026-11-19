@@ -33,10 +33,21 @@ class Category < ApplicationRecord
   before_validation :sync_category_kind
   validates :slug, presence: true, uniqueness: true, format: { with: /\A[a-z0-9-]+\z/, message: "只能包含小写字母、数字和连字符" }
   
-  scope :visible, -> { where(hidden: false) }
+  # Include a category only when its entire path from the root is visible.
+  # Recursive SQL is supported by both SQLite and PostgreSQL.
+  scope :visible, -> {
+    where("categories.id IN (WITH RECURSIVE visible_categories(id) AS (
+      SELECT id FROM categories WHERE parent_id IS NULL AND hidden = FALSE
+      UNION
+      SELECT child.id FROM categories child
+      INNER JOIN visible_categories parent ON child.parent_id = parent.id
+      WHERE child.hidden = FALSE
+    ) SELECT id FROM visible_categories)")
+  }
   scope :roots, -> { where(parent_id: nil) }
 
   after_commit :clear_cache
+  after_update :sync_descendant_channels, if: :saved_change_to_category_kind?
 
   def to_param
     slug.presence || id.to_s
@@ -62,9 +73,9 @@ class Category < ApplicationRecord
 
   def all_descendant_skus
     if leaf?
-      skus.order(position: :asc, created_at: :desc)
+      skus.in_catalog_order
     else
-      Sku.where(category_id: all_descendant_ids + [ id ]).order(position: :asc, created_at: :desc)
+      Sku.where(category_id: all_descendant_ids + [ id ]).in_catalog_order
     end
   end
 
@@ -228,7 +239,22 @@ class Category < ApplicationRecord
   end
 
   def clear_cache
-    Rails.cache.delete("categories_for_kind_#{category_kind}") if category_kind.present?
+    [category_kind, category_kind_before_last_save].compact.uniq.each do |kind|
+      Rails.cache.delete("categories_for_kind_#{kind}")
+    end
+  end
+
+  # Runs within the save transaction; include hidden descendants as well.
+  def sync_descendant_channels
+    pending = [id]
+    visited = [id]
+    while pending.any?
+      pending = Category.unscoped.where(parent_id: pending).where.not(id: visited).pluck(:id)
+      break if pending.empty?
+
+      Category.unscoped.where(id: pending).update_all(category_kind: category_kind, updated_at: Time.current)
+      visited.concat(pending)
+    end
   end
 
   def leaf_category_constraint_for_parent

@@ -6,6 +6,21 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should display a kitchen equipment channel" do
+    Category.create!(name: "Refrigeration", slug: "refrigeration")
+
+    get categories_path(kind: "refrigeration")
+    assert_response :success
+
+    get dynamic_channel_path(kind: "refrigeration")
+    assert_response :success
+  end
+
+  test "should reject an unknown channel" do
+    get categories_path(kind: "apple")
+    assert_redirected_to categories_path
+  end
+
   test "should redirect if category not found" do
     get categories_index_url(category_id: 999999)
     assert_redirected_to categories_path

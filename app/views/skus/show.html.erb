@@ -232,7 +232,7 @@
 
   <!-- 推荐产品 (工业风) -->
   <%
-    all_in_cat = @sku.category.skus.where(status: 'active').order(position: :asc, created_at: :desc).to_a
+    all_in_cat = @sku.category.skus.visible.in_catalog_order.to_a
     cur_idx    = all_in_cat.index { |s| s.id == @sku.id }
     related    = []
     if cur_idx

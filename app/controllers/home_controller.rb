@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   before_action :check_submission_rate_limit, only: [:create_contact]
 
   def index
-    @featured_categories = Category.unscoped.where(featured: true).order(featured_position: :asc, id: :desc).with_attached_image
+    @featured_categories = Category.visible.where(featured: true).reorder(featured_position: :asc, id: :desc).with_attached_image
     @site_config = SiteConfig.get
   end
 
@@ -10,16 +10,16 @@ class HomeController < ApplicationController
     @kind = params[:kind]
     if params[:q].present?
       @categories = Category.visible.where(parent_id: nil).includes(children: { children: { children: :children } })
-      @skus = Sku.joins(:category).where(categories: { hidden: false }, status: 'active')
+      @skus = Sku.visible
                  .where("LOWER(skus.name) LIKE :query OR LOWER(skus.sku_code) LIKE :query",
                         query: "%#{ActiveRecord::Base.sanitize_sql_like(params[:q].downcase)}%")
                  .includes(:category, images_attachments: :blob)
-                 .order(position: :asc, created_at: :desc)
+                 .in_catalog_order
                  .page(params[:page]).per(20)
       render "categories/index"
     else
-      @skus_by_category = Sku.where(status: 'active').order(position: :asc, created_at: :desc).group_by(&:category_id)
-      @root_categories = Category.where(parent_id: nil).includes(children: { children: { children: :children } })
+      @skus_by_category = Sku.visible.in_catalog_order.group_by(&:category_id)
+      @root_categories = Category.visible.roots.includes(children: { children: { children: :children } })
     end
   end
 

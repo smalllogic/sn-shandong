@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
+  before_action :remove_unavailable_cart_items
+
   def add_item
-    sku = Sku.find(params[:sku_id])
+    sku = Sku.visible.find(params[:sku_id])
     session[:cart] ||= {}
     session[:cart][sku.id.to_s] = (session[:cart][sku.id.to_s] || 0) + 1
     render json: { count: session[:cart].values.sum }
@@ -16,6 +18,7 @@ class OrdersController < ApplicationController
   def update_item
     sku_id = params[:sku_id].to_s
     quantity = params[:quantity].to_i
+    Sku.visible.find(sku_id) if quantity > 0
     session[:cart] ||= {}
     if quantity > 0
       session[:cart][sku_id] = quantity
@@ -27,7 +30,7 @@ class OrdersController < ApplicationController
 
   def cart_items
     cart = session[:cart] || {}
-    skus = Sku.where(id: cart.keys)
+    skus = Sku.visible.where(id: cart.keys)
     render json: {
       items: skus.map { |sku| { id: sku.id, name: sku.name, sku_code: sku.sku_code, quantity: cart[sku.id.to_s] } },
       count: cart.values.sum
@@ -53,6 +56,13 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def remove_unavailable_cart_items
+    return unless session[:cart].present?
+
+    available_ids = Sku.visible.where(id: session[:cart].keys).pluck(:id).map(&:to_s)
+    session[:cart] = session[:cart].slice(*available_ids)
+  end
 
   def order_params
     params.permit(:name, :country, :phone, :email, :message)

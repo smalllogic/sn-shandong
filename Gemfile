@@ -6,11 +6,11 @@ ruby "3.4.9"
 gem "rails", "8.1.3"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
-# Use PostgreSQL as the database for production
+# Use PostgreSQL in development, test, and production.
 gem "pg", "~> 1.1"
 
-# Use sqlite3 as the database for local development
-gem "sqlite3", ">= 2.1", groups: [:development, :test]
+# Legacy SQLite reader used only by script/import_sqlite_to_postgresql.rb.
+gem "sqlite3", ">= 2.1", groups: [:development, :test], require: false
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]

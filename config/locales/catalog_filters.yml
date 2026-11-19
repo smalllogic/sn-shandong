@@ -1,0 +1,63 @@
+en:
+  catalog_filters:
+    title: Filters
+    apply: Apply filters
+    applied: Applied filters
+    clear: Clear all
+    remove: Remove filter
+    target: Required operating value
+    coverage_hint: Enter both limits the equipment must support.
+    min: Minimum
+    max: Maximum
+    results:
+      one: "%{count} product"
+      other: "%{count} products"
+    invalid: "Check the values for %{fields}. These filters were not applied."
+    no_matches: "No products match these filters. Remove a filter or clear all to see more products."
+zh-CN:
+  catalog_filters:
+    title: 筛选商品
+    apply: 应用筛选
+    applied: 已选条件
+    clear: 清空条件
+    remove: 移除筛选条件
+    target: 所需工作值
+    coverage_hint: 填写设备必须完整覆盖的上下限。
+    min: 最低
+    max: 最高
+    results:
+      other: "%{count} 件商品"
+    invalid: "请检查 %{fields} 的输入。这些条件未应用。"
+    no_matches: 没有商品符合当前条件。可以移除单项条件或清空筛选。
+it:
+  catalog_filters:
+    title: Filtri
+    apply: Applica filtri
+    applied: Filtri applicati
+    clear: Cancella tutto
+    remove: Rimuovi filtro
+    target: Valore operativo richiesto
+    coverage_hint: Inserisci entrambi i limiti che l’apparecchio deve supportare.
+    min: Minimo
+    max: Massimo
+    results:
+      one: "%{count} prodotto"
+      other: "%{count} prodotti"
+    invalid: "Controlla i valori di %{fields}. Questi filtri non sono stati applicati."
+    no_matches: "Nessun prodotto corrisponde. Rimuovi un filtro o cancella tutti i filtri."
+fr:
+  catalog_filters:
+    title: Filtres
+    apply: Appliquer les filtres
+    applied: Filtres appliqués
+    clear: Tout effacer
+    remove: Supprimer le filtre
+    target: Valeur de fonctionnement requise
+    coverage_hint: Saisissez les deux limites que l’appareil doit couvrir.
+    min: Minimum
+    max: Maximum
+    results:
+      one: "%{count} produit"
+      other: "%{count} produits"
+    invalid: "Vérifiez les valeurs de %{fields}. Ces filtres n’ont pas été appliqués."
+    no_matches: "Aucun produit correspondant. Supprimez un filtre ou effacez tous les filtres."

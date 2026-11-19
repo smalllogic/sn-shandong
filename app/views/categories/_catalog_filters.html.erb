@@ -1,0 +1,87 @@
+<%
+  context = { category_id: @current_category&.slug, kind: @kind, q: params[:q], locale: I18n.locale }.compact_blank
+  input_class = "min-w-0 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm"
+%>
+<div class="mb-6 space-y-3">
+  <div class="flex flex-wrap items-center justify-between gap-2">
+    <p class="text-sm font-semibold text-slate-900" role="status"><%= t("catalog_filters.results", count: @skus.total_count) %></p>
+    <% if query.selected.any? || query.invalid.any? %>
+      <%= link_to t("catalog_filters.clear"), categories_path(context), class: "text-sm font-semibold text-primary underline underline-offset-2" %>
+    <% end %>
+  </div>
+
+  <% if query.selected.any? %>
+    <ul class="flex flex-wrap gap-2" aria-label="<%= t("catalog_filters.applied") %>">
+      <% query.controls.each do |field, options| %>
+        <% selection = query.selected[field.code] %>
+        <% next if selection.nil? %>
+        <% value = case field.kind
+           when "choice"
+             selection.map { |code| options.find { |option| option["code"] == code }.fetch("label") }.join(", ")
+           when "interval"
+             "#{selection.to_s('F')} #{field.unit}".strip
+           else
+             [selection["min"]&.to_s("F") || "…", selection["max"]&.to_s("F") || "…", field.unit].compact.join(" ")
+           end %>
+        <li>
+          <%= link_to categories_path(context.merge(filters: query.url_selections.except(field.code))), class: "inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1.5 text-sm text-slate-800 hover:bg-slate-200", aria: { label: "#{t('catalog_filters.remove')} #{field.localized_label}" } do %>
+            <%= field.localized_label %> · <%= value %> <span aria-hidden="true">×</span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if query.invalid.any? %>
+    <p role="alert" class="rounded-md bg-red-50 px-4 py-2 text-sm text-red-800"><%= t("catalog_filters.invalid", fields: query.invalid.map(&:localized_label).join(", ")) %></p>
+  <% end %>
+
+  <% if query.controls.any? %>
+    <details class="rounded-xl border border-slate-200 bg-white" open>
+      <summary class="cursor-pointer px-4 py-3 font-semibold text-slate-900"><%= t("catalog_filters.title") %></summary>
+      <%= form_with url: categories_path, method: :get, class: "border-t border-slate-100 p-4" do %>
+        <% context.each do |key, value| %><%= hidden_field_tag key, value %><% end %>
+        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <% query.controls.each do |field, options| %>
+            <% name = "filters[#{field.code}]" %>
+            <% selection = query.selected[field.code] %>
+            <fieldset class="min-w-0 rounded-md border border-slate-200 px-3 pb-3">
+              <legend class="px-1 text-sm font-semibold text-slate-900">
+                <%= field.localized_label %><%= " (#{field.unit})" if field.unit.present? && field.kind != "choice" %>
+              </legend>
+              <% if field.kind == "choice" %>
+                <div class="max-h-36 space-y-1 overflow-y-auto pt-1">
+                  <% options.each do |option| %>
+                    <% checked = Array(selection).include?(option["code"]) %>
+                    <label class="flex min-h-8 cursor-pointer items-center gap-2 text-sm text-slate-700">
+                      <%= check_box_tag "#{name}[]", option["code"], checked, id: nil, class: "shrink-0 rounded border-slate-400" %>
+                      <span class="break-words"><%= option["label"] %> <span class="text-slate-500">(<%= option["quantity"] %>)</span></span>
+                    </label>
+                  <% end %>
+                </div>
+              <% elsif field.kind == "interval" %>
+                <%= label_tag "filter_#{field.code}", t("catalog_filters.target"), class: "mb-1 block text-xs text-slate-600" %>
+                <%= text_field_tag name, selection&.to_s("F"), id: "filter_#{field.code}", inputmode: "decimal", maxlength: 26, class: input_class %>
+              <% else %>
+                <% if field.kind == "interval_cover" %>
+                  <p class="mb-1 text-xs text-slate-600"><%= t("catalog_filters.coverage_hint") %></p>
+                <% end %>
+                <div class="grid grid-cols-2 gap-2">
+                  <% %w[min max].each do |bound| %>
+                    <div>
+                      <%= label_tag "filter_#{field.code}_#{bound}", t("catalog_filters.#{bound}"), class: "mb-1 block text-xs text-slate-600" %>
+                      <%= text_field_tag "#{name}[#{bound}]", selection&.dig(bound)&.to_s("F"), id: "filter_#{field.code}_#{bound}", inputmode: "decimal", maxlength: 26, class: input_class %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </fieldset>
+          <% end %>
+        </div>
+        <div class="mt-4 flex justify-end">
+          <%= submit_tag t("catalog_filters.apply"), name: nil, class: "w-full cursor-pointer rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-white sm:w-auto" %>
+        </div>
+      <% end %>
+    </details>
+  <% end %>
+</div>

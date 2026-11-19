@@ -17,7 +17,10 @@ Rails.application.routes.draw do
     get "dashboard", to: "dashboard#index"
     get "catalog_export", to: "dashboard#catalog_export"
     post "catalog_import", to: "dashboard#catalog_import"
-    resources :categories
+    resources :catalog_filter_fields, except: :show
+    resources :categories do
+      resources :category_filters, path: "filters", except: :show
+    end
     resources :skus do
       collection do
         patch :update_positions

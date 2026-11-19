@@ -15,6 +15,7 @@ class Category < ApplicationRecord
   has_many :children, -> { unscoped.order(:position, :id) }, class_name: "Category", foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: "Category", optional: true
   has_many :skus, dependent: :destroy
+  has_many :category_filters, dependent: :destroy
   has_one_attached :image do |attachable|
     attachable.variant :thumb, resize_to_limit: [300, 300], format: :webp, saver: { quality: 80 }
     attachable.variant :featured, resize_to_limit: [600, 800], format: :webp, saver: { quality: 85 }

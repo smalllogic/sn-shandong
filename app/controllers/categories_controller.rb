@@ -8,48 +8,43 @@ class CategoriesController < ApplicationController
       return
     end
 
-    @categories = Category.visible.where(parent_id: nil).includes(children: { children: { children: :children } })
-    
-    if @kind.present?
-      @categories = @categories.where(category_kind: @kind)
-    end
-    
+    @categories = Category.visible.roots.includes(children: { children: { children: :children } })
+    @categories = @categories.where(slug: @kind) if @kind
     if params[:category_id].present?
-      begin
-        @current_category = Category.visible.includes(parent: { parent: :parent }).find_by(slug: params[:category_id])
-        @current_category ||= Category.visible.includes(parent: { parent: :parent }).find(params[:category_id])
-        
-        @skus = @current_category.all_descendant_skus.visible.includes(:category, images_attachments: :blob)
-        
-        if params[:q].present?
-          query = "%#{ActiveRecord::Base.sanitize_sql_like(params[:q].downcase)}%"
-          @skus = @skus.where("LOWER(skus.name) LIKE :query OR LOWER(skus.sku_code) LIKE :query", query: query)
-        end
-
-        @skus = @skus.page(params[:page]).per(20)
-      rescue ActiveRecord::RecordNotFound
-        redirect_to categories_path, alert: "未找到指定的分类"
-        return
+      @current_category = find_visible_category(params[:category_id])
+      if @current_category.nil? || (@kind && @current_category.ancestors_and_self.first.slug != @kind)
+        return redirect_to categories_path, alert: "未找到指定的分类"
       end
-    else
-      @skus = Sku.visible.joins(:category).includes(:category, images_attachments: :blob).in_catalog_order
-      
-      if @kind.present?
-        @skus = @skus.where(categories: { category_kind: @kind })
-      end
-
-      if params[:q].present?
-        query = "%#{ActiveRecord::Base.sanitize_sql_like(params[:q].downcase)}%"
-        @skus = @skus.where("LOWER(skus.name) LIKE :query OR LOWER(skus.sku_code) LIKE :query", query: query)
-      end
-
-      @skus = @skus.page(params[:page]).per(20)
     end
+
+    collection = @current_category || (@categories.find_by(slug: @kind) if @kind)
+    scope = if collection
+      collection.all_descendant_skus.visible
+    elsif @kind
+      Sku.none
+    else
+      Sku.visible.in_catalog_order
+    end
+    if params[:q].is_a?(String) && params[:q].present?
+      query = "%#{ActiveRecord::Base.sanitize_sql_like(params[:q].downcase)}%"
+      scope = scope.where("LOWER(skus.name) LIKE :query OR LOWER(skus.sku_code) LIKE :query", query: query)
+    end
+
+    @catalog_filters = CatalogFilterQuery.new(scope, collection, params[:filters])
+    @skus = @catalog_filters.results.includes(:category, images_attachments: :blob).page(params[:page]).per(20)
   end
 
   def show
     @category = Category.visible.find_by(slug: params[:id]) || Category.visible.find_by(id: params[:id])
     return redirect_to categories_path, alert: "未找到指定的分类" unless @category
     redirect_to categories_path(category_id: @category.slug.presence || @category.id)
+  end
+
+  private
+
+  def find_visible_category(value)
+    return unless value.is_a?(String)
+    categories = Category.visible.includes(parent: { parent: :parent })
+    categories.find_by(slug: value) || categories.find_by(id: value)
   end
 end

@@ -1,0 +1,37 @@
+<% content_for :admin_title, "#{@category.name} · 集合页筛选" %>
+<div class="max-w-5xl space-y-5">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div class="flex flex-wrap gap-4 text-sm">
+      <%= link_to "返回分类", edit_admin_category_path(@category), class: "text-blue-700 hover:underline" %>
+      <%= link_to "预览集合页", categories_path(category_id: @category), target: "_blank", rel: "noopener", class: "text-blue-700 hover:underline" %>
+      <%= link_to "筛选字段库", admin_catalog_filter_fields_path, class: "text-blue-700 hover:underline" %>
+    </div>
+    <%= link_to "添加筛选项", new_admin_category_category_filter_path(@category), class: "rounded-lg bg-primary px-4 py-2 font-semibold text-white" %>
+  </div>
+  <p class="text-sm text-slate-600">配置应用于此集合页及其当前商品范围。各子分类的集合页可独立配置。</p>
+  <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+    <table class="w-full text-left text-sm">
+      <thead class="bg-slate-50">
+        <tr><th class="p-4">字段</th><th class="p-4">顺序</th><th class="p-4">可筛选数据</th><th class="p-4">状态</th><th class="p-4">操作</th></tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        <% @filters.each do |filter| %>
+          <% field = filter.catalog_filter_field %>
+          <tr>
+            <td class="p-4"><%= field.label_zh.presence || field.label_en %><span class="ml-2 text-xs text-slate-500"><%= CatalogFilterField::KINDS.fetch(field.kind) %></span></td>
+            <td class="p-4"><%= filter.position %></td>
+            <td class="p-4"><%= @coverage.fetch(filter.id) %> / <%= @visible_total %> 件上架商品</td>
+            <td class="p-4"><%= !filter.enabled? ? "已停用" : (@coverage.fetch(filter.id).positive? ? "已启用" : "等待有效数据") %></td>
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <%= link_to "编辑", edit_admin_category_category_filter_path(@category, filter), class: "text-blue-700 hover:underline" %>
+                <%= button_to "移除", admin_category_category_filter_path(@category, filter), method: :delete, form: { data: { turbo_confirm: "从当前集合页移除此筛选项？" } }, class: "text-red-700 hover:underline" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        <% if @filters.empty? %><tr><td colspan="5" class="p-6 text-slate-600">此集合页还没有筛选项。</td></tr><% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

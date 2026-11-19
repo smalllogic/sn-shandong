@@ -1,0 +1,27 @@
+<div class="max-w-xl">
+  <% if @fields.empty? %>
+    <p class="rounded-lg bg-white p-5 text-sm text-slate-700"><%= link_to "先创建一个筛选字段", new_admin_catalog_filter_field_path, class: "font-semibold text-blue-700 hover:underline" %></p>
+  <% else %>
+    <%= form_with model: [:admin, @category, @filter], class: "space-y-5 rounded-xl border border-slate-200 bg-white p-6" do |form| %>
+      <% if @filter.errors.any? %>
+        <ul role="alert" class="list-disc rounded-lg bg-red-50 p-4 pl-8 text-sm text-red-800">
+          <% @filter.errors.full_messages.each do |message| %><li><%= message %></li><% end %>
+        </ul>
+      <% end %>
+      <div>
+        <%= form.label :catalog_filter_field_id, "筛选字段", class: "mb-1 block text-sm font-semibold" %>
+        <%= form.collection_select :catalog_filter_field_id, @fields, :id, ->(field) { "#{field.label_zh.presence || field.label_en} · #{field.code}" }, { prompt: "选择一个字段" }, required: true, class: "w-full rounded-lg border border-slate-300 px-3 py-2" %>
+        <p class="mt-1 text-xs text-slate-600">启用价格筛选会公开价格范围信息。添加前请确认这一分类的价格使用同一货币。</p>
+      </div>
+      <div>
+        <%= form.label :position, "显示顺序（数字越小越靠前）", class: "mb-1 block text-sm font-semibold" %>
+        <%= form.number_field :position, min: 0, max: 9999, required: true, class: "w-full rounded-lg border border-slate-300 px-3 py-2" %>
+      </div>
+      <%= form.label :enabled, class: "flex items-center gap-2 text-sm" do %>
+        <%= form.check_box :enabled %> 在集合页启用
+      <% end %>
+      <%= form.submit "保存筛选项", class: "rounded-lg bg-primary px-4 py-2 font-semibold text-white" %>
+    <% end %>
+  <% end %>
+  <%= link_to "返回筛选设置", admin_category_category_filters_path(@category), class: "mt-4 inline-block text-sm text-blue-700 hover:underline" %>
+</div>

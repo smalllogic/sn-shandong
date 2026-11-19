@@ -1,0 +1,35 @@
+<% content_for :admin_title, "筛选字段库" %>
+<div class="max-w-5xl space-y-5">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <p class="text-sm text-slate-600">定义如何读取商品规格，再到分类管理选择哪些字段在集合页显示。</p>
+    <%= link_to "新增筛选字段", new_admin_catalog_filter_field_path, class: "rounded-lg bg-primary px-4 py-2 font-semibold text-white" %>
+  </div>
+  <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+    <table class="w-full text-left text-sm">
+      <thead class="bg-slate-50">
+        <tr><th class="p-4">名称</th><th class="p-4">类型</th><th class="p-4">使用分类</th><th class="p-4">操作</th></tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        <% @fields.each do |field| %>
+          <tr>
+            <td class="p-4"><%= field.label_zh.presence || field.label_en %><span class="ml-2 font-mono text-xs text-slate-500"><%= field.code %></span></td>
+            <td class="p-4"><%= CatalogFilterField::KINDS.fetch(field.kind) %></td>
+            <td class="p-4"><%= field.category_filters.size %></td>
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <%= link_to "编辑", edit_admin_catalog_filter_field_path(field), class: "text-blue-700 hover:underline" %>
+                <% if field.category_filters.empty? %>
+                  <%= button_to "删除", admin_catalog_filter_field_path(field), method: :delete, form: { data: { turbo_confirm: "删除这个筛选字段？" } }, class: "text-red-700 hover:underline" %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        <% if @fields.empty? %>
+          <tr><td colspan="4" class="p-6 text-slate-600">还没有筛选字段。可以从商品已有的容量、电压或温度规格开始。</td></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= link_to "前往分类管理", admin_categories_path, class: "text-sm text-blue-700 hover:underline" %>
+</div>

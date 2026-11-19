@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_19_000000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_19_000001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -54,6 +54,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_000000) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "catalog_filter_fields", force: :cascade do |t|
+    t.string "code", null: false
+    t.datetime "created_at", null: false
+    t.string "kind", null: false
+    t.string "label_en", null: false
+    t.string "label_fr"
+    t.string "label_it"
+    t.string "label_zh"
+    t.text "legacy_names"
+    t.string "unit"
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_catalog_filter_fields_on_code", unique: true
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "category_kind"
     t.datetime "created_at", null: false
@@ -91,6 +105,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_000000) do
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["slug"], name: "index_categories_on_slug"
+  end
+
+  create_table "category_filters", force: :cascade do |t|
+    t.bigint "catalog_filter_field_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.boolean "enabled", default: true, null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.index ["catalog_filter_field_id"], name: "index_category_filters_on_catalog_filter_field_id"
+    t.index ["category_id", "catalog_filter_field_id"], name: "idx_on_category_id_catalog_filter_field_id_1fb4738d74", unique: true
+    t.index ["category_id"], name: "index_category_filters_on_category_id"
   end
 
   create_table "contact_messages", force: :cascade do |t|
@@ -459,6 +485,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_000000) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "category_filters", "catalog_filter_fields"
+  add_foreign_key "category_filters", "categories", on_delete: :cascade
   add_foreign_key "contact_messages", "users"
   add_foreign_key "faqs", "faq_categories"
   add_foreign_key "login_logs", "users"

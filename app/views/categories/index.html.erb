@@ -124,8 +124,7 @@
                            x-data="{ expanded: <%= is_ancestor || is_active ? 'true' : 'false' %> }">
                         
                         <div class="flex items-center transition-all rounded-lg hover:bg-primary/5 <%= is_active ? 'bg-primary/10' : '' %>">
-                          <%= view_context.link_to view_context.channel_path(kind, category_id: cat), 
-                              data: { turbo_frame: "skus_list" },
+                          <%= view_context.link_to view_context.channel_path(kind, category_id: cat),
                               class: "flex-grow flex items-center p-2 #{is_active ? 'text-primary font-black' : 'text-slate-600 hover:text-primary'}",
                               style: "padding-left: #{depth * 1.25 + 0.5}rem;" do %>
                             <span class="text-sm <%= is_active ? 'font-black' : 'font-bold' %>"><%= cat.localized_name %></span>
@@ -170,6 +169,9 @@
       <!-- SKU 列表 网格系统 -->
       <main class="flex-1">
         <%= turbo_frame_tag "skus_list", class: "block", data: { turbo_action: "advance" } do %>
+          <% if @catalog_filters && (@catalog_filters.controls.any? || @catalog_filters.invalid.any?) %>
+            <%= render "catalog_filters", query: @catalog_filters %>
+          <% end %>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
             <% if @skus.any? %>
               <% @skus.each do |sku| %>
@@ -272,7 +274,7 @@
                     <svg class="w-10 h-10 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                   </div>
                   <h2 class="text-xl font-black text-slate-900 mb-2"><%= t('categories.no_skus_title', default: '暂无可用型号') %></h2>
-                  <p class="text-slate-500 font-medium"><%= t('categories.no_skus_desc', default: '该分类正在不断完善中，请稍后再来查看我们的最新发布。') %></p>
+                  <p class="text-slate-500 font-medium"><%= @catalog_filters&.selected&.any? ? t('catalog_filters.no_matches') : t('categories.no_skus_desc', default: '该分类正在不断完善中，请稍后再来查看我们的最新发布。') %></p>
                 </div>
               </div>
             <% end %>

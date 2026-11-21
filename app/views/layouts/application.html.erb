@@ -184,20 +184,30 @@
             box.classList.remove("flex");
         }
         
-        function addToOrder(skuId) {
-            fetch('/order/add_item', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-              },
-              body: JSON.stringify({ sku_id: skuId })
-            })
-            .then(response => response.json())
-            .then(data => {
-              showToast(<%= t('common.success').to_json.html_safe %>, <%= t('common.added_to_order').to_json.html_safe %>);
-              updateCartBadge();
-            });
+        function addToOrder(skuId, optionIds) {
+          return fetch('/order/add_item', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.content ?? ''
+            },
+            body: JSON.stringify({ sku_id: skuId, option_ids: optionIds })
+          }).then(async response => {
+            const data = await response.json();
+            if (data.configuration_url) {
+              window.location.assign(data.configuration_url);
+              return;
+            }
+            if (!response.ok) {
+              showToast(<%= t('sku_configurations.selection_error').to_json.html_safe %>, data.message);
+              return;
+            }
+            showToast(<%= t('common.success').to_json.html_safe %>, <%= t('common.added_to_order').to_json.html_safe %>);
+            updateCartBadge(data.count);
+          }).catch(() => {
+            showToast(<%= t('sku_configurations.selection_error').to_json.html_safe %>, <%= t('sku_configurations.invalid').to_json.html_safe %>);
+          });
         }
 
         function showToast(title, message) {
@@ -218,12 +228,16 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-sm">${title}</p>
-                        <p class="text-xs text-slate-400">${message}</p>
+                        <p class="font-bold text-sm"></p>
+                        <p class="text-xs text-slate-400"></p>
                     </div>
                 </div>
             `;
             
+            const [titleNode, messageNode] = toast.querySelectorAll('p');
+            titleNode.textContent = title;
+            messageNode.textContent = message;
+
             // Show
             setTimeout(() => toast.classList.remove('translate-x-full'), 100);
             
@@ -238,89 +252,51 @@
             .then(response => response.json())
             .then(data => {
               const container = document.getElementById('cartItems');
-              container.innerHTML = data.items.map(item => `
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 gap-4">
-                  <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary flex-shrink-0">
-                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 7h-3V5a2 2 0 00-2-2H8a2 2 0 00-2 2v2H3a1 1 0 00-1 1v11a2 2 0 002 2h16a2 2 0 002-2V8a1 1 0 00-1-1zM8 5h8v2H8V5z"></path></svg>
-                    </div>
-                    <span class="font-bold text-gray-800">${item.sku_code ? item.sku_code + ' · ' : ''}${item.name}</span>
-                  </div>
-                  
-                  <div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
-                    <div class="flex items-center bg-white rounded-xl border border-gray-200 p-1 shadow-sm">
-                      <button onclick="decrementQuantity(${item.id}, ${item.quantity})" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
-                      </button>
-                      <input type="number" value="${item.quantity}" min="1" 
-                        class="w-12 border-none bg-transparent p-0 text-center text-sm font-bold text-gray-700 focus:ring-0" 
-                        onchange="updateCartQuantity(${item.id}, this.value)">
-                      <button onclick="incrementQuantity(${item.id}, ${item.quantity})" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                      </button>
-                    </div>
-                    
-                    <button onclick="removeFromCart(${item.id})" class="p-2 text-gray-400 hover:text-red-500 transition-colors">
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                    </button>
-                  </div>
-                </div>
-              `).join('');
-              updateCartBadge(data.items.length);
+              const template = document.getElementById('cartItemTemplate');
+              container.replaceChildren(...data.items.map(item => {
+                const row = template.content.cloneNode(true);
+                row.querySelector('[data-cart-product]').textContent = [item.sku_code, item.name].filter(Boolean).join(' · ');
+                const options = row.querySelector('[data-cart-configurations]');
+                for (const configuration of item.configuration) {
+                  const line = document.createElement('li');
+                  line.textContent = configuration.group + ': ' + [configuration.option, configuration.model_code].filter(Boolean).join(' · ');
+                  options.appendChild(line);
+                }
+                const quantity = row.querySelector('input');
+                quantity.value = item.quantity;
+                quantity.addEventListener('change', () => updateCartQuantity(item.line_key, quantity.value));
+                row.querySelector('[data-cart-minus]').addEventListener('click', () => updateCartQuantity(item.line_key, item.quantity - 1));
+                row.querySelector('[data-cart-plus]').addEventListener('click', () => updateCartQuantity(item.line_key, item.quantity + 1));
+                row.querySelector('[data-cart-remove]').addEventListener('click', () => changeCartLine('/order/remove_item', 'DELETE', { line_key: item.line_key }));
+                return row;
+              }));
+              updateCartBadge(data.count);
             });
         }
 
-        function incrementQuantity(skuId, currentQty) {
-          updateCartQuantity(skuId, parseInt(currentQty) + 1);
+        function updateCartQuantity(lineKey, quantity) {
+          changeCartLine('/order/update_item', 'PATCH', { line_key: lineKey, quantity: Math.max(1, parseInt(quantity, 10) || 1) });
         }
 
-        function decrementQuantity(skuId, currentQty) {
-          const newQty = Math.max(1, parseInt(currentQty) - 1);
-          updateCartQuantity(skuId, newQty);
+        function changeCartLine(path, method, payload) {
+          fetch(path, {
+            method: method,
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.content ?? ''
+            },
+            body: JSON.stringify(payload)
+          }).then(() => loadCart());
         }
 
-        function updateCartQuantity(skuId, quantity) {
-            quantity = parseInt(quantity);
-            if (isNaN(quantity) || quantity < 1) quantity = 1;
-            
-            fetch('/order/update_item', {
-              method: 'PATCH',
-              headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-              },
-              body: JSON.stringify({ sku_id: skuId, quantity: quantity })
-            })
-            .then(response => response.json())
-            .then(data => {
-              loadCart();
-              updateCartBadge();
-            });
-        }
-
-        function removeFromCart(skuId) {
-            fetch('/order/remove_item', {
-              method: 'DELETE',
-              headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-              },
-              body: JSON.stringify({ sku_id: skuId })
-            })
-            .then(response => response.json())
-            .then(data => {
-              loadCart();
-              updateCartBadge();
-            });
-        }
-        
         function updateCartBadge(count) {
             const badge = document.getElementById('cartCountBadge');
+            if (!badge) return;
             if (count === undefined) {
                 fetch('/order/cart_items')
                 .then(response => response.json())
                 .then(data => {
-                    updateCartBadge(data.items.length);
+                    updateCartBadge(data.count);
                 });
                 return;
             }

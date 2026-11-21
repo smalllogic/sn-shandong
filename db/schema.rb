@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_19_000001) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_20_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -184,6 +184,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_000001) do
   end
 
   create_table "order_items", force: :cascade do |t|
+    t.jsonb "configuration_snapshot", default: [], null: false
     t.datetime "created_at", null: false
     t.integer "order_id", null: false
     t.integer "quantity"
@@ -260,7 +261,41 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_000001) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sku_configuration_groups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "currency", limit: 3
+    t.boolean "enabled", default: true, null: false
+    t.string "name_en", null: false
+    t.string "name_fr"
+    t.string "name_it"
+    t.string "name_zh"
+    t.integer "position", default: 0, null: false
+    t.bigint "sku_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sku_id"], name: "index_sku_configuration_groups_on_sku_id"
+  end
+
+  create_table "sku_configuration_options", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.boolean "enabled", default: true, null: false
+    t.string "model_code"
+    t.string "name_en", null: false
+    t.string "name_fr"
+    t.string "name_it"
+    t.string "name_zh"
+    t.integer "position", default: 0, null: false
+    t.bigint "sku_configuration_group_id", null: false
+    t.decimal "surcharge", precision: 12, scale: 2
+    t.datetime "updated_at", null: false
+    t.index ["sku_configuration_group_id"], name: "index_sku_configuration_options_on_sku_configuration_group_id"
+    t.check_constraint "surcharge >= 0::numeric", name: "sku_configuration_options_nonnegative_surcharge"
+  end
+
   create_table "skus", force: :cascade do |t|
+    t.text "card_parameters_en"
+    t.text "card_parameters_fr"
+    t.text "card_parameters_it"
+    t.text "card_parameters_zh"
     t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.text "meta_description"
@@ -494,5 +529,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_000001) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "skus"
   add_foreign_key "orders", "users"
+  add_foreign_key "sku_configuration_groups", "skus", on_delete: :cascade
+  add_foreign_key "sku_configuration_options", "sku_configuration_groups", on_delete: :cascade
   add_foreign_key "skus", "categories"
 end

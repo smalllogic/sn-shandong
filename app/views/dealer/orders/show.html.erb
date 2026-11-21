@@ -82,6 +82,7 @@
                   <% else %>
                     未知产品型号
                   <% end %>
+                  <%= render "shared/configuration_snapshot", item: item %>
                 </td>
                 <td class="py-3 px-4 text-slate-500 text-xs font-mono">
                   <%= item.sku&.sku_code || "-" %>

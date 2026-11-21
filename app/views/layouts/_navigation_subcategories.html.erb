@@ -1,0 +1,18 @@
+<%# Only direct children are passed here; navigation stops at the second level. %>
+<div class="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-6" data-category-submenu-grid>
+  <% subcategories.each do |subcategory| %>
+    <%= link_to category_path(subcategory),
+        class: "group/sub flex min-w-0 flex-col items-center gap-2 rounded-xl border border-transparent p-3 text-center text-xs font-semibold leading-snug text-slate-600 transition-colors hover:border-slate-200 hover:bg-slate-50 hover:text-accent focus-visible:outline-2 focus-visible:outline-primary",
+        **(mobile ? { "@click": "mobileMenuOpen = false" } : {}) do %>
+      <span class="flex aspect-square w-full max-w-24 items-center justify-center overflow-hidden rounded-lg bg-slate-50">
+        <% if subcategory.image.attached? && subcategory.image.variable? %>
+          <%= image_tag subcategory.image.variant(:thumb), alt: "", width: 300, height: 300,
+              class: "h-full w-full object-contain transition-transform duration-200 group-hover/sub:scale-105", loading: "lazy", decoding: "async" %>
+        <% else %>
+          <svg class="size-8 text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m12 3 9 5-9 5-9-5 9-5Zm-9 5v8l9 5 9-5V8M12 13v8"/></svg>
+        <% end %>
+      </span>
+      <span class="w-full break-words"><%= subcategory.localized_name %></span>
+    <% end %>
+  <% end %>
+</div>

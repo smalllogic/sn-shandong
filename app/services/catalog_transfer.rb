@@ -2,7 +2,7 @@ module CatalogTransfer
   class Error < StandardError; end
 
   FORMAT = "sinower-category-sku".freeze
-  VERSION = 1
+  VERSION = 2
   MAX_ARCHIVE_BYTES = 50.megabytes
   MAX_ENTRY_BYTES = 100.megabytes
   MAX_ROWS = 100_000
@@ -20,14 +20,16 @@ module CatalogTransfer
   ].freeze
   CATEGORY_HEADERS = (["slug", "parent_slug"] + CATEGORY_ATTRIBUTES).freeze
 
-  SKU_ATTRIBUTES = %w[
+  LEGACY_SKU_ATTRIBUTES = %w[
     name name_zh name_en name_it name_fr price status position specifications
     meta_title meta_title_zh meta_title_en meta_title_it meta_title_fr
     meta_description meta_description_zh meta_description_en meta_description_it meta_description_fr
     meta_keywords meta_keywords_zh meta_keywords_en meta_keywords_it meta_keywords_fr
   ].freeze
+  SKU_ATTRIBUTES = (LEGACY_SKU_ATTRIBUTES + Sku::CARD_PARAMETER_FIELDS.map(&:to_s)).freeze
   RICH_TEXT_ATTRIBUTES = %w[
     standard_features standard_features_zh standard_features_it standard_features_fr
   ].freeze
   SKU_HEADERS = (["sku_code", "category_slug"] + SKU_ATTRIBUTES + RICH_TEXT_ATTRIBUTES).freeze
+  LEGACY_SKU_HEADERS = (["sku_code", "category_slug"] + LEGACY_SKU_ATTRIBUTES + RICH_TEXT_ATTRIBUTES).freeze
 end

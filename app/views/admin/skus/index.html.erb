@@ -1,5 +1,19 @@
 <% content_for :admin_title, "SKU 管理" %>
 
+<details class="mb-6 rounded-xl border border-slate-200 bg-white px-4 py-3">
+  <summary class="cursor-pointer text-sm font-semibold text-slate-900">上传商品卡片参数 CSV</summary>
+  <p class="mt-2 text-sm text-slate-600">
+    第一行填列名 <code>sku_code</code>，再加要更新的语言列
+    <code>card_parameters_en</code>、<code>card_parameters_zh</code>、<code>card_parameters_it</code> 或 <code>card_parameters_fr</code>。
+    只上传需要修改的语言列。空单元格会清除该语言的卡片参数。
+  </p>
+  <%= form_with url: import_card_parameters_admin_skus_path, multipart: true, class: "mt-3 flex flex-wrap items-center gap-3" do |f| %>
+    <%= f.label :file, "选择 UTF-8 CSV", class: "text-sm font-medium" %>
+    <%= f.file_field :file, accept: ".csv,text/csv", required: true, class: "max-w-full text-sm" %>
+    <%= f.submit "上传参数", class: "cursor-pointer rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700" %>
+  <% end %>
+</details>
+
 <div class="mb-6 flex justify-between items-center">
   <p class="text-slate-600">管理所有的产品型号 (SKU)。注意：只能在叶子分类下创建 SKU。</p>
   <div class="flex items-center space-x-3">

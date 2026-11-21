@@ -1,9 +1,14 @@
-<div class="relative z-40">
+<% image_category_navigation = controller_path == "categories" ||
+     (controller_path == "skus" && action_name == "show") ||
+     (controller_path == "home" && action_name == "all_products") %>
+<% navigation_categories = Category.roots.visible.with_attached_image.to_a %>
+<% navigation_children = image_category_navigation ? Category.visible.where(parent_id: navigation_categories.map(&:id)).with_attached_image.to_a.group_by(&:parent_id) : {} %>
+<div class="relative z-40" data-controller="navigation-height">
   <nav class="fixed w-full z-50 top-0 start-0 transition-all duration-300" 
        x-data="{ mobileMenuOpen: false }">
     
     <!-- Main Navigation Bar -->
-    <div class="bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
+    <div class="bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300" data-navigation-height-target="bar">
       <!-- Top Level: Basic Pages & Branding -->
       <div class="border-b border-slate-100/50">
         <div class="max-w-screen-2xl mx-auto px-4 md:px-8 h-16 flex justify-between items-center">
@@ -156,58 +161,60 @@
       </div>
 
       <!-- Bottom Level: Product Categories -->
-      <div class="hidden md:block bg-white/80 backdrop-blur-md border-b border-slate-100 relative overflow-hidden">
+      <div class="hidden md:block bg-white/95 backdrop-blur-md border-b border-slate-100 relative">
         <!-- Modern accent line -->
         <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent opacity-50"></div>
         
-        <div class="max-w-screen-2xl mx-auto px-8 relative z-10">
-          <div class="flex items-center justify-center py-0">
-            <% Category.roots.visible.each_with_index do |category, index| %>
-              <% if index > 0 %>
-                <div class="h-3 w-px bg-slate-200 self-center mx-1 opacity-50"></div>
-              <% end %>
+        <div class="max-w-screen-2xl mx-auto px-4 lg:px-8 relative z-10">
+          <div class="<%= image_category_navigation ? 'grid grid-cols-7 gap-1 lg:gap-2 py-2' : 'flex items-center justify-center py-0' %>" <%= image_category_navigation ? 'data-category-cover-navigation' : 'data-category-compact-navigation' %>>
+            <% navigation_categories.each do |category| %>
+              <% subcategories = navigation_children.fetch(category.id, []) %>
               
-              <div class="relative group/mega flex items-center">
-                <%= link_to category_path(category), class: "flex items-center px-4 xl:px-6 py-4 text-[10px] xl:text-[11px] font-bold uppercase tracking-[0.15em] #{current_page?(category_path(category)) ? 'text-accent' : 'text-slate-500 hover:text-slate-900'} transition-all cursor-pointer relative" do %>
+              <div class="group/mega min-w-0">
+                <%= link_to category_path(category), class: "flex items-center #{image_category_navigation ? 'h-full flex-col justify-start gap-1.5 rounded-lg px-2 py-1.5 text-center text-[11px] lg:text-xs font-semibold tracking-normal' : 'px-3 xl:px-6 py-4 text-[10px] xl:text-[11px] font-bold uppercase tracking-[0.15em]'} focus-visible:outline-2 focus-visible:outline-primary #{current_page?(category_path(category)) ? 'text-accent' : 'text-slate-500 hover:text-slate-900'} transition-all cursor-pointer relative" do %>
                   <!-- Subtle Hover Background -->
                   <div class="absolute inset-y-2 inset-x-1 bg-slate-50 rounded-xl opacity-0 group-hover/mega:opacity-100 transition-all duration-300 -z-10"></div>
                   
-                  <span class="w-7 h-7 flex items-center justify-center mr-2.5 text-slate-400 group-hover/mega:text-accent transition-all duration-300 flex-shrink-0">
+                  <% if image_category_navigation && category.image.attached? && category.image.variable? %>
+                    <span class="flex size-14 items-center justify-center overflow-hidden rounded-md lg:size-16">
+                      <%= image_tag category.image.variant(:thumb), alt: "", width: 300, height: 300,
+                          class: "h-full w-full object-contain transition-transform duration-300 group-hover/mega:scale-105", decoding: "async" %>
+                    </span>
+                  <% else %>
+                  <span class="<%= image_category_navigation ? 'size-14 lg:size-16' : 'w-7 h-7 mr-2.5 [&>svg]:size-5' %> flex items-center justify-center text-slate-400 group-hover/mega:text-accent transition-all duration-300 flex-shrink-0">
                     <% case category.slug %>
                     <% when 'refrigeration' %>
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7m14-8l-7 7-7-7"></path></svg>
+                      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7m14-8l-7 7-7-7"></path></svg>
                     <% when 'cooking-equipment' %>
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.99 7.99 0 0120 13a7.98 7.98 0 01-2.343 5.657z"></path></svg>
+                      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.99 7.99 0 0120 13a7.98 7.98 0 01-2.343 5.657z"></path></svg>
                     <% when 'stainless-steel-product' %>
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
                     <% when 'stainless-steel-sink' %>
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4M9 19h6"></path></svg>
+                      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4M9 19h6"></path></svg>
                     <% when 'food-equipment' %>
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m12 12a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m12 12a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
                     <% when 'retail-refrigeration' %>
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     <% when 'ventilation' %>
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path></svg>
+                      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path></svg>
                     <% else %>
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     <% end %>
                   </span>
-                  <span class="relative z-10"><%= category.localized_name %></span>
-                  <% if category.children.visible.any? %>
-                    <svg class="w-3 h-3 ml-1.5 transition-transform group-hover/mega:rotate-180 text-slate-300 group-hover/mega:text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                   <% end %>
+                  <span class="relative z-10 flex items-center justify-center gap-1 leading-snug <%= image_category_navigation ? 'min-h-8' : '' %>">
+                    <span><%= category.localized_name %></span>
+                    <% if subcategories.any? %>
+                      <svg class="size-3 shrink-0 text-slate-400 transition-transform group-hover/mega:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <% end %>
+                  </span>
                 <% end %>
                 
-                <% if category.children.visible.any? %>
-                  <div class="invisible group-hover/mega:visible absolute left-1/2 -translate-x-1/2 top-full pt-1 z-50 w-72 opacity-0 group-hover/mega:opacity-100 transition-all duration-300 transform translate-y-2 group-hover/mega:translate-y-0">
-                    <div class="bg-white rounded-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] overflow-hidden p-3 border border-slate-100 ring-1 ring-slate-900/5">
-                      <div class="grid grid-cols-1 gap-1">
-                        <% category.children.visible.each do |sub| %>
-                          <%= link_to category_path(sub), class: "flex items-center justify-between px-4 py-2.5 rounded-xl text-[11px] font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all group/sub" do %>
-                            <span><%= sub.localized_name %></span>
-                            <svg class="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                          <% end %>
-                        <% end %>
+                <% if subcategories.any? %>
+                  <div data-category-submenu="<%= category.id %>" class="invisible group-hover/mega:visible group-focus-within/mega:visible absolute inset-x-0 top-full pt-1 z-50 opacity-0 group-hover/mega:opacity-100 group-focus-within/mega:opacity-100 transition-all duration-200">
+                    <div class="mx-auto max-w-6xl rounded-2xl border border-slate-100 bg-white p-4 shadow-xl lg:p-6">
+                      <div class="max-h-[min(60vh,32rem)] overflow-y-auto overscroll-contain">
+                        <%= render "layouts/navigation_subcategories", subcategories: subcategories, mobile: false %>
                       </div>
                     </div>
                   </div>
@@ -227,7 +234,7 @@
          x-transition:leave="transition ease-in duration-200"
          x-transition:leave-start="opacity-100 translate-y-0"
          x-transition:leave-end="opacity-0 -translate-y-4"
-         class="md:hidden fixed inset-0 z-40" 
+         class="md:hidden fixed inset-0 z-40 overflow-y-auto overscroll-contain"
          x-cloak>
       <div class="bg-white min-h-screen flex flex-col p-6 pt-24 overflow-y-auto">
         <div class="space-y-8">
@@ -310,10 +317,15 @@
           <div>
             <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] block mb-6"><%= t('navbar.product_range') %></span>
             <div class="grid grid-cols-1 gap-2">
-              <% Category.roots.visible.each do |category| %>
+              <% navigation_categories.each do |category| %>
+              <% subcategories = navigation_children.fetch(category.id, []) %>
                 <div x-data="{ open: false }">
                   <div class="flex items-center justify-between py-4 px-5 text-sm font-bold text-slate-900 bg-slate-50 rounded-2xl border border-slate-100 hover:border-accent transition-all cursor-pointer">
                     <%= link_to category_path(category), class: "flex items-center flex-grow", "@click": "mobileMenuOpen = false" do %>
+                      <% if image_category_navigation && category.image.attached? && category.image.variable? %>
+                        <%= image_tag category.image.variant(:thumb), alt: "", width: 48, height: 48,
+                            class: "mr-3 size-12 shrink-0 rounded-md bg-white object-contain", loading: "lazy" %>
+                      <% else %>
                       <span class="w-10 h-10 flex items-center justify-center mr-3 bg-white rounded-lg text-accent flex-shrink-0 transition-all shadow-sm">
                         <% case category.slug %>
                         <% when 'refrigeration' %>
@@ -332,24 +344,19 @@
                           <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         <% end %>
                       </span>
+                      <% end %>
                       <span><%= category.localized_name %></span>
                     <% end %>
                     
-                    <% if category.children.visible.any? %>
-                      <div class="p-2 -mr-2" @click="open = !open">
+                    <% if subcategories.any? %>
+                      <button type="button" class="p-2 -mr-2" @click="open = !open" :aria-expanded="open" aria-controls="mobile-category-submenu-<%= category.id %>" aria-label="<%= category.localized_name %>">
                         <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                      </div>
+                      </button>
                     <% end %>
                   </div>
-                  <% if category.children.visible.any? %>
-                    <div x-show="open" x-collapse x-cloak class="pl-4 space-y-1 mt-2">
-                      <% category.children.visible.each do |sub| %>
-                        <%= link_to category_path(sub), 
-                            class: "block py-3 px-5 text-[13px] font-bold text-slate-600 hover:text-accent bg-slate-50 rounded-xl border border-slate-100 mt-1 transition-all",
-                            "@click": "mobileMenuOpen = false" do %>
-                          <%= sub.localized_name %>
-                        <% end %>
-                      <% end %>
+                  <% if subcategories.any? %>
+                    <div id="mobile-category-submenu-<%= category.id %>" data-category-submenu="<%= category.id %>" x-show="open" x-cloak class="mt-2 rounded-xl border border-slate-100 bg-white p-3">
+                      <%= render "layouts/navigation_subcategories", subcategories: subcategories, mobile: true %>
                     </div>
                   <% end %>
                 </div>
@@ -381,5 +388,5 @@
     </div>
   </nav>
   <!-- Spacer to prevent content jump -->
-  <div class="h-[64px] md:h-[116px]"></div>
+  <div class="h-[64px] <%= image_category_navigation ? 'md:h-[188px]' : 'md:h-[124px]' %>" data-navigation-height-target="spacer" aria-hidden="true"></div>
 </div>

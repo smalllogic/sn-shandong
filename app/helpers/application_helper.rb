@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def format_configuration_money(amount, currency)
+    [currency, number_with_precision(amount, precision: 2, delimiter: ",")].compact.join(" ")
+  end
+
   def categories_for_kind(kind)
     Rails.cache.fetch("categories_for_kind_#{kind}", expires_in: 12.hours) do
       Category.visible.where(category_kind: kind, parent_id: nil).includes(children: { children: { children: { children: :children } } }).to_a

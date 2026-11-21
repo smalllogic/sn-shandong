@@ -5,7 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69105836-b536-45f9-8b97-f315a7f5c2b5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/admin/skus_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/admin/skus_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/orders_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/orders_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/skus_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/skus_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/helpers/application_helper.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers/application_helper.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/sku.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/sku.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/catalog_transfer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/catalog_transfer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/catalog_transfer/import.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/catalog_transfer/import.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/categories/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/categories/_form.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/orders/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/orders/show.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/skus/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/skus/_form.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/skus/edit.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/skus/edit.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/skus/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/skus/index.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/categories/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/categories/index.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/dealer/orders/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/dealer/orders/show.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/layouts/_navbar.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/_navbar.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/shared/_cart_modal.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/shared/_cart_modal.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/skus/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/skus/show.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/controllers/categories_controller_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/controllers/categories_controller_test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/services/catalog_transfer_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/services/catalog_transfer_test.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +114,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RakeTasksRunner#FAILED_RELOADS_PROPERTY": "1",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -248,6 +270,7 @@
       <workItem from="1792030356071" duration="53000" />
       <workItem from="1792206876556" duration="6902000" />
       <workItem from="1792485293947" duration="277000" />
+      <workItem from="1795153450895" duration="35000" />
     </task>
     <servers />
   </component>

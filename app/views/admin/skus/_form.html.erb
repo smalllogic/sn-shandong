@@ -99,6 +99,22 @@
       </div>
     </div>
 
+    <fieldset class="mb-6 rounded-xl border border-slate-200 bg-slate-50 p-5">
+      <legend class="px-2 text-sm font-bold text-slate-900">商品卡片参数</legend>
+      <p class="mb-4 text-sm text-slate-600">显示在集合页卡片的 SKU 代码下方。每行填一项，建议用「名称：值」，最多四行，每行最多 80 个字。留空时不占卡片空间。</p>
+      <div class="grid gap-4 md:grid-cols-2">
+        <% { card_parameters_en: ["英文", "Capacity: 500 L\nVoltage: 220 V"],
+             card_parameters_zh: ["中文", "容量：500 L\n电压：220 V"],
+             card_parameters_it: ["意大利语", "Capacità: 500 L\nTensione: 220 V"],
+             card_parameters_fr: ["法语", "Capacité : 500 L\nTension : 220 V"] }.each do |attribute, (language, example)| %>
+          <div>
+            <%= f.label attribute, language, class: "mb-1 block text-sm font-medium text-slate-700" %>
+            <%= f.text_area attribute, rows: 4, placeholder: example, class: "block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm" %>
+          </div>
+        <% end %>
+      </div>
+    </fieldset>
+
     <!-- specifications -->
     <div class="mb-6 bg-slate-50 p-6 rounded-xl border border-slate-200">
       <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider mb-4">规格参数 (Specifications)</h3>

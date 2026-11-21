@@ -10,22 +10,41 @@ class CatalogTransferTest < ActiveSupport::TestCase
 
   test "exports and imports categories and skus by stable keys without duplicates" do
     root, leaf, sku = create_catalog
+    sku.update!(card_parameters_en: "Power: 100 W\nVoltage: 220 V")
     archive = CatalogTransfer::Export.new.call
 
     leaf.update!(name_en: "Changed locally")
-    sku.update!(name: "Changed locally", price: 9)
+    sku.update!(name: "Changed locally", price: 9, card_parameters_en: nil)
 
     result = CatalogTransfer::Import.new(StringIO.new(archive)).call
     assert_equal({ categories: 2, skus: 1 }, result)
     assert_equal "Leaf", leaf.reload.name_en
     assert_equal "Product", sku.reload.name
     assert_equal 25, sku.price
+    assert_equal "Power: 100 W\nVoltage: 220 V", sku.card_parameters_en
     assert_equal leaf.id, sku.category_id
 
     CatalogTransfer::Import.new(StringIO.new(archive)).call
     assert_equal 2, Category.unscoped.count
     assert_equal 1, Sku.count
     assert_equal root.id, leaf.reload.parent_id
+  end
+
+  test "a version one archive leaves card parameters intact" do
+    _root, _leaf, sku = create_catalog
+    sku.update!(card_parameters_en: "Power: 100 W")
+    entries = read_entries(CatalogTransfer::Export.new.call)
+    filename = CatalogTransfer::SKU_FILE
+    entries[filename] = change_csv(entries[filename]) do |rows|
+      Sku::CARD_PARAMETER_FIELDS.each { |field| rows.delete(field.to_s) }
+    end
+    manifest = JSON.parse(entries[CatalogTransfer::MANIFEST_FILE])
+    manifest["version"] = 1
+    manifest["sha256"][filename] = Digest::SHA256.hexdigest(entries[filename])
+    entries[CatalogTransfer::MANIFEST_FILE] = manifest.to_json
+
+    CatalogTransfer::Import.new(StringIO.new(write_entries(entries))).call
+    assert_equal "Power: 100 W", sku.reload.card_parameters_en
   end
 
   test "a sku failure rolls back category updates in the same archive" do

@@ -1,0 +1,8 @@
+<div class="grid gap-3 sm:grid-cols-2">
+  <% { name_en: "英文名称（必填）", name_zh: "中文名称", name_it: "意大利语名称", name_fr: "法语名称" }.each do |attribute, label| %>
+    <div>
+      <%= form.label attribute, label, class: "mb-1 block text-sm font-medium" %>
+      <%= form.text_field attribute, required: attribute == :name_en, maxlength: 120, class: "w-full rounded-md border border-slate-300 px-3 py-2 text-sm" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,40 @@
+<% option = form.object %>
+<section class="space-y-3 rounded-xl border border-slate-200 bg-white p-5" data-option-row <%= "hidden" if option.marked_for_destruction? %>>
+  <%= form.hidden_field :id if option.persisted? %>
+  <%= form.hidden_field :_destroy, value: option.marked_for_destruction? ? "1" : "0", data: { destroy_option: true } %>
+  <fieldset class="min-w-0 space-y-3" <%= "disabled" if option.marked_for_destruction? %>>
+    <div class="flex items-center justify-between">
+      <span class="text-sm font-semibold">选项</span>
+      <button type="button" data-action="sku-configuration-form#remove" class="text-sm text-red-700 hover:underline">移除此选项</button>
+    </div>
+    <%= render "names", form: form %>
+    <div class="grid gap-3 sm:grid-cols-3">
+      <div>
+        <%= form.label :model_code, "型号", class: "mb-1 block text-sm font-medium" %>
+        <%= form.text_field :model_code, maxlength: 100, class: "w-full rounded-md border border-slate-300 px-3 py-2 text-sm" %>
+      </div>
+      <div>
+        <%= form.label :surcharge, "每台加价", class: "mb-1 block text-sm font-medium" %>
+        <%= form.number_field :surcharge, min: 0, step: "0.01", class: "w-full rounded-md border border-slate-300 px-3 py-2 text-sm" %>
+        <p class="mt-1 text-xs text-slate-600">填 0 表示不加价，留空表示请询价。</p>
+      </div>
+      <div>
+        <%= form.label :position, "显示顺序", class: "mb-1 block text-sm font-medium" %>
+        <%= form.number_field :position, min: 0, max: 9999, required: true, class: "w-full rounded-md border border-slate-300 px-3 py-2 text-sm" %>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-start gap-3">
+      <% if option.image.attached? && option.image.blob.persisted? %>
+        <%= image_tag option.image, alt: "", class: "size-16 rounded-md object-cover" %>
+      <% end %>
+      <div>
+        <%= form.label :image, "款式图片", class: "mb-1 block text-sm font-medium" %>
+        <%= form.file_field :image, accept: "image/jpeg,image/png,image/webp,image/gif,image/bmp", class: "block max-w-full text-sm" %>
+        <% if option.image.attached? && option.image.blob.persisted? %>
+          <%= form.label :remove_image, class: "mt-1 flex items-center gap-2 text-xs text-slate-700" do %><%= form.check_box :remove_image %> 移除现有图片<% end %>
+        <% end %>
+      </div>
+    </div>
+    <%= form.label :enabled, class: "flex items-center gap-2 text-sm" do %><%= form.check_box :enabled %> 启用选项<% end %>
+  </fieldset>
+</section>

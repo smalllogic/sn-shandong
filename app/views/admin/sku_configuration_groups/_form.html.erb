@@ -1,0 +1,49 @@
+<%= form_with model: [:admin, @sku, @group], multipart: true, class: "max-w-4xl space-y-5", data: { controller: "sku-configuration-form" } do |form| %>
+  <% if @group.errors.any? %>
+    <ul role="alert" class="list-disc rounded-lg bg-red-50 p-4 pl-8 text-sm text-red-800">
+      <% @group.errors.full_messages.each do |message| %><li><%= message %></li><% end %>
+    </ul>
+  <% end %>
+
+  <section class="space-y-4 rounded-xl border border-slate-200 bg-white p-5">
+    <h2 class="font-semibold">配置组</h2>
+    <%= render "names", form: form %>
+    <div class="grid gap-3 sm:grid-cols-2">
+      <div>
+        <%= form.label :currency, "加价币种", class: "mb-1 block text-sm font-medium" %>
+        <%= form.text_field :currency, maxlength: 3, placeholder: "USD", class: "w-full rounded-md border border-slate-300 px-3 py-2 text-sm" %>
+      </div>
+      <div>
+        <%= form.label :position, "显示顺序", class: "mb-1 block text-sm font-medium" %>
+        <%= form.number_field :position, min: 0, max: 9999, required: true, class: "w-full rounded-md border border-slate-300 px-3 py-2 text-sm" %>
+      </div>
+    </div>
+    <%= form.label :enabled, class: "flex items-center gap-2 text-sm" do %>
+      <%= form.check_box :enabled %> 在商品详情页启用
+    <% end %>
+  </section>
+
+  <div class="flex flex-wrap items-center justify-between gap-2">
+    <div>
+      <h2 class="font-semibold">组内选项</h2>
+      <p class="text-sm text-slate-600">客户每组选择一项。排序最靠前的启用项为默认选项。</p>
+    </div>
+    <button type="button" data-action="sku-configuration-form#add" class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-blue-700">添加选项</button>
+  </div>
+
+  <div class="space-y-4" data-sku-configuration-form-target="list">
+    <%= form.fields_for :options, include_id: false do |option_form| %>
+      <%= render "option_fields", form: option_form %>
+    <% end %>
+  </div>
+  <template data-sku-configuration-form-target="template">
+    <%= form.fields_for :options, SkuConfigurationOption.new, child_index: "NEW_OPTION", include_id: false do |option_form| %>
+      <%= render "option_fields", form: option_form %>
+    <% end %>
+  </template>
+
+  <div class="flex items-center gap-4">
+    <%= form.submit "保存配置组", class: "cursor-pointer rounded-lg bg-primary px-5 py-2.5 font-semibold text-white" %>
+    <%= link_to "返回配置列表", admin_sku_sku_configuration_groups_path(@sku), class: "text-sm text-slate-700 hover:underline" %>
+  </div>
+<% end %>

@@ -1,0 +1,46 @@
+<% content_for :admin_title, "SKU 选配 · #{@sku.sku_code.presence || @sku.localized_name}" %>
+<div class="max-w-5xl space-y-5">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div class="flex flex-wrap gap-4 text-sm">
+      <%= link_to "返回 SKU 编辑", edit_admin_sku_path(@sku), class: "text-blue-700 hover:underline" %>
+      <% if Sku.visible.exists?(@sku.id) %>
+        <%= link_to "预览商品详情", sku_path(@sku), class: "text-blue-700 hover:underline" %>
+      <% end %>
+    </div>
+    <%= link_to "添加配置组", new_admin_sku_sku_configuration_group_path(@sku), class: "rounded-lg bg-primary px-4 py-2 font-semibold text-white" %>
+  </div>
+  <% if @groups.empty? %>
+    <p class="rounded-xl border border-slate-200 bg-white p-6 text-sm text-slate-600">此 SKU 还没有选配。可以添加「大理石台面」或「后背板」等配置组。</p>
+  <% end %>
+  <% @groups.each do |group| %>
+    <section class="rounded-xl border border-slate-200 bg-white p-5">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 class="font-semibold"><%= group.name_zh.presence || group.name_en %></h2>
+          <p class="mt-1 text-xs text-slate-600"><%= group.enabled? ? "已启用" : "已停用" %> · 排序 <%= group.position %></p>
+        </div>
+        <div class="flex items-center gap-4 text-sm">
+          <%= link_to "编辑选项", edit_admin_sku_sku_configuration_group_path(@sku, group), class: "text-blue-700 hover:underline" %>
+          <%= button_to "删除组", admin_sku_sku_configuration_group_path(@sku, group), method: :delete, form: { data: { turbo_confirm: "删除此组及其所有选项？" } }, class: "text-red-700 hover:underline" %>
+        </div>
+      </div>
+      <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+        <% group.options.each do |option| %>
+          <li class="flex items-center gap-3 rounded-lg border border-slate-100 p-3">
+            <% if option.image.attached? %>
+              <%= image_tag option.image, alt: "", class: "size-12 shrink-0 rounded-md object-cover" %>
+            <% end %>
+            <div class="min-w-0 text-sm">
+              <p class="break-words font-medium"><%= option.name_zh.presence || option.name_en %><%= " · #{option.model_code}" if option.model_code.present? %></p>
+              <p class="text-xs text-slate-600">
+                <%= option.surcharge.present? ? format_configuration_money(option.surcharge, group.currency) : "加价请询" %>
+                <% if group.available_options.first == option %> · 默认<% end %>
+                <% unless option.enabled? %> · 已停用<% end %>
+              </p>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+</div>

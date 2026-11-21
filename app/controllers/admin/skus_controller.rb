@@ -26,6 +26,13 @@ class Admin::SkusController < Admin::BaseController
 
 
 
+  def import_card_parameters
+    count = SkuCardParametersImport.new(params[:file]).call
+    redirect_to admin_skus_path, notice: "已更新 #{count} 件商品的卡片参数。", status: :see_other
+  rescue SkuCardParametersImport::Error => e
+    redirect_to admin_skus_path, alert: e.message, status: :see_other
+  end
+
   def update_positions
     unless params[:positions].present?
       return redirect_back fallback_location: admin_skus_path, alert: "未提供有效的排序数据。"
@@ -183,6 +190,7 @@ class Admin::SkusController < Admin::BaseController
   def sku_params
     params.require(:sku).permit(
       :name, :sku_code, :name_zh, :name_en, :name_it, :name_fr,
+      *Sku::CARD_PARAMETER_FIELDS,
       :category_id, :price, :status, :position,
       :standard_features, :standard_features_zh, :standard_features_it, :standard_features_fr,
       :meta_title, :meta_title_zh, :meta_title_en, :meta_title_it, :meta_title_fr,

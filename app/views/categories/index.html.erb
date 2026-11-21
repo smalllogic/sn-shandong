@@ -238,14 +238,13 @@
                       </div>
                     <% end %>
                     
-                    <!-- 描述摘要 -->
-                    <div class="mb-4">
-                      <% if sku.localized_standard_features.present? %>
-                        <div class="text-[10px] text-slate-500 line-clamp-2 font-medium leading-relaxed font-sans">
-                          <%= strip_tags(sku.localized_standard_features.to_s).truncate(85) %>
-                        </div>
-                      <% end %>
-                    </div>
+                    <% if (card_parameters = sku.localized_card_parameters).any? %>
+                      <ul class="mb-3 space-y-1 border-l-2 border-primary/30 pl-2 text-xs leading-snug text-slate-700" data-card-parameters>
+                        <% card_parameters.each do |parameter| %>
+                          <li class="break-words"><%= parameter %></li>
+                        <% end %>
+                      </ul>
+                    <% end %>
 
                     <!-- 底部状态区 (工业感) -->
                     <div class="mt-auto pt-3 border-t border-slate-100 flex items-center justify-between">

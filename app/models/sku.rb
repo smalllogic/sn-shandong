@@ -1,10 +1,23 @@
 class Sku < ApplicationRecord
+  CARD_PARAMETER_FIELDS = %i[card_parameters_en card_parameters_zh card_parameters_it card_parameters_fr].freeze
+  MAX_CARD_PARAMETER_LINES = 4
+  MAX_CARD_PARAMETER_LENGTH = 80
+
+  normalizes(*CARD_PARAMETER_FIELDS, with: ->(value) { value.lines.map(&:strip).reject(&:empty?).join("\n").presence })
+  validate :validate_card_parameters
+
   before_validation :normalize_sku_code
   after_commit :clear_dashboard_cache
 
   belongs_to :category
+  has_many :configuration_groups, -> { order(:position, :id) }, class_name: "SkuConfigurationGroup",
+    inverse_of: :sku, dependent: :destroy
   scope :visible, -> { where(status: 'active', category_id: Category.visible.select(:id)) }
   scope :in_catalog_order, -> { order(position: :asc, created_at: :desc, id: :desc) }
+
+  def available_configuration_groups
+    configuration_groups.select { |group| group.available_options.any? }
+  end
   has_many_attached :images do |attachable|
     attachable.variant :thumb, resize_to_limit: [200, 200], format: :webp, saver: { quality: 80 }
     attachable.variant :medium, resize_to_limit: [800, 800], format: :webp, saver: { quality: 85 }
@@ -32,6 +45,14 @@ class Sku < ApplicationRecord
     else
       name
     end
+  end
+
+  def localized_card_parameters
+    locale = I18n.locale.to_s.split("-").first
+    columns = CARD_PARAMETER_FIELDS.map(&:to_s)
+    preferred = "card_parameters_#{locale}"
+    columns = [preferred] + columns if columns.include?(preferred)
+    columns.uniq.filter_map { |column| self[column].presence }.first.to_s.lines.map(&:chomp)
   end
 
   def localized_meta_title
@@ -121,6 +142,15 @@ class Sku < ApplicationRecord
   # 不再使用 store_accessor，因为内容是动态且多语言的数组
 
   private
+
+  def validate_card_parameters
+    CARD_PARAMETER_FIELDS.each do |field|
+      lines = self[field].to_s.lines
+      if lines.size > MAX_CARD_PARAMETER_LINES || lines.any? { |line| line.chomp.length > MAX_CARD_PARAMETER_LENGTH }
+        errors.add(field, "最多 #{MAX_CARD_PARAMETER_LINES} 行，每行最多 #{MAX_CARD_PARAMETER_LENGTH} 个字符")
+      end
+    end
+  end
 
   def normalize_sku_code
     self.sku_code = sku_code.strip if sku_code

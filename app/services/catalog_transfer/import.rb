@@ -77,7 +77,8 @@ module CatalogTransfer
         unless manifest.is_a?(Hash) && manifest["sha256"].is_a?(Hash) && manifest["counts"].is_a?(Hash)
           raise Error, "ZIP 清单格式无效。"
         end
-        unless manifest["format"] == FORMAT && manifest["version"] == VERSION
+        version = manifest["version"]
+        unless manifest["format"] == FORMAT && [1, VERSION].include?(version)
           raise Error, "ZIP 格式或版本不受支持。"
         end
 
@@ -88,7 +89,7 @@ module CatalogTransfer
         end
 
         categories = parse_csv(category_csv, CATEGORY_FILE, CATEGORY_HEADERS)
-        skus = parse_csv(sku_csv, SKU_FILE, SKU_HEADERS)
+        skus = parse_csv(sku_csv, SKU_FILE, version == 1 ? LEGACY_SKU_HEADERS : SKU_HEADERS)
         unless manifest.dig("counts", CATEGORY_FILE) == categories.size && manifest.dig("counts", SKU_FILE) == skus.size
           raise Error, "ZIP 中的记录数量与清单不一致。"
         end
@@ -206,7 +207,7 @@ module CatalogTransfer
     end
 
     def sku_attributes(row, line)
-      SKU_ATTRIBUTES.to_h do |name|
+      SKU_ATTRIBUTES.select { |name| row.key?(name) }.to_h do |name|
         value = row[name]
         value = integer(value, name) if name == "position"
         value = decimal(value, name) if name == "price" && value.present?

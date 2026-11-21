@@ -84,7 +84,13 @@
     </div>
 
     <!-- 右侧：产品详情信息 (工业风) -->
-    <div class="lg:col-span-7 flex flex-col bg-white p-8 lg:p-14 lg:pl-16">
+    <div class="lg:col-span-7 flex flex-col bg-white p-8 lg:p-14 lg:pl-16"
+         <% if @configuration_groups.any? %>
+           data-controller="sku-configurator"
+           data-sku-configurator-sku-id-value="<%= @sku.id %>"
+           data-sku-configurator-quote-label-value="<%= t('sku_configurations.quote') %>"
+           data-sku-configurator-locale-value="<%= I18n.locale %>"
+         <% end %>>
       <div class="mb-auto">
         <div class="flex flex-col mb-10">
           <h1 class="text-4xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-none uppercase mb-6"><%= @sku.localized_name %></h1>
@@ -122,6 +128,10 @@
           </div>
         <% end %>
 
+        <% if @configuration_groups.any? %>
+          <%= render "configurations", groups: @configuration_groups %>
+        <% end %>
+
         <!-- Technical Assurance & Add to Quote Action Block -->
         <div class="flex flex-col gap-4">
           <div class="flex items-center justify-between py-6 px-6 bg-slate-50 border border-slate-100 rounded-lg relative overflow-hidden group shadow-sm">
@@ -142,7 +152,7 @@
             </div>
           </div>
 
-          <button onclick="addToOrder(<%= @sku.id %>)" class="w-full inline-flex items-center justify-center px-8 py-5 bg-primary hover:bg-slate-900 text-white font-black text-[13px] tracking-[0.25em] uppercase transition-all duration-300 group shadow-xl shadow-primary/20 hover:shadow-slate-300 relative overflow-hidden rounded-sm">
+          <button type="button" <% if @configuration_groups.any? %>data-action="sku-configurator#addToQuote"<% else %>onclick="addToOrder(<%= @sku.id %>)"<% end %> class="w-full inline-flex items-center justify-center px-8 py-5 bg-primary hover:bg-slate-900 text-white font-black text-[13px] tracking-[0.25em] uppercase transition-all duration-300 group shadow-xl shadow-primary/20 hover:shadow-slate-300 relative overflow-hidden rounded-sm">
             <span class="relative z-10"><%= t('skus.add_to_quote_request') %></span>
             <svg class="w-5 h-5 ml-4 group-hover:translate-x-1 transition-transform relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity"></div>

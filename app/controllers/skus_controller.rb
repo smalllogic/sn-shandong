@@ -8,5 +8,8 @@ class SkusController < ApplicationController
     end
 
     @kind = @sku.category.category_kind
+    @configuration_groups = @sku.configuration_groups.includes(options: { image_attachment: :blob }).select do |group|
+      group.available_options.any?
+    end
   end
 end

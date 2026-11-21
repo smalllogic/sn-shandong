@@ -1,0 +1,11 @@
+<% if item.configuration_snapshot.any? %>
+  <ul class="mt-1 space-y-0.5 text-xs font-normal text-slate-700">
+    <% item.configuration_snapshot.each do |option| %>
+      <li>
+        <%= option.fetch("group") %> · <%= option.fetch("option") %>
+        <%= " · #{option['model_code']}" if option["model_code"].present? %>
+        · <%= option["surcharge"].nil? ? t("sku_configurations.quote") : format_configuration_money(option["surcharge"], option["currency"]) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

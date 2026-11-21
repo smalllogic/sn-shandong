@@ -13,6 +13,20 @@
       <div id="cartItems" class="overflow-y-auto pr-2 flex-grow min-h-[200px] custom-scrollbar">
         <%# Items will be rendered here by JS %>
       </div>
+      <template id="cartItemTemplate">
+        <div class="mb-4 flex flex-col justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 sm:flex-row sm:items-center">
+          <div class="min-w-0">
+            <p data-cart-product class="break-words font-semibold text-slate-900"></p>
+            <ul data-cart-configurations class="space-y-0.5 break-words text-xs text-slate-700"></ul>
+          </div>
+          <div class="flex shrink-0 flex-wrap items-center gap-2">
+            <button type="button" data-cart-minus aria-label="<%= t('sku_configurations.decrease') %>" class="size-9 rounded border border-slate-300 bg-white">−</button>
+            <input type="number" min="1" aria-label="<%= t('sku_configurations.quantity') %>" class="w-14 rounded border border-slate-300 bg-white py-2 text-center text-sm">
+            <button type="button" data-cart-plus aria-label="<%= t('sku_configurations.increase') %>" class="size-9 rounded border border-slate-300 bg-white">+</button>
+            <button type="button" data-cart-remove class="px-2 py-2 text-sm font-medium text-red-700"><%= t('sku_configurations.remove') %></button>
+          </div>
+        </div>
+      </template>
     </div>
     
     <!-- 右侧：表单 (黄金分割 1 : 1.6) -->
@@ -44,7 +58,7 @@
       method: 'POST',
       body: formData,
       headers: {
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.content ?? ''
       }
     })
     .then(response => response.json())
@@ -57,6 +71,7 @@
         this.reset();
       } else {
         alert(data.message);
+        loadCart();
       }
     })
     .catch(error => {

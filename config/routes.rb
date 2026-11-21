@@ -22,7 +22,9 @@ Rails.application.routes.draw do
       resources :category_filters, path: "filters", except: :show
     end
     resources :skus do
+      resources :sku_configuration_groups, path: "configurations", except: :show
       collection do
+        post :import_card_parameters
         patch :update_positions
       end
       member do

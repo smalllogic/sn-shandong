@@ -90,3 +90,122 @@
     100% { transform: translate(0px, 0px) scale(1); }
   }
 }
+
+.home-globe-hero {
+  background:
+    radial-gradient(ellipse at 78% 34%, #122e43 0%, transparent 58%),
+    linear-gradient(135deg, #0c1427 0%, #0b1424 58%, #101e31 100%);
+}
+
+.home-globe-title {
+  font-size: clamp(2.5rem, 5vw, 5.3rem);
+  text-wrap: balance;
+}
+
+.home-globe-canvas,
+.home-globe-stage[data-rendering="webgl"] .home-globe-fallback {
+  visibility: hidden;
+}
+
+.home-globe-stage[data-rendering="webgl"] .home-globe-canvas {
+  visibility: visible;
+}
+
+.home-globe-label,
+.home-globe-dot,
+.home-globe-line {
+  position: absolute;
+  inset: 0 auto auto 0;
+  visibility: hidden;
+}
+
+.home-globe-marker[data-visible] .home-globe-dot,
+.home-globe-marker[data-visible="label"] .home-globe-label,
+.home-globe-marker[data-visible="label"] .home-globe-line {
+  visibility: visible;
+}
+
+.home-globe-dot::after {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #b9fffd;
+  box-shadow: 0 0 0 3px #44e5eb40, 0 0 11px 2px #54f5ffb3;
+}
+
+.home-globe-line {
+  height: 1px;
+  transform-origin: 0 50%;
+  background: #a5f3fcb3;
+}
+
+.home-globe-label {
+  padding: 3px 7px;
+  border: 1px solid #61dcf057;
+  border-radius: 6px;
+  background: #081525ef;
+  color: #e4fbff;
+  font-size: clamp(9px, 1.9vw, 11px);
+  font-weight: 650;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.home-globe-marker[data-selected="true"] .home-globe-label {
+  border-color: #67e8f9;
+  color: #fff;
+}
+
+.home-globe-country:not(:disabled):hover {
+  cursor: pointer;
+  border-color: #67e8f980;
+  background: #67e8f912;
+}
+
+.home-globe-page .site-floating-contact {
+  pointer-events: none;
+}
+
+.home-globe-page .site-floating-contact a {
+  pointer-events: auto;
+}
+
+@media (max-width: 639px) {
+  .home-globe-stage {
+    width: calc(100% - 2.75rem);
+    margin-inline: 0 auto;
+  }
+
+  .home-globe-page .site-floating-contact,
+  .home-globe-page .site-floating-inquiry {
+    right: 0.5rem;
+  }
+
+  .home-globe-page .site-floating-inquiry {
+    bottom: 0.75rem;
+  }
+
+  .home-globe-page .site-floating-contact a,
+  .home-globe-page .site-floating-inquiry button {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  .home-globe-page .site-floating-inquiry svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .home-globe-page .site-floating-inquiry-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}

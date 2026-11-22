@@ -1,0 +1,60 @@
+en:
+  hero_globe:
+    pause: "Pause rotation"
+    play: "Resume rotation"
+    locations: "Global locations"
+    countries:
+      china: "China"
+      france: "France"
+      germany: "Germany"
+      czech: "Czech"
+      uk: "United Kingdom"
+      australia: "Australia"
+      uae: "UAE"
+      usa: "USA"
+      spain: "Spain"
+"zh-CN":
+  hero_globe:
+    pause: "暂停旋转"
+    play: "继续旋转"
+    locations: "全球网点"
+    countries:
+      china: "中国"
+      france: "法国"
+      germany: "德国"
+      czech: "捷克"
+      uk: "英国"
+      australia: "澳大利亚"
+      uae: "阿联酋"
+      usa: "美国"
+      spain: "西班牙"
+fr:
+  hero_globe:
+    pause: "Mettre en pause"
+    play: "Reprendre la rotation"
+    locations: "Implantations mondiales"
+    countries:
+      china: "Chine"
+      france: "France"
+      germany: "Allemagne"
+      czech: "Tchéquie"
+      uk: "Royaume-Uni"
+      australia: "Australie"
+      uae: "Émirats arabes unis"
+      usa: "États-Unis"
+      spain: "Espagne"
+it:
+  hero_globe:
+    pause: "Metti in pausa"
+    play: "Riprendi la rotazione"
+    locations: "Sedi nel mondo"
+    countries:
+      china: "Cina"
+      france: "Francia"
+      germany: "Germania"
+      czech: "Cechia"
+      uk: "Regno Unito"
+      australia: "Australia"
+      uae: "Emirati Arabi Uniti"
+      usa: "Stati Uniti"
+      spain: "Spagna"

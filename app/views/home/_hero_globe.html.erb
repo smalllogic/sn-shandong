@@ -1,0 +1,82 @@
+<% branches = [
+  { country: :china, location: :boxing, code: "CN", lat: 37.15, lng: 118.11, side: 1 },
+  { country: :france, location: :paris, code: "FR", lat: 48.86, lng: 2.35, side: -1 },
+  { country: :germany, location: :munich, code: "DE", lat: 48.14, lng: 11.58, side: 1 },
+  { country: :czech, location: :czech_republic, code: "CZ", lat: 49.82, lng: 15.47, side: 1 },
+  { country: :uk, location: :london, code: "GB", lat: 51.51, lng: -0.13, side: -1 },
+  { country: :australia, location: :sydney, code: "AU", lat: -33.87, lng: 151.21, side: 1 },
+  { country: :uae, address: "Dubai, UAE", code: "AE", lat: 25.20, lng: 55.27, side: 1 },
+  { country: :usa, location: :georgia, code: "US", lat: 33.75, lng: -84.39, side: -1 },
+  { country: :spain, location: :madrid, code: "ES", lat: 40.42, lng: -3.70, side: -1 }
+] %>
+<section class="home-globe-hero relative overflow-hidden border-b border-white/5 bg-slate-900 text-white"
+         data-controller="hero-globe"
+         data-hero-globe-texture-url-value="<%= asset_path("globe-land-mask.png") %>"
+         data-hero-globe-pause-label-value="<%= t("hero_globe.pause") %>"
+         data-hero-globe-play-label-value="<%= t("hero_globe.play") %>"
+         data-action="visibilitychange@document->hero-globe#updatePlayback turbo:before-cache@document->hero-globe#release">
+  <div class="mx-auto max-w-screen-2xl px-5 pb-12 pt-14 sm:px-8 lg:pb-16 lg:pt-20 xl:px-16">
+    <div class="grid items-center gap-2 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-8">
+      <div class="relative z-10 mx-auto max-w-2xl text-center lg:mx-0 lg:text-left">
+        <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-cyan-200">
+          <span class="size-1.5 rounded-full bg-cyan-300" aria-hidden="true"></span>
+          <%= t("home.index.hero.badge") %>
+        </div>
+        <h1 class="home-globe-title font-black leading-[0.99] tracking-[-0.055em]">
+          <span class="block"><%= t("home.index.hero.title_line_one") %></span>
+          <span class="mt-1 block bg-gradient-to-br from-white via-cyan-50 to-cyan-200/70 bg-clip-text text-transparent"><%= t("home.index.hero.title_line_two") %></span>
+        </h1>
+        <p class="mt-6 text-sm font-medium leading-relaxed text-slate-300 sm:text-base lg:max-w-md">
+          <%= t("home.index.hero.description") %>
+          <span class="text-slate-400"><%= t("home.index.hero.highlight") %></span>
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
+          <%= link_to t("home.index.hero.request_quote"), contact_path, class: "rounded-xl bg-white px-5 py-3 text-xs font-extrabold text-slate-900 transition-colors hover:bg-cyan-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200 sm:px-6 sm:py-4" %>
+          <%= link_to t("home.index.hero.explore_factory"), factory_path, class: "rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-xs font-extrabold text-white transition-colors hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200 sm:px-6 sm:py-4" %>
+        </div>
+      </div>
+
+      <div class="home-globe-stage relative mx-auto aspect-square w-full max-w-[650px]"
+           data-hero-globe-target="stage">
+        <%= image_tag "globe-fallback.webp", class: "home-globe-fallback absolute inset-0 size-full object-contain", alt: "", width: 640, height: 640, decoding: "async", aria: { hidden: true } %>
+        <canvas class="home-globe-canvas absolute inset-0 block size-full"
+                data-hero-globe-target="canvas"
+                data-action="webglcontextlost->hero-globe#useFallback"
+                aria-hidden="true"></canvas>
+        <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+          <% branches.each do |branch| %>
+            <div class="home-globe-marker absolute inset-0"
+                 data-hero-globe-target="marker"
+                 data-code="<%= branch[:code] %>" data-latitude="<%= branch[:lat] %>"
+                 data-longitude="<%= branch[:lng] %>" data-side="<%= branch[:side] %>">
+              <span class="home-globe-line" data-globe-line></span>
+              <span class="home-globe-dot" data-globe-dot></span>
+              <span class="home-globe-label" data-globe-label><%= t("hero_globe.countries.#{branch[:country]}") %></span>
+            </div>
+          <% end %>
+        </div>
+        <button type="button" hidden
+                class="absolute bottom-1 right-2 z-10 rounded-full border border-white/15 bg-slate-950/80 px-3 py-1.5 text-[10px] font-semibold text-slate-200 hover:border-cyan-300/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300 sm:bottom-4"
+                data-hero-globe-target="rotationToggle" data-action="hero-globe#toggleRotation"
+                aria-pressed="false"><%= t("hero_globe.pause") %></button>
+      </div>
+    </div>
+
+    <ul class="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:mt-2 lg:gap-3 max-sm:pr-11 xl:grid-cols-9 xl:pr-16" aria-label="<%= t("hero_globe.locations") %>">
+      <% branches.each do |branch| %>
+        <li class="min-w-0">
+          <button type="button" disabled aria-pressed="false"
+                  class="home-globe-country flex h-full min-h-16 w-full items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.035] p-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300 aria-pressed:border-cyan-300/65 aria-pressed:bg-cyan-300/10"
+                  data-hero-globe-target="country" data-globe-country="<%= branch[:code] %>"
+                  data-action="hero-globe#focusCountry">
+            <%= flag_svg(branch[:code], classes: "h-4 w-6 shrink-0 rounded-sm") %>
+            <span class="min-w-0">
+              <span class="block text-xs font-bold leading-tight text-white"><%= t("hero_globe.countries.#{branch[:country]}") %></span>
+              <span class="mt-1 block text-[10px] leading-tight text-slate-400"><%= branch[:address] || t("home.branches.#{branch[:location]}") %></span>
+            </span>
+          </button>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</section>

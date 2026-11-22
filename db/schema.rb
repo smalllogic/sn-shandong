@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_20_000000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_22_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -104,7 +104,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_000000) do
     t.string "slug"
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_categories_on_parent_id"
-    t.index ["slug"], name: "index_categories_on_slug"
+    t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
   create_table "category_filters", force: :cascade do |t|
@@ -188,7 +188,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_000000) do
     t.datetime "created_at", null: false
     t.integer "order_id", null: false
     t.integer "quantity"
+    t.string "sku_code_snapshot"
     t.integer "sku_id", null: false
+    t.string "sku_name_snapshot"
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["sku_id"], name: "index_order_items_on_sku_id"
@@ -202,8 +204,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_000000) do
     t.string "name"
     t.string "phone"
     t.string "status"
+    t.string "submission_key"
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.index ["submission_key"], name: "index_orders_on_submission_key", unique: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -239,6 +243,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_000000) do
 
   create_table "site_configs", force: :cascade do |t|
     t.string "address"
+    t.string "catalog_currency", limit: 3, default: "USD", null: false
     t.string "copyright_year"
     t.datetime "created_at", null: false
     t.string "email"
@@ -271,8 +276,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_000000) do
     t.string "name_zh"
     t.integer "position", default: 0, null: false
     t.bigint "sku_id", null: false
+    t.uuid "transfer_key", default: -> { "gen_random_uuid()" }, null: false
     t.datetime "updated_at", null: false
     t.index ["sku_id"], name: "index_sku_configuration_groups_on_sku_id"
+    t.index ["transfer_key"], name: "index_sku_configuration_groups_on_transfer_key", unique: true
   end
 
   create_table "sku_configuration_options", force: :cascade do |t|
@@ -286,8 +293,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_000000) do
     t.integer "position", default: 0, null: false
     t.bigint "sku_configuration_group_id", null: false
     t.decimal "surcharge", precision: 12, scale: 2
+    t.uuid "transfer_key", default: -> { "gen_random_uuid()" }, null: false
     t.datetime "updated_at", null: false
     t.index ["sku_configuration_group_id"], name: "index_sku_configuration_options_on_sku_configuration_group_id"
+    t.index ["transfer_key"], name: "index_sku_configuration_options_on_transfer_key", unique: true
     t.check_constraint "surcharge >= 0::numeric", name: "sku_configuration_options_nonnegative_surcharge"
   end
 
@@ -320,13 +329,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_000000) do
     t.string "name_zh"
     t.integer "position", default: 0, null: false
     t.decimal "price", precision: 10, scale: 2
-    t.string "sku_code"
+    t.string "sku_code", null: false
     t.jsonb "specifications", default: {}
     t.string "status", default: "draft"
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_skus_on_category_id"
     t.index ["position"], name: "index_skus_on_position"
-    t.index ["sku_code"], name: "index_skus_on_sku_code"
+    t.index ["sku_code"], name: "index_skus_on_sku_code", unique: true
     t.index ["status"], name: "index_skus_on_status"
   end
 

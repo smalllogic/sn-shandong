@@ -1,0 +1,9 @@
+<div class="space-y-3">
+  <%= link_to category.localized_name, category_path(category), class: "block font-semibold text-slate-900 hover:text-primary" %>
+  <%= render "product_index_items", skus: @skus_by_category.fetch(category.id, []) %>
+  <% @categories_by_parent.fetch(category.id, []).each do |child| %>
+    <div class="border-l border-slate-200 pl-3">
+      <%= render "product_index_branch", category: child %>
+    </div>
+  <% end %>
+</div>

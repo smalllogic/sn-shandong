@@ -19,9 +19,9 @@
            when "choice"
              selection.map { |code| options.find { |option| option["code"] == code }.fetch("label") }.join(", ")
            when "interval"
-             "#{selection.to_s('F')} #{field.unit}".strip
+             "#{selection.to_s('F')} #{field.display_unit(@site_config.catalog_currency)}".strip
            else
-             [selection["min"]&.to_s("F") || "…", selection["max"]&.to_s("F") || "…", field.unit].compact.join(" ")
+             [selection["min"]&.to_s("F") || "…", selection["max"]&.to_s("F") || "…", field.display_unit(@site_config.catalog_currency)].compact.join(" ")
            end %>
         <li>
           <%= link_to categories_path(context.merge(filters: query.url_selections.except(field.code))), class: "inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1.5 text-sm text-slate-800 hover:bg-slate-200", aria: { label: "#{t('catalog_filters.remove')} #{field.localized_label}" } do %>
@@ -47,7 +47,7 @@
             <% selection = query.selected[field.code] %>
             <fieldset class="min-w-0 rounded-md border border-slate-200 px-3 pb-3">
               <legend class="px-1 text-sm font-semibold text-slate-900">
-                <%= field.localized_label %><%= " (#{field.unit})" if field.unit.present? && field.kind != "choice" %>
+                <%= field.localized_label %><%= " (#{field.display_unit(@site_config.catalog_currency)})" if field.display_unit(@site_config.catalog_currency).present? && field.kind != "choice" %>
               </legend>
               <% if field.kind == "choice" %>
                 <div class="max-h-36 space-y-1 overflow-y-auto pt-1">

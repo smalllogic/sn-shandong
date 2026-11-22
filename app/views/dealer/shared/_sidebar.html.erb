@@ -47,6 +47,7 @@
       工作台概览
     <% end %>
 
+    <% unless current_user.dealer_rejected? && !current_user.super_admin? %>
     <%= link_to dealer_inquiries_path, class: "flex items-center px-4 py-3 rounded-xl transition-all font-bold #{current_page?(dealer_inquiries_path) ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-300 hover:bg-slate-800 hover:text-white'}" do %>
       <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
       我的询盘记录
@@ -55,6 +56,7 @@
     <%= link_to dealer_orders_path, class: "flex items-center px-4 py-3 rounded-xl transition-all font-bold #{current_page?(dealer_orders_path) ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-300 hover:bg-slate-800 hover:text-white'}" do %>
       <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
       我的订单记录
+    <% end %>
     <% end %>
 
     <%= link_to dealer_profile_path, class: "flex items-center px-4 py-3 rounded-xl transition-all font-bold #{current_page?(dealer_profile_path) ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-300 hover:bg-slate-800 hover:text-white'}" do %>

@@ -21,7 +21,7 @@ class Admin::SiteConfigsController < Admin::BaseController
 
   def site_config_params
     params.require(:site_config).permit(
-      :name, :meta_title, :meta_keywords, :meta_description,
+      :name, :catalog_currency, :meta_title, :meta_keywords, :meta_description,
       :phone, :email, :address, :copyright_year, :statistics_code,
       :logo, :favicon, :sitemap, :robots,
       :infra_title, :infra_subtitle,

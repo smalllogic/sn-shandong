@@ -42,9 +42,11 @@ class Admin::CategoriesController < Admin::BaseController
     if @category.parent_id.nil? && Category::ROOT_CATEGORIES.key?(@category.slug)
       redirect_to admin_categories_path, alert: '顶级分类不可删除。'
     else
-      @category.destroy
+      @category.destroy!
       redirect_to admin_categories_path, notice: '分类已删除。'
     end
+  rescue ActiveRecord::InvalidForeignKey
+    redirect_to admin_categories_path, alert: "该分类或子分类仍有商品，请先移动商品。", status: :see_other
   end
 
   private

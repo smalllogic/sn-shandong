@@ -2,14 +2,16 @@ module CatalogTransfer
   class Error < StandardError; end
 
   FORMAT = "sinower-category-sku".freeze
-  VERSION = 2
+  VERSION = 3
   MAX_ARCHIVE_BYTES = 50.megabytes
   MAX_ENTRY_BYTES = 100.megabytes
   MAX_ROWS = 100_000
   CATEGORY_FILE = "categories.csv".freeze
   SKU_FILE = "skus.csv".freeze
   MANIFEST_FILE = "manifest.json".freeze
-  FILES = [CATEGORY_FILE, SKU_FILE, MANIFEST_FILE].freeze
+  EXTRAS_FILE = "catalog-extras.json".freeze
+  CORE_FILES = [CATEGORY_FILE, SKU_FILE, MANIFEST_FILE].freeze
+  FILES = (CORE_FILES + [EXTRAS_FILE]).freeze
 
   CATEGORY_ATTRIBUTES = %w[
     name name_zh name_en name_it name_fr category_kind position hidden featured featured_position

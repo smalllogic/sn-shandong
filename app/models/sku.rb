@@ -7,6 +7,9 @@ class Sku < ApplicationRecord
   validate :validate_card_parameters
 
   before_validation :normalize_sku_code
+  validates :status, inclusion: { in: %w[draft active archived] }
+  validates :price, numericality: { greater_than_or_equal_to: 0, less_than: 100_000_000 }, allow_nil: true
+  validate :validate_specifications
   after_commit :clear_dashboard_cache
 
   belongs_to :category
@@ -116,9 +119,7 @@ class Sku < ApplicationRecord
   end
 
   def localized_specifications
-    return [] unless specifications.is_a?(Array)
-    
-    specifications.map do |spec|
+    specification_rows.grep(Hash).map do |spec|
       case I18n.locale.to_sym
       when :en
         { key: spec['key'], value: spec['value'] }
@@ -133,8 +134,20 @@ class Sku < ApplicationRecord
       end
     end.reject { |s| s[:key].blank? }
   end
+  def specification_rows
+    self.class.specification_rows(specifications)
+  end
+
+  def self.specification_rows(values)
+    case values
+    when Hash then values.map { |key, value| { "key" => key, "value" => value } }
+    when Array then values
+    else []
+    end
+  end
+
   validates :position, numericality: { only_integer: true }
-  validates :sku_code, uniqueness: { allow_blank: true }
+  validates :sku_code, presence: true, uniqueness: true
   validate :category_must_be_leaf
   validate :images_must_be_bmp_or_png_jpg_images
 
@@ -153,7 +166,15 @@ class Sku < ApplicationRecord
   end
 
   def normalize_sku_code
-    self.sku_code = sku_code.strip if sku_code
+    self.sku_code = sku_code.to_s.strip.presence || "SKU-#{SecureRandom.uuid}"
+  end
+
+  def validate_specifications
+    return unless will_save_change_to_specifications?
+    return if specifications.is_a?(Hash)
+    return if specifications.is_a?(Array) && specifications.all? { |row| row.is_a?(Hash) }
+
+    errors.add(:specifications, "必须为规格对象组成的数组")
   end
 
   def images_must_be_bmp_or_png_jpg_images

@@ -24,10 +24,15 @@ module CatalogTransfer
         end
       end
 
+      assets = Assets.new
+      extras = Extras.new(assets).export(categories, skus).to_json
+      raise Error, "目录扩展资料超过 100 MB。" if extras.bytesize > MAX_ENTRY_BYTES
+      data_files = { CATEGORY_FILE => category_csv, SKU_FILE => sku_csv, EXTRAS_FILE => extras }.merge(assets.files)
+
       manifest = {
         format: FORMAT, version: VERSION,
         counts: { CATEGORY_FILE => categories.size, SKU_FILE => skus.size },
-        sha256: { CATEGORY_FILE => Digest::SHA256.hexdigest(category_csv), SKU_FILE => Digest::SHA256.hexdigest(sku_csv) }
+        sha256: data_files.transform_values { |contents| Digest::SHA256.hexdigest(contents) }
       }.to_json
 
       if category_csv.bytesize > MAX_ENTRY_BYTES || sku_csv.bytesize > MAX_ENTRY_BYTES
@@ -35,7 +40,7 @@ module CatalogTransfer
       end
 
       archive = Zip::OutputStream.write_buffer do |zip|
-        { CATEGORY_FILE => category_csv, SKU_FILE => sku_csv, MANIFEST_FILE => manifest }.each do |name, contents|
+        data_files.merge(MANIFEST_FILE => manifest).each do |name, contents|
           zip.put_next_entry(name)
           zip.write(contents)
         end

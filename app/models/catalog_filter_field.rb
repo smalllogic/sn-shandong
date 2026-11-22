@@ -17,10 +17,13 @@ class CatalogFilterField < ApplicationRecord
   validates :label_en, presence: true
   validates :label_en, :label_zh, :label_it, :label_fr, length: { maximum: 100 }
   validates :unit, length: { maximum: 20 }
-  validates :unit, presence: true, format: { with: /\A[A-Z]{3}\z/, message: "请输入三位大写货币代码，例如 USD" }, if: :price?
   validates :legacy_names, length: { maximum: 2500 }
   validate :validate_source_names
   validate :validate_stable_identity, on: :update
+
+  def display_unit(catalog_currency)
+    price? ? catalog_currency : unit
+  end
 
   def price?
     kind == "price"

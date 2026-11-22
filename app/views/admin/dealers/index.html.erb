@@ -11,7 +11,7 @@
       <% [
         { key: 'all', label: '全部申请', count: User.dealers.count },
         { key: 'pending', label: '待审核', count: User.where(dealer_status: 'pending').count, badge_class: 'bg-amber-100 text-amber-800' },
-        { key: 'approved', label: '已批准', count: User.where(dealer_status: 'approved').or(User.where(role: 'dealer')).count, badge_class: 'bg-emerald-100 text-emerald-800' },
+        { key: 'approved', label: '已批准', count: User.where(dealer_status: 'approved').count, badge_class: 'bg-emerald-100 text-emerald-800' },
         { key: 'rejected', label: '已拒绝', count: User.where(dealer_status: 'rejected').count, badge_class: 'bg-red-100 text-red-800' }
       ].each do |tab| %>
         <%= link_to admin_dealers_path(status: tab[:key]), class: "px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center space-x-1.5 #{@status == tab[:key] ? 'bg-slate-900 text-white shadow-sm' : 'bg-slate-50 hover:bg-slate-100 text-slate-600'}" do %>
@@ -65,7 +65,7 @@
                       <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5"></span>
                       待审核
                     </span>
-                  <% elsif dealer.dealer_approved? || dealer.role == 'dealer' %>
+                  <% elsif dealer.dealer_approved? %>
                     <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                       <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5"></span>
                       已批准

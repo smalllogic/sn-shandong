@@ -1,5 +1,9 @@
 en:
   sku_configurations:
+    reselect: "Choose again"
+    submitted: "Your inquiry was submitted."
+    invalid_quantity: "Enter a quantity between 1 and %{max}."
+    unavailable: "Product or configuration no longer available"
     title: Configuration options
     per_unit: Configuration surcharge per unit
     quote: Ask for a quote
@@ -13,6 +17,10 @@ en:
     remove: Remove
 zh-CN:
   sku_configurations:
+    reselect: "重新选择"
+    submitted: "询价已提交。"
+    invalid_quantity: "请输入 1 至 %{max} 的数量。"
+    unavailable: "商品或配置已失效，请移除此项后重新选择"
     title: 可选配置
     per_unit: 每台配置加价
     quote: 加价请询
@@ -26,6 +34,10 @@ zh-CN:
     remove: 移除
 it:
   sku_configurations:
+    reselect: "Scegli di nuovo"
+    submitted: "La richiesta è stata inviata."
+    invalid_quantity: "Inserisci una quantità da 1 a %{max}."
+    unavailable: "Prodotto o configurazione non più disponibile"
     title: Opzioni di configurazione
     per_unit: Supplemento per unità
     quote: Richiedi un preventivo
@@ -39,6 +51,10 @@ it:
     remove: Rimuovi
 fr:
   sku_configurations:
+    reselect: "Choisir à nouveau"
+    submitted: "Votre demande a été envoyée."
+    invalid_quantity: "Saisissez une quantité de 1 à %{max}."
+    unavailable: "Produit ou configuration indisponible"
     title: Options de configuration
     per_unit: Supplément par unité
     quote: Sur devis

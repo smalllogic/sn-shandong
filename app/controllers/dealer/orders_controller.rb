@@ -1,5 +1,7 @@
 module Dealer
   class OrdersController < BaseController
+    before_action :ensure_dealer_history_access
+
     def index
       @orders = current_user.orders.order(created_at: :desc)
       @orders = @orders.page(params[:page]).per(15) if defined?(Kaminari)

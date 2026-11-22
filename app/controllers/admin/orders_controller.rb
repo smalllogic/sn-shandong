@@ -1,4 +1,7 @@
 class Admin::OrdersController < Admin::BaseController
+  before_action :require_order_access
+  before_action :require_super_admin, only: :destroy
+
   def index
     @orders = Order.order(created_at: :desc).page(params[:page]).per(20)
   end
@@ -23,6 +26,12 @@ class Admin::OrdersController < Admin::BaseController
   end
 
   private
+
+  def require_order_access
+    return if current_user.super_admin? || current_user.role == "admin"
+
+    redirect_to admin_root_path, alert: "您没有订单管理权限。"
+  end
 
   def order_params
     params.require(:order).permit(:status)

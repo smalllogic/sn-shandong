@@ -21,7 +21,7 @@
           </div>
           <div class="flex shrink-0 flex-wrap items-center gap-2">
             <button type="button" data-cart-minus aria-label="<%= t('sku_configurations.decrease') %>" class="size-9 rounded border border-slate-300 bg-white">−</button>
-            <input type="number" min="1" aria-label="<%= t('sku_configurations.quantity') %>" class="w-14 rounded border border-slate-300 bg-white py-2 text-center text-sm">
+            <input type="number" min="1" max="<%= OrderItem::MAX_QUANTITY %>" aria-label="<%= t('sku_configurations.quantity') %>" class="w-14 rounded border border-slate-300 bg-white py-2 text-center text-sm">
             <button type="button" data-cart-plus aria-label="<%= t('sku_configurations.increase') %>" class="size-9 rounded border border-slate-300 bg-white">+</button>
             <button type="button" data-cart-remove class="px-2 py-2 text-sm font-medium text-red-700"><%= t('sku_configurations.remove') %></button>
           </div>
@@ -52,6 +52,9 @@
 <script>
   document.getElementById('orderForm').addEventListener('submit', function(e) {
     e.preventDefault();
+    const submit = this.querySelector('[type="submit"]');
+    if (submit.disabled) return;
+    submit.disabled = true;
     const formData = new FormData(this);
     
     fetch(this.action, {
@@ -77,6 +80,6 @@
     .catch(error => {
       console.error('Error:', error);
       alert(<%= t('cart.submit_error').to_json.html_safe %>);
-    });
+    }).finally(() => { submit.disabled = false; });
   });
 </script>

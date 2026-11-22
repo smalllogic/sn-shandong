@@ -6,6 +6,12 @@ module Dealer
 
     private
 
+    def ensure_dealer_history_access
+      return if current_user.dealer_approved? || current_user.dealer_pending? || current_user.super_admin?
+
+      redirect_to dealer_root_path, alert: "您的经销商申请未通过，业务工作台不可用。"
+    end
+
     def ensure_dealer_access
       # Super admin can view dealer portal
       return if current_user.super_admin?

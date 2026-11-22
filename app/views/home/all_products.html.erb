@@ -48,80 +48,15 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          <% root.children.visible.each do |sub1| %>
-            <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:shadow-primary/10 hover:border-primary/20 transition-all duration-500 group">
-              <h3 class="text-xl font-black text-dark mb-6 flex items-center justify-between border-b border-slate-50 pb-4 group-hover:border-primary/20 transition-colors">
-                <%= link_to sub1.localized_name, category_path(sub1), class: "hover:text-primary" %>
-                <span class="text-slate-300 group-hover:text-primary transition-colors">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
-                </span>
-              </h3>
-
-              <div class="space-y-6">
-                <!-- Level 3 Categories -->
-                <% sub1.children.visible.each do |sub2| %>
-                  <div>
-                    <h4 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-                      <span class="w-1.5 h-1.5 bg-secondary rounded-full"></span>
-                      <%= link_to sub2.localized_name, category_path(sub2), class: "hover:text-secondary transition-colors" %>
-                    </h4>
-                    
-                    <% if sub2.children.visible.any? %>
-                      <!-- Level 4 Categories and their products -->
-                      <div class="ml-3 space-y-4">
-                        <% sub2.children.visible.each do |sub3| %>
-                          <div class="pl-3 border-l-2 border-slate-50 hover:border-accent transition-colors py-1">
-                            <h5 class="text-[13px] font-bold text-slate-700 mb-2">
-                              <%= link_to sub3.localized_name, category_path(sub3), class: "hover:text-accent" %>
-                            </h5>
-                            
-                            <ul class="grid grid-cols-1 gap-1.5">
-                              <% skus = @skus_by_category[sub3.id] || [] %>
-                              <% skus.each do |sku| %>
-                                <li>
-                                  <%= link_to sku_path(sku), class: "text-sm text-slate-500 hover:text-primary flex items-center group/sku py-0.5" do %>
-                                    <span class="w-1 h-1 bg-slate-200 group-hover/sku:bg-primary rounded-full mr-2 transition-colors"></span>
-                                    <span class="truncate"><%= sku.sku_code.present? ? "#{sku.sku_code} · #{sku.name}" : sku.name %></span>
-                                  <% end %>
-                                </li>
-                              <% end %>
-                            </ul>
-                          </div>
-                        <% end %>
-                      </div>
-                    <% else %>
-                      <!-- Direct products under Level 3 if no Level 4 -->
-                      <ul class="ml-3 grid grid-cols-1 gap-1.5">
-                        <% skus = @skus_by_category[sub2.id] || [] %>
-                        <% skus.each do |sku| %>
-                          <li>
-                            <%= link_to sku_path(sku), class: "text-sm text-slate-500 hover:text-secondary flex items-center group/sku py-0.5" do %>
-                              <span class="w-1 h-1 bg-slate-200 group-hover/sku:bg-secondary rounded-full mr-2 transition-colors"></span>
-                              <span class="truncate"><%= sku.sku_code.present? ? "#{sku.sku_code} · #{sku.name}" : sku.name %></span>
-                            <% end %>
-                          </li>
-                        <% end %>
-                      </ul>
-                    <% end %>
-                  </div>
-                <% end %>
-
-                <!-- Direct products under Level 2 if no Level 3 -->
-                <% if sub1.children.visible.empty? %>
-                  <ul class="grid grid-cols-1 gap-1.5">
-                    <% skus = @skus_by_category[sub1.id] || [] %>
-                    <% skus.each do |sku| %>
-                      <li>
-                        <%= link_to sku_path(sku), class: "text-sm text-slate-500 hover:text-primary flex items-center group/sku py-0.5" do %>
-                          <span class="w-1 h-1 bg-slate-200 group-hover/sku:bg-primary rounded-full mr-2 transition-colors"></span>
-                          <span class="truncate"><%= sku.sku_code.present? ? "#{sku.sku_code} · #{sku.name}" : sku.name %></span>
-                        <% end %>
-                      </li>
-                    <% end %>
-                  </ul>
-                <% end %>
-              </div>
+          <% if @skus_by_category[root.id].present? %>
+            <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+              <%= render "product_index_items", skus: @skus_by_category[root.id] %>
             </div>
+          <% end %>
+          <% @categories_by_parent.fetch(root.id, []).each do |subcategory| %>
+            <article class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+              <%= render "product_index_branch", category: subcategory %>
+            </article>
           <% end %>
         </div>
       </div>

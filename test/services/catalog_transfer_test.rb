@@ -30,6 +30,48 @@ class CatalogTransferTest < ActiveSupport::TestCase
     assert_equal root.id, leaf.reload.parent_id
   end
 
+  test "a directory package restores attachments, filters, and configuration to new records" do
+    root, leaf, sku = create_catalog
+    picture = Rails.root.join("app/assets/images/categories_banner.jpg")
+    attachment = -> { { io: StringIO.new(picture.binread), filename: "catalog.jpg", content_type: "image/jpeg" } }
+    leaf.image.attach(attachment.call)
+    sku.images.attach(attachment.call)
+    sku.images_attachments.update_all(position: 12)
+    blob = sku.images.first.blob
+    sku.update!(standard_features: "<p>Feature photo</p>#{ActionText::Attachment.from_attachable(blob).to_html}")
+    field = CatalogFilterField.create!(code: "power", kind: "number", label_en: "Power", legacy_names: "Power", unit: "W")
+    leaf.category_filters.create!(catalog_filter_field: field)
+    group = sku.configuration_groups.create!(name_en: "Worktop", currency: "EUR",
+      options_attributes: [{ name_en: "Black", surcharge: 50, image: attachment.call }])
+    archive = CatalogTransfer::Export.new.call
+    old_id = sku.id
+    sku.destroy!
+    leaf.destroy!
+    root.destroy!
+    field.destroy!
+    ActiveStorage::Blob.unattached.find_each(&:purge)
+
+    importer = CatalogTransfer::Import.new(StringIO.new(archive))
+    assert_equal 1, importer.preview.fetch(:new_skus)
+    importer.call
+    restored = Sku.find_by!(sku_code: "SKU-1")
+    assert_not_equal old_id, restored.id
+    assert_equal picture.binread, restored.category.image.download
+    assert_equal picture.binread, restored.images.first.download
+    assert_equal 12, restored.images_attachments.sole.position
+    assert_equal "power", restored.category.category_filters.sole.catalog_filter_field.code
+    option = restored.configuration_groups.sole.options.sole
+    assert_equal group.transfer_key, restored.configuration_groups.sole.transfer_key
+    assert_equal 50, option.surcharge
+    assert_equal picture.binread, option.image.download
+    assert_equal picture.binread, restored.standard_features.body.attachables.sole.download
+
+    CatalogTransfer::Import.new(StringIO.new(archive)).call
+    assert_equal 1, restored.reload.configuration_groups.count
+    assert_equal 1, restored.configuration_groups.sole.options.count
+    assert_equal 1, restored.images_attachments.count
+  end
+
   test "a version one archive leaves card parameters intact" do
     _root, _leaf, sku = create_catalog
     sku.update!(card_parameters_en: "Power: 100 W")

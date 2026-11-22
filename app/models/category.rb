@@ -56,6 +56,16 @@ class Category < ApplicationRecord
   validate :root_category_slug_and_kind_consistency, if: -> { parent_id.nil? }
   validate :prevent_root_slug_change_if_has_children, if: -> { parent_id.nil? && !new_record? }
   validate :validate_root_category_slug, if: -> { parent_id.nil? }
+  validate :preserve_root_category
+
+  def preserve_root_category
+    if parent_id.present? && ROOT_CATEGORIES.key?(slug)
+      errors.add(:parent_id, "预设顶级分类不能移到其他分类下")
+    end
+    if persisted? && ROOT_CATEGORIES.key?(slug_in_database) && slug != slug_in_database
+      errors.add(:slug, "预设顶级分类的标识不能修改")
+    end
+  end
   validate :validate_parent_relationship, if: -> { parent_id.present? }
 
   def validate_root_category_slug

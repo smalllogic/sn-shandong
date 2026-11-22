@@ -19,13 +19,19 @@ module Admin
     end
 
     def promote
-      @user.update(role: 'admin')
-      redirect_to admin_users_path, notice: "用户已成功提升为小管理员。"
+      if @user.update(role: "admin")
+        redirect_to admin_users_path, notice: "用户已成功提升为小管理员。"
+      else
+        redirect_to admin_users_path, alert: @user.errors.full_messages.to_sentence
+      end
     end
 
     def destroy
-      @user.destroy
-      redirect_to admin_users_path, notice: "User was successfully deleted."
+      if @user.destroy
+        redirect_to admin_users_path, notice: "用户已删除。"
+      else
+        redirect_to admin_users_path, alert: @user.errors.full_messages.to_sentence
+      end
     end
 
     private
@@ -35,7 +41,11 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(:role)
+      params.require(:user).permit(:role).tap do |attributes|
+        if attributes.key?(:role) && !%w[user editor admin].include?(attributes[:role])
+          raise ActionController::BadRequest, "Unsupported role"
+        end
+      end
     end
   end
 end

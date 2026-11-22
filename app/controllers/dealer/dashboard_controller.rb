@@ -1,6 +1,8 @@
 module Dealer
   class DashboardController < BaseController
     def index
+      return unless current_user.dealer_approved? || current_user.dealer_pending? || current_user.super_admin?
+
       @inquiries_count = current_user.contact_messages.count
       @orders_count = current_user.orders.count
       @recent_inquiries = current_user.contact_messages.order(created_at: :desc).limit(5)

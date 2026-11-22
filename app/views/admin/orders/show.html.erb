@@ -5,7 +5,10 @@
     <p><strong>邮箱:</strong> <%= @order.email %></p>
     <p><strong>国家:</strong> <%= @order.country %></p>
     <p><strong>电话:</strong> <%= @order.phone %></p>
-    <p class="mt-2"><strong>状态:</strong> <%= @order.status.humanize %></p>
+    <% if @order.message.present? %>
+      <p class="mt-2 whitespace-pre-wrap"><strong>客户留言</strong> <%= @order.message %></p>
+    <% end %>
+    <p class="mt-2"><strong>状态:</strong> <%= @order.status.to_s.humanize %></p>
     <div class="mt-2 flex gap-2">
       <% Order.statuses.keys.each do |status| %>
         <% unless @order.status == status %>
@@ -26,7 +29,10 @@
       <% @order.order_items.each do |item| %>
         <tr>
           <td class="border p-2">
-            <%= item.sku.name %>
+            <%= [item.product_code.presence, item.product_name].compact.join(" · ") %>
+            <% unless item.product_snapshot? %>
+              <span class="block text-xs text-slate-500">旧询价 · 商品信息为当前资料</span>
+            <% end %>
             <%= render "shared/configuration_snapshot", item: item %>
           </td>
           <td class="border p-2"><%= item.quantity %></td>

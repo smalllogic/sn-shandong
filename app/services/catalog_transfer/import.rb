@@ -10,13 +10,38 @@ module CatalogTransfer
       @upload = upload
     end
 
+    def preview
+      categories, skus = read_archive
+      validate_keys!(categories, skus)
+      order_categories(categories)
+      validate_target_keys!(categories, skus)
+      category_keys = categories.map { |row, _| row.fetch("slug").strip }
+      sku_keys = skus.map { |row, _| row.fetch("sku_code").strip }
+      category_updates = Category.where(slug: category_keys).count
+      sku_updates = Sku.where(sku_code: sku_keys).count
+      dependent_slugs = categories.filter_map { |row, _| row["parent_slug"].to_s.strip.presence } +
+        skus.map { |row, _| row.fetch("category_slug").strip }
+      external_slugs = dependent_slugs.uniq - category_keys
+      missing_categories = external_slugs - Category.where(slug: external_slugs).pluck(:slug)
+      {
+        new_categories: category_keys.size - category_updates,
+        updated_categories: category_updates,
+        new_skus: sku_keys.size - sku_updates,
+        updated_skus: sku_updates,
+        missing_categories: missing_categories.size,
+        includes_extras: @extras.present?
+      }
+    end
+
     def call
       category_rows, sku_rows = read_archive
       validate_keys!(category_rows, sku_rows)
       ordered_categories = order_categories(category_rows)
       validate_target_keys!(category_rows, sku_rows)
 
-      Category.transaction do
+      assets = Assets.new(@asset_files || {})
+      Category.transaction(requires_new: true) do
+        currency_conflict = @extras.present? && Sku.where.not(price: nil).exists?
         imported_categories = {}
         ordered_categories.each do |row, line|
           slug = row.fetch("slug").strip
@@ -38,6 +63,7 @@ module CatalogTransfer
           raise Error, "分类层级与现有 SKU 冲突：已有 SKU 绑定在非末级分类。"
         end
 
+        imported_skus = {}
         sku_rows.each do |row, line|
           code = row.fetch("sku_code").strip
           category_slug = row.fetch("category_slug").strip
@@ -49,18 +75,23 @@ module CatalogTransfer
           sku.assign_attributes(sku_attributes(row, line))
           sku.sku_code = code
           sku.category = category
-          RICH_TEXT_ATTRIBUTES.each { |name| sku.public_send("#{name}=", row[name]) }
+          RICH_TEXT_ATTRIBUTES.each { |name| sku.public_send("#{name}=", row[name]) } unless @extras
           save!(sku, SKU_FILE, line)
+          imported_skus[code] = sku
         end
+        Extras.new(assets).import(@extras, imported_categories, imported_skus, currency_conflict: currency_conflict) if @extras
       end
 
       { categories: category_rows.size, skus: sku_rows.size }
+    rescue StandardError
+      assets&.cleanup_failed_uploads
+      raise
     end
 
     private
 
     def read_archive
-      raise Error, "请选择 ZIP 文件。" unless @upload
+      raise Error, "请选择 ZIP 文件。" unless @upload.respond_to?(:read) && @upload.respond_to?(:size)
       raise Error, "ZIP 文件超过 50 MB。" if @upload.size > MAX_ARCHIVE_BYTES
 
       @upload.rewind
@@ -78,14 +109,21 @@ module CatalogTransfer
           raise Error, "ZIP 清单格式无效。"
         end
         version = manifest["version"]
-        unless manifest["format"] == FORMAT && [1, VERSION].include?(version)
+        unless manifest["format"] == FORMAT && [1, 2, VERSION].include?(version)
           raise Error, "ZIP 格式或版本不受支持。"
         end
 
-        { CATEGORY_FILE => category_csv, SKU_FILE => sku_csv }.each do |name, csv|
-          unless manifest.dig("sha256", name) == Digest::SHA256.hexdigest(csv)
-            raise Error, "#{name} 校验失败，文件可能已损坏。"
-          end
+        verify_checksum!(manifest, CATEGORY_FILE, category_csv)
+        verify_checksum!(manifest, SKU_FILE, sku_csv)
+        if version == VERSION
+          raise Error, "目录包缺少扩展资料。" unless entries.key?(EXTRAS_FILE)
+
+          extras_bytes = entry_text(entries.fetch(EXTRAS_FILE), EXTRAS_FILE)
+          verify_checksum!(manifest, EXTRAS_FILE, extras_bytes)
+          @extras = JSON.parse(extras_bytes)
+          raise Error, "目录扩展资料格式无效。" unless @extras.is_a?(Hash)
+
+          @asset_files = read_assets(entries, manifest)
         end
 
         categories = parse_csv(category_csv, CATEGORY_FILE, CATEGORY_HEADERS)
@@ -114,7 +152,7 @@ module CatalogTransfer
       if names.uniq.size != names.size
         raise Error, "ZIP 中存在重名的数据文件。"
       end
-      unless names.sort == FILES.sort
+      unless (CORE_FILES - names).empty? && names.all? { |name| FILES.include?(name) || name.match?(Assets::NAME) }
         if names.include?(CATEGORY_FILE) && names.include?(SKU_FILE) && !names.include?(MANIFEST_FILE)
           raise Error, "这是旧版 ZIP，缺少 manifest.json；请在当前控制面板重新导出后上传。"
         end
@@ -122,6 +160,33 @@ module CatalogTransfer
       end
 
       names.zip(entries).to_h
+    end
+
+    def verify_checksum!(manifest, name, bytes)
+      unless manifest.dig("sha256", name) == Digest::SHA256.hexdigest(bytes)
+        raise Error, "#{name} 校验失败，文件可能已损坏。"
+      end
+    end
+
+    def read_assets(entries, manifest)
+      total = 0
+      entries.select { |name| name.match?(Assets::NAME) }.to_h do |name, entry|
+        if entry.size > Assets::MAX_FILE_BYTES || total + entry.size > Assets::MAX_TOTAL_BYTES
+          raise Error, "目录附件超过解压大小限制。"
+        end
+
+        bytes = entry.get_input_stream.read(Assets::MAX_FILE_BYTES + 1)
+        total += bytes.bytesize
+        if bytes.bytesize > Assets::MAX_FILE_BYTES || total > Assets::MAX_TOTAL_BYTES
+          raise Error, "目录附件超过解压大小限制。"
+        end
+        verify_checksum!(manifest, name, bytes)
+        unless name == "asset-#{Digest::SHA256.hexdigest(bytes)}.bin"
+          raise Error, "目录附件标识与内容不符。"
+        end
+
+        [name, bytes]
+      end
     end
 
     def macos_metadata?(name)
@@ -213,9 +278,10 @@ module CatalogTransfer
         value = decimal(value, name) if name == "price" && value.present?
         if name == "specifications"
           value = value.present? ? JSON.parse(value) : {}
-          unless value.is_a?(Array) || value.is_a?(Hash)
-            raise Error, "skus.csv 第 #{line} 行：specifications 必须是 JSON 数组或对象。"
+          unless value.is_a?(Hash) || (value.is_a?(Array) && value.all? { |row| row.is_a?(Hash) })
+            raise Error, "skus.csv 第 #{line} 行：specifications 必须是 JSON 对象或规格对象组成的数组。"
           end
+          value = Sku.specification_rows(value)
         end
         [name, value]
       end

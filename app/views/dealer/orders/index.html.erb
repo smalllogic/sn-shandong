@@ -48,7 +48,7 @@
                     <%= order.order_items.count %> 项设备型号
                   </div>
                   <div class="text-xs text-slate-400 truncate max-w-xs">
-                    <%= order.order_items.map { |i| "#{i.sku&.name || 'SKU'} x #{i.quantity}" }.join(', ') %>
+                    <%= order.order_items.map { |i| "#{i.product_name || 'SKU'} x #{i.quantity}" }.join(', ') %>
                   </div>
                 </td>
                 <td class="py-4 px-6 whitespace-nowrap text-xs text-slate-600">

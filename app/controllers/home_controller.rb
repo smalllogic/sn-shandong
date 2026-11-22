@@ -8,7 +8,7 @@ class HomeController < ApplicationController
 
   def all_products
     @kind = params[:kind]
-    if params[:q].present?
+    if params[:q].is_a?(String) && params[:q].present?
       @categories = Category.visible.where(parent_id: nil).includes(children: { children: { children: :children } })
       @skus = Sku.visible
                  .where("LOWER(skus.name) LIKE :query OR LOWER(skus.sku_code) LIKE :query",
@@ -19,7 +19,8 @@ class HomeController < ApplicationController
       render "categories/index"
     else
       @skus_by_category = Sku.visible.in_catalog_order.group_by(&:category_id)
-      @root_categories = Category.visible.roots.includes(children: { children: { children: :children } })
+      @categories_by_parent = Category.visible.to_a.group_by(&:parent_id)
+      @root_categories = @categories_by_parent.fetch(nil, [])
     end
   end
 
@@ -44,23 +45,20 @@ class HomeController < ApplicationController
   end
 
   def create_contact
-    # Cloudflare Turnstile Verification
-    unless verify_turnstile(params["cf-turnstile-response"])
-      redirect_to contact_path, alert: t('home.contact.form.verification_failed')
-      return
-    end
-
-    if params[:privacy_agreement] != "1"
-      redirect_to contact_path, alert: t('home.contact.form.privacy_error')
-      return
-    end
-
     @contact_message = ContactMessage.new(contact_params)
-    @contact_message.user = current_user if user_signed_in?
-    if !@contact_message.user && @contact_message.email.present?
-      @contact_message.user = User.find_by(email: @contact_message.email.strip.downcase)
+    if params[:privacy_agreement] != "1"
+      @contact_message.errors.add(:base, t("home.contact.form.privacy_error"))
+      return render :contact, status: :unprocessable_entity
     end
+
+    unless verify_turnstile(params["cf-turnstile-response"])
+      @contact_message.errors.add(:base, t("home.contact.form.verification_failed"))
+      return render :contact, status: :unprocessable_entity
+    end
+
+    @contact_message.user = current_user if user_signed_in?
     if @contact_message.save
+      session[:last_submission_time] = Time.current.to_s
       begin
         # 记录调试信息到日志
         Rails.logger.info "[Mailer Debug] Attempting to send contact notification for Message ID: #{@contact_message.id}"
@@ -109,14 +107,18 @@ class HomeController < ApplicationController
 
     secret_key = ENV.fetch("CLOUDFLARE_TURNSTILE_SECRET_KEY", "1x0000000000000000000000000000000AA")
     uri = URI.parse("https://challenges.cloudflare.com/turnstile/v0/siteverify")
-    response = Net::HTTP.post_form(uri, {
-      'secret' => secret_key,
-      'response' => token,
-      'remoteip' => request.remote_ip
-    })
+    request_to_verify = Net::HTTP::Post.new(uri)
+    request_to_verify.set_form_data(secret: secret_key, response: token, remoteip: request.remote_ip)
+    response = Net::HTTP.start(uri.host, uri.port, use_ssl: true, open_timeout: 3, read_timeout: 5) do |http|
+      http.request(request_to_verify)
+    end
+    return false unless response.is_a?(Net::HTTPSuccess)
 
     outcome = JSON.parse(response.body)
-    outcome["success"] == true
+    outcome.is_a?(Hash) && outcome["success"] == true
+  rescue IOError, SystemCallError, SocketError, Timeout::Error, OpenSSL::SSL::SSLError, JSON::ParserError => error
+    Rails.logger.warn("Turnstile verification unavailable: #{error.class}")
+    false
   end
 
   def check_submission_rate_limit
@@ -125,7 +127,6 @@ class HomeController < ApplicationController
       redirect_to contact_path, alert: t('home.submission_limit')
       return
     end
-    session[:last_submission_time] = Time.current.to_s
   end
 
   def contact_params

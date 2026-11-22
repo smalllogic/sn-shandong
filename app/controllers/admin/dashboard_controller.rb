@@ -25,7 +25,12 @@ class Admin::DashboardController < Admin::BaseController
   end
 
   def catalog_import
-    result = CatalogTransfer::Import.new(params[:file]).call
+    importer = CatalogTransfer::Import.new(params[:file])
+    if params[:preview].present?
+      summary = importer.preview
+      return redirect_to admin_root_path, notice: "导入预检：新增分类 #{summary[:new_categories]}、更新分类 #{summary[:updated_categories]}，新增 SKU #{summary[:new_skus]}、更新 SKU #{summary[:updated_skus]}，缺少的分类依赖 #{summary[:missing_categories]}。#{summary[:includes_extras] ? '含扩展资料。' : '仅基础资料。'} 确认后请重新选择文件并导入。"
+    end
+    result = importer.call
     redirect_to admin_root_path, notice: "导入完成：分类 #{result[:categories]} 条，SKU #{result[:skus]} 条。"
   rescue CatalogTransfer::Error => e
     redirect_to admin_root_path, alert: "导入失败，所有改动已回滚：#{e.message}"

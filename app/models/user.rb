@@ -13,11 +13,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable, :lockable
 
-  scope :dealers, -> { where(dealer_status: ['pending', 'approved', 'rejected']).or(where(role: 'dealer')) }
+  ROLES = %w[user editor admin super_admin].freeze
+  DEALER_STATUSES = %w[none pending approved rejected].freeze
+
+  validates :role, inclusion: { in: ROLES }
+  validates :dealer_status, inclusion: { in: DEALER_STATUSES }
+  before_save :sync_dealer_approval_time, if: :will_save_change_to_dealer_status?
+  before_update :protect_last_super_admin, if: -> { role_in_database == "super_admin" && role != "super_admin" }
+  before_destroy :protect_last_super_admin, if: :super_admin?, prepend: true
+
+  scope :dealers, -> { where(dealer_status: %w[pending approved rejected]) }
   scope :pending_dealers, -> { where(dealer_status: 'pending') }
 
   def super_admin?
-    role == 'super_admin' || admin
+    role == 'super_admin'
   end
 
   def editor?
@@ -33,7 +42,7 @@ class User < ApplicationRecord
   end
 
   def dealer?
-    role == 'dealer' || dealer_status == 'approved'
+    dealer_approved?
   end
 
   def dealer_pending?
@@ -49,11 +58,11 @@ class User < ApplicationRecord
   end
 
   def dealer_applicant?
-    ['pending', 'approved', 'rejected'].include?(dealer_status) || role == 'dealer'
+    %w[pending approved rejected].include?(dealer_status)
   end
 
   def approve_dealer!
-    update(role: 'dealer', dealer_status: 'approved', dealer_approved_at: Time.current)
+    update(dealer_status: 'approved')
   end
 
   def reject_dealer!
@@ -65,6 +74,19 @@ class User < ApplicationRecord
   end
 
   private
+
+  def sync_dealer_approval_time
+    self.dealer_approved_at = dealer_approved? ? Time.current : nil
+  end
+
+  def protect_last_super_admin
+    # Serialize role removal across accounts, including concurrent deletions.
+    self.class.connection.execute("SELECT pg_advisory_xact_lock(2026112201)")
+    return if self.class.where(role: "super_admin").where.not(id: id).exists?
+
+    errors.add(:base, "必须保留至少一位大管理员")
+    throw :abort
+  end
 
   def clear_dashboard_cache
     Rails.cache.delete("admin_users_count")

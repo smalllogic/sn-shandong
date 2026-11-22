@@ -255,7 +255,21 @@
               const template = document.getElementById('cartItemTemplate');
               container.replaceChildren(...data.items.map(item => {
                 const row = template.content.cloneNode(true);
-                row.querySelector('[data-cart-product]').textContent = [item.sku_code, item.name].filter(Boolean).join(' · ');
+                const product = row.querySelector('[data-cart-product]');
+                const name = [item.sku_code, item.name].filter(Boolean).join(' · ');
+                product.textContent = item.unavailable
+                  ? [name, <%= t('sku_configurations.unavailable').to_json.html_safe %>].filter(Boolean).join(' — ')
+                  : name;
+                if (item.unavailable) {
+                  row.querySelectorAll('input, [data-cart-minus], [data-cart-plus]').forEach(control => control.disabled = true);
+                  if (item.product_url) {
+                    const reselect = document.createElement('a');
+                    reselect.href = item.product_url;
+                    reselect.className = 'text-xs font-semibold text-primary underline';
+                    reselect.textContent = <%= t('sku_configurations.reselect').to_json.html_safe %>;
+                    product.after(reselect);
+                  }
+                }
                 const options = row.querySelector('[data-cart-configurations]');
                 for (const configuration of item.configuration) {
                   const line = document.createElement('li');
@@ -286,7 +300,13 @@
               'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.content ?? ''
             },
             body: JSON.stringify(payload)
-          }).then(() => loadCart());
+          }).then(async response => {
+            if (!response.ok) {
+              const data = await response.json();
+              showToast(<%= t('sku_configurations.selection_error').to_json.html_safe %>, data.message);
+            }
+            return loadCart();
+          });
         }
 
         function updateCartBadge(count) {

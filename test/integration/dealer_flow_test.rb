@@ -67,7 +67,7 @@ class DealerFlowTest < ActionDispatch::IntegrationTest
 
     applicant.reload
     assert_equal "approved", applicant.dealer_status
-    assert_equal "dealer", applicant.role
+    assert_equal "user", applicant.role
     assert applicant.dealer_approved?
     assert applicant.dealer?
     assert_not_nil applicant.dealer_approved_at
@@ -79,6 +79,18 @@ class DealerFlowTest < ActionDispatch::IntegrationTest
     applicant.reload
     assert_equal "rejected", applicant.dealer_status
     assert applicant.dealer_rejected?
+    assert_not applicant.dealer?
+    assert_nil applicant.dealer_approved_at
+    get admin_dealers_path(status: "approved")
+    assert_not_includes response.body, "Berlin Foodservice GmbH"
+    get admin_dealers_path(status: "rejected")
+    assert_includes response.body, "Berlin Foodservice GmbH"
+    sign_out @admin
+    sign_in applicant
+    get dealer_orders_path
+    assert_redirected_to dealer_root_path
+    follow_redirect!
+    assert_response :success
   end
 
   test "dealer can view submitted inquiries and orders in dealer backend" do
@@ -86,7 +98,6 @@ class DealerFlowTest < ActionDispatch::IntegrationTest
       email: "approved_dealer@example.com",
       password: "password123",
       password_confirmation: "password123",
-      role: "dealer",
       dealer_status: "approved",
       company_name: "Milano Restaurant Supplies",
       contact_name: "Marco Rossi"
@@ -147,7 +158,6 @@ class DealerFlowTest < ActionDispatch::IntegrationTest
       email: "order_dealer@example.com",
       password: "password123",
       password_confirmation: "password123",
-      role: "dealer",
       dealer_status: "approved"
     )
 

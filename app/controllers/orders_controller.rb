@@ -1,77 +1,94 @@
 class OrdersController < ApplicationController
-  before_action :remove_unavailable_cart_items
-
   def add_item
     sku = Sku.visible.includes(configuration_groups: :options).find(params[:sku_id])
     if !params.key?(:option_ids) && sku.available_configuration_groups.any?
       return render json: { configuration_url: sku_path(sku, anchor: "sku-configuration-heading") }, status: :unprocessable_entity
     end
+
     selection = SkuConfigurationSelection.new(sku, params.fetch(:option_ids, []))
     return invalid_configuration unless selection.valid?
 
     key = selection.line_key
-    cart[key] = cart.fetch(key, 0) + 1
-    render json: { count: cart.values.sum }
+    quantity = cart.fetch(key, 0) + 1
+    return invalid_quantity if quantity > OrderItem::MAX_QUANTITY
+
+    cart[key] = quantity
+    cart_changed
   end
 
   def remove_item
-    cart.delete(requested_line_key)
+    return cart_changed if cart.delete(requested_line_key)
+
     render json: { count: cart.values.sum }
   end
 
   def update_item
     key = requested_line_key
-    quantity = params[:quantity].to_i
-    if quantity.positive?
-      unless cart.key?(key)
-        return invalid_configuration if params.key?(:line_key)
-        sku = Sku.visible.find(params[:sku_id])
-        return invalid_configuration if sku.available_configuration_groups.any?
-        key = sku.id.to_s
-      end
-      cart[key] = quantity
-    else
-      cart.delete(key)
-    end
-    render json: { count: cart.values.sum }
+    quantity = Integer(params[:quantity].to_s, 10, exception: false)
+    return invalid_quantity unless quantity&.between?(1, OrderItem::MAX_QUANTITY)
+    return invalid_configuration unless cart.key?(key) && available_cart_lines.key?(key)
+
+    cart[key] = quantity
+    cart_changed
   end
 
   def cart_items
     render json: {
-      items: @available_cart_lines.map do |key, (sku, selection)|
-        { id: sku.id, line_key: key, name: sku.localized_name, sku_code: sku.sku_code,
-          quantity: cart.fetch(key), configuration: selection.snapshot }
+      items: cart.map do |key, quantity|
+        sku, selection = available_cart_lines[key]
+        sku ||= visible_cart_skus[key.split(":", 2).first]
+        { id: sku&.id, line_key: key, name: sku&.localized_name, sku_code: sku&.sku_code,
+          quantity: quantity, configuration: selection&.snapshot || [],
+          unavailable: !selection, product_url: (sku_path(sku) if sku) }
       end,
       count: cart.values.sum
     }
   end
 
   def create
-    if @removed_configuration || @available_cart_lines.empty?
+    key = submission_key
+    return submitted if key && Order.exists?(submission_key: key)
+
+    if cart.empty? || available_cart_lines.size != cart.size
       return render json: { success: false, message: t("sku_configurations.review_cart") }, status: :unprocessable_entity
     end
 
-    @order = Order.new(order_params)
-    @order.status = 'pending'
-    @order.user = current_user if user_signed_in?
-    if !@order.user && @order.email.present?
-      @order.user = User.find_by(email: @order.email.strip.downcase)
+    order = Order.new(order_params.merge(status: "pending", user: current_user, submission_key: key))
+    available_cart_lines.each do |line_key, (sku, selection)|
+      order.order_items.build(sku: sku, quantity: cart.fetch(line_key), configuration_snapshot: selection.snapshot)
     end
-    @available_cart_lines.each do |key, (sku, selection)|
-      @order.order_items.build(sku: sku, quantity: cart.fetch(key), configuration_snapshot: selection.snapshot)
-    end
-    if @order.save
-      session[:cart] = {}
-      render json: { success: true, message: "Order submitted successfully!" }
+
+    if order.save
+      submitted
     else
-      render json: { success: false, message: "Failed to submit order, please check your information." }, status: :unprocessable_entity
+      render json: { success: false, message: order.errors.full_messages.to_sentence }, status: :unprocessable_entity
     end
+  rescue ActiveRecord::RecordNotUnique
+    raise unless key && Order.exists?(submission_key: key)
+
+    submitted
   end
 
   private
 
   def cart
     session[:cart] ||= {}
+  end
+
+  def cart_changed
+    session[:inquiry_token] = SecureRandom.uuid
+    render json: { count: cart.values.sum }
+  end
+
+  def submission_key
+    session[:inquiry_token] ||= Digest::SHA256.hexdigest([session.id.to_s, cart.sort].to_json) if cart.any?
+    token = session[:inquiry_token]
+    Digest::SHA256.hexdigest([session.id.to_s, current_user&.id, token].to_json) if token
+  end
+
+  def submitted
+    session[:cart] = {}
+    render json: { success: true, message: t("sku_configurations.submitted") }
   end
 
   def requested_line_key
@@ -82,22 +99,28 @@ class OrdersController < ApplicationController
     render json: { success: false, message: t("sku_configurations.invalid") }, status: :unprocessable_entity
   end
 
-  def remove_unavailable_cart_items
-    @available_cart_lines = {}
-    return if cart.empty?
+  def invalid_quantity
+    render json: { success: false, message: t("sku_configurations.invalid_quantity", max: OrderItem::MAX_QUANTITY) }, status: :unprocessable_entity
+  end
 
-    sku_ids = cart.keys.map { |key| key.split(":", 2).first }.uniq
-    skus = Sku.visible.includes(configuration_groups: :options).where(id: sku_ids).index_by { |sku| sku.id.to_s }
-    cart.each_key do |key|
-      sku_id, options = key.split(":", 2)
-      sku = skus[sku_id]
-      next unless sku
-      selection = SkuConfigurationSelection.new(sku, options ? options.split(",") : [])
-      @available_cart_lines[key] = [sku, selection] if selection.valid?
+  def available_cart_lines
+    @available_cart_lines ||= begin
+      cart.keys.each_with_object({}) do |key, lines|
+        sku_id, options = key.split(":", 2)
+        sku = visible_cart_skus[sku_id]
+        next unless sku
+
+        selection = SkuConfigurationSelection.new(sku, options ? options.split(",") : [])
+        lines[key] = [sku, selection] if selection.valid?
+      end
     end
+  end
 
-    @removed_configuration = cart.keys.any? { |key| !@available_cart_lines.key?(key) && key.include?(":") }
-    session[:cart] = cart.slice(*@available_cart_lines.keys)
+  def visible_cart_skus
+    @visible_cart_skus ||= begin
+      sku_ids = cart.keys.map { |key| key.split(":", 2).first }.uniq
+      Sku.visible.includes(configuration_groups: :options).where(id: sku_ids).index_by { |sku| sku.id.to_s }
+    end
   end
 
   def order_params

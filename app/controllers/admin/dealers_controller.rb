@@ -10,7 +10,7 @@ module Admin
       when 'pending'
         @dealers = @dealers.where(dealer_status: 'pending')
       when 'approved'
-        @dealers = @dealers.where(dealer_status: 'approved').or(User.where(role: 'dealer'))
+        @dealers = @dealers.where(dealer_status: 'approved')
       when 'rejected'
         @dealers = @dealers.where(dealer_status: 'rejected')
       else
@@ -36,23 +36,29 @@ module Admin
     end
 
     def approve
-      @dealer.approve_dealer!
-      redirect_to admin_dealers_path(status: params[:status]), notice: "已批准 #{@dealer.display_name} 的经销商申请。"
+      if @dealer.approve_dealer!
+        redirect_to admin_dealers_path(status: params[:status]), notice: "已批准 #{@dealer.display_name} 的经销商申请。"
+      else
+        redirect_to admin_dealers_path(status: params[:status]), alert: @dealer.errors.full_messages.to_sentence
+      end
     end
 
     def reject
-      @dealer.reject_dealer!
-      redirect_to admin_dealers_path(status: params[:status]), notice: "已拒绝 #{@dealer.display_name} 的经销商申请。"
+      if @dealer.reject_dealer!
+        redirect_to admin_dealers_path(status: params[:status]), notice: "已拒绝 #{@dealer.display_name} 的经销商申请。"
+      else
+        redirect_to admin_dealers_path(status: params[:status]), alert: @dealer.errors.full_messages.to_sentence
+      end
     end
 
     private
 
     def set_dealer
-      @dealer = User.find(params[:id])
+      @dealer = User.dealers.find(params[:id])
     end
 
     def dealer_params
-      params.require(:user).permit(:dealer_status, :company_name, :contact_name, :phone, :country, :dealer_notes, :role)
+      params.require(:user).permit(:dealer_status, :company_name, :contact_name, :phone, :country, :dealer_notes)
     end
   end
 end

@@ -78,14 +78,17 @@
               <tr class="hover:bg-slate-50/50">
                 <td class="py-3 px-4 font-bold text-slate-900">
                   <% if item.sku %>
-                    <%= link_to item.sku.name, sku_path(item.sku), class: "hover:text-primary transition-colors", target: "_blank" %>
+                    <%= link_to item.product_name, sku_path(item.sku), class: "hover:text-primary transition-colors", target: "_blank" %>
                   <% else %>
                     未知产品型号
+                  <% end %>
+                  <% unless item.product_snapshot? %>
+                    <span class="block text-xs text-slate-500">旧询价 · 商品信息为当前资料</span>
                   <% end %>
                   <%= render "shared/configuration_snapshot", item: item %>
                 </td>
                 <td class="py-3 px-4 text-slate-500 text-xs font-mono">
-                  <%= item.sku&.sku_code || "-" %>
+                  <%= item.product_code || "-" %>
                 </td>
                 <td class="py-3 px-4 text-right font-black text-slate-900">
                   <%= item.quantity %> 台/套

@@ -61,78 +61,22 @@ class Admin::SkusController < Admin::BaseController
   end
 
   def edit
-    normalize_specifications
   end
 
   def create
-    begin
-      filtered_params = sku_params
-      process_specifications(filtered_params)
-      # 提取图片位置信息，并从 filtered_params 中删除，防止 UnknownAttributeError
-      image_positions = filtered_params.delete(:image_positions)
-      
-      # 过滤空的图片/文件占位符，防止保存时出现空附件
-      # 注意：不要过滤 position 字段，因为 0.blank? 是 true
-      # 提取图片/文件参数，用于后续单独处理，避免 Sku.new(params) 可能引起的自动分配
-      images = filtered_params.delete(:images)
-
-      @sku = Sku.new(filtered_params)
-      if @sku.save
-        # 显式使用 attach 附加图片/文件
-        @sku.images.attach(images) if images.present?
-
-        update_image_positions(@sku, image_positions)
-        redirect_to sku_list_path, notice: "SKU created successfully."
-      else
-        Rails.logger.error "SKU Create Failed: #{@sku.errors.full_messages.join(', ')}"
-        render :new, status: :unprocessable_entity
-      end
-    rescue StandardError => e
-      Rails.logger.error "SKU Create Exception: #{e.message}"
-      Rails.logger.error e.backtrace.join("\n")
-      @sku ||= Sku.new
-      @sku.errors.add(:base, "Save error: #{e.message}.")
-      render :new, status: :unprocessable_entity
-    end
+    @sku = Sku.new
+    save_sku(:new, "SKU created successfully.")
   end
 
   def update
-    begin
-      normalize_specifications
-      filtered_params = sku_params
-      process_specifications(filtered_params)
-      # 提取图片位置信息，并从 filtered_params 中删除，防止 UnknownAttributeError
-      image_positions = filtered_params.delete(:image_positions)
-
-      # 如果用户在编辑时没有上传新文件，从 params 中剔除对应键，防止覆盖旧文件
-      # 注意：不要过滤 position 字段，因为 0.blank? 是 true
-      # 注意：对于 images，如果使用了 config.active_storage.replace_on_assign_to_many = false
-      # 那么上传新图片会附加到旧图片。如果上传的是空数组，则不进行任何操作。
-      # 提取图片/文件参数，用于后续单独处理，避免 update 方法的全量替换行为
-      images = filtered_params.delete(:images)
-
-      if @sku.update(filtered_params)
-        # 显式使用 attach 附加图片，确保不替换旧图片
-        @sku.images.attach(images) if images.present?
-
-        update_image_positions(@sku, image_positions)
-        redirect_to sku_list_path, notice: "SKU updated successfully."
-      else
-        Rails.logger.error "SKU Update Failed: #{@sku.errors.full_messages.join(', ')}"
-        render :edit, status: :unprocessable_entity
-      end
-    rescue StandardError => e
-      Rails.logger.error "SKU Update Exception: #{e.message}"
-      Rails.logger.error e.backtrace.join("\n")
-      @sku ||= Sku.find(params[:id]) if params[:id]
-      @sku.errors.add(:base, "Update error: #{e.message}.") if @sku
-      render :edit, status: :unprocessable_entity
-    end
+    save_sku(:edit, "SKU updated successfully.")
   end
 
   def destroy
-    @sku.destroy
+    @sku.destroy!
     redirect_to sku_list_path, notice: "SKU deleted successfully."
+  rescue ActiveRecord::InvalidForeignKey
+    redirect_to sku_list_path, alert: "该 SKU 已有询价记录，请归档以保留历史。", status: :see_other
   end
 
   def delete_image
@@ -171,44 +115,70 @@ class Admin::SkusController < Admin::BaseController
     @sku = Sku.find(params[:id])
   end
 
-  def normalize_specifications
-    return unless @sku && @sku.specifications.is_a?(Hash)
-    
-    # 将旧的 Hash 格式 {"key" => "value"} 转换为新格式 [{"key" => "key", "value" => "value", ...}]
-    new_specs = @sku.specifications.map do |k, v|
-      {
-        'key' => k,
-        'value' => v,
-        'key_zh' => '', 'value_zh' => '',
-        'key_it' => '', 'value_it' => '',
-        'key_fr' => '', 'value_fr' => ''
-      }
+  def save_sku(template, notice)
+    attributes = sku_params
+    uploads = Array(attributes.delete(:images)).reject(&:blank?)
+    positions = attributes.delete(:image_positions)
+    process_specifications(attributes)
+    @sku.assign_attributes(attributes)
+    batch = AttachmentUploadBatch.new
+    staged_images = uploads.map do |upload|
+      blob = ActiveStorage::Blob.build_after_unfurling(io: upload.open, filename: upload.original_filename,
+        content_type: upload.content_type)
+      [blob, upload]
     end
-    @sku.specifications = new_specs
+    @sku.images = @sku.images.blobs + staged_images.map(&:first) if staged_images.any?
+    saved = false
+
+    Sku.transaction(requires_new: true) do
+      if @sku.save
+        staged_images.each { |blob, upload| batch.upload(blob, upload.open) }
+        update_image_positions(@sku, positions)
+        saved = true
+      end
+    end
+
+    if saved
+      redirect_to sku_list_path, notice: notice
+    else
+      render template, status: :unprocessable_entity
+    end
+  rescue ActiveRecord::RecordNotUnique
+    batch&.cleanup_failed_uploads
+    @sku.errors.add(:sku_code, "已被其他商品使用")
+    render template, status: :unprocessable_entity
+  rescue StandardError => error
+    batch&.cleanup_failed_uploads
+    Rails.logger.error("SKU save failed: #{error.class}: #{error.message}")
+    @sku.errors.add(:base, "保存失败，请核对资料和图片后重试。")
+    render(@sku.persisted? ? :edit : template, status: :unprocessable_entity)
   end
 
   def sku_params
     params.require(:sku).permit(
       :name, :sku_code, :name_zh, :name_en, :name_it, :name_fr,
       *Sku::CARD_PARAMETER_FIELDS,
-      :category_id, :price, :status, :position,
+      :category_id, :price, :status, :position, :edit_specifications,
       :standard_features, :standard_features_zh, :standard_features_it, :standard_features_fr,
       :meta_title, :meta_title_zh, :meta_title_en, :meta_title_it, :meta_title_fr,
       :meta_description, :meta_description_zh, :meta_description_en, :meta_description_it, :meta_description_fr,
       :meta_keywords, :meta_keywords_zh, :meta_keywords_en, :meta_keywords_it, :meta_keywords_fr,
       images: [], image_positions: {},
-      specifications: [:key, :value, :key_zh, :value_zh, :key_it, :value_it, :key_fr, :value_fr]
+      specifications: [:original_index, :key, :value, :key_zh, :value_zh, :key_it, :value_it, :key_fr, :value_fr]
     )
   end
 
   def process_specifications(filtered_params)
+    editing_specs = filtered_params.delete(:edit_specifications) == "1"
     specs = filtered_params.delete(:specifications)
+    specs = [] if specs.nil? && editing_specs
     if specs.is_a?(Array)
       processed_specs = []
       specs.each do |s|
         # 只要有一个语言的 key 有值，就保留这一行
         if s[:key].present? || s[:key_zh].present? || s[:key_it].present? || s[:key_fr].present?
-          processed_specs << {
+          original = @sku.specification_rows[s[:original_index].to_i] if s[:original_index].to_s.match?(/\A[0-9]+\z/)
+          values = {
             key: s[:key].to_s.strip,
             value: s[:value].to_s.strip,
             key_zh: s[:key_zh].to_s.strip,
@@ -217,7 +187,8 @@ class Admin::SkusController < Admin::BaseController
             value_it: s[:value_it].to_s.strip,
             key_fr: s[:key_fr].to_s.strip,
             value_fr: s[:value_fr].to_s.strip
-          }
+          }.stringify_keys
+          processed_specs << (original.is_a?(Hash) ? original.merge(values) : values)
         end
       end
       filtered_params[:specifications] = processed_specs

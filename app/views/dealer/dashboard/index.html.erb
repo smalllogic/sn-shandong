@@ -33,6 +33,9 @@
     </div>
   <% end %>
 
+  <% if current_user.dealer_rejected? && !current_user.super_admin? %>
+    <p class="rounded-xl bg-white p-6 text-slate-700">您的经销商申请未通过。如有疑问，请联系我们。</p>
+  <% else %>
   <!-- Metrics Grid -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
@@ -151,4 +154,5 @@
       </div>
     </div>
   </div>
+  <% end %>
 </div>

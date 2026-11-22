@@ -50,13 +50,15 @@ class CatalogVisibilityTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", sku_path(@public_sku), minimum: 1
   end
 
-  test "cart removes a product that becomes hidden and cannot add it again" do
+  test "cart marks a product that becomes hidden and cannot add it again" do
     post "/order/add_item", params: { sku_id: @public_sku.id }
     assert_response :success
     @root.update!(hidden: true)
     get "/order/cart_items"
     assert_response :success
-    assert_equal [], response.parsed_body.fetch("items")
+    assert response.parsed_body.fetch("items").sole.fetch("unavailable")
+    assert_equal 1, response.parsed_body.fetch("count")
+    delete remove_item_order_path, params: { line_key: @public_sku.id.to_s }
     assert_equal 0, response.parsed_body.fetch("count")
     post "/order/add_item", params: { sku_id: @public_sku.id }
     assert_response :not_found

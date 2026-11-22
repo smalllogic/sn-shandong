@@ -31,7 +31,7 @@
       <div>
         <div class="flex items-center space-x-3">
           <h2 class="text-2xl font-black text-slate-900"><%= @dealer.company_name.presence || "未填写公司名称" %></h2>
-          <% if @dealer.dealer_approved? || @dealer.role == 'dealer' %>
+          <% if @dealer.dealer_approved? %>
             <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full">已认证经销商</span>
           <% elsif @dealer.dealer_status == 'pending' %>
             <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full">申请待审核</span>

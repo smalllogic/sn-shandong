@@ -1,0 +1,9 @@
+<% if skus.any? %>
+  <ul class="space-y-1 text-sm text-slate-600">
+    <% skus.each do |sku| %>
+      <li>
+        <%= link_to [sku.sku_code.presence, sku.localized_name].compact.join(" · "), sku_path(sku), class: "break-words hover:text-primary" %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

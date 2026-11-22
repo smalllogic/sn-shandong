@@ -24,8 +24,9 @@
       <% end %>
     </div>
     <div>
-      <%= form.label :unit, "规格单位或价格货币", class: "mb-1 block text-sm font-semibold" %>
-      <%= form.text_field :unit, maxlength: 20, placeholder: "L、°C 或 USD", class: input_class %>
+      <%= form.label :unit, "规格单位", class: "mb-1 block text-sm font-semibold" %>
+      <%= form.text_field :unit, maxlength: 20, placeholder: "例如 L 或 °C", class: input_class %>
+      <p class="mt-1 text-xs text-slate-500">价格筛选使用网站设置中的基础价币种，忽略这里填写的单位。</p>
       <p class="mt-1 text-xs text-slate-600">数值字段只匹配同单位或无单位的数值。无单位值按此单位解读，系统不会换算。价格必须填写货币。</p>
     </div>
     <div>

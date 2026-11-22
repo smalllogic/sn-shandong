@@ -89,7 +89,7 @@
     <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
       <div class="p-6 border-b border-slate-200">
         <h3 class="font-bold text-slate-800">分类与 SKU 导入导出</h3>
-        <p class="mt-1 text-sm text-slate-500">导出一个 ZIP，包含全部分类和 SKU 数据；导入时先处理分类，再处理 SKU。</p>
+        <p class="mt-1 text-sm text-slate-500">导出一个目录 ZIP，包含分类、SKU、图片、规格筛选配置和 SKU 装配配置。</p>
       </div>
       <div class="p-6 space-y-5">
         <div>
@@ -100,7 +100,8 @@
           <%= form.label :file, "导入分类和 SKU ZIP", class: "block text-sm font-semibold text-slate-700" %>
           <%= form.file_field :file, accept: ".zip,application/zip", required: true,
             class: "block w-full rounded-lg border border-slate-300 p-2 text-sm text-slate-700" %>
-          <p class="text-xs text-slate-500">仅接受本功能导出的 ZIP（最大 50 MB）。按分类 Slug、SKU 代码更新已有记录；任一错误都会回滚整包。分类图片、SKU 图片和富文本附件不包含在数据包中。</p>
+          <p class="text-xs text-slate-500">仅接受本功能导出的 ZIP（最大 50 MB）。按分类 Slug、SKU 代码更新已有记录；任一错误都会回滚整包。配置组选项按迁移标识更新。同一编码对应已有记录时，导入会更新其资料。旧版 ZIP 仍可导入基础资料。</p>
+          <%= form.submit "预检导入", name: :preview, class: "rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-semibold" %>
           <%= form.submit "导入分类和 SKU", data: { turbo_confirm: "确定导入并更新同 Slug 分类与同代码 SKU 吗？" },
             class: "rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 cursor-pointer" %>
         <% end %>

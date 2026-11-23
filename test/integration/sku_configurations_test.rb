@@ -36,7 +36,8 @@ class SkuConfigurationsTest < ActionDispatch::IntegrationTest
     get sku_path(@sku, locale: "zh-CN")
     assert_response :success
     assert_select "legend", text: "大理石台面"
-    assert_select "input[type=radio][name=?][checked]", "configuration_group_#{group.id}", count: 1
+    assert_select 'input[type=radio][name=?][checked][value=""]', "configuration_group_#{group.id}", count: 1
+    assert_select "output[data-sku-configurator-target='total']", text: "不加价"
     assert_select "input[type=radio][value=?][data-surcharge-cents='8000']", black.id.to_s
     assert_select "img[src*='black.png']"
     get sku_path(@other_sku)
@@ -55,7 +56,7 @@ class SkuConfigurationsTest < ActionDispatch::IntegrationTest
     post add_item_order_path, params: { sku_id: @sku.id }, as: :json
     assert_response :unprocessable_entity
     assert_equal sku_path(@sku, anchor: "sku-configuration-heading"), response.parsed_body["configuration_url"]
-    [[countertop.id], [countertop.id, gray.id], [wrong_sku.id, back.id]].each do |invalid|
+    [[countertop.id, countertop.id], [countertop.id, gray.id], [wrong_sku.id, back.id]].each do |invalid|
       post add_item_order_path, params: { sku_id: @sku.id, option_ids: invalid }, as: :json
       assert_response :unprocessable_entity
     end
@@ -79,6 +80,29 @@ class SkuConfigurationsTest < ActionDispatch::IntegrationTest
     assert_equal ["80.0", "40.0"], saved.configuration_snapshot.pluck("surcharge")
     countertop.update!(name_en: "Updated finish", surcharge: 99)
     assert_equal "Black", saved.reload.configuration_snapshot.first.fetch("option")
+  end
+
+  test "customers can request standard or partially configured products in the same inquiry" do
+    countertop = add_group(@sku, "Marble", "Black", 80)
+    add_group(@sku, "Back panel", "Walnut", 40)
+
+    [[], [countertop.id], []].each do |ids|
+      post add_item_order_path, params: { sku_id: @sku.id, option_ids: ids }, as: :json
+      assert_response :success
+    end
+
+    get cart_items_order_path
+    lines = response.parsed_body.fetch("items")
+    assert_equal [2, 1], lines.pluck("quantity")
+    assert_equal [[], ["Black"]], lines.map { |line| line.fetch("configuration").pluck("option") }
+    assert_not lines.any? { |line| line.fetch("unavailable") }
+
+    post order_path, params: { name: "Customer", country: "USA", phone: "5551234", email: "customer@example.com" }, as: :json
+    assert_response :success
+    standard, custom = Order.last.order_items.order(:id)
+    assert_empty standard.configuration_snapshot
+    assert_equal ["Black"], custom.configuration_snapshot.pluck("option")
+    assert_equal ["80.0"], custom.configuration_snapshot.pluck("surcharge")
   end
 
   test "disabled options are excluded and stale selections cannot be submitted" do

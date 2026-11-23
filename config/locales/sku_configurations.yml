@@ -9,7 +9,8 @@ en:
     quote: Ask for a quote
     no_surcharge: No surcharge
     selection_error: Unable to add to inquiry
-    invalid: "Please select an available option from each configuration group and try again."
+    standard: "Standard configuration"
+    invalid: "Choose up to one available option per group and try again."
     review_cart: "Please review your inquiry list and add any unavailable configuration again from the product page."
     decrease: Decrease quantity
     increase: Increase quantity
@@ -26,7 +27,8 @@ zh-CN:
     quote: 加价请询
     no_surcharge: 不加价
     selection_error: 无法加入询价
-    invalid: 请在每个配置组选择一个可用选项后重试。
+    standard: "标准配置"
+    invalid: 每组最多选择一个可用选项，请检查后重试。
     review_cart: 请检查询价清单。配置变更后，请到商品详情页重新选择并加入。
     decrease: 减少数量
     increase: 增加数量
@@ -43,7 +45,8 @@ it:
     quote: Richiedi un preventivo
     no_surcharge: Nessun supplemento
     selection_error: Impossibile aggiungere alla richiesta
-    invalid: Seleziona un’opzione disponibile per ogni gruppo e riprova.
+    standard: "Configurazione standard"
+    invalid: Seleziona al massimo un’opzione disponibile per gruppo e riprova.
     review_cart: Controlla la richiesta e aggiungi di nuovo le configurazioni dalla pagina del prodotto.
     decrease: Diminuisci la quantità
     increase: Aumenta la quantità
@@ -60,7 +63,8 @@ fr:
     quote: Sur devis
     no_surcharge: Sans supplément
     selection_error: Impossible d’ajouter à la demande
-    invalid: Sélectionnez une option disponible pour chaque groupe et réessayez.
+    standard: "Configuration standard"
+    invalid: Sélectionnez au plus une option disponible par groupe et réessayez.
     review_cart: Vérifiez votre demande et ajoutez de nouveau les configurations depuis la fiche produit.
     decrease: Diminuer la quantité
     increase: Augmenter la quantité

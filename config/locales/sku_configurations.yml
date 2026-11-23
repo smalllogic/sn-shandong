@@ -1,5 +1,8 @@
 en:
   sku_configurations:
+    preview_image: "Preview image: %{name}"
+    back_to_product_image: "Back to product image"
+    product_image_number: "Product image %{number}"
     reselect: "Choose again"
     submitted: "Your inquiry was submitted."
     invalid_quantity: "Enter a quantity between 1 and %{max}."
@@ -18,6 +21,9 @@ en:
     remove: Remove
 zh-CN:
   sku_configurations:
+    preview_image: "查看大图：%{name}"
+    back_to_product_image: "返回商品主图"
+    product_image_number: "商品图片 %{number}"
     reselect: "重新选择"
     submitted: "询价已提交。"
     invalid_quantity: "请输入 1 至 %{max} 的数量。"
@@ -36,6 +42,9 @@ zh-CN:
     remove: 移除
 it:
   sku_configurations:
+    preview_image: "Ingrandisci immagine: %{name}"
+    back_to_product_image: "Torna all’immagine del prodotto"
+    product_image_number: "Immagine prodotto %{number}"
     reselect: "Scegli di nuovo"
     submitted: "La richiesta è stata inviata."
     invalid_quantity: "Inserisci una quantità da 1 a %{max}."
@@ -54,6 +63,9 @@ it:
     remove: Rimuovi
 fr:
   sku_configurations:
+    preview_image: "Agrandir l’image : %{name}"
+    back_to_product_image: "Retour à l’image du produit"
+    product_image_number: "Image du produit %{number}"
     reselect: "Choisir à nouveau"
     submitted: "Votre demande a été envoyée."
     invalid_quantity: "Saisissez une quantité de 1 à %{max}."

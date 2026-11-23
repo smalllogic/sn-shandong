@@ -13,75 +13,9 @@
   </nav>
 
   <!-- 产品主展示区：工业风布局 -->
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden relative">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden relative" data-controller="sku-gallery" data-action="turbo:before-cache@document->sku-gallery#resetPreview">
     
-    <!-- 左侧：媒体展示 (占 5/12) -->
-    <div class="lg:col-span-5 relative border-r border-slate-100 bg-slate-50/30" 
-         x-data="{ 
-           activeImage: 0, 
-           isZoomed: false, 
-           zoomX: 0, 
-           zoomY: 0,
-           handleMouseMove(e) {
-             const rect = e.currentTarget.getBoundingClientRect();
-             this.zoomX = ((e.clientX - rect.left) / rect.width) * 100;
-             this.zoomY = ((e.clientY - rect.top) / rect.height) * 100;
-           }
-         }">
-      <div class="p-8">
-        <div class="bg-white rounded-lg border border-slate-100 shadow-sm overflow-hidden group relative">
-          <div class="aspect-square relative overflow-hidden bg-white"
-               :class="isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'"
-               @mouseenter="isZoomed = true"
-               @mouseleave="isZoomed = false"
-               @mousemove="handleMouseMove($event)">
-            <% if @sku.images.attached? %>
-              <% @sku.sorted_images.each_with_index do |image, index| %>
-                <div x-show="activeImage === <%= index %>" 
-                     x-cloak
-                     x-transition:enter="transition opacity duration-300"
-                     class="w-full h-full absolute inset-0">
-                  <%= image_tag image, 
-                                class: "w-full h-full object-contain p-6", 
-                                style: "background-color: transparent;",
-                                loading: index == 0 ? "eager" : "lazy" %>
-                  
-                  <!-- 放大镜层 -->
-                  <div x-show="isZoomed"
-                       class="absolute inset-0 z-20 pointer-events-none"
-                       :style="`background-image: url('${activeImage === <%= index %> ? url_for(image).html_safe : ''}'); 
-                                background-size: 250%; 
-                                background-position: ${zoomX}% ${zoomY}%; 
-                                background-repeat: no-repeat;`"
-                       x-transition:enter="transition opacity duration-200"
-                       x-transition:enter-start="opacity-0"
-                       x-transition:enter-end="opacity-100">
-                  </div>
-                </div>
-              <% end %>
-            <% else %>
-              <div class="w-full h-full flex flex-col items-center justify-center">
-                <svg class="w-24 h-24 text-slate-100 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                <span class="text-[10px] font-bold text-slate-300 uppercase tracking-widest"><%= t('skus.digital_asset_pending') %></span>
-              </div>
-            <% end %>
-          </div>
-        </div>
-
-        <!-- 缩略图列表 -->
-        <% if @sku.images.attached? && @sku.images.count > 1 %>
-          <div class="flex flex-wrap gap-3 mt-6">
-            <% @sku.sorted_images.each_with_index do |image, index| %>
-              <button @click="activeImage = <%= index %>" 
-                      :class="activeImage === <%= index %> ? 'border-primary' : 'border-slate-200'"
-                      class="w-16 h-16 rounded border bg-white overflow-hidden transition-all group">
-                <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "w-full h-full object-contain p-1 group-hover:scale-110 transition-transform" %>
-              </button>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </div>
+    <%= render "gallery", sku: @sku %>
 
     <!-- 右侧：产品详情信息 (工业风) -->
     <div class="lg:col-span-7 flex flex-col bg-white p-8 lg:p-14 lg:pl-16"

@@ -39,7 +39,15 @@ class SkuConfigurationsTest < ActionDispatch::IntegrationTest
     assert_select 'input[type=radio][name=?][checked][value=""]', "configuration_group_#{group.id}", count: 1
     assert_select "output[data-sku-configurator-target='total']", text: "不加价"
     assert_select "input[type=radio][value=?][data-surcharge-cents='8000']", black.id.to_s
-    assert_select "img[src*='black.png']"
+    assert_select "button[data-action='sku-gallery#showConfiguration'][aria-controls='sku-main-gallery']" do |buttons|
+      assert_equal "大理石台面 · 黑色", buttons.sole["data-image-description"]
+      assert_match %r{/rails/active_storage/representations/}, buttons.sole["data-image-url"]
+      assert_select "img[src*='/representations/']" do |thumbnails|
+        assert_not_equal buttons.sole["data-image-url"], thumbnails.sole["src"]
+      end
+    end
+    assert_select "#sku-main-gallery img[data-sku-gallery-target='image'][hidden]", count: 1
+    assert_select "button[data-action='sku-gallery#restoreProduct']", text: "返回商品主图"
     get sku_path(@other_sku)
     assert_select "#sku-configuration-heading", count: 0
 

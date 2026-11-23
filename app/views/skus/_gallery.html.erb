@@ -1,0 +1,42 @@
+<% images = sku.sorted_images.to_a %>
+<div id="sku-main-gallery" class="scroll-mt-24 border-slate-100 bg-slate-50/30 p-4 sm:p-8 md:scroll-mt-60 lg:col-span-5 lg:border-r"
+     data-sku-gallery-target="gallery">
+  <div class="overflow-hidden rounded-lg border border-slate-100 bg-white shadow-sm">
+    <div class="relative aspect-square overflow-hidden bg-white"
+         data-action="pointermove->sku-gallery#zoom pointerleave->sku-gallery#stopZoom">
+      <% first_image = images.first %>
+      <%= tag.img src: (url_for(first_image) if first_image), alt: (first_image ? sku.localized_name : ""),
+          hidden: first_image.nil?, class: "absolute inset-0 size-full object-contain p-4 sm:p-6 md:cursor-zoom-in",
+          data: { sku_gallery_target: "image" }, decoding: "async" %>
+      <div <%= "hidden" if first_image %> class="absolute inset-0 flex flex-col items-center justify-center" data-sku-gallery-target="placeholder">
+        <svg class="mb-4 size-24 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+        <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500"><%= t("skus.digital_asset_pending") %></span>
+      </div>
+    </div>
+    <div hidden class="flex flex-col items-start gap-2 border-t border-slate-100 px-4 py-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between"
+         data-sku-gallery-target="previewBar">
+      <p class="min-w-0 break-words text-sm font-semibold text-slate-900"
+         data-sku-gallery-target="caption" aria-live="polite"></p>
+      <button type="button" class="rounded-md border border-slate-200 px-3 py-2 text-xs font-semibold text-primary hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-primary"
+              data-sku-gallery-target="restore" data-action="sku-gallery#restoreProduct">
+        <%= t("sku_configurations.back_to_product_image") %>
+      </button>
+    </div>
+  </div>
+
+  <% if images.length > 1 %>
+    <div class="mt-4 flex flex-wrap gap-3">
+      <% images.each_with_index do |image, index| %>
+        <button type="button" aria-label="<%= t("sku_configurations.product_image_number", number: index + 1) %>"
+                aria-controls="sku-main-gallery" aria-pressed="<%= index.zero? %>"
+                class="size-14 overflow-hidden rounded border border-slate-200 bg-white hover:border-primary focus-visible:outline-2 focus-visible:outline-primary aria-pressed:border-primary sm:size-16"
+                data-sku-gallery-target="product"
+                data-action="sku-gallery#showProduct"
+                data-image-url="<%= url_for(image) %>">
+          <%= image_tag(image.variable? ? image.variant(:thumb) : image, alt: "", width: 64, height: 64,
+                        loading: "lazy", decoding: "async", class: "size-full object-contain p-1") %>
+        </button>
+      <% end %>
+    </div>
+  <% end %>
+</div>

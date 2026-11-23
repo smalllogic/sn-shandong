@@ -2,7 +2,10 @@ class SkuConfigurationOption < ApplicationRecord
   include ConfigurationDisplayName
 
   belongs_to :sku_configuration_group, inverse_of: :options
-  has_one_attached :image
+  has_one_attached :image do |attachable|
+    attachable.variant :thumb, resize_to_limit: [144, 144], format: :webp, saver: { quality: 80 }
+    attachable.variant :large, resize_to_limit: [1200, 1200], format: :webp, saver: { quality: 85 }
+  end
   attribute :remove_image, :boolean, default: false
 
   normalizes :model_code, with: ->(value) { value.strip.presence }
